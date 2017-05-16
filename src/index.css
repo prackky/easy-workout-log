@@ -1,5 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background: white;
+  font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #50596c;
+  font-size: 1.8rem; 
 }
