@@ -1,6 +1,6 @@
-
 const userReducer = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
+    
     case 'LOG-WORKOUT':
       return {
         ...state,
@@ -9,7 +9,27 @@ const userReducer = (state = {}, action) => {
           exercises: []
         }
       };
-    default: 
+    
+    case 'LOG-WORKOUT-EXERCISE':
+      const logWorkout = state.logWorkout;
+      const exercises = logWorkout.exercises;
+
+      return {
+        ...state,
+        logWorkout: {
+          ...logWorkout,
+          exercises: [
+            ...exercises, {
+              exercise: 'squats',
+              reps: 8,
+              weight: 100,
+              sets: 3
+            }
+          ]
+        }
+      };
+
+    default:
       return state;
   }
 };

@@ -3,6 +3,11 @@ const userActions = {
     return {
       type: 'LOG-WORKOUT'
     };
+  },
+  logWorkoutExercise: () => {
+    return {
+      type: 'LOG-WORKOUT-EXERCISE'
+    };
   }
 };
 

@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 
 import './welcome.css';
 
-import userActions from '../core/actions/userActions';
-
 const mapStateToProps = (state) => {
   return {user: state.user};
 };
@@ -33,7 +31,7 @@ class Welcome extends Component {
     }
 
     return (
-      <div className="container grid-1280">
+      <div className="container">
         <div className="columns">
           <div className="column col-12">
             <div className="text-center">
