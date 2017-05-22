@@ -1,6 +1,6 @@
 body {
   background: white;
   font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #50596c;
+  color: #50596c; /* need to figure out a solution for global variables */
   font-size: 1.8rem; 
 }
