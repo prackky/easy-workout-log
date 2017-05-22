@@ -1,11 +1,34 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-const LogWorkout = () => {
-  return (
-    <div>
-    LogWorkout
-    </div>
-  )
+import userActions from '../core/actions/userActions';
+
+const mapStateToProps = (state) => {
+  return {logWorkout: state.user.logWorkout};
 };
 
-export default LogWorkout;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logWorkout: () => {
+      dispatch(userActions.logWorkout());
+    }
+  };
+};
+
+class LogWorkout extends Component {
+
+  constructor(props) {
+    super(props);
+    this.props.logWorkout();
+  }
+
+  render() {
+    return (
+      <div>
+        LogWorkout
+      </div>
+    );
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogWorkout);

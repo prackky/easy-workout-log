@@ -1,7 +1,18 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router';
+import {connect} from 'react-redux';
 
 import './welcome.css';
+
+import userActions from '../core/actions/userActions';
+
+const mapStateToProps = (state) => {
+  return {user: state.user};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 
 class Welcome extends Component {
 
@@ -13,14 +24,12 @@ class Welcome extends Component {
   }
 
   handleBtnLogWorkoutClick = () => {
-    this.setState({
-      redirect: '/log-workout'
-    });
+    this.setState({redirect: '/log-workout'});
   };
 
   render() {
     if (this.state.redirect) {
-      return (<Redirect push to={this.state.redirect} />);
+      return (<Redirect push to={this.state.redirect}/>);
     }
 
     return (
@@ -33,7 +42,9 @@ class Welcome extends Component {
               {/* background image this with a logo */}
               <button
                 className="btn btn-primary btn-welcome-log-workout"
-                onClick={this.handleBtnLogWorkoutClick.bind(this)}>Log a workout</button>
+                onClick={this
+                .handleBtnLogWorkoutClick
+                .bind(this)}>Log a workout</button>
             </div>
           </div>
         </div>
@@ -42,4 +53,4 @@ class Welcome extends Component {
   }
 };
 
-export default Welcome;
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
