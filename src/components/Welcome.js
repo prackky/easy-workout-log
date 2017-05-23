@@ -19,6 +19,7 @@ class Welcome extends Component {
     this.state = {
       redirect: ''
     };
+    console.log(this.state);
   }
 
   handleBtnLogWorkoutClick = () => {
