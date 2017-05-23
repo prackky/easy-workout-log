@@ -15,3 +15,8 @@
   bottom: 2rem;
   right: 2rem;
 }
+
+.bg-gray {
+  background: #f8f9fa;
+  color: #667189;
+}

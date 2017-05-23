@@ -1,6 +1,7 @@
 .navbar {
   min-height: 10rem;
   font-size: 1.8rem;
+  /*border-bottom: 1px solid #50596c;*/
 }
 
 .navbar .navbar-brand {

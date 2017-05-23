@@ -25,6 +25,7 @@ describe('userReducer', () => {
       .equal({
         logWorkout: {
           type: 'weight',
+          notes: '',
           exercises: []
         }
       });
@@ -44,6 +45,7 @@ describe('userReducer', () => {
         snoop: 'dawg',
         logWorkout: {
           type: 'weight',
+          notes: '',
           exercises: []
         }
       });

@@ -25,7 +25,7 @@ class Header extends Component {
 
     return (
       <div>
-        <div className="container grid-1280">
+        <div className="container grid-1280 bg-gray">
           <header className="navbar">
             <section className="navbar-section">
               <a
@@ -42,7 +42,7 @@ class Header extends Component {
             </section>
             <section className="navbar-section navbar-content">
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
-              <NavLink exact to="/log-workout" className="btn btn-link">Log a workout</NavLink>
+              <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
             <section className="navbar-section navbar-content"></section>
           </header>
@@ -70,7 +70,7 @@ class Header extends Component {
                     to="/log-workout"
                     onClick={this
                     .handleSidebarCloseClick
-                    .bind(this)}>Log a workout</NavLink>
+                    .bind(this)}>Log workout</NavLink>
                 </li>
                 {/*
                 <li className="nav-item">

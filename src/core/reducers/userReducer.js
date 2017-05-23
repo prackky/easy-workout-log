@@ -6,6 +6,7 @@ const userReducer = (state = {}, action) => {
         ...state,
         logWorkout: {
           type: 'weight',
+          notes: '',
           exercises: []
         }
       };

@@ -34,40 +34,64 @@ class LogWorkout extends Component {
   }
 
   renderExercises() {
-    if (!this.props.logWorkout) {
-      return;
-    }
-
     return this
       .props
       .logWorkout
       .exercises
       .map((exercise, index) => {
-        return (<LogExercise key={index} exercise={exercise}/>);
+        return (<LogExercise key={index} index={index} exercise={exercise}/>);
       });
 
   }
 
   handleBtnAddExerciseClick(event) {
     event.preventDefault();
-    this.props.doLogWorkoutExercise();
+    this
+      .props
+      .doLogWorkoutExercise();
   };
 
   render() {
+    if (!this.props.logWorkout) {
+      return <div></div>;
+    }
 
     return (
       <div className="container grid-480">
         <div className="columns">
           <div className="column col-12">
+            <h4>Log a new workout.</h4>
+            <p>
+            Fields marked with a * are required. Click + to add a new exercise. Hit the save button once finished.
+            </p>
+          </div>
+        </div>
+        
+        <div className="columns">
+          <div className="column col-12">
 
             <form className="form-horizontal">
+
+              <div className="form-group">
+                <div className="col-3">
+                  <label className="form-label">Notes</label>
+                </div>
+                <div className="col-9">
+                  <textarea className="form-input" placeholder="notes" rows="3" value={this.props.logWorkout.notes}></textarea>
+                </div>
+
+              </div>
 
               {this.renderExercises()}
 
               <div className="form-group">
                 <div className="col-10"></div>
                 <div className="col-2 text-center">
-                  <button className="btn btn-action btn-lg circle btn-exercise-action" onClick={this.handleBtnAddExerciseClick.bind(this)}>
+                  <button
+                    className="btn btn-action btn-lg circle btn-exercise-action"
+                    onClick={this
+                    .handleBtnAddExerciseClick
+                    .bind(this)}>
                     <i className="icon icon-plus"></i>
                   </button>
                 </div>
