@@ -8,6 +8,12 @@ const userActions = {
     return {
       type: 'LOG-WORKOUT-EXERCISE'
     };
+  },
+  logWorkoutExerciseDelete: (index) => {
+    return {
+      type: 'LOG-WORKOUT-EXERCISE-DELETE',
+      index: index
+    };
   }
 };
 

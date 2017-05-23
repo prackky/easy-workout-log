@@ -1,17 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import userActions from '../../core/actions/userActions';
+
 import './log-exercise.css';
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    doLogWorkoutExerciseDelete: (index) => {
+      dispatch(userActions.logWorkoutExerciseDelete(index));
+    }
+  };
+};
 
 const LogExercise = (props) => {
 
+  const handleExerciseDelete = () => {
+    props.doLogWorkoutExerciseDelete(props.index);
+  };
+
   const displayDeleteButton = () => {
     return (
-      <button className="btn btn-action btn-lg circle btn-exercise-action">
+      <button className="btn btn-action btn-lg circle btn-exercise-action" onClick={handleExerciseDelete}>
         <i className="icon icon-delete"></i>
       </button>
     );
-  }
+  };
 
   return (
     <div>
@@ -66,4 +80,4 @@ const LogExercise = (props) => {
   );
 };
 
-export default LogExercise;
+export default connect(null, mapDispatchToProps)(LogExercise);
