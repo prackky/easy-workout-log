@@ -27,9 +27,9 @@ const userReducer = (state = {}, action) => {
             exercises: [
             ...exercises, {
                 name: 'squats',
-                reps: 8,
-                weight: 100,
-                sets: 3
+                reps: '8',
+                weight: '100',
+                sets: '3'
             }
           ]
           }
@@ -59,6 +59,19 @@ const userReducer = (state = {}, action) => {
         const exerciseIndex = action.exerciseIndex;
         const exercise = exercises[exerciseIndex];
         const nameFormHint = action.exercise.name ? '' : 'Required.';
+        const repsFormHint = action.exercise.reps ? '' : 'Required.';
+
+        /*
+        // this is taken care of by type="number"
+        ['reps', 'sets', 'weights'].forEach((property) => {
+          if (action.exercise[property]) {
+            const propertyIntValue = parseInt(action.exercise[property]);
+            if (!propertyIntValue) {
+              
+            }
+          }
+        });
+        */
 
         return {
           ...state,
@@ -69,7 +82,8 @@ const userReducer = (state = {}, action) => {
               {
                 ...exercise,
                 ...action.exercise,
-                nameFormHint: nameFormHint
+                nameFormHint: nameFormHint,
+                repsFormHint: repsFormHint
             },
             ...exercises.slice(exerciseIndex + 1)
           ]

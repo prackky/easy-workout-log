@@ -78,9 +78,9 @@ describe('userReducer', () => {
             exercises: [
               {
                 name: 'squats',
-                reps: 8,
-                weight: 100,
-                sets: 3
+                reps: '8',
+                weight: '100',
+                sets: '3'
               }
             ]
           }
@@ -157,12 +157,12 @@ describe('userReducer', () => {
       // when
       const newState = userReducer({
         logWorkout: {
-          exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+          exercises: [{ name: 'a' }, { name: 'b', reps: '1' }, { name: 'c' }]
         }
       }, {
         type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
         exerciseIndex: 1,
-        exercise: { name: 'changed', snoop: 'dawg' }
+        exercise: { name: 'changed', snoop: 'dawg', reps: '1' }
       });
 
       // then
@@ -171,7 +171,7 @@ describe('userReducer', () => {
         .deep
         .equal({
           logWorkout: {
-            exercises: [{ name: 'a' }, { name: 'changed', snoop: 'dawg', nameFormHint: '' }, { name: 'c' }]
+            exercises: [{ name: 'a' }, { name: 'changed', snoop: 'dawg', reps: '1', nameFormHint: '', repsFormHint: '' }, { name: 'c' }]
           }
         });
     });
@@ -180,21 +180,22 @@ describe('userReducer', () => {
       // when
       const newState = userReducer({
         logWorkout: {
-          exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+          exercises: [{ name: 'a' }, { name: 'b', reps: '1' }, { name: 'c' }]
         }
       }, {
         type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
         exerciseIndex: 1,
-        exercise: { name: '' }
+        exercise: { name: '', reps: '1' }
       });
 
       // then
+      // console.log(newState.logWorkout.exercises[1]);
       expect(newState)
         .to
         .deep
         .equal({
           logWorkout: {
-            exercises: [{ name: 'a' }, { name: '', nameFormHint: 'Required.' }, { name: 'c' }]
+            exercises: [{ name: 'a' }, { name: '', nameFormHint: 'Required.', repsFormHint: '', reps: '1' }, { name: 'c' }]
           }
         });
     });

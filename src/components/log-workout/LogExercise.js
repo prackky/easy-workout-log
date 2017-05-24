@@ -23,14 +23,15 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseDelete(props.index);
   };
 
-  const handleExerciseNameChange = (event) => {
-    props.doLogWorkoutExerciseSetData(props.index, {
-      name: event.target.value,
-      reps: props.reps,
-      weight: props.weight,
-      sets: props.sets
-    });
-  }
+  const handleChange = (event) => {
+    const propertyName = event
+      .target
+      .getAttribute('property');
+    const exercise = props.exercise;
+    exercise[propertyName] = event.target.value;
+
+    props.doLogWorkoutExerciseSetData(props.index, exercise);
+  };
 
   const displayDeleteButton = () => {
     return (
@@ -49,15 +50,16 @@ const LogExercise = (props) => {
       <div className="exercise-entry">
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Exercise</label>
+            <label className="form-label">Name</label>
           </div>
           <div className="col-7">
             <input
               className="form-input input-lg"
               type="text"
-              placeholder="Squats"
+              placeholder="e.g. Squats"
               value={props.exercise.name}
-              onChange={handleExerciseNameChange}/>
+              property="name"
+              onChange={handleChange}/>
           </div>
           <div className="col-2 text-center">
             {displayDeleteButton()}
@@ -78,8 +80,25 @@ const LogExercise = (props) => {
           <div className="col-3">
             <label className="form-label">Reps</label>
           </div>
-          <div className="col-3">
-            <input className="form-input input-lg" type="text" placeholder="8"/>
+          <div className="col-4">
+            <input
+              className="form-input input-lg"
+              type="number"
+              min="0"
+              max="1000"
+              property="reps"
+              value={props.exercise.reps}
+              onChange={handleChange}/>
+          </div>
+        </div>
+
+        <div
+          className={"form-group form-input-hint" + (props.exercise.repsFormHint
+          ? ''
+          : 'hide')}>
+          <div className="col-3"></div>
+          <div className="col-9">
+            {props.exercise.repsFormHint}
           </div>
         </div>
 
@@ -87,8 +106,15 @@ const LogExercise = (props) => {
           <div className="col-3">
             <label className="form-label">Weight</label>
           </div>
-          <div className="col-3">
-            <input className="form-input input-lg" type="text" placeholder="100"/>
+          <div className="col-4">
+            <input
+              className="form-input input-lg"
+              type="number"
+              property="weight"
+              min="0"
+              max="1000"
+              value={props.exercise.weight}
+              onChange={handleChange}/>
           </div>
         </div>
 
@@ -96,8 +122,15 @@ const LogExercise = (props) => {
           <div className="col-3">
             <label className="form-label">Sets</label>
           </div>
-          <div className="col-3">
-            <input className="form-input input-lg" type="text" placeholder="3"/>
+          <div className="col-4">
+            <input
+              className="form-input input-lg"
+              type="number"
+              min="0"
+              max="1000"
+              property="sets"
+              value={props.exercise.sets}
+              onChange={handleChange}/>
           </div>
         </div>
       </div>
