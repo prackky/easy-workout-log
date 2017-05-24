@@ -7,6 +7,8 @@ const userReducer = (state = {}, action) => {
         logWorkout: {
           type: 'weight',
           notes: '',
+          date: null,
+          time: null,
           exercises: []
         }
       };

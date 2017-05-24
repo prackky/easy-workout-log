@@ -41,7 +41,6 @@ class LogWorkout extends Component {
       .map((exercise, index) => {
         return (<LogExercise key={index} index={index} exercise={exercise}/>);
       });
-
   }
 
   handleBtnAddExerciseClick(event) {
@@ -62,7 +61,7 @@ class LogWorkout extends Component {
           <div className="column col-12">
             <h4>Log a new workout.</h4>
             <p>
-            Fields marked with a * are required. Click + to add a new exercise. Hit the save button once finished.
+            Click + to add a new exercise. Hit the save button once finished.
             </p>
           </div>
         </div>
@@ -74,10 +73,36 @@ class LogWorkout extends Component {
 
               <div className="form-group">
                 <div className="col-3">
+                  <label className="form-label">Date</label>
+                </div>
+                <div className="col-9">
+                  <input className="form-input" type="date" value={this.props.logWorkout.date} />
+                </div>
+              </div>
+              <div className={"form-group form-input-hint" + (this.props.logWorkout.dateFormHint ? 'hide' : '')}>
+                <div className="col-3">
+                  
+                </div>
+                <div className="col-9">
+                  {this.props.logWorkout.dateFormHint}
+                </div>
+              </div>
+              
+              <div className="form-group">
+                <div className="col-3">
+                  <label className="form-label">Time</label>
+                </div>
+                <div className="col-9">
+                  <input className="form-input" type="time" value={this.props.logWorkout.time} />
+                </div>
+              </div>
+              
+              <div className="form-group">
+                <div className="col-3">
                   <label className="form-label">Notes</label>
                 </div>
                 <div className="col-9">
-                  <textarea className="form-input" placeholder="notes" rows="3" value={this.props.logWorkout.notes}></textarea>
+                  <input className="form-input" type="text" placeholder="e.g. chest and legs" value={this.props.logWorkout.notes} />
                 </div>
 
               </div>

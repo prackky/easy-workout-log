@@ -27,6 +27,8 @@ describe('userReducer', () => {
           logWorkout: {
             type: 'weight',
             notes: '',
+            date: null,
+            time: null,
             exercises: []
           }
         });
@@ -47,6 +49,8 @@ describe('userReducer', () => {
           logWorkout: {
             type: 'weight',
             notes: '',
+            date: null,
+            time: null,
             exercises: []
           }
         });

@@ -20,3 +20,7 @@
   background: #f8f9fa;
   color: #667189;
 }
+
+.form-input-hint {
+  margin-top: -1rem;
+}

@@ -34,7 +34,7 @@ const LogExercise = (props) => {
       <div className="exercise-entry">
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Exercise*</label>
+            <label className="form-label">Exercise</label>
           </div>
           <div className="col-7">
             <input
@@ -46,7 +46,15 @@ const LogExercise = (props) => {
           <div className="col-2 text-center">
             {displayDeleteButton()}
           </div>
+        </div>
 
+        <div className={"form-group form-input-hint" + (props.exercise.nameFormHint ? 'hide' : '')}>
+          <div className="col-3">
+            
+          </div>
+          <div className="col-9">
+            {props.exercise.nameFormHint}
+          </div>
         </div>
 
         <div className="form-group">
