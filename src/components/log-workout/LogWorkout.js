@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     doLogWorkoutExercise: () => {
       dispatch(userActions.logWorkoutExercise());
+    },
+    doLogWorkoutSetDate: (date) => {
+      dispatch(userActions.logWorkoutSetDate(date));
     }
   };
 };
@@ -50,6 +53,10 @@ class LogWorkout extends Component {
       .doLogWorkoutExercise();
   };
 
+  handleDateChange(event) {
+    this.props.doLogWorkoutSetDate(event.target.value);
+  }
+
   render() {
     if (!this.props.logWorkout) {
       return <div></div>;
@@ -76,24 +83,15 @@ class LogWorkout extends Component {
                   <label className="form-label">Date</label>
                 </div>
                 <div className="col-9">
-                  <input className="form-input" type="date" value={this.props.logWorkout.date} />
+                  <input className="form-input" type="date" value={this.props.logWorkout.date} onChange={this.handleDateChange.bind(this)} />
                 </div>
               </div>
-              <div className={"form-group form-input-hint" + (this.props.logWorkout.dateFormHint ? 'hide' : '')}>
+              <div className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint ? '' : 'hide')}>
                 <div className="col-3">
                   
                 </div>
                 <div className="col-9">
                   {this.props.logWorkout.dateFormHint}
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <div className="col-3">
-                  <label className="form-label">Time</label>
-                </div>
-                <div className="col-9">
-                  <input className="form-input" type="time" value={this.props.logWorkout.time} />
                 </div>
               </div>
               
@@ -129,23 +127,6 @@ class LogWorkout extends Component {
                   </button>
                 </div>
               </div>
-
-              {/*
-              <div className="form-group">
-                <div className="column col-4">
-                  <div className="input-group">
-                    <span className="input-group-addon addon-lg">Reps</span>
-                    <input type="text" className="form-input input-lg" placeholder="8"/>
-                  </div>
-                </div>
-                <div className="column col-4">
-                  <div className="input-group">
-                    <span className="input-group-addon addon-lg">Weight</span>
-                    <input type="text" className="form-input input-lg" placeholder="100"/>
-                  </div>
-                </div>
-              </div>
-              */}
 
             </form>
 

@@ -14,6 +14,12 @@ const userActions = {
       type: 'LOG-WORKOUT-EXERCISE-DELETE',
       index: index
     };
+  },
+  logWorkoutSetDate: (date) => {
+    return {
+      type: 'LOG-WORKOUT-SET-DATE',
+      date: date
+    };
   }
 };
 

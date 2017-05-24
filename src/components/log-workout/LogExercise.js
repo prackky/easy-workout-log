@@ -48,7 +48,7 @@ const LogExercise = (props) => {
           </div>
         </div>
 
-        <div className={"form-group form-input-hint" + (props.exercise.nameFormHint ? 'hide' : '')}>
+        <div className={"form-group form-input-hint" + (props.exercise.nameFormHint ? '' : 'hide')}>
           <div className="col-3">
             
           </div>
@@ -59,7 +59,7 @@ const LogExercise = (props) => {
 
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Reps*</label>
+            <label className="form-label">Reps</label>
           </div>
           <div className="col-3">
             <input className="form-input input-lg" type="text" placeholder="8"/>

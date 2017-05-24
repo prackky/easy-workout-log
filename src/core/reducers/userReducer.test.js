@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import moment from 'moment';
 
 import userReducer from './userReducer';
 
@@ -15,6 +16,8 @@ describe('userReducer', () => {
   });
 
   describe('LOG-WORKOUT', () => {
+    const today = moment().format('YYYY-MM-DD');
+
     it('should add logWorkout for LOG-WORKOUT', () => {
       // when
       const newState = userReducer(undefined, { type: 'LOG-WORKOUT' });
@@ -27,8 +30,7 @@ describe('userReducer', () => {
           logWorkout: {
             type: 'weight',
             notes: '',
-            date: null,
-            time: null,
+            date: today,
             exercises: []
           }
         });
@@ -49,8 +51,7 @@ describe('userReducer', () => {
           logWorkout: {
             type: 'weight',
             notes: '',
-            date: null,
-            time: null,
+            date: today,
             exercises: []
           }
         });
@@ -108,7 +109,7 @@ describe('userReducer', () => {
           }
         });
     });
-    
+
     it('should remove the first exercise for LOG-WORKOUT-EXERCISE-DELETE', () => {
       // when
       const newState = userReducer({
@@ -129,7 +130,7 @@ describe('userReducer', () => {
           }
         });
     });
-    
+
     it('should remove the last exercise for LOG-WORKOUT-EXERCISE-DELETE', () => {
       // when
       const newState = userReducer({
@@ -150,6 +151,31 @@ describe('userReducer', () => {
           }
         });
     });
+  });
+
+  describe('LOG-WORKOUT-SET-DATE', () => {
+    it('should set the date', () => {
+      // when
+      const now = new Date();
+
+      const newState = userReducer({
+        logWorkout: {
+          date: null
+        }
+      }, { type: 'LOG-WORKOUT-SET-DATE', date: now });
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          logWorkout: {
+            date: now,
+            dateFormHint: ''
+          }
+        });
+    });
+
   });
 
 

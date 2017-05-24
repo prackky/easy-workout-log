@@ -1,14 +1,16 @@
+import moment from 'moment';
+
 const userReducer = (state = {}, action) => {
   switch (action.type) {
-
     case 'LOG-WORKOUT':
+      const today = moment().format('YYYY-MM-DD');
+
       return {
         ...state,
         logWorkout: {
           type: 'weight',
           notes: '',
-          date: null,
-          time: null,
+          date: today,
           exercises: []
         }
       };
@@ -50,6 +52,22 @@ const userReducer = (state = {}, action) => {
           }
         };
       }
+    case 'LOG-WORKOUT-SET-DATE':
+      {
+        const logWorkout = state.logWorkout;
+        const date = action.date;
+        const dateFormHint = action.date ? '' : 'Required or invalid'
+
+        return {
+          ...state,
+          logWorkout: {
+            ...logWorkout,
+            date: date,
+            dateFormHint: dateFormHint
+          }
+        };
+      }
+
     default:
       return state;
   }
