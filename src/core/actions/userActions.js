@@ -15,10 +15,11 @@ const userActions = {
       index: index
     };
   },
-  logWorkoutSetDate: (date) => {
+  logWorkoutSetData: (date, notes) => {
     return {
-      type: 'LOG-WORKOUT-SET-DATE',
-      date: date
+      type: 'LOG-WORKOUT-SET-DATA',
+      date: date,
+      notes: notes
     };
   }
 };

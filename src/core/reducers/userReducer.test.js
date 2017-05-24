@@ -153,16 +153,17 @@ describe('userReducer', () => {
     });
   });
 
-  describe('LOG-WORKOUT-SET-DATE', () => {
-    it('should set the date', () => {
+  describe('LOG-WORKOUT-SET-DATA', () => {
+    it('should set the date and notes', () => {
       // when
       const now = new Date();
 
       const newState = userReducer({
         logWorkout: {
-          date: null
+          date: null,
+          notes: ''
         }
-      }, { type: 'LOG-WORKOUT-SET-DATE', date: now });
+      }, { type: 'LOG-WORKOUT-SET-DATA', date: now, notes: 'blah' });
 
       // then
       expect(newState)
@@ -171,7 +172,8 @@ describe('userReducer', () => {
         .equal({
           logWorkout: {
             date: now,
-            dateFormHint: ''
+            dateFormHint: '',
+            notes: 'blah'
           }
         });
     });

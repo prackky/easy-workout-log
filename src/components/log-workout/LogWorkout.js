@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkoutExercise: () => {
       dispatch(userActions.logWorkoutExercise());
     },
-    doLogWorkoutSetDate: (date) => {
-      dispatch(userActions.logWorkoutSetDate(date));
+    doLogWorkoutSetData: (date, notes) => {
+      dispatch(userActions.logWorkoutSetData(date, notes));
     }
   };
 };
@@ -54,7 +54,11 @@ class LogWorkout extends Component {
   };
 
   handleDateChange(event) {
-    this.props.doLogWorkoutSetDate(event.target.value);
+    this.props.doLogWorkoutSetData(event.target.value, this.props.logWorkout.notes);
+  }
+
+  handleNotesChange(event) {
+    this.props.doLogWorkoutSetData(this.props.logWorkout.date, event.target.value);
   }
 
   render() {
@@ -100,7 +104,7 @@ class LogWorkout extends Component {
                   <label className="form-label">Notes</label>
                 </div>
                 <div className="col-9">
-                  <input className="form-input" type="text" placeholder="e.g. chest and legs" value={this.props.logWorkout.notes} />
+                  <input className="form-input" type="text" placeholder="e.g. chest and legs" value={this.props.logWorkout.notes} onChange={this.handleNotesChange.bind(this)} />
                 </div>
 
               </div>

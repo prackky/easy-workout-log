@@ -52,16 +52,19 @@ const userReducer = (state = {}, action) => {
           }
         };
       }
-    case 'LOG-WORKOUT-SET-DATE':
+      
+    case 'LOG-WORKOUT-SET-DATA':
       {
         const logWorkout = state.logWorkout;
         const date = action.date;
+        const notes = action.notes;
         const dateFormHint = action.date ? '' : 'Required or invalid'
 
         return {
           ...state,
           logWorkout: {
             ...logWorkout,
+            notes: notes,
             date: date,
             dateFormHint: dateFormHint
           }
