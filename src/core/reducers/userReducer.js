@@ -26,7 +26,7 @@ const userReducer = (state = {}, action) => {
             ...logWorkout,
             exercises: [
             ...exercises, {
-                exercise: 'squats',
+                name: 'squats',
                 reps: 8,
                 weight: 100,
                 sets: 3
@@ -52,7 +52,30 @@ const userReducer = (state = {}, action) => {
           }
         };
       }
-      
+    case 'LOG-WORKOUT-EXERCISE-SET-DATA':
+      {
+        const logWorkout = state.logWorkout;
+        const exercises = logWorkout.exercises;
+        const exerciseIndex = action.exerciseIndex;
+        const exercise = exercises[exerciseIndex];
+        const nameFormHint = action.exercise.name ? '' : 'Required.';
+
+        return {
+          ...state,
+          logWorkout: {
+            ...logWorkout,
+            exercises: [
+            ...exercises.slice(0, exerciseIndex),
+              {
+                ...exercise,
+                ...action.exercise,
+                nameFormHint: nameFormHint
+            },
+            ...exercises.slice(exerciseIndex + 1)
+          ]
+          }
+        };
+      }
     case 'LOG-WORKOUT-SET-DATA':
       {
         const logWorkout = state.logWorkout;

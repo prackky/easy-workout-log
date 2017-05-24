@@ -9,19 +9,34 @@ const mapDispatchToProps = (dispatch) => {
   return {
     doLogWorkoutExerciseDelete: (index) => {
       dispatch(userActions.logWorkoutExerciseDelete(index));
+    },
+    doLogWorkoutExerciseSetData: (index, exercise) => {
+      dispatch(userActions.logWorkoutExerciseSetData(index, exercise));
     }
   };
 };
 
 const LogExercise = (props) => {
 
-  const handleExerciseDelete = () => {
+  const handleExerciseDelete = (event) => {
+    event.preventDefault();
     props.doLogWorkoutExerciseDelete(props.index);
   };
 
+  const handleExerciseNameChange = (event) => {
+    props.doLogWorkoutExerciseSetData(props.index, {
+      name: event.target.value,
+      reps: props.reps,
+      weight: props.weight,
+      sets: props.sets
+    });
+  }
+
   const displayDeleteButton = () => {
     return (
-      <button className="btn btn-action btn-lg circle btn-exercise-action" onClick={handleExerciseDelete}>
+      <button
+        className="btn btn-action btn-lg circle btn-exercise-action"
+        onClick={handleExerciseDelete}>
         <i className="icon icon-delete"></i>
       </button>
     );
@@ -41,17 +56,19 @@ const LogExercise = (props) => {
               className="form-input input-lg"
               type="text"
               placeholder="Squats"
-              value={props.exercise.name}/>
+              value={props.exercise.name}
+              onChange={handleExerciseNameChange}/>
           </div>
           <div className="col-2 text-center">
             {displayDeleteButton()}
           </div>
         </div>
 
-        <div className={"form-group form-input-hint" + (props.exercise.nameFormHint ? '' : 'hide')}>
-          <div className="col-3">
-            
-          </div>
+        <div
+          className={"form-group form-input-hint" + (props.exercise.nameFormHint
+          ? ''
+          : 'hide')}>
+          <div className="col-3"></div>
           <div className="col-9">
             {props.exercise.nameFormHint}
           </div>

@@ -77,7 +77,7 @@ describe('userReducer', () => {
             type: 'weight',
             exercises: [
               {
-                exercise: 'squats',
+                name: 'squats',
                 reps: 8,
                 weight: 100,
                 sets: 3
@@ -152,6 +152,55 @@ describe('userReducer', () => {
         });
     });
   });
+  describe('LOG-WORKOUT-EXERCISE-SET-DATA', () => {
+    it('should update the specified exercise', () => {
+      // when
+      const newState = userReducer({
+        logWorkout: {
+          exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+        }
+      }, {
+        type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
+        exerciseIndex: 1,
+        exercise: { name: 'changed', snoop: 'dawg' }
+      });
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          logWorkout: {
+            exercises: [{ name: 'a' }, { name: 'changed', snoop: 'dawg', nameFormHint: '' }, { name: 'c' }]
+          }
+        });
+    });
+    
+    it('should set the nameFormHint for an empty name', () => {
+      // when
+      const newState = userReducer({
+        logWorkout: {
+          exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+        }
+      }, {
+        type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
+        exerciseIndex: 1,
+        exercise: { name: '' }
+      });
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          logWorkout: {
+            exercises: [{ name: 'a' }, { name: '', nameFormHint: 'Required.' }, { name: 'c' }]
+          }
+        });
+    });
+
+
+  });
 
   describe('LOG-WORKOUT-SET-DATA', () => {
     it('should set the date and notes', () => {
@@ -173,6 +222,28 @@ describe('userReducer', () => {
           logWorkout: {
             date: now,
             dateFormHint: '',
+            notes: 'blah'
+          }
+        });
+    });
+    
+    it('should set the dateFormHint for empty date', () => {
+      // when
+      const newState = userReducer({
+        logWorkout: {
+          date: null,
+          notes: ''
+        }
+      }, { type: 'LOG-WORKOUT-SET-DATA', date: '', notes: 'blah' });
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          logWorkout: {
+            date: '',
+            dateFormHint: 'Required or invalid',
             notes: 'blah'
           }
         });
