@@ -28,16 +28,15 @@ class Header extends Component {
         <div className="container grid-1280 bg-gray">
           <header className="navbar">
             <section className="navbar-section">
-              <a
+              <button
                 id="sidebar-show"
-                href="#"
-                className="btn btn-lg btn-link btn-action show-sm">
-                <i
-                  className="icon icon-menu"
-                  onClick={this
-                  .handleSidebarShowClick
-                  .bind(this)}></i>
-              </a>
+                className="btn btn-link btn-action btn-lg"
+                onClick={this
+                .handleSidebarShowClick
+                .bind(this)}>
+                <i className="icon icon-menu"></i>
+              </button>
+
               <Link to="/" className="navbar-brand mr-10">Easy Workout Log</Link>
             </section>
             <section className="navbar-section navbar-content">
