@@ -135,7 +135,8 @@ class LogWorkout extends Component {
                 <div className="col-10"></div>
                 <div className="col-2 text-center">
                   <button
-                    className="btn btn-action btn-lg circle btn-exercise-action"
+                    className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+                    data-tooltip="Add exercise"
                     onClick={this
                     .handleBtnAddExerciseClick
                     .bind(this)}>

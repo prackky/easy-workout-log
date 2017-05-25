@@ -80,7 +80,10 @@ describe('userReducer', () => {
                 name: 'squats',
                 reps: '8',
                 weight: '100',
-                sets: '3'
+                sets: '1',
+                tempo: '101',
+                rest: '60',
+                showAdvanced: false
               }
             ]
           }
