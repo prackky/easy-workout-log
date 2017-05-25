@@ -28,12 +28,14 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkout extends Component {
 
   componentDidMount() {
-    this
-      .props
-      .doLogWorkout();
-    this
-      .props
-      .doLogWorkoutExercise();
+    if (!this.props.logWorkout) {
+      this
+        .props
+        .doLogWorkout();
+      this
+        .props
+        .doLogWorkoutExercise();
+    }
   }
 
   renderExercises() {
@@ -54,11 +56,15 @@ class LogWorkout extends Component {
   };
 
   handleDateChange(event) {
-    this.props.doLogWorkoutSetData(event.target.value, this.props.logWorkout.notes);
+    this
+      .props
+      .doLogWorkoutSetData(event.target.value, this.props.logWorkout.notes);
   }
 
   handleNotesChange(event) {
-    this.props.doLogWorkoutSetData(this.props.logWorkout.date, event.target.value);
+    this
+      .props
+      .doLogWorkoutSetData(this.props.logWorkout.date, event.target.value);
   }
 
   render() {
@@ -72,11 +78,11 @@ class LogWorkout extends Component {
           <div className="column col-12">
             <h4>Log a new workout.</h4>
             <p>
-            Click + to add a new exercise. Hit the save button once finished.
+              Click + to add a new exercise. Hit the save button once finished.
             </p>
           </div>
         </div>
-        
+
         <div className="columns">
           <div className="column col-12">
 
@@ -87,24 +93,38 @@ class LogWorkout extends Component {
                   <label className="form-label">Date</label>
                 </div>
                 <div className="col-9">
-                  <input className="form-input" type="date" value={this.props.logWorkout.date} onChange={this.handleDateChange.bind(this)} />
+                  <input
+                    className="form-input"
+                    type="date"
+                    value={this.props.logWorkout.date}
+                    onChange={this
+                    .handleDateChange
+                    .bind(this)}/>
                 </div>
               </div>
-              <div className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint ? '' : 'hide')}>
-                <div className="col-3">
-                  
-                </div>
+              <div
+                className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint
+                ? ''
+                : 'hide')}>
+                <div className="col-3"></div>
                 <div className="col-9">
                   {this.props.logWorkout.dateFormHint}
                 </div>
               </div>
-              
+
               <div className="form-group">
                 <div className="col-3">
                   <label className="form-label">Notes</label>
                 </div>
                 <div className="col-9">
-                  <input className="form-input" type="text" placeholder="e.g. chest and legs" value={this.props.logWorkout.notes} onChange={this.handleNotesChange.bind(this)} />
+                  <input
+                    className="form-input"
+                    type="text"
+                    placeholder="e.g. chest and legs"
+                    value={this.props.logWorkout.notes}
+                    onChange={this
+                    .handleNotesChange
+                    .bind(this)}/>
                 </div>
 
               </div>
