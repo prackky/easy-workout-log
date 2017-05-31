@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkout extends Component {
 
   componentDidMount() {
-    if (!this.props.logWorkout) {
+    if (!this.props.logWorkout.componentMounted) {
       this
         .props
         .doLogWorkout();
@@ -68,7 +68,7 @@ class LogWorkout extends Component {
   }
 
   render() {
-    if (!this.props.logWorkout) {
+    if (!this.props.logWorkout.componentMounted) {
       return <div></div>;
     }
 

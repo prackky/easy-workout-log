@@ -8,6 +8,6 @@ describe('appReducer', () => {
     const newState = appReducer(undefined, { type: '' });
 
     // then
-    expect(newState).to.deep.equal({ user: {} });
+    expect(newState).to.deep.equal({ user: { logWorkout: {} } });
   })
 });
