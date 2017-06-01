@@ -1,4 +1,4 @@
-const userActions = {
+const logWorkoutActions = {
   logWorkout: () => {
     return {
       type: 'LOG-WORKOUT'
@@ -31,4 +31,4 @@ const userActions = {
   }
 };
 
-export default userActions;
+export default logWorkoutActions;

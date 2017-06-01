@@ -1,17 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import userActions from '../../core/actions/userActions';
+import logWorkoutActions from '../../core/actions/logWorkoutActions';
 
 import './log-exercise.css';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     doLogWorkoutExerciseDelete: (index) => {
-      dispatch(userActions.logWorkoutExerciseDelete(index));
+      dispatch(logWorkoutActions.logWorkoutExerciseDelete(index));
     },
     doLogWorkoutExerciseSetData: (index, exercise) => {
-      dispatch(userActions.logWorkoutExerciseSetData(index, exercise));
+      dispatch(logWorkoutActions.logWorkoutExerciseSetData(index, exercise));
     }
   };
 };

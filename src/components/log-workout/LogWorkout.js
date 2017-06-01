@@ -5,7 +5,7 @@ import './log-workout.css';
 
 import LogExercise from './LogExercise';
 
-import userActions from '../../core/actions/userActions';
+import logWorkoutActions from '../../core/actions/logWorkoutActions';
 
 const mapStateToProps = (state) => {
   return {logWorkout: state.user.logWorkout};
@@ -14,13 +14,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     doLogWorkout: () => {
-      dispatch(userActions.logWorkout());
+      dispatch(logWorkoutActions.logWorkout());
     },
     doLogWorkoutExercise: () => {
-      dispatch(userActions.logWorkoutExercise());
+      dispatch(logWorkoutActions.logWorkoutExercise());
     },
     doLogWorkoutSetData: (date, notes) => {
-      dispatch(userActions.logWorkoutSetData(date, notes));
+      dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
     }
   };
 };

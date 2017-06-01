@@ -23,7 +23,7 @@ class Welcome extends Component {
   }
 
   handleBtnLogWorkoutClick = () => {
-    this.setState({redirect: '/log-workout'});
+    this.setState({redirect: '/log-workout'}); // using react-router with a button is not straightforward at all
   };
 
   render() {
