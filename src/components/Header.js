@@ -37,7 +37,7 @@ class Header extends Component {
                 <i className="icon icon-menu"></i>
               </button>
 
-              <Link to="/" className="navbar-brand mr-10">Easy Workout Log</Link>
+              <Link to="/" className="navbar-brand mr-10">Ewolo</Link>
             </section>
             <section className="navbar-section navbar-content">
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
@@ -64,7 +64,7 @@ class Header extends Component {
 
               <ul className="docs-nav nav">
                 <li className="brand">
-                  Easy workout log
+                  Ewolo
                 </li>
                 <li className="nav-item">
                   <NavLink

@@ -36,8 +36,8 @@ class Welcome extends Component {
         <div className="columns">
           <div className="column col-12">
             <div className="text-center">
-              <h2>Easy workout log</h2>
-              <h4>Progress tracking made simple</h4>
+              <h2>Ewolo</h2>
+              <h4>Workout tracking made simple</h4>
               {/* background image this with a logo */}
               <button
                 className="btn btn-primary btn-welcome-log-workout"
