@@ -50,6 +50,18 @@ class Header extends Component {
           <div className="columns">
             <div
               className={"docs-sidebar column col-3 col-sm-12 " + this.state.docsSidebarClass}>
+
+              <div className="text-right">
+                <button
+                  id="btn-sidebar-close"
+                  className="btn btn-link btn-action btn-lg"
+                  onClick={this
+                  .handleSidebarCloseClick
+                  .bind(this)}>
+                  <i className="icon icon-cross"></i>
+                </button>
+              </div>
+
               <ul className="docs-nav nav">
                 <li className="brand">
                   Easy workout log
@@ -91,12 +103,12 @@ class Header extends Component {
               </ul>
             </div>
             <a
-              href="#"
               id="sidebar-close"
               className={"docs-nav-clear " + this.state.sidebarCloseClass}
               onClick={this
               .handleSidebarCloseClick
               .bind(this)}></a>
+
           </div>
         </div>
 
