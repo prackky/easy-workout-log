@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 
 import Header from './components/Header';
 import Welcome from './components/Welcome';
-import UserNotification from './components/notification/UserNotification';
+import UserNotificationBar from './components/notification/UserNotificationBar';
 import LogWorkout from './components/log-workout/LogWorkout';
 
 import './App.css';
@@ -14,7 +14,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Header/>
-          <UserNotification/>
+          <UserNotificationBar/>
           <Route exact path="/" component={Welcome}/>
           <Route exact path="/log-workout" component={LogWorkout}/>
         </div>
