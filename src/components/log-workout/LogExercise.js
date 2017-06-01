@@ -94,7 +94,7 @@ const LogExercise = (props) => {
     }
 
     return (
-      <div>
+      <div className="fade-in">
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">Reps</label>
@@ -167,7 +167,7 @@ const LogExercise = (props) => {
     }
 
     return (
-      <div>
+      <div className="fade-in">
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">Tempo</label>
@@ -239,7 +239,7 @@ const LogExercise = (props) => {
 
   return (
 
-    <div>
+    <div className="fade-in">
       <div className="divider"></div>
 
       <div className="exercise-entry">
