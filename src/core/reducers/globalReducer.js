@@ -30,7 +30,8 @@ const globalReducer = (state = initialState, action) => {
             {
               type: action.userNotificationType,
               text: action.userNotificationText,
-              isRead: false
+              isRead: false,
+              at: action.at
             }
           ]
         };

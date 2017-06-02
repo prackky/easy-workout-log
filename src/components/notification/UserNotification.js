@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const UserNotification = (props) => {
 
@@ -23,11 +24,16 @@ const UserNotification = (props) => {
 
   return (
     <div className="columns">
-      <div className="column col-sm-12">
+      <div className="column col-xs-12">
         <div
           className={"toast user-notification " + getNotificationClassName(props.userNotification.type)}>
           <button className="btn btn-clear float-right" onClick={handleClearNotification}></button>
-          {props.userNotification.text}
+          <div>
+            {props.userNotification.text}
+          </div>
+          <div className="notification-timestamp">
+            {moment(props.userNotification.at).fromNow()}
+          </div>
         </div>
       </div>
     </div>

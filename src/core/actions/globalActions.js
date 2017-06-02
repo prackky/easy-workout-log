@@ -15,7 +15,8 @@ const globalActions = {
     return {
       type: 'USER-NOTIFICATION-ADD',
       userNotificationType: type,
-      userNotificationText: text
+      userNotificationText: text,
+      at: new Date()
     };
   },
   userNotificationUpdate: (index, isRead) => {

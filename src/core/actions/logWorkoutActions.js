@@ -40,6 +40,8 @@ const logWorkoutActions = {
   },
   logWorkoutSaveFlow: () => {
     return (dispatch, getState) => {
+      const logWorkoutDate = getState().user.logWorkout.date;
+
       dispatch(globalActions.taskStart());
 
       const promise = new Promise((resolve, reject) => {
@@ -49,13 +51,13 @@ const logWorkoutActions = {
       });
 
       return promise.then(result => {
-          const logWorkoutDate = getState().user.logWorkout.date;
           dispatch(logWorkoutActions.logWorkoutSave());
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
           dispatch(push('/'));
         })
         .catch(error => {
           console.log(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when saving workout for ' + logWorkoutDate));
         })
         .then(() => {
           dispatch(globalActions.taskEnd());

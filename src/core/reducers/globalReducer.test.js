@@ -70,9 +70,13 @@ describe('globalReducer', () => {
   describe('USER-NOTIFICATION-ADD', () => {
     it('should add a user notification', () => {
       // when
+      const now = new Date();
+      const action = actions.userNotificationAdd('SUCCESS', 'yay!');
+      action.at = now;
+      
       const newState = globalReducer({
         userNotifications: []
-      }, actions.userNotificationAdd('SUCCESS', 'yay!'));
+      }, action);
 
       // then
       expect(newState)
@@ -83,7 +87,8 @@ describe('globalReducer', () => {
             {
               type: 'SUCCESS',
               text: 'yay!',
-              isRead: false
+              isRead: false,
+              at: now
             }
           ]
         });
