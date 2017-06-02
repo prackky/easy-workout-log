@@ -21,18 +21,29 @@ const globalReducer = (state = initialState, action) => {
       }
     case 'USER-NOTIFICATION-ADD':
       {
-        const userNotifications = state.userNotifications;
+        let userNotifications = [];
+
+        if (action.markPreviousAsRead) {
+          for (const userNotification of state.userNotifications) {
+            userNotifications.push({
+              ...userNotification,
+              isRead: true
+            });
+          }
+        } else {
+          userNotifications = state.userNotifications;
+        }
 
         return {
           ...state,
           userNotifications: [
-            ...userNotifications,
             {
               type: action.userNotificationType,
               text: action.userNotificationText,
               isRead: false,
               at: action.at
-            }
+            },
+            ...userNotifications
           ]
         };
       }

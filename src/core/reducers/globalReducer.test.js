@@ -73,7 +73,7 @@ describe('globalReducer', () => {
       const now = new Date();
       const action = actions.userNotificationAdd('SUCCESS', 'yay!');
       action.at = now;
-      
+
       const newState = globalReducer({
         userNotifications: []
       }, action);
@@ -89,6 +89,70 @@ describe('globalReducer', () => {
               text: 'yay!',
               isRead: false,
               at: now
+            }
+          ]
+        });
+    });
+
+    it('should add a user notification at the front of the queue', () => {
+      // when
+      const now = new Date();
+      const action = actions.userNotificationAdd('SUCCESS', 'yay!');
+      action.at = now;
+
+      const newState = globalReducer({
+        userNotifications: [{ text: '0', isRead: true }]
+      }, action);
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          userNotifications: [
+            {
+              type: 'SUCCESS',
+              text: 'yay!',
+              isRead: false,
+              at: now
+            },
+            {
+              text: '0',
+              isRead: true
+            }
+          ]
+        });
+    });
+
+    it('should mark the other user notifications as seen', () => {
+      // when
+      const now = new Date();
+      const action = actions.userNotificationAdd('SUCCESS', 'yay!', true);
+      action.at = now;
+
+      const newState = globalReducer({
+        userNotifications: [{ text: '0', isRead: false }, { text: '1', isRead: false }]
+      }, action);
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          userNotifications: [
+            {
+              type: 'SUCCESS',
+              text: 'yay!',
+              isRead: false,
+              at: now
+            },
+            {
+              text: '0',
+              isRead: true
+            },
+            {
+              text: '1',
+              isRead: true
             }
           ]
         });

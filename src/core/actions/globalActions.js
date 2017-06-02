@@ -11,12 +11,13 @@ const globalActions = {
       type: 'TASK-END'
     };
   },
-  userNotificationAdd: (type, text) => {
+  userNotificationAdd: (type, text, markPreviousAsRead = false) => {
     return {
       type: 'USER-NOTIFICATION-ADD',
       userNotificationType: type,
       userNotificationText: text,
-      at: new Date()
+      at: new Date(),
+      markPreviousAsRead: markPreviousAsRead
     };
   },
   userNotificationUpdate: (index, isRead) => {
