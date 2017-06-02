@@ -222,5 +222,26 @@ describe('logWorkoutReducer', () => {
 
   });
 
+  describe('LOG-WORKOUT-SAVE', () => {
+    const today = moment().format('YYYY-MM-DD');
+
+    it('should clean data', () => {
+      // when
+      const newState = logWorkoutReducer({
+        date: today,
+        notes: 'workout in progress',
+        componentMounted: true,
+        exercises: ['a']
+      }, { type: 'LOG-WORKOUT-SAVE' });
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({ date: today, notes: '', componentMounted: true, exercises: [] });
+    });
+
+  });
+
 
 });

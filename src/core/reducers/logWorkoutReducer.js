@@ -81,6 +81,7 @@ const logWorkoutReducer = (state = {}, action) => {
           ]
         };
       }
+
     case 'LOG-WORKOUT-SET-DATA':
       {
         const date = action.date;
@@ -92,6 +93,18 @@ const logWorkoutReducer = (state = {}, action) => {
           notes: notes,
           date: date,
           dateFormHint: dateFormHint
+        };
+      }
+
+    case 'LOG-WORKOUT-SAVE':
+      {
+        const today = moment().format('YYYY-MM-DD');
+
+        return {
+          componentMounted: true,
+          notes: '',
+          date: today,
+          exercises: []
         };
       }
 

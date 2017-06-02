@@ -28,6 +28,30 @@ const logWorkoutActions = {
       date: date,
       notes: notes
     };
+  },
+  logWorkoutSave: () => {
+    return (dispatch, getState) => {
+      dispatch({ type: 'TASK-START' });
+
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('done');
+        }, 1000);
+      });
+
+      return promise.then(result => {
+          console.log(result);
+          dispatch({
+            type: 'LOG-WORKOUT-SAVE'
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .then(() => {
+          dispatch({ type: 'TASK-END' });
+        });
+    };
   }
 };
 

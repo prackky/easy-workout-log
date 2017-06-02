@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 import {Provider} from 'react-redux';
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import {applyMiddleware, createStore} from 'redux';
 
@@ -15,7 +15,7 @@ import './index.css';
 
 import appReducer from './core/reducers/appReducer';
 
-const store = createStore(appReducer, applyMiddleware(logger));
+const store = createStore(appReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>

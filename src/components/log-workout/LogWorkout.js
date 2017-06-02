@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
+    },
+    doLogWorkoutSave: () => {
+      dispatch(logWorkoutActions.logWorkoutSave());
     }
   };
 };
@@ -65,6 +68,13 @@ class LogWorkout extends Component {
     this
       .props
       .doLogWorkoutSetData(this.props.logWorkout.date, event.target.value);
+  }
+
+  handleSave(event) {
+    event.preventDefault();
+    this
+      .props
+      .doLogWorkoutSave();
   }
 
   render() {
@@ -147,7 +157,12 @@ class LogWorkout extends Component {
 
               <div className="form-group">
                 <div className="col-12 text-center">
-                  <button id="btn-save-workout" className="btn btn-primary btn-lg">
+                  <button
+                    id="btn-save-workout"
+                    className="btn btn-primary btn-lg"
+                    onClick={this
+                    .handleSave
+                    .bind(this)}>
                     Save Workout
                   </button>
                 </div>
