@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
     },
     doLogWorkoutSave: () => {
-      dispatch(logWorkoutActions.logWorkoutSave());
+      dispatch(logWorkoutActions.logWorkoutSaveFlow());
     }
   };
 };

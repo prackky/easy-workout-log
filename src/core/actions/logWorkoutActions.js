@@ -32,6 +32,11 @@ const logWorkoutActions = {
     };
   },
   logWorkoutSave: () => {
+    return {
+      type: 'LOG-WORKOUT-SAVE'
+    };
+  },
+  logWorkoutSaveFlow: () => {
     return (dispatch, getState) => {
       dispatch({ type: 'TASK-START' });
 
@@ -42,11 +47,7 @@ const logWorkoutActions = {
       });
 
       return promise.then(result => {
-          console.log(result);
-          dispatch({
-            type: 'LOG-WORKOUT-SAVE'
-          });
-
+          dispatch(logWorkoutActions.logWorkoutSave());
           dispatch(push('/'));
         })
         .catch(error => {

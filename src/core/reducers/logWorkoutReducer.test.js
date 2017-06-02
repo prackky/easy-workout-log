@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
+import actions from '../actions/logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -20,7 +21,7 @@ describe('logWorkoutReducer', () => {
 
     it('should add logWorkout for LOG-WORKOUT', () => {
       // when
-      const newState = logWorkoutReducer(undefined, { type: 'LOG-WORKOUT' });
+      const newState = logWorkoutReducer(undefined, actions.logWorkout());
 
       // then
       expect(newState)
@@ -39,7 +40,7 @@ describe('logWorkoutReducer', () => {
       // when
       const newState = logWorkoutReducer({
         snoop: 'dawg'
-      }, { type: 'LOG-WORKOUT' });
+      }, actions.logWorkout());
 
       // then
       expect(newState)
@@ -62,7 +63,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: []
-      }, { type: 'LOG-WORKOUT-EXERCISE' });
+      }, actions.logWorkoutExercise());
 
       // then
       expect(newState)
@@ -92,7 +93,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: [{ exercise: 'a' }, { exercise: 'b' }, { exercise: 'c' }]
-      }, { type: 'LOG-WORKOUT-EXERCISE-DELETE', index: 1 });
+      }, actions.logWorkoutExerciseDelete(1));
 
       // then
       expect(newState)
@@ -109,7 +110,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: [{ exercise: 'a' }, { exercise: 'b' }, { exercise: 'c' }]
-      }, { type: 'LOG-WORKOUT-EXERCISE-DELETE', index: 0 });
+      }, actions.logWorkoutExerciseDelete(0));
 
       // then
       expect(newState)
@@ -126,7 +127,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: [{ exercise: 'a' }, { exercise: 'b' }, { exercise: 'c' }]
-      }, { type: 'LOG-WORKOUT-EXERCISE-DELETE', index: 2 });
+      }, actions.logWorkoutExerciseDelete(2));
 
       // then
       expect(newState)
@@ -143,11 +144,7 @@ describe('logWorkoutReducer', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b', reps: '1' }, { name: 'c' }]
-      }, {
-        type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
-        exerciseIndex: 1,
-        exercise: { name: 'changed', snoop: 'dawg', reps: '1' }
-      });
+      }, actions.logWorkoutExerciseSetData(1, { name: 'changed', snoop: 'dawg', reps: '1' }));
 
       // then
       expect(newState)
@@ -162,11 +159,7 @@ describe('logWorkoutReducer', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b', reps: '1' }, { name: 'c' }]
-      }, {
-        type: 'LOG-WORKOUT-EXERCISE-SET-DATA',
-        exerciseIndex: 1,
-        exercise: { name: '', reps: '1' }
-      });
+      }, actions.logWorkoutExerciseSetData(1, { name: '', reps: '1' }));
 
       // then
       // console.log(newState.logWorkout.exercises[1]);
@@ -189,7 +182,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         date: null,
         notes: ''
-      }, { type: 'LOG-WORKOUT-SET-DATA', date: now, notes: 'blah' });
+      }, actions.logWorkoutSetData(now, 'blah'));
 
       // then
       expect(newState)
@@ -207,7 +200,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         date: null,
         notes: ''
-      }, { type: 'LOG-WORKOUT-SET-DATA', date: '', notes: 'blah' });
+      }, actions.logWorkoutSetData('', 'blah'));
 
       // then
       expect(newState)
@@ -232,7 +225,7 @@ describe('logWorkoutReducer', () => {
         notes: 'workout in progress',
         componentMounted: true,
         exercises: ['a']
-      }, { type: 'LOG-WORKOUT-SAVE' });
+      }, actions.logWorkoutSave());
 
       // then
       expect(newState)
