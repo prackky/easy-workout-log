@@ -157,7 +157,7 @@ const LogExercise = (props) => {
           <div className="col-12">
             <button
               className="btn btn-action btn-lg circle tooltip"
-              data-tooltip="Advanced fields"
+              data-tooltip="Show advanced"
               onClick={handleShowAdvanced}>
               <i className="icon icon-more-horiz"></i>
             </button>
@@ -192,8 +192,13 @@ const LogExercise = (props) => {
               <div className="popover-container">
                 <div className="card">
                   <div className="card-body">
+                    <p>
                     The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0
                     second mid-point and 1 second concentric (positive).
+                    </p>
+                    <p>
+                      Keep value at 101 (default) if unsure.
+                    </p> 
                   </div>
                 </div>
               </div>
