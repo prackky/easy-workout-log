@@ -12,7 +12,7 @@ describe('globalReducer', () => {
     expect(newState)
       .to
       .deep
-      .equal({ loadingCounter: 0 });
+      .equal({ loadingCounter: 0, userNotifications: [] });
   });
 
   describe('TASK-START', () => {
@@ -25,7 +25,8 @@ describe('globalReducer', () => {
         .to
         .deep
         .equal({
-          loadingCounter: 1
+          loadingCounter: 1,
+          userNotifications: []
         });
     });
 
@@ -53,7 +54,8 @@ describe('globalReducer', () => {
         .to
         .deep
         .equal({
-          loadingCounter: -1
+          loadingCounter: -1,
+          userNotifications: []
         });
     });
 

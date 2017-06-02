@@ -1,5 +1,7 @@
 import { push } from 'react-router-redux';
 
+import globalActions from './globalActions';
+
 const logWorkoutActions = {
   logWorkout: () => {
     return {
@@ -38,7 +40,7 @@ const logWorkoutActions = {
   },
   logWorkoutSaveFlow: () => {
     return (dispatch, getState) => {
-      dispatch({ type: 'TASK-START' });
+      dispatch(globalActions.taskStart());
 
       const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -54,7 +56,7 @@ const logWorkoutActions = {
           console.log(error);
         })
         .then(() => {
-          dispatch({ type: 'TASK-END' });
+          dispatch(globalActions.taskEnd());
         });
     };
   }

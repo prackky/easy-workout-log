@@ -1,5 +1,6 @@
 const initialState = {
-  loadingCounter: 0
+  loadingCounter: 0,
+  userNotifications: []
 };
 
 const globalReducer = (state = initialState, action) => {
