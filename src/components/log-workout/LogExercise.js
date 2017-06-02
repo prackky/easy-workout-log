@@ -1,20 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import logWorkoutActions from '../../actions/logWorkoutActions';
-
-import './log-exercise.css';
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    doLogWorkoutExerciseDelete: (index) => {
-      dispatch(logWorkoutActions.logWorkoutExerciseDelete(index));
-    },
-    doLogWorkoutExerciseSetData: (index, exercise) => {
-      dispatch(logWorkoutActions.logWorkoutExerciseSetData(index, exercise));
-    }
-  };
-};
 
 const LogExercise = (props) => {
 
@@ -274,4 +260,4 @@ const LogExercise = (props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(LogExercise);
+export default LogExercise;

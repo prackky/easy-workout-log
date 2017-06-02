@@ -24,6 +24,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     doLogWorkoutSave: () => {
       dispatch(logWorkoutActions.logWorkoutSave());
+    },
+    doLogWorkoutExerciseDelete: (index) => {
+      dispatch(logWorkoutActions.logWorkoutExerciseDelete(index));
+    },
+    doLogWorkoutExerciseSetData: (index, exercise) => {
+      dispatch(logWorkoutActions.logWorkoutExerciseSetData(index, exercise));
     }
   };
 };
@@ -47,7 +53,12 @@ class LogWorkout extends Component {
       .logWorkout
       .exercises
       .map((exercise, index) => {
-        return (<LogExercise key={index} index={index} exercise={exercise}/>);
+        return (<LogExercise
+          key={index}
+          index={index}
+          exercise={exercise}
+          doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
+          doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}/>);
       });
   }
 
