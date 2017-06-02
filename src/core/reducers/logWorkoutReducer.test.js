@@ -225,7 +225,7 @@ describe('logWorkoutReducer', () => {
         notes: 'workout in progress',
         componentMounted: true,
         exercises: ['a']
-      }, actions.logWorkoutSave());
+      }, actions.logWorkoutSaveSuccess());
 
       // then
       expect(newState)

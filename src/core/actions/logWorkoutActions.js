@@ -33,12 +33,12 @@ const logWorkoutActions = {
       notes: notes
     };
   },
-  logWorkoutSave: () => {
+  logWorkoutSaveSuccess: () => {
     return {
-      type: 'LOG-WORKOUT-SAVE'
+      type: 'LOG-WORKOUT-SAVE-SUCCESS'
     };
   },
-  logWorkoutSaveFlow: () => {
+  logWorkoutSave: () => {
     return (dispatch, getState) => {
       const logWorkoutDate = getState().user.logWorkout.date;
 
@@ -51,7 +51,7 @@ const logWorkoutActions = {
       });
 
       return promise.then(result => {
-          dispatch(logWorkoutActions.logWorkoutSave());
+          dispatch(logWorkoutActions.logWorkoutSaveSuccess());
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
           dispatch(push('/'));
         })

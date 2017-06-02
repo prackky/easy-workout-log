@@ -96,7 +96,7 @@ const logWorkoutReducer = (state = {}, action) => {
         };
       }
 
-    case 'LOG-WORKOUT-SAVE':
+    case 'LOG-WORKOUT-SAVE-SUCCESS':
       {
         const today = moment().format('YYYY-MM-DD');
 
