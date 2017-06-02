@@ -231,7 +231,7 @@ describe('logWorkoutReducer', () => {
       expect(newState)
         .to
         .deep
-        .equal({ date: today, notes: '', componentMounted: true, exercises: [] });
+        .equal({ date: today, notes: '', componentMounted: false, exercises: [] });
     });
 
   });

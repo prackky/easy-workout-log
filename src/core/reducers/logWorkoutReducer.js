@@ -101,7 +101,7 @@ const logWorkoutReducer = (state = {}, action) => {
         const today = moment().format('YYYY-MM-DD');
 
         return {
-          componentMounted: true,
+          componentMounted: false,
           notes: '',
           date: today,
           exercises: []
