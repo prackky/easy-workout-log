@@ -13,7 +13,7 @@ import Header from './components/Header';
 import Welcome from './components/Welcome';
 import UserNotificationBar from './components/notification/UserNotificationBar';
 import LogWorkout from './components/log-workout/LogWorkout';
-
+import Loader from './components/Loader';
 
 import appReducer from './core/reducers/appReducer';
 
@@ -29,6 +29,7 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <div>
+            <Loader/>
             <Header/>
             <UserNotificationBar/>
             <Route exact path="/" component={Welcome}/>
