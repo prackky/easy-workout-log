@@ -24,8 +24,8 @@ class Header extends Component {
   render() {
 
     return (
-      <div>
-        <div className="container grid-1280 bg-gray">
+      <div className="bg-gray">
+        <div className="container grid-1280 ">
           <header className="navbar">
             <section className="navbar-section">
               <button
