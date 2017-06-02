@@ -24,23 +24,20 @@ describe('globalReducer', () => {
       expect(newState)
         .to
         .deep
-        .equal({
-          loadingCounter: 1,
-          userNotifications: []
-        });
+        .equal({ loadingCounter: 1, userNotifications: [] });
     });
 
     it('should increment the loading counter for TASK-START', () => {
       // when
-      const newState = globalReducer({ loadingCounter: 2 }, actions.taskStart());
+      const newState = globalReducer({
+        loadingCounter: 2
+      }, actions.taskStart());
 
       // then
       expect(newState)
         .to
         .deep
-        .equal({
-          loadingCounter: 3
-        });
+        .equal({ loadingCounter: 3 });
     });
   });
 
@@ -53,24 +50,91 @@ describe('globalReducer', () => {
       expect(newState)
         .to
         .deep
-        .equal({
-          loadingCounter: -1,
-          userNotifications: []
-        });
+        .equal({ loadingCounter: -1, userNotifications: [] });
     });
 
     it('should decrement the loading counter', () => {
       // when
-      const newState = globalReducer({ loadingCounter: 2 }, actions.taskEnd());
+      const newState = globalReducer({
+        loadingCounter: 2
+      }, actions.taskEnd());
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({ loadingCounter: 1 });
+    });
+  });
+
+  describe('USER-NOTIFICATION-ADD', () => {
+    it('should add a user notification', () => {
+      // when
+      const newState = globalReducer({
+        userNotifications: []
+      }, actions.userNotificationAdd('SUCCESS', 'yay!'));
 
       // then
       expect(newState)
         .to
         .deep
         .equal({
-          loadingCounter: 1
+          userNotifications: [
+            {
+              type: 'SUCCESS',
+              text: 'yay!',
+              isRead: false
+            }
+          ]
         });
     });
+
+  });
+
+  describe('USER-NOTIFICATION-UPDATE', () => {
+    it('should mark a user notification as read for the first notification', () => {
+      // when
+      const newState = globalReducer({
+        userNotifications: [
+          {
+            type: 'SUCCESS',
+            text: '0',
+            isRead: false
+          }, {
+            type: 'SUCCESS',
+            text: '1',
+            isRead: false
+          }, {
+            type: 'SUCCESS',
+            text: '2',
+            isRead: false
+          }
+        ]
+      }, actions.userNotificationUpdate(0, true));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          userNotifications: [
+            {
+              type: 'SUCCESS',
+              text: '0',
+              isRead: true
+            }, {
+              type: 'SUCCESS',
+              text: '1',
+              isRead: false
+            }, {
+              type: 'SUCCESS',
+              text: '2',
+              isRead: false
+            }
+          ]
+        });
+    });
+
   });
 
 });

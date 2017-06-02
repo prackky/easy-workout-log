@@ -14,8 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     doUpdateUserNotification: (index, isRead) => {
-      // dispatch(globalActions.updateUserNotification(index, true));
-      console.log([index, isRead]);
+      dispatch(globalActions.userNotificationUpdate(index, isRead));
     }
   };
 };
@@ -37,11 +36,7 @@ const UserNotificationBar = (props) => {
   return (
     <div>
       <div className="container grid-480">
-        <div className="columns">
-
-          {renderUserNotifications()}
-
-        </div>
+        {renderUserNotifications()}
       </div>
 
     </div>
