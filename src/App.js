@@ -15,7 +15,7 @@ import UserNotificationBar from './components/notification/UserNotificationBar';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/Loader';
 
-import appReducer from './core/reducers/appReducer';
+import appReducer from './reducers/appReducer';
 
 import './App.css';
 

@@ -5,7 +5,7 @@ import './log-workout.css';
 
 import LogExercise from './LogExercise';
 
-import logWorkoutActions from '../../core/actions/logWorkoutActions';
+import logWorkoutActions from '../../actions/logWorkoutActions';
 
 const mapStateToProps = (state) => {
   return {logWorkout: state.user.logWorkout};

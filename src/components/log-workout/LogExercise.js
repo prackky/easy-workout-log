@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import logWorkoutActions from '../../core/actions/logWorkoutActions';
+import logWorkoutActions from '../../actions/logWorkoutActions';
 
 import './log-exercise.css';
 
