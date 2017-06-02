@@ -144,6 +144,11 @@
       "from": "react-router-dom@latest",
       "resolved": "https://registry.npmjs.org/react-router-dom/-/react-router-dom-4.1.1.tgz"
     },
+    "react-router-redux": {
+      "version": "4.0.8",
+      "from": "react-router-redux@latest",
+      "resolved": "https://registry.npmjs.org/react-router-redux/-/react-router-redux-4.0.8.tgz"
+    },
     "redux": {
       "version": "3.6.0",
       "from": "redux@latest",
