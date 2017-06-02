@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux';
+
 const logWorkoutActions = {
   logWorkout: () => {
     return {
@@ -44,6 +46,8 @@ const logWorkoutActions = {
           dispatch({
             type: 'LOG-WORKOUT-SAVE'
           });
+
+          dispatch(push('/'));
         })
         .catch(error => {
           console.log(error);
