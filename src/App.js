@@ -11,7 +11,6 @@ import createHistory from 'history/createBrowserHistory';
 
 import Header from './components/Header';
 import Welcome from './components/Welcome';
-import UserNotificationBar from './components/notification/UserNotificationBar';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/Loader';
 import Signup from './components/auth/Signup';
@@ -32,7 +31,6 @@ class App extends Component {
           <div>
             <Loader/>
             <Header/>
-            <UserNotificationBar/>
             <Route exact path="/" component={Welcome}/>
             <Route exact path="/log-workout" component={LogWorkout}/>
             <Route exact path="/signup" component={Signup}/>

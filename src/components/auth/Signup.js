@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router';
 import {connect} from 'react-redux';
 
+import UserNotificationBar from '../notification/UserNotificationBar';
+
 const mapStateToProps = (state) => {
   return {signup: state.signup};
 };
@@ -22,6 +24,8 @@ class Signup extends Component {
 
   render() {
     return (
+      <div>
+        <UserNotificationBar/>
       <div className="container grid-480 section-content">
         <div className="columns">
           <div className="column col-12">
@@ -35,6 +39,7 @@ class Signup extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

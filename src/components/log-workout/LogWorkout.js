@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import './log-workout.css';
 
+import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
 
 import logWorkoutActions from '../../actions/logWorkoutActions';
@@ -94,93 +95,96 @@ class LogWorkout extends Component {
     }
 
     return (
-      <div className="container grid-480 section-content">
-        <div className="columns">
-          <div className="column col-12">
-            <h4>Log a new workout.</h4>
-            <p>
-              Click + to add a new exercise. Hit the save button once finished.
-            </p>
+      <div>
+        <UserNotificationBar/>
+        <div className="container grid-480 section-content">
+          <div className="columns">
+            <div className="column col-12">
+              <h4>Log a new workout.</h4>
+              <p>
+                Click + to add a new exercise. Hit the save button once finished.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="columns">
-          <div className="column col-12">
+          <div className="columns">
+            <div className="column col-12">
 
-            <form className="form-horizontal">
+              <form className="form-horizontal">
 
-              <div className="form-group">
-                <div className="col-3">
-                  <label className="form-label">Date</label>
+                <div className="form-group">
+                  <div className="col-3">
+                    <label className="form-label">Date</label>
+                  </div>
+                  <div className="col-9">
+                    <input
+                      className="form-input"
+                      type="date"
+                      value={this.props.logWorkout.date}
+                      onChange={this
+                      .handleDateChange
+                      .bind(this)}/>
+                  </div>
                 </div>
-                <div className="col-9">
-                  <input
-                    className="form-input"
-                    type="date"
-                    value={this.props.logWorkout.date}
-                    onChange={this
-                    .handleDateChange
-                    .bind(this)}/>
-                </div>
-              </div>
-              <div
-                className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint
-                ? ''
-                : 'hide')}>
-                <div className="col-3"></div>
-                <div className="col-9">
-                  {this.props.logWorkout.dateFormHint}
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div className="col-3">
-                  <label className="form-label">Notes</label>
-                </div>
-                <div className="col-9">
-                  <input
-                    className="form-input"
-                    type="text"
-                    placeholder="e.g. chest and legs"
-                    value={this.props.logWorkout.notes}
-                    onChange={this
-                    .handleNotesChange
-                    .bind(this)}/>
+                <div
+                  className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint
+                  ? ''
+                  : 'hide')}>
+                  <div className="col-3"></div>
+                  <div className="col-9">
+                    {this.props.logWorkout.dateFormHint}
+                  </div>
                 </div>
 
-              </div>
+                <div className="form-group">
+                  <div className="col-3">
+                    <label className="form-label">Notes</label>
+                  </div>
+                  <div className="col-9">
+                    <input
+                      className="form-input"
+                      type="text"
+                      placeholder="e.g. chest and legs"
+                      value={this.props.logWorkout.notes}
+                      onChange={this
+                      .handleNotesChange
+                      .bind(this)}/>
+                  </div>
 
-              {this.renderExercises()}
-
-              <div className="form-group">
-                <div className="col-10"></div>
-                <div className="col-2 text-center">
-                  <button
-                    className="btn btn-action btn-lg circle btn-exercise-action tooltip"
-                    data-tooltip="Add exercise"
-                    onClick={this
-                    .handleBtnAddExerciseClick
-                    .bind(this)}>
-                    <i className="icon icon-plus"></i>
-                  </button>
                 </div>
-              </div>
 
-              <div className="form-group">
-                <div className="col-12 text-center">
-                  <button
-                    id="btn-save-workout"
-                    className="btn btn-primary btn-lg"
-                    onClick={this
-                    .handleSave
-                    .bind(this)}>
-                    Save Workout
-                  </button>
+                {this.renderExercises()}
+
+                <div className="form-group">
+                  <div className="col-10"></div>
+                  <div className="col-2 text-center">
+                    <button
+                      className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+                      data-tooltip="Add exercise"
+                      onClick={this
+                      .handleBtnAddExerciseClick
+                      .bind(this)}>
+                      <i className="icon icon-plus"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-            </form>
+                <div className="form-group">
+                  <div className="col-12 text-center">
+                    <button
+                      id="btn-save-workout"
+                      className="btn btn-primary btn-lg"
+                      onClick={this
+                      .handleSave
+                      .bind(this)}>
+                      Save Workout
+                    </button>
+                  </div>
+                </div>
 
+              </form>
+
+            </div>
           </div>
         </div>
       </div>
