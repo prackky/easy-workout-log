@@ -94,7 +94,7 @@ class LogWorkout extends Component {
     }
 
     return (
-      <div className="container grid-480">
+      <div className="container grid-480 section-content">
         <div className="columns">
           <div className="column col-12">
             <h4>Log a new workout.</h4>

@@ -43,7 +43,9 @@ class Header extends Component {
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
-            <section className="navbar-section navbar-content"></section>
+            <section className="navbar-section navbar-content">
+              <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
+            </section>
           </header>
         </div>
         <div id="sidebar" className="container grid-960">
@@ -83,6 +85,15 @@ class Header extends Component {
                     .handleSidebarCloseClick
                     .bind(this)}>Log workout</NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/signup"
+                    onClick={this
+                    .handleSidebarCloseClick
+                    .bind(this)}>Signup</NavLink>
+                </li>
+                
                 {/*
                 <li className="nav-item">
                   <a href="#"><strong>Insights</strong></a>
