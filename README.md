@@ -1,9 +1,11 @@
 # Easy Workout Log
 
-## TODO
+Ewolo front-end. 
 
-- Fix navigation bar (with styling)
-- Add user login concept
-- Add basic form actions
-- Add form validation
-- Error messages
+Created using React with Redux for state management.
+
+## Development
+
+- Start local server with live-reload: `npm start`
+- Start tests and watch for changes: `npm test`
+- Count lines of js code: `find . -name '*.js' | xargs wc -l`

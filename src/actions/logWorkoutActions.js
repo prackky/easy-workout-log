@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 
 import globalActions from './globalActions';
+import signupActions from './signupActions';
 
 const logWorkoutActions = {
   logWorkout: () => {
@@ -40,6 +41,18 @@ const logWorkoutActions = {
   },
   logWorkoutSave: () => {
     return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        console.log('no auth token found!');
+        return Promise.resolve()
+          .then(() => {
+            const action = logWorkoutActions.logWorkoutSave();
+            dispatch(signupActions.signupAfterSuccess(action));
+            dispatch(push('/signup'));
+          });
+      }
+
       const logWorkoutDate = getState().user.logWorkout.date;
 
       dispatch(globalActions.taskStart());

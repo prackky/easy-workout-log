@@ -12,7 +12,7 @@ describe('userReducer', () => {
     expect(newState)
       .to
       .deep
-      .equal({logWorkout: {}});
+      .equal({logWorkout: {}, data: {authToken: undefined}});
   });
 
 });

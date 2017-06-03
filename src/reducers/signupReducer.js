@@ -3,7 +3,11 @@ export const initialState = {
   email: '',
   emailFormHint: '',
   password: '',
-  passwordFormHint: ''
+  passwordFormHint: '',
+  afterSuccess: {
+    action: undefined,
+    redirect: '/dashboard' // by default redirect to the dashboard after signup
+  }
 };
 
 const signupReducer = (state = initialState, action) => {
@@ -33,6 +37,19 @@ const signupReducer = (state = initialState, action) => {
           password: password,
           emailFormHint: emailFormHint,
           passwordFormHint: passwordFormHint
+        };
+      }
+    case 'SIGNUP-AFTER-SUCCESS':
+      {
+        const redirect = action.redirect;
+        const actionAfterSuccess = action.action;
+
+        return {
+          ...state,
+          afterSuccess: {
+            action: actionAfterSuccess,
+            redirect: redirect
+          }
         };
       }
     default:
