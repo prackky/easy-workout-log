@@ -12,11 +12,27 @@ const signupReducer = (state = initialState, action) => {
       {
         const {name, email, password} = action;
 
+        let emailFormHint = '', passwordFormHint = '';
+
+        if (!email) {
+          emailFormHint = 'Email is required.';
+        }
+
+        if (!password) {
+          passwordFormHint = 'Password is required.';
+        }
+
+        if (password && password.length < 8) {
+          passwordFormHint = 'Password must be minimum 8 characters in length.';
+        }
+
         return {
           ...state,
           name: name,
           email: email,
-          password: password
+          password: password,
+          emailFormHint: emailFormHint,
+          passwordFormHint: passwordFormHint
         };
       }
     default:

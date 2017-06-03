@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   loadingCounter: 0,
   userNotifications: []
 };

@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 
 import appReducer from './appReducer';
+import {initialState as signupInitialState} from './signupReducer';
+import {initialState as globalInitialState} from './globalReducer';
 
 describe('appReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -8,6 +10,12 @@ describe('appReducer', () => {
     const newState = appReducer(undefined, { type: '' });
 
     // then
-    expect(newState).to.deep.equal({ user: { logWorkout: {} }, global: { loadingCounter: 0, userNotifications: [] } });
+    expect(newState).to.deep.equal({ 
+      user: { 
+        logWorkout: {} 
+      }, 
+      signup: signupInitialState,
+      global: globalInitialState
+    });
   })
 });

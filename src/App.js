@@ -14,6 +14,7 @@ import Welcome from './components/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/Loader';
 import Signup from './components/auth/Signup';
+import Dashboard from './components/dashboard/Dashboard';
 
 import appReducer from './reducers/appReducer';
 
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/" component={Welcome}/>
             <Route exact path="/log-workout" component={LogWorkout}/>
             <Route exact path="/signup" component={Signup}/>
+            <Route exact path="/dashboard" component={Dashboard}/>
           </div>
         </ConnectedRouter>
       </Provider>

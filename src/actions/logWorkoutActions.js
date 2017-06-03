@@ -53,7 +53,7 @@ const logWorkoutActions = {
       return promise.then(result => {
           dispatch(logWorkoutActions.logWorkoutSaveSuccess());
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
-          dispatch(push('/'));
+          dispatch(push('/dashboard'));
         })
         .catch(error => {
           console.log(error);

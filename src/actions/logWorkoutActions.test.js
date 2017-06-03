@@ -31,7 +31,7 @@ describe('logWorkoutActions', () => {
       },
       {
         type: '@@router/CALL_HISTORY_METHOD',
-        payload: { method: 'push', args: ['/'] }
+        payload: { method: 'push', args: ['/dashboard'] }
       },
       { type: 'TASK-END' }
     ];

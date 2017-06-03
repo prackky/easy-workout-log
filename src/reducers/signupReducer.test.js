@@ -25,7 +25,46 @@ describe('signupReducer', () => {
         ...initialState,
         name: 'vic',
         email: 'vic@smalldata.tech',
-        password: 'sdk;jhskljdghdksfljghf'
+        password: 'sdk;jhskljdghdksfljghf',
+        emailFormHint: '',
+        passwordFormHint: ''
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+    it('should set email form hint for missing email', () => {
+      // when
+      const newState = signupReducer(undefined, actions.signupSetData('vic', '', 'sdk;jhskljdghdksfljghf'));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        name: 'vic',
+        email: '',
+        password: 'sdk;jhskljdghdksfljghf',
+        emailFormHint: 'Email is required.'
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+
+    it('should set password form hint for password less than 8 characters', () => {
+      // when
+      const newState = signupReducer(undefined, actions.signupSetData('vic', 'vic@smalldata.tech', '1234567'));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        name: 'vic',
+        email: 'vic@smalldata.tech',
+        password: '1234567',
+        passwordFormHint: 'Password must be minimum 8 characters in length.'
       };
 
       expect(newState)
