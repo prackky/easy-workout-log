@@ -1,5 +1,7 @@
 import { push } from 'react-router-redux';
 
+import ewoloUtil, {RequestError} from '../ewoloUtil';
+
 import globalActions from './globalActions';
 import userDataActions from './userDataActions';
 
@@ -21,21 +23,32 @@ const signupActions = {
   },
   signup: () => {
     return (dispatch, getState) => {
-      const signup = getState().signup;
-      const email = signup.email;
-      const afterSuccess = signup.afterSuccess;
+      const signup = {
+        ...getState().signup
+      };
+      const afterSuccess = {
+        ...signup.afterSuccess
+      };
 
       dispatch(globalActions.taskStart());
 
+      const promise = ewoloUtil.getApiRequest('/users', 'POST', { name: signup.name, email: signup.email, password: signup.password });
+
+      /*
       const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve('done');
         }, 1000);
       });
+      */
 
-      return promise.then(result => {
+      return promise.then(response => {
+          if (response.status > 400) {
+            throw new RequestError(response);
+          }
+
           dispatch(userDataActions.userAuthSuccess('blah'));
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + email));
+          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));
 
           if (afterSuccess.action) {
             dispatch(afterSuccess.action);
@@ -46,8 +59,14 @@ const signupActions = {
           }
         })
         .catch(error => {
-          console.log(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when creating account for ' + email));
+          console.error(error);
+          let userNotificationText = 'An error occured when creating account for ' + signup.email;
+
+          if (error.response && error.response.status === 409) {
+            userNotificationText = 'An account with this email address already exists!';
+          }
+
+          dispatch(globalActions.userNotificationAdd('ERROR', userNotificationText));
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
