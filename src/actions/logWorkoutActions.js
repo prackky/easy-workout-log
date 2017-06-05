@@ -9,10 +9,16 @@ const logWorkoutActions = {
       type: 'LOG-WORKOUT'
     };
   },
-  logWorkoutExercise: (name) => {
+  logWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
     return {
       type: 'LOG-WORKOUT-EXERCISE',
-      name: name
+      name: name,
+      reps: reps,
+      weight: weight,
+      sets: sets,
+      tempo: tempo,
+      rest: rest,
+      showAdvanced
     };
   },
   logWorkoutExerciseDelete: (index) => {

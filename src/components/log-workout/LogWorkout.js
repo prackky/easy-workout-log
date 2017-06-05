@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkout: () => {
       dispatch(logWorkoutActions.logWorkout());
     },
-    doLogWorkoutExercise: (name) => {
-      dispatch(logWorkoutActions.logWorkoutExercise(name));
+    doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
+      dispatch(logWorkoutActions.logWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced));
     },
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
@@ -66,18 +66,29 @@ class LogWorkout extends Component {
   handleBtnAddExerciseClick(event) {
     event.preventDefault();
 
-    let name = '';
     const numExercises = this.props.logWorkout.exercises.length;
-    
-    console.log(numExercises);
 
     if (numExercises) {
-      name = this.props.logWorkout.exercises[numExercises - 1].name;
+      const {
+        name,
+        reps,
+        weight,
+        sets,
+        tempo,
+        rest, 
+        showAdvanced
+      } = this.props.logWorkout.exercises[numExercises - 1];
+
+      this
+        .props
+        .doLogWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced);
+
+      return;
     }
 
     this
       .props
-      .doLogWorkoutExercise(name);
+      .doLogWorkoutExercise();
   };
 
   handleDateChange(event) {
@@ -115,7 +126,8 @@ class LogWorkout extends Component {
                 Click + to add a new exercise. Use the same exercise name for multiple sets.
               </p>
               <p>
-                To convert from kilograms to pounds, enter the weight in kgs and hit the convert button.
+                To convert from kilograms to pounds, enter the weight in kgs and hit the convert
+                button.
               </p>
               <p>
                 Hit the save button once finished.

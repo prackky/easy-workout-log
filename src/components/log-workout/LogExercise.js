@@ -27,11 +27,21 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
 
-  const handleShowAdvanced = () => {
+  const handleShowAdvanced = (event) => {
+    event.preventDefault();
     const exercise = {
       ...props.exercise
     };
     exercise.showAdvanced = true;
+    props.doLogWorkoutExerciseSetData(props.index, exercise);
+  };
+  
+  const handleHideAdvanced = (event) => {
+    event.preventDefault();
+    const exercise = {
+      ...props.exercise
+    };
+    exercise.showAdvanced = false;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
 
@@ -46,17 +56,6 @@ const LogExercise = (props) => {
     };
     exercise.showProperties = !exercise.showProperties;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
-  };
-
-  const renderDeleteButton = () => {
-    return (
-      <button
-        className="btn btn-action btn-lg circle btn-exercise-action tooltip"
-        data-tooltip="Delete exercise"
-        onClick={handleExerciseDelete}>
-        <i className="icon icon-delete"></i>
-      </button>
-    );
   };
 
   const renderPropertyFormHint = (hint) => {
@@ -144,8 +143,10 @@ const LogExercise = (props) => {
           </div>
         </div>
         */}
-        
+
         {renderAdvanced()}
+
+        {renderExerciseOperations()}
       </div>
     );
   }
@@ -160,8 +161,48 @@ const LogExercise = (props) => {
     );
   };
 
+  const renderExerciseOperations = () => {
+    return (
+        <div className="form-group">
+          <div className="col-12">
+            {renderAdvancedPropertiesButton()}
+            <button
+              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+              data-tooltip="Delete exercise"
+              onClick={handleExerciseDelete}>
+              <i className="icon icon-delete"></i>
+            </button>
+          </div>
+        </div>
+      );
+  }
+
+  const renderAdvancedPropertiesButton = () => {
+    if (props.exercise.showAdvanced) {
+      return (
+        <button
+          className="btn btn-action btn-lg circle tooltip"
+          data-tooltip="Hide advanced"
+          onClick={handleHideAdvanced}>
+          <i className="icon icon-arrow-up"></i>
+        </button>
+      );
+    }
+
+    return (
+      <button
+        className="btn btn-action btn-lg circle tooltip"
+        data-tooltip="Show advanced"
+        onClick={handleShowAdvanced}>
+        <i className="icon icon-arrow-down"></i>
+      </button>
+    );
+  }
+
   const renderAdvanced = () => {
     if (!props.exercise.showAdvanced) {
+      return null;
+      /*
       return (
         <div className="form-group">
           <div className="col-12">
@@ -169,15 +210,16 @@ const LogExercise = (props) => {
               className="btn btn-action btn-lg circle tooltip"
               data-tooltip="Show advanced"
               onClick={handleShowAdvanced}>
-              <i className="icon icon-more-horiz"></i>
+              <i className="icon icon-arrow-down"></i>
             </button>
           </div>
         </div>
       );
+      */
     }
 
     return (
-      <div className="fade-in">
+      <div className="fade-in margin-bottom-1rem">
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">Tempo</label>
@@ -262,7 +304,7 @@ const LogExercise = (props) => {
           <div className="col-3">
             {renderExerciseNameLabel()}
           </div>
-          <div className="col-7">
+          <div className="col-9">
             <input
               className="form-input input-lg"
               type="text"
@@ -271,9 +313,11 @@ const LogExercise = (props) => {
               property="name"
               onChange={handleChange}/>
           </div>
+          {/*
           <div className="col-2 text-center">
             {renderDeleteButton()}
           </div>
+          */}
         </div>
 
         {renderPropertyFormHint(props.exercise.nameFormHint)}

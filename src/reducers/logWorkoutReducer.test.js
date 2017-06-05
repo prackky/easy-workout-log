@@ -86,12 +86,12 @@ describe('logWorkoutReducer', () => {
         });
     });
     
-    it('should add an exercise for with given name for LOG-WORKOUT-EXERCISE', () => {
+    it('should add an exercise for with given properties for LOG-WORKOUT-EXERCISE', () => {
       // when
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: []
-      }, actions.logWorkoutExercise('existing'));
+      }, actions.logWorkoutExercise('existing', '24', '200', '2', '202', '200', true));
 
       // then
       expect(newState)
@@ -102,12 +102,12 @@ describe('logWorkoutReducer', () => {
           exercises: [
             {
               name: 'existing',
-              reps: '8',
-              weight: '100',
-              sets: '1',
-              tempo: '101',
-              rest: '60',
-              showAdvanced: false,
+              reps: '24',
+              weight: '200',
+              sets: '2',
+              tempo: '202',
+              rest: '200',
+              showAdvanced: true,
               showProperties: true
             }
           ]
