@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkout: () => {
       dispatch(logWorkoutActions.logWorkout());
     },
-    doLogWorkoutExercise: () => {
-      dispatch(logWorkoutActions.logWorkoutExercise());
+    doLogWorkoutExercise: (name) => {
+      dispatch(logWorkoutActions.logWorkoutExercise(name));
     },
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
@@ -65,9 +65,19 @@ class LogWorkout extends Component {
 
   handleBtnAddExerciseClick(event) {
     event.preventDefault();
+
+    let name = '';
+    const numExercises = this.props.logWorkout.exercises.length;
+    
+    console.log(numExercises);
+
+    if (numExercises) {
+      name = this.props.logWorkout.exercises[numExercises - 1].name;
+    }
+
     this
       .props
-      .doLogWorkoutExercise();
+      .doLogWorkoutExercise(name);
   };
 
   handleDateChange(event) {

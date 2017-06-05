@@ -9,9 +9,10 @@ const logWorkoutActions = {
       type: 'LOG-WORKOUT'
     };
   },
-  logWorkoutExercise: () => {
+  logWorkoutExercise: (name) => {
     return {
-      type: 'LOG-WORKOUT-EXERCISE'
+      type: 'LOG-WORKOUT-EXERCISE',
+      name: name
     };
   },
   logWorkoutExerciseDelete: (index) => {

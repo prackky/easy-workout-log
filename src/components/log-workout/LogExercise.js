@@ -127,6 +127,7 @@ const LogExercise = (props) => {
           </div>
         </div>
 
+        {/*
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">Sets</label>
@@ -142,7 +143,8 @@ const LogExercise = (props) => {
               onChange={handleChange}/>
           </div>
         </div>
-
+        */}
+        
         {renderAdvanced()}
       </div>
     );
@@ -153,7 +155,7 @@ const LogExercise = (props) => {
 
     return (
       <div>
-        {sets ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
+        {sets && sets !== '1' ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
       </div>
     );
   };

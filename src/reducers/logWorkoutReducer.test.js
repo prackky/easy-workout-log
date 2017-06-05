@@ -85,6 +85,34 @@ describe('logWorkoutReducer', () => {
           ]
         });
     });
+    
+    it('should add an exercise for with given name for LOG-WORKOUT-EXERCISE', () => {
+      // when
+      const newState = logWorkoutReducer({
+        type: 'weight',
+        exercises: []
+      }, actions.logWorkoutExercise('existing'));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          type: 'weight',
+          exercises: [
+            {
+              name: 'existing',
+              reps: '8',
+              weight: '100',
+              sets: '1',
+              tempo: '101',
+              rest: '60',
+              showAdvanced: false,
+              showProperties: true
+            }
+          ]
+        });
+    });
   });
 
   describe('LOG-WORKOUT-EXERCISE-DELETE', () => {

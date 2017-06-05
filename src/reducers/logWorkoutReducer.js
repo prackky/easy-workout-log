@@ -17,12 +17,13 @@ const logWorkoutReducer = (state = {}, action) => {
     case 'LOG-WORKOUT-EXERCISE':
       {
         const exercises = state.exercises;
+        const name = action.name;
 
         return {
           ...state,
           exercises: [
             ...exercises, {
-              name: 'squats',
+              name: name ? name : 'squats',
               reps: '8',
               weight: '100',
               sets: '1',
