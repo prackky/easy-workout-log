@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
-import {/*BrowserRouter,*/ Route} from 'react-router-dom';
+import {/*BrowserRouter,*/
+  Route
+} from 'react-router-dom';
 
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import {applyMiddleware, createStore/*, combineReducers*/} from 'redux';
+import {
+  applyMiddleware, createStore/*, combineReducers*/
+} from 'redux';
 
-import { ConnectedRouter, /*routerReducer,*/ routerMiddleware } from 'react-router-redux'
+import {
+  ConnectedRouter,
+  /*routerReducer,*/
+  routerMiddleware
+} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
 import Header from './components/Header';
@@ -42,5 +50,10 @@ class App extends Component {
     );
   }
 }
+
+history.listen((location) => {
+  console.log(location); // TODO: Think about clearing the message bar when transitioning to certain states
+  // TODO: save to localstorage on transition
+});
 
 export default App;
