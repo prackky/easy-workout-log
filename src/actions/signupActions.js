@@ -27,7 +27,7 @@ const signupActions = {
         ...getState().signup
       };
       const afterSuccess = {
-        ...signup.afterSuccess
+        ...signup.afterSuccess // not sure about how comfortable I am with setting async future actions here
       };
 
       dispatch(globalActions.taskStart());
@@ -68,7 +68,7 @@ const signupActions = {
 
           dispatch(globalActions.userNotificationAdd('ERROR', userNotificationText));
         })
-        .then(() => {
+        .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
         });
     };

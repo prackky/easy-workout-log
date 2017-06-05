@@ -4,6 +4,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import signupActions from './signupActions';
+import ewoloConstants from '../ewoloConstants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -14,11 +15,9 @@ describe('signupActions', () => {
   });
 
   it('creates SIGNUP-SUCCESS when signing up', () => {
-    /*
-    nock('http://example.com/')
-      .get('/todos')
-      .reply(200, { body: { todos: ['do something'] }});
-    */
+    nock(ewoloConstants.api.url)
+      .post('/users')
+      .reply(201, { body: { authToken: 'blah' } });
 
     const expectedActions = [
       { type: 'TASK-START' },
