@@ -1,3 +1,7 @@
+/**
+ * Utility
+ */
+
 .section-content {
   margin-top: 2rem;
 }
@@ -33,9 +37,21 @@
   color: #667189;
 }
 
+/**
+ * Spectre overrides
+ */
+
+.input-group .input-group-addon {
+  padding: 0.8rem .8rem;
+}
+
 .form-input-hint {
   margin-top: -0.5rem;
 }
+
+/**
+ * Animations
+ */
 
 .fade-in {
   animation: fadeIn 500ms;

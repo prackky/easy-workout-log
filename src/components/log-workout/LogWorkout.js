@@ -102,7 +102,10 @@ class LogWorkout extends Component {
             <div className="column col-12">
               <h4>Log a new workout.</h4>
               <p>
-                Click + to add a new exercise. Hit the save button once finished.
+                Click + to add a new exercise. Use the same exercise name for multiple sets. To convert from kilograms to pounds, enter the weight in kgs and hit the convert button.
+              </p>
+              <p>
+                Hit the save button once finished.
               </p>
             </div>
           </div>

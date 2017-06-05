@@ -4,6 +4,14 @@ import logWorkoutActions from '../../actions/logWorkoutActions';
 
 const LogExercise = (props) => {
 
+  const handleWeightKgToLbs = (event) => {
+    event.preventDefault();
+    const exercise = props.exercise;
+    exercise.weight = parseInt(exercise.weight * 2.20462);
+    exercise.converted = true;
+    props.doLogWorkoutExerciseSetData(props.index, exercise);
+  }
+
   const handleExerciseDelete = (event) => {
     event.preventDefault();
     props.doLogWorkoutExerciseDelete(props.index);
@@ -76,7 +84,7 @@ const LogExercise = (props) => {
 
   const renderExerciseProperties = () => {
     if (!props.exercise.showProperties) {
-      return;
+      return renderExercisePropertiesShortForm();
     }
 
     return (
@@ -103,15 +111,19 @@ const LogExercise = (props) => {
           <div className="col-3">
             <label className="form-label">Weight</label>
           </div>
-          <div className="col-4">
-            <input
-              className="form-input input-lg"
-              type="number"
-              property="weight"
-              min="0"
-              max="1000"
-              value={props.exercise.weight}
-              onChange={handleChange}/>
+          <div className="col-9">
+            <div className="input-group">
+              <input
+                className="form-input input-lg"
+                type="number"
+                property="weight"
+                min="0"
+                max="1000"
+                value={props.exercise.weight}
+                onChange={handleChange}/>
+              <span className="input-group-addon">lbs</span>
+              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} onClick={handleWeightKgToLbs}>kg -> lbs</button>
+            </div>
           </div>
         </div>
 
@@ -135,6 +147,16 @@ const LogExercise = (props) => {
       </div>
     );
   }
+
+  const renderExercisePropertiesShortForm = () => {
+    const {sets, reps, weight, tempo, rest} = props.exercise;
+
+    return (
+      <div>
+        {sets ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
+      </div>
+    );
+  };
 
   const renderAdvanced = () => {
     if (!props.exercise.showAdvanced) {
