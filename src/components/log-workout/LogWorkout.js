@@ -20,6 +20,11 @@ const tempoHelpModalContent = [
                 'Keep value at 101 (default) if unsure.'
 ];
 
+const restHelpModalContent = [
+  'The rest in seconds between sets.',
+  'Setting this to 0 indicates that the next exercise is a super-set. Keep at 60 seconds (default) if unsure.'
+];
+
 const mapStateToProps = (state) => {
   return {logWorkout: state.user.logWorkout};
 };
@@ -158,7 +163,7 @@ class LogWorkout extends Component {
           doSetShowHelp={this.props.doLogWorkoutSetShowRestHelp}
           showHelp={this.props.logWorkout.showRestHelp}
           title="Rest"
-          content={['The rest in seconds between sets.']} />
+          content={restHelpModalContent} />
 
         <LogWorkoutHelpModal 
           doSetShowHelp={this.props.doLogWorkoutSetShowWeightHelp}
