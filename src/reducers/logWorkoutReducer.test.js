@@ -32,7 +32,9 @@ describe('logWorkoutReducer', () => {
           type: 'weight',
           notes: '',
           date: today,
-          exercises: []
+          exercises: [],
+          showTempoHelp: false,
+          showRestHelp: false
         });
     });
 
@@ -52,7 +54,9 @@ describe('logWorkoutReducer', () => {
           type: 'weight',
           notes: '',
           date: today,
-          exercises: []
+          exercises: [],
+          showTempoHelp: false,
+          showRestHelp: false
         });
     });
   });
@@ -203,14 +207,16 @@ describe('logWorkoutReducer', () => {
   });
 
   describe('LOG-WORKOUT-SET-DATA', () => {
-    it('should set the date and notes', () => {
+    it('should set data', () => {
       // when
       const now = new Date();
 
       const newState = logWorkoutReducer({
         date: null,
-        notes: ''
-      }, actions.logWorkoutSetData(now, 'blah'));
+        notes: '',
+        showTempoHelp: false,
+        showRestHelp: false
+      }, actions.logWorkoutSetData(now, 'blah', true, true));
 
       // then
       expect(newState)
@@ -219,7 +225,9 @@ describe('logWorkoutReducer', () => {
         .equal({
           date: now,
           dateFormHint: '',
-          notes: 'blah'
+          notes: 'blah',
+          showTempoHelp: true,
+          showRestHelp: true
         });
     });
 
@@ -227,7 +235,9 @@ describe('logWorkoutReducer', () => {
       // when
       const newState = logWorkoutReducer({
         date: null,
-        notes: ''
+        notes: '',
+        showTempoHelp: false,
+        showRestHelp: false
       }, actions.logWorkoutSetData('', 'blah'));
 
       // then
@@ -237,7 +247,57 @@ describe('logWorkoutReducer', () => {
         .equal({
           date: '',
           dateFormHint: 'Required or invalid',
-          notes: 'blah'
+          notes: 'blah',
+          showTempoHelp: false,
+          showRestHelp: false
+        });
+    });
+
+  });
+
+  describe('LOG-WORKOUT-SET-SHOW-TEMPO-HELP', () => {
+    it('should set help', () => {
+      // when
+      const newState = logWorkoutReducer({
+        date: null,
+        notes: '',
+        showTempoHelp: false,
+        showRestHelp: false
+      }, actions.logWorkoutSetShowTempoHelp(true));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          date: null,
+          notes: '',
+          showTempoHelp: true,
+          showRestHelp: false
+        });
+    });
+
+  });
+  
+  describe('LOG-WORKOUT-SET-SHOW-REST-HELP', () => {
+    it('should set help', () => {
+      // when
+      const newState = logWorkoutReducer({
+        date: null,
+        notes: '',
+        showTempoHelp: false,
+        showRestHelp: false
+      }, actions.logWorkoutSetShowRestHelp(true));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          date: null,
+          notes: '',
+          showTempoHelp: false,
+          showRestHelp: true
         });
     });
 

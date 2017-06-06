@@ -49,6 +49,16 @@ const LogExercise = (props) => {
     event.preventDefault();
   };
 
+  const handleSetShowTempoHelpClick = (event) => {
+    event.preventDefault();
+    props.doLogWorkoutSetShowTempoHelp(true);
+  };
+  
+  const handleSetShowRestHelpClick = (event) => {
+    event.preventDefault();
+    props.doLogWorkoutSetShowRestHelp(true);
+  };
+
   const handleExercisePropertiesToggle = (event) => {
     // console.log('wtf');
     const exercise = {
@@ -87,7 +97,7 @@ const LogExercise = (props) => {
     }
 
     return (
-      <div className="fade-in">
+      <div className="fade-in exercise-entry-details">
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">Reps</label>
@@ -120,8 +130,8 @@ const LogExercise = (props) => {
                 max="1000"
                 value={props.exercise.weight}
                 onChange={handleChange}/>
-              <span className="input-group-addon">lbs</span>
-              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} onClick={handleWeightKgToLbs}>kg -> lbs</button>
+              <span className="input-group-addon">lb</span>
+              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} onClick={handleWeightKgToLbs}>kg -> lb</button>
             </div>
           </div>
         </div>
@@ -155,7 +165,7 @@ const LogExercise = (props) => {
     const {sets, reps, weight, tempo, rest} = props.exercise;
 
     return (
-      <div>
+      <div className="exercise-entry-details">
         {sets && sets !== '1' ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
       </div>
     );
@@ -235,6 +245,14 @@ const LogExercise = (props) => {
               onChange={handleChange}/>
           </div>
           <div className="col-5">
+            <button
+              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+              data-tooltip="Show help"
+              onClick={handleSetShowTempoHelpClick}>
+              <i className="icon icon-message"></i>
+            </button>
+            
+            {/*
             <div className="popover popover-top">
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
@@ -255,7 +273,7 @@ const LogExercise = (props) => {
                 </div>
               </div>
             </div>
-
+            */}
           </div>
         </div>
 
@@ -274,6 +292,13 @@ const LogExercise = (props) => {
               onChange={handleChange}/>
           </div>
           <div className="col-5">
+            <button
+              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+              data-tooltip="Show help"
+              onClick={handleSetShowRestHelpClick}>
+              <i className="icon icon-message"></i>
+            </button>
+            {/*
             <div className="popover popover-top">
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
@@ -288,6 +313,7 @@ const LogExercise = (props) => {
                 </div>
               </div>
             </div>
+            */}
           </div>
         </div>
       </div>

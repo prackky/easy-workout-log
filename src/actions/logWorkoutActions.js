@@ -34,11 +34,25 @@ const logWorkoutActions = {
       exercise: exercise
     };
   },
-  logWorkoutSetData: (date, notes) => {
+  logWorkoutSetData: (date, notes, showTempoHelp = false, showRestHelp = false) => {
     return {
       type: 'LOG-WORKOUT-SET-DATA',
       date: date,
-      notes: notes
+      notes: notes,
+      showTempoHelp: showTempoHelp,
+      showRestHelp: showRestHelp
+    };
+  },
+  logWorkoutSetShowTempoHelp: (showTempoHelp = true) => {
+    return {
+      type: 'LOG-WORKOUT-SET-SHOW-TEMPO-HELP',
+      showTempoHelp: showTempoHelp
+    };
+  },
+  logWorkoutSetShowRestHelp: (showRestHelp = true) => {
+    return {
+      type: 'LOG-WORKOUT-SET-SHOW-REST-HELP',
+      showRestHelp: showRestHelp
     };
   },
   logWorkoutSaveSuccess: () => {

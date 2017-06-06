@@ -23,6 +23,12 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));
     },
+    doLogWorkoutSetShowTempoHelp: (showTempoHelp) => {
+      dispatch(logWorkoutActions.logWorkoutSetShowTempoHelp(showTempoHelp));
+    },
+    doLogWorkoutSetShowRestHelp: (showRestHelp) => {
+      dispatch(logWorkoutActions.logWorkoutSetShowRestHelp(showRestHelp));
+    },
     doLogWorkoutSave: () => {
       dispatch(logWorkoutActions.logWorkoutSave());
     },
@@ -59,7 +65,9 @@ class LogWorkout extends Component {
           index={index}
           exercise={exercise}
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
-          doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}/>);
+          doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}
+          doLogWorkoutSetShowTempoHelp={this.props.doLogWorkoutSetShowTempoHelp}
+          doLogWorkoutSetShowRestHelp={this.props.doLogWorkoutSetShowRestHelp}/>);
       });
   }
 
@@ -75,7 +83,7 @@ class LogWorkout extends Component {
         weight,
         sets,
         tempo,
-        rest, 
+        rest,
         showAdvanced
       } = this.props.logWorkout.exercises[numExercises - 1];
 
@@ -110,6 +118,20 @@ class LogWorkout extends Component {
       .doLogWorkoutSave();
   }
 
+  handleTempoHelpCloseClick(event) {
+    event.preventDefault();
+    this
+      .props
+      .doLogWorkoutSetShowTempoHelp(false);
+  }
+  
+  handleRestHelpCloseClick(event) {
+    event.preventDefault();
+    this
+      .props
+      .doLogWorkoutSetShowRestHelp(false);
+  }
+
   render() {
     if (!this.props.logWorkout.componentMounted) {
       return <div></div>;
@@ -118,6 +140,63 @@ class LogWorkout extends Component {
     return (
       <div>
         <UserNotificationBar/>
+
+        <div
+          className={"modal modal-sm" + (this.props.logWorkout.showTempoHelp
+          ? ' active'
+          : '')}>
+          <div className="modal-overlay"></div>
+          <div className="modal-container" role="document">
+            <div className="modal-header">
+              {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
+              <div className="modal-title">Tempo</div>
+            </div>
+            <div className="modal-body">
+              <div className="content">
+                <p>
+                The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0
+                second mid-point and 1 second concentric (positive).
+                </p>
+                <p>
+                Keep value at 101 (default) if unsure.
+                </p> 
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-primary"
+                onClick={this
+                .handleTempoHelpCloseClick
+                .bind(this)}>Close</button>
+            </div>
+          </div>
+        </div>
+        
+        <div
+          className={"modal modal-sm" + (this.props.logWorkout.showRestHelp
+          ? ' active'
+          : '')}>
+          <div className="modal-overlay"></div>
+          <div className="modal-container" role="document">
+            <div className="modal-header">
+              {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
+              <div className="modal-title">Rest</div>
+            </div>
+            <div className="modal-body">
+              <div className="content">
+                The rest in seconds between sets.
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-primary"
+                onClick={this
+                .handleRestHelpCloseClick
+                .bind(this)}>Close</button>
+            </div>
+          </div>
+        </div>
+
         <div className="container grid-480 section-content">
           <div className="columns">
             <div className="column col-12">

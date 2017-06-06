@@ -11,7 +11,9 @@ const logWorkoutReducer = (state = {}, action) => {
         type: 'weight',
         notes: '',
         date: today,
-        exercises: []
+        exercises: [],
+        showTempoHelp: false,
+        showRestHelp: false
       };
 
     case 'LOG-WORKOUT-EXERCISE':
@@ -85,15 +87,32 @@ const logWorkoutReducer = (state = {}, action) => {
 
     case 'LOG-WORKOUT-SET-DATA':
       {
-        const date = action.date;
-        const notes = action.notes;
+        const {date, notes, showTempoHelp, showRestHelp} = action;
         const dateFormHint = action.date ? '' : 'Required or invalid'
 
         return {
           ...state,
           notes: notes,
           date: date,
-          dateFormHint: dateFormHint
+          dateFormHint: dateFormHint,
+          showTempoHelp: showTempoHelp,
+          showRestHelp: showRestHelp
+        };
+      }
+    
+    case 'LOG-WORKOUT-SET-SHOW-TEMPO-HELP':
+      {
+        return {
+          ...state,
+          showTempoHelp: action.showTempoHelp
+        };
+      }
+    
+    case 'LOG-WORKOUT-SET-SHOW-REST-HELP':
+      {
+        return {
+          ...state,
+          showRestHelp: action.showRestHelp
         };
       }
 
