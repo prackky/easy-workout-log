@@ -93,68 +93,73 @@ const LogExercise = (props) => {
 
     return (
       <div className="fade-in exercise-entry-details">
-        <div className="form-group">
-          <div className="col-3">
-            <label className="form-label">Reps</label>
-          </div>
-          <div className="col-4">
-            <input
-              className="form-input input-lg"
-              type="number"
-              min="0"
-              max="1000"
-              property="reps"
-              value={props.exercise.reps}
-              onChange={handleChange}/>
-          </div>
-        </div>
-
-        {renderPropertyFormHint(props.exercise.repsFormHint)}
-
-        <div className="form-group">
-          <div className="col-3">
-            <label className="form-label"><a onClick={handleSetShowWeightHelpClick}> Weight</a></label>
-          </div>
-          <div className="col-9">
-            <div className="input-group">
-              <input
-                className="form-input input-lg"
-                type="number"
-                property="weight"
-                min="0"
-                max="1000"
-                value={props.exercise.weight}
-                onChange={handleChange}/>
-              <span className="input-group-addon">lb</span>
-              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} type="button" onClick={handleWeightKgToLbs}>kg -> lb</button>
+        <div className="columns">
+          <div className="divider-vert" data-content="#1"></div>
+          <div className="column col-11">
+            <div className="form-group">
+              <div className="col-3">
+                <label className="form-label">Reps</label>
+              </div>
+              <div className="col-4">
+                <input
+                  className="form-input input-lg"
+                  type="number"
+                  min="0"
+                  max="1000"
+                  property="reps"
+                  value={props.exercise.reps}
+                  onChange={handleChange}/>
+              </div>
             </div>
+
+            {renderPropertyFormHint(props.exercise.repsFormHint)}
+
+            <div className="form-group">
+              <div className="col-3">
+                <label className="form-label"><a onClick={handleSetShowWeightHelpClick}> Lbs</a></label>
+              </div>
+              <div className="col-9">
+                <div className="input-group">
+                  <input
+                    className="form-input input-lg"
+                    type="number"
+                    property="weight"
+                    min="0"
+                    max="1000"
+                    value={props.exercise.weight}
+                    onChange={handleChange}/>
+                  {/*<span className="input-group-addon">lb</span>*/}
+                  <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} type="button" onClick={handleWeightKgToLbs}>kg -> lbs</button>
+                </div>
+              </div>
+            </div>
+
+            {/*
+            <div className="form-group">
+              <div className="col-3">
+                <label className="form-label">Sets</label>
+              </div>
+              <div className="col-4">
+                <input
+                  className="form-input input-lg"
+                  type="number"
+                  min="0"
+                  max="1000"
+                  property="sets"
+                  value={props.exercise.sets}
+                  onChange={handleChange}/>
+              </div>
+            </div>
+            */}
+
+            {renderAdvanced()}
+
+            {renderExerciseOperations()}
           </div>
         </div>
-
-        {/*
-        <div className="form-group">
-          <div className="col-3">
-            <label className="form-label">Sets</label>
-          </div>
-          <div className="col-4">
-            <input
-              className="form-input input-lg"
-              type="number"
-              min="0"
-              max="1000"
-              property="sets"
-              value={props.exercise.sets}
-              onChange={handleChange}/>
-          </div>
-        </div>
-        */}
-
-        {renderAdvanced()}
-
-        {renderExerciseOperations()}
       </div>
     );
-  }
+  };
 
   const renderExercisePropertiesShortForm = () => {
     const {sets, reps, weight, tempo, rest} = props.exercise;
