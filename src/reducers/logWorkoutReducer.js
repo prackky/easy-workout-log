@@ -1,5 +1,28 @@
 import moment from 'moment';
 
+const copyExercises = (exercises) => {
+  const result = [];
+
+  for (const exercise of exercises) {
+    result.push({
+      ...exercise,
+      setIndex: 1
+    });
+  }
+
+  return result;
+};
+
+const calculateSetIndexes = (exercises) => {
+  for (let i = 0; i < exercises.length; ++i) {
+    if (i > 0) {
+      if (exercises[i].name === exercises[i - 1].name) {
+        exercises[i].setIndex = exercises[i - 1].setIndex + 1;
+      }
+    }
+  }
+}
+
 const logWorkoutReducer = (state = {}, action) => {
   switch (action.type) {
     case 'LOG-WORKOUT':
@@ -18,45 +41,61 @@ const logWorkoutReducer = (state = {}, action) => {
 
     case 'LOG-WORKOUT-EXERCISE':
       {
-        const exercises = state.exercises;
-        const {name, reps, weight, sets, tempo, rest, showAdvanced} = action;
+        const exercises = copyExercises(state.exercises);
+        const { name, reps, weight, sets, tempo, rest, showAdvanced } = action;
+
+        exercises.push({
+          name: name ? name : 'squats',
+          reps: reps ? reps : '8',
+          weight: weight ? weight : '100',
+          sets: sets ? sets : '1',
+          tempo: tempo ? tempo : '101',
+          rest: rest ? rest : '60',
+          showAdvanced: showAdvanced ? true : false,
+          showProperties: true,
+          setIndex: 1
+        });
+
+        calculateSetIndexes(exercises);
 
         return {
           ...state,
-          exercises: [
-            ...exercises, {
-              name: name ? name : 'squats',
-              reps: reps ? reps : '8',
-              weight: weight ? weight : '100',
-              sets: sets ? sets : '1',
-              tempo: tempo ? tempo : '101',
-              rest: rest ? rest : '60',
-              showAdvanced: showAdvanced ? true : false,
-              showProperties: true
-            }
-          ]
+          exercises: exercises
         };
       }
     case 'LOG-WORKOUT-EXERCISE-DELETE':
       {
-        const exercises = state.exercises;
+        const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.index;
+        
+        exercises.splice(exerciseIndex, 1);
+        calculateSetIndexes(exercises);
 
         return {
           ...state,
-          exercises: [
-            ...exercises.slice(0, exerciseIndex),
-            ...exercises.slice(exerciseIndex + 1)
-          ]
+          exercises: exercises
         };
       }
     case 'LOG-WORKOUT-EXERCISE-SET-DATA':
       {
-        const exercises = state.exercises;
+        const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.exerciseIndex;
-        const exercise = exercises[exerciseIndex];
-        const nameFormHint = action.exercise.name ? '' : 'Required.';
-        const repsFormHint = action.exercise.reps ? '' : 'Required.';
+        
+        const exercise = {
+          ...exercises[exerciseIndex],
+          ...action.exercise,
+          setIndex: 1,
+          nameFormHint: action.exercise.name ? '' : 'Required.',
+          repsFormHint: action.exercise.reps ? '' : 'Required.'
+        };
+        exercises[exerciseIndex] = exercise;
+
+        calculateSetIndexes(exercises);
+
+        return {
+          ...state,
+          exercises: exercises
+        };
 
         /*
         // this is taken care of by type="number"
@@ -70,6 +109,7 @@ const logWorkoutReducer = (state = {}, action) => {
         });
         */
 
+        /*
         return {
           ...state,
           exercises: [
@@ -83,11 +123,12 @@ const logWorkoutReducer = (state = {}, action) => {
             ...exercises.slice(exerciseIndex + 1)
           ]
         };
+        */
       }
 
     case 'LOG-WORKOUT-SET-DATA':
       {
-        const {date, notes, showTempoHelp, showRestHelp} = action;
+        const { date, notes, showTempoHelp, showRestHelp } = action;
         const dateFormHint = action.date ? '' : 'Required or invalid'
 
         return {
@@ -99,7 +140,7 @@ const logWorkoutReducer = (state = {}, action) => {
           showRestHelp: showRestHelp
         };
       }
-    
+
     case 'LOG-WORKOUT-SET-SHOW-TEMPO-HELP':
       {
         return {
@@ -107,7 +148,7 @@ const logWorkoutReducer = (state = {}, action) => {
           showTempoHelp: action.showTempoHelp
         };
       }
-    
+
     case 'LOG-WORKOUT-SET-SHOW-REST-HELP':
       {
         return {
@@ -115,7 +156,7 @@ const logWorkoutReducer = (state = {}, action) => {
           showRestHelp: action.showRestHelp
         };
       }
-    
+
     case 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP':
       {
         return {

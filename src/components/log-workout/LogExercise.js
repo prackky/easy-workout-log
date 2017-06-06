@@ -94,7 +94,7 @@ const LogExercise = (props) => {
     return (
       <div className="fade-in exercise-entry-details">
         <div className="columns">
-          <div className="divider-vert" data-content="#1"></div>
+          <div className="divider-vert" data-content={'#' + (props.exercise.setIndex)}></div>
           <div className="column col-11">
             <div className="form-group">
               <div className="col-3">
