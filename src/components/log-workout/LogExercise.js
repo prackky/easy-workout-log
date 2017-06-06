@@ -83,14 +83,6 @@ const LogExercise = (props) => {
     )
   };
 
-  const renderExerciseNameLabel = () => {
-    return (
-      <label className="form-label tooltip" data-tooltip="Toggle properties">
-        <a onClick={handleExercisePropertiesToggle}>Name</a>
-      </label>
-    );
-  };
-
   const renderExerciseProperties = () => {
     if (!props.exercise.showProperties) {
       return renderExercisePropertiesShortForm();
@@ -232,7 +224,7 @@ const LogExercise = (props) => {
       <div className="fade-in margin-bottom-1rem">
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Tempo</label>
+            <label className="form-label"><a href="#" onClick={handleSetShowTempoHelpClick}>Tempo</a></label>
           </div>
           <div className="col-4">
             <input
@@ -244,6 +236,7 @@ const LogExercise = (props) => {
               value={props.exercise.tempo}
               onChange={handleChange}/>
           </div>
+          {/*
           <div className="col-5">
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
@@ -252,7 +245,6 @@ const LogExercise = (props) => {
               <i className="icon icon-message"></i>
             </button>
             
-            {/*
             <div className="popover popover-top">
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
@@ -273,13 +265,14 @@ const LogExercise = (props) => {
                 </div>
               </div>
             </div>
-            */}
+            
           </div>
+          */}
         </div>
 
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Rest</label>
+            <label className="form-label"><a href="#" onClick={handleSetShowRestHelpClick}>Rest</a></label>
           </div>
           <div className="col-4">
             <input
@@ -291,6 +284,7 @@ const LogExercise = (props) => {
               value={props.exercise.rest}
               onChange={handleChange}/>
           </div>
+          {/*
           <div className="col-5">
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
@@ -298,7 +292,7 @@ const LogExercise = (props) => {
               onClick={handleSetShowRestHelpClick}>
               <i className="icon icon-message"></i>
             </button>
-            {/*
+            
             <div className="popover popover-top">
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
@@ -313,8 +307,9 @@ const LogExercise = (props) => {
                 </div>
               </div>
             </div>
-            */}
+            
           </div>
+          */}
         </div>
       </div>
     );
@@ -328,7 +323,14 @@ const LogExercise = (props) => {
       <div className="exercise-entry">
         <div className="form-group">
           <div className="col-3">
-            {renderExerciseNameLabel()}
+            {/*
+            <label className="form-label tooltip" data-tooltip="Toggle properties">
+              <a onClick={handleExercisePropertiesToggle}>Name</a>
+            </label>
+            */}
+            <label className="form-label">
+              Name
+            </label>
           </div>
           <div className="col-9">
             <input
