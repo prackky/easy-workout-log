@@ -57,6 +57,10 @@ const LogExercise = (props) => {
   const handleSetShowRestHelpClick = (event) => {
     props.doLogWorkoutSetShowRestHelp(true);
   };
+  
+  const handleSetShowWeightHelpClick = (event) => {
+    props.doLogWorkoutSetShowWeightHelp(true);
+  };
 
   const handleExercisePropertiesToggle = (event) => {
     // console.log('wtf');
@@ -109,7 +113,7 @@ const LogExercise = (props) => {
 
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label">Weight</label>
+            <label className="form-label"><a onClick={handleSetShowWeightHelpClick}> Weight</a></label>
           </div>
           <div className="col-9">
             <div className="input-group">

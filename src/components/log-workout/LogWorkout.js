@@ -6,8 +6,19 @@ import './log-workout.css';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
+import LogWorkoutHelpModal from './LogWorkoutHelpModal';
 
 import logWorkoutActions from '../../actions/logWorkoutActions';
+
+const weightHelpModalContent = [
+  'Weight in lbs.',
+  'To convert from kilograms to pounds, enter the weight in kgs and hit the convert button. To re-enable the button delete and re-add the exercise.'
+];
+
+const tempoHelpModalContent = [
+  'The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0 second mid-point and 1 second concentric (positive).',
+                'Keep value at 101 (default) if unsure.'
+];
 
 const mapStateToProps = (state) => {
   return {logWorkout: state.user.logWorkout};
@@ -29,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     doLogWorkoutSetShowRestHelp: (showRestHelp) => {
       dispatch(logWorkoutActions.logWorkoutSetShowRestHelp(showRestHelp));
+    },
+    doLogWorkoutSetShowWeightHelp: (showWeightHelp) => {
+      dispatch(logWorkoutActions.logWorkoutSetShowWeightHelp(showWeightHelp));
     },
     doLogWorkoutSave: () => {
       dispatch(logWorkoutActions.logWorkoutSave());
@@ -68,7 +82,8 @@ class LogWorkout extends Component {
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
           doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}
           doLogWorkoutSetShowTempoHelp={this.props.doLogWorkoutSetShowTempoHelp}
-          doLogWorkoutSetShowRestHelp={this.props.doLogWorkoutSetShowRestHelp}/>);
+          doLogWorkoutSetShowRestHelp={this.props.doLogWorkoutSetShowRestHelp}
+          doLogWorkoutSetShowWeightHelp={this.props.doLogWorkoutSetShowWeightHelp}/>);
       });
   }
 
@@ -123,19 +138,6 @@ class LogWorkout extends Component {
       .doLogWorkoutSave();
   }
 
-  handleTempoHelpCloseClick(event) {
-    event.preventDefault();
-    this
-      .props
-      .doLogWorkoutSetShowTempoHelp(false);
-  }
-  
-  handleRestHelpCloseClick(event) {
-    event.preventDefault();
-    this
-      .props
-      .doLogWorkoutSetShowRestHelp(false);
-  }
 
   render() {
     if (!this.props.logWorkout.componentMounted) {
@@ -146,63 +148,23 @@ class LogWorkout extends Component {
       <div>
         <UserNotificationBar/>
 
-        <div
-          className={"modal modal-sm" + (this.props.logWorkout.showTempoHelp
-          ? ' active'
-          : '')}>
-          <div className="modal-overlay"></div>
-          <div className="modal-container" role="document">
-            <div className="modal-header">
-              {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
-              <div className="modal-title">Tempo</div>
-            </div>
-            <div className="modal-body">
-              <div className="content">
-                <p>
-                The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0
-                second mid-point and 1 second concentric (positive).
-                </p>
-                <p>
-                Keep value at 101 (default) if unsure.
-                </p> 
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={this
-                .handleTempoHelpCloseClick
-                .bind(this)}>Close</button>
-            </div>
-          </div>
-        </div>
+        <LogWorkoutHelpModal 
+          doSetShowHelp={this.props.doLogWorkoutSetShowTempoHelp}
+          showHelp={this.props.logWorkout.showTempoHelp}
+          title="Tempo"
+          content={tempoHelpModalContent} />
         
-        <div
-          className={"modal modal-sm" + (this.props.logWorkout.showRestHelp
-          ? ' active'
-          : '')}>
-          <div className="modal-overlay"></div>
-          <div className="modal-container" role="document">
-            <div className="modal-header">
-              {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
-              <div className="modal-title">Rest</div>
-            </div>
-            <div className="modal-body">
-              <div className="content">
-                The rest in seconds between sets.
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={this
-                .handleRestHelpCloseClick
-                .bind(this)}>Close</button>
-            </div>
-          </div>
-        </div>
+        <LogWorkoutHelpModal 
+          doSetShowHelp={this.props.doLogWorkoutSetShowRestHelp}
+          showHelp={this.props.logWorkout.showRestHelp}
+          title="Rest"
+          content={['The rest in seconds between sets.']} />
+
+        <LogWorkoutHelpModal 
+          doSetShowHelp={this.props.doLogWorkoutSetShowWeightHelp}
+          showHelp={this.props.logWorkout.showWeightHelp}
+          title="Weight"
+          content={weightHelpModalContent} />
 
         <div className="container grid-480 section-content">
           <div className="columns">
@@ -213,8 +175,6 @@ class LogWorkout extends Component {
               </p>
               <p>
                 Clickable labels provide hints.
-                To convert from kilograms to pounds, enter the weight in kgs and hit the convert
-                button.
               </p>
               <p>
                 Hit the save button once finished.

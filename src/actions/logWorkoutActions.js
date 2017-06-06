@@ -55,6 +55,12 @@ const logWorkoutActions = {
       showRestHelp: showRestHelp
     };
   },
+  logWorkoutSetShowWeightHelp: (showWeightHelp = true) => {
+    return {
+      type: 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP',
+      showWeightHelp: showWeightHelp
+    };
+  },
   logWorkoutSaveSuccess: () => {
     return {
       type: 'LOG-WORKOUT-SAVE-SUCCESS'

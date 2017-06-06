@@ -115,6 +115,14 @@ const logWorkoutReducer = (state = {}, action) => {
           showRestHelp: action.showRestHelp
         };
       }
+    
+    case 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP':
+      {
+        return {
+          ...state,
+          showWeightHelp: action.showWeightHelp
+        };
+      }
 
     case 'LOG-WORKOUT-SAVE-SUCCESS':
       {

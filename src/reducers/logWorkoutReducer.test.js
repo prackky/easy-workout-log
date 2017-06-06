@@ -303,6 +303,24 @@ describe('logWorkoutReducer', () => {
 
   });
 
+  describe('LOG-WORKOUT-SET-SHOW-WEIGHT-HELP', () => {
+    it('should set help', () => {
+      // when
+      const newState = logWorkoutReducer({
+        showWeightHelp: false
+      }, actions.logWorkoutSetShowWeightHelp(true));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          showWeightHelp: true
+        });
+    });
+
+  });
+
   describe('LOG-WORKOUT-SAVE', () => {
     const today = moment().format('YYYY-MM-DD');
 
