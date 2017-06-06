@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
 import './log-workout.css';
@@ -72,8 +73,8 @@ class LogWorkout extends Component {
   }
 
   handleBtnAddExerciseClick(event) {
-    event.preventDefault();
-
+    event.currentTarget.blur(); // hide the tooltip 
+    
     const numExercises = this.props.logWorkout.exercises.length;
 
     if (numExercises) {
@@ -90,6 +91,10 @@ class LogWorkout extends Component {
       this
         .props
         .doLogWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced);
+
+      setTimeout(() => {
+        ReactDOM.findDOMNode(this.refs.btnAddExercise).scrollIntoView({block: 'end', behavior: 'smooth'});
+      }, 0);
 
       return;
     }
@@ -165,6 +170,7 @@ class LogWorkout extends Component {
             <div className="modal-footer">
               <button
                 className="btn btn-primary"
+                type="button"
                 onClick={this
                 .handleTempoHelpCloseClick
                 .bind(this)}>Close</button>
@@ -190,6 +196,7 @@ class LogWorkout extends Component {
             <div className="modal-footer">
               <button
                 className="btn btn-primary"
+                type="button"
                 onClick={this
                 .handleRestHelpCloseClick
                 .bind(this)}>Close</button>
@@ -205,6 +212,7 @@ class LogWorkout extends Component {
                 Click + to add a new exercise. Use the same exercise name for multiple sets.
               </p>
               <p>
+                Clickable labels provide hints.
                 To convert from kilograms to pounds, enter the weight in kgs and hit the convert
                 button.
               </p>
@@ -266,8 +274,10 @@ class LogWorkout extends Component {
                   <div className="col-10"></div>
                   <div className="col-2 text-center">
                     <button
+                      ref="btnAddExercise"
                       className="btn btn-action btn-lg circle btn-exercise-action tooltip"
                       data-tooltip="Add exercise"
+                      type="button"
                       onClick={this
                       .handleBtnAddExerciseClick
                       .bind(this)}>

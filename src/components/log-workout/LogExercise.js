@@ -5,7 +5,6 @@ import logWorkoutActions from '../../actions/logWorkoutActions';
 const LogExercise = (props) => {
 
   const handleWeightKgToLbs = (event) => {
-    event.preventDefault();
     const exercise = props.exercise;
     exercise.weight = parseInt(exercise.weight * 2.20462);
     exercise.converted = true;
@@ -13,7 +12,7 @@ const LogExercise = (props) => {
   }
 
   const handleExerciseDelete = (event) => {
-    event.preventDefault();
+    event.currentTarget.blur(); // hide the tooltip
     props.doLogWorkoutExerciseDelete(props.index);
   };
 
@@ -28,7 +27,8 @@ const LogExercise = (props) => {
   };
 
   const handleShowAdvanced = (event) => {
-    event.preventDefault();
+    event.currentTarget.blur(); // hide the tooltip 
+
     const exercise = {
       ...props.exercise
     };
@@ -37,7 +37,8 @@ const LogExercise = (props) => {
   };
   
   const handleHideAdvanced = (event) => {
-    event.preventDefault();
+    event.currentTarget.blur(); // hide the tooltip
+
     const exercise = {
       ...props.exercise
     };
@@ -50,12 +51,10 @@ const LogExercise = (props) => {
   };
 
   const handleSetShowTempoHelpClick = (event) => {
-    event.preventDefault();
     props.doLogWorkoutSetShowTempoHelp(true);
   };
   
   const handleSetShowRestHelpClick = (event) => {
-    event.preventDefault();
     props.doLogWorkoutSetShowRestHelp(true);
   };
 
@@ -123,7 +122,7 @@ const LogExercise = (props) => {
                 value={props.exercise.weight}
                 onChange={handleChange}/>
               <span className="input-group-addon">lb</span>
-              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} onClick={handleWeightKgToLbs}>kg -> lb</button>
+              <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} type="button" onClick={handleWeightKgToLbs}>kg -> lb</button>
             </div>
           </div>
         </div>
@@ -171,6 +170,7 @@ const LogExercise = (props) => {
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
               data-tooltip="Delete exercise"
+              type="button"
               onClick={handleExerciseDelete}>
               <i className="icon icon-delete"></i>
             </button>
@@ -185,6 +185,7 @@ const LogExercise = (props) => {
         <button
           className="btn btn-action btn-lg circle tooltip"
           data-tooltip="Hide advanced"
+          type="button"
           onClick={handleHideAdvanced}>
           <i className="icon icon-arrow-up"></i>
         </button>
@@ -195,6 +196,7 @@ const LogExercise = (props) => {
       <button
         className="btn btn-action btn-lg circle tooltip"
         data-tooltip="Show advanced"
+        type="button"
         onClick={handleShowAdvanced}>
         <i className="icon icon-arrow-down"></i>
       </button>
@@ -211,6 +213,7 @@ const LogExercise = (props) => {
             <button
               className="btn btn-action btn-lg circle tooltip"
               data-tooltip="Show advanced"
+              type="button"
               onClick={handleShowAdvanced}>
               <i className="icon icon-arrow-down"></i>
             </button>
@@ -224,7 +227,7 @@ const LogExercise = (props) => {
       <div className="fade-in margin-bottom-1rem">
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label"><a href="#" onClick={handleSetShowTempoHelpClick}>Tempo</a></label>
+            <label className="form-label"><a onClick={handleSetShowTempoHelpClick}>Tempo</a></label>
           </div>
           <div className="col-4">
             <input
@@ -241,6 +244,7 @@ const LogExercise = (props) => {
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
               data-tooltip="Show help"
+              type="button"
               onClick={handleSetShowTempoHelpClick}>
               <i className="icon icon-message"></i>
             </button>
@@ -249,6 +253,7 @@ const LogExercise = (props) => {
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
                 onClick={handlePopover}>
+                type="button"
                 <i className="icon icon-message"></i>
               </button>
               <div className="popover-container">
@@ -272,7 +277,7 @@ const LogExercise = (props) => {
 
         <div className="form-group">
           <div className="col-3">
-            <label className="form-label"><a href="#" onClick={handleSetShowRestHelpClick}>Rest</a></label>
+            <label className="form-label"><a onClick={handleSetShowRestHelpClick}>Rest</a></label>
           </div>
           <div className="col-4">
             <input
@@ -289,6 +294,7 @@ const LogExercise = (props) => {
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
               data-tooltip="Show help"
+              type="button"
               onClick={handleSetShowRestHelpClick}>
               <i className="icon icon-message"></i>
             </button>
@@ -296,6 +302,7 @@ const LogExercise = (props) => {
             <div className="popover popover-top">
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
+                type="button"
                 onClick={handlePopover}>
                 <i className="icon icon-message"></i>
               </button>
@@ -341,11 +348,6 @@ const LogExercise = (props) => {
               property="name"
               onChange={handleChange}/>
           </div>
-          {/*
-          <div className="col-2 text-center">
-            {renderDeleteButton()}
-          </div>
-          */}
         </div>
 
         {renderPropertyFormHint(props.exercise.nameFormHint)}
