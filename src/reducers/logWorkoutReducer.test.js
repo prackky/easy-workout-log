@@ -16,12 +16,12 @@ describe('logWorkoutReducer', () => {
       .equal({});
   });
 
-  describe('LOG-WORKOUT', () => {
+  describe('LOG-WORKOUT-SUCCESS', () => {
     const today = moment().format('YYYY-MM-DD');
 
-    it('should add logWorkout for LOG-WORKOUT', () => {
+    it('should add logWorkout for LOG-WORKOUT-SUCCESS', () => {
       // when
-      const newState = logWorkoutReducer(undefined, actions.logWorkout());
+      const newState = logWorkoutReducer(undefined, actions.logWorkoutSuccess(['a', 'b']));
 
       // then
       expect(newState)
@@ -34,15 +34,16 @@ describe('logWorkoutReducer', () => {
           date: today,
           exercises: [],
           showTempoHelp: false,
-          showRestHelp: false
+          showRestHelp: false,
+          allExercises: ['a', 'b']
         });
     });
 
-    it('should maintain existing state for LOG-WORKOUT', () => {
+    it('should maintain existing state for LOG-WORKOUT-SUCCESS', () => {
       // when
       const newState = logWorkoutReducer({
         snoop: 'dawg'
-      }, actions.logWorkout());
+      }, actions.logWorkoutSuccess([]));
 
       // then
       expect(newState)
@@ -56,7 +57,8 @@ describe('logWorkoutReducer', () => {
           date: today,
           exercises: [],
           showTempoHelp: false,
-          showRestHelp: false
+          showRestHelp: false,
+          allExercises: []
         });
     });
   });

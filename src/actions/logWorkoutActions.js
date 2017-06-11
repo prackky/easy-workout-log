@@ -1,12 +1,45 @@
 import { push } from 'react-router-redux';
 
+import ewoloConstants from '../ewoloConstants';
 import globalActions from './globalActions';
 import signupActions from './signupActions';
 
 const logWorkoutActions = {
-  logWorkout: () => {
+  logWorkoutSuccess: (allExercises) => {
     return {
-      type: 'LOG-WORKOUT'
+      type: 'LOG-WORKOUT-SUCCESS',
+      allExercises: allExercises
+    };
+  },
+  logWorkout: (shouldLogWorkoutExercise) => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatchLogWorkoutSuccess(dispatch, ewoloConstants.allExercises, shouldLogWorkoutExercise);
+          });
+      }
+
+      dispatch(globalActions.taskStart());
+
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('done');
+        }, 1000);
+      });
+
+      return promise.then(result => {
+          dispatchLogWorkoutSuccess(dispatch, [], shouldLogWorkoutExercise);
+        })
+        .catch(error => {
+          console.log(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading exercise data'));
+        })
+        .then(() => {
+          dispatch(globalActions.taskEnd());
+        });
     };
   },
   logWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
@@ -103,6 +136,13 @@ const logWorkoutActions = {
           dispatch(globalActions.taskEnd());
         });
     };
+  }
+};
+
+const dispatchLogWorkoutSuccess = (dispatch, allExercises, shouldLogWorkoutExercise) => {
+  dispatch(logWorkoutActions.logWorkoutSuccess(allExercises));
+  if (shouldLogWorkoutExercise) {
+    dispatch(logWorkoutActions.logWorkoutExercise());
   }
 };
 

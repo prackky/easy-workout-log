@@ -25,7 +25,7 @@ const calculateSetIndexes = (exercises) => {
 
 const logWorkoutReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'LOG-WORKOUT':
+    case 'LOG-WORKOUT-SUCCESS':
       const today = moment().format('YYYY-MM-DD');
 
       return {
@@ -36,7 +36,8 @@ const logWorkoutReducer = (state = {}, action) => {
         date: today,
         exercises: [],
         showTempoHelp: false,
-        showRestHelp: false
+        showRestHelp: false,
+        allExercises: action.allExercises
       };
 
     case 'LOG-WORKOUT-EXERCISE':

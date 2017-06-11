@@ -31,8 +31,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    doLogWorkout: () => {
-      dispatch(logWorkoutActions.logWorkout());
+    doLogWorkout: (shouldLogWorkoutExercise) => {
+      dispatch(logWorkoutActions.logWorkout(shouldLogWorkoutExercise));
     },
     doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
       dispatch(logWorkoutActions.logWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced));
@@ -67,10 +67,12 @@ class LogWorkout extends Component {
     if (!this.props.logWorkout.componentMounted) {
       this
         .props
-        .doLogWorkout();
+        .doLogWorkout(true);
+      /*
       this
         .props
         .doLogWorkoutExercise();
+      */
     }
   }
 

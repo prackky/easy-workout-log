@@ -4,12 +4,18 @@ import {connect} from 'react-redux';
 
 import './welcome.css';
 
+import logWorkoutActions from '../actions/logWorkoutActions';
+
 const mapStateToProps = (state) => {
   return {user: state.user};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    doLogWorkout: () => {
+      dispatch(logWorkoutActions.logWorkout());
+    }
+  };
 };
 
 class Welcome extends Component {
