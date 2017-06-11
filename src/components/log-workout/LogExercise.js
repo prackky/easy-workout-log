@@ -6,7 +6,7 @@ const LogExercise = (props) => {
 
   const handleWeightKgToLbs = (event) => {
     const exercise = props.exercise;
-    exercise.weight = parseInt(exercise.weight * 2.20462);
+    exercise.weight = parseInt(exercise.weight * 2.20462, 10);
     exercise.converted = true;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   }
@@ -215,21 +215,6 @@ const LogExercise = (props) => {
   const renderAdvanced = () => {
     if (!props.exercise.showAdvanced) {
       return null;
-      /*
-      return (
-        <div className="form-group">
-          <div className="col-12">
-            <button
-              className="btn btn-action btn-lg circle tooltip"
-              data-tooltip="Show advanced"
-              type="button"
-              onClick={handleShowAdvanced}>
-              <i className="icon icon-arrow-down"></i>
-            </button>
-          </div>
-        </div>
-      );
-      */
     }
 
     return (
@@ -298,34 +283,6 @@ const LogExercise = (props) => {
               value={props.exercise.rest}
               onChange={handleChange}/>
           </div>
-          {/*
-          <div className="col-5">
-            <button
-              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
-              data-tooltip="Show help"
-              type="button"
-              onClick={handleSetShowRestHelpClick}>
-              <i className="icon icon-message"></i>
-            </button>
-            
-            <div className="popover popover-top">
-              <button
-                className="btn btn-action btn-lg circle btn-exercise-action"
-                type="button"
-                onClick={handlePopover}>
-                <i className="icon icon-message"></i>
-              </button>
-              <div className="popover-container">
-                <div className="card">
-                  <div className="card-body">
-                    The rest in seconds between sets.
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          */}
         </div>
       </div>
     );
@@ -349,13 +306,32 @@ const LogExercise = (props) => {
             </label>
           </div>
           <div className="col-9">
-            <input
-              className="form-input input-lg"
-              type="text"
-              placeholder="e.g. Squats"
-              value={props.exercise.name}
-              property="name"
-              onChange={handleChange}/>
+            <div className="form-autocomplete">
+              <div className="form-autocomplete-input form-input">
+                <input
+                className="form-input input-lg"
+                type="text"
+                placeholder="e.g. Squats"
+                value={props.exercise.name}
+                property="name"
+                onChange={handleChange}/>
+              </div>
+
+              <ul className="menu">
+                <li className="menu-item">
+                  <a href="#">
+                    Squatsdffn,ms.ndfn s.,mfdn s.,dnfs.,dfmnsdf
+                  </a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">
+                    Standing barbell shoulder press
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+            
           </div>
         </div>
 
