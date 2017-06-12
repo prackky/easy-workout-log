@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 
-import ewoloUtil, {RequestError} from '../../ewoloUtil';
+import ewoloUtil, {RequestError} from '../../common/ewoloUtil';
 
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';

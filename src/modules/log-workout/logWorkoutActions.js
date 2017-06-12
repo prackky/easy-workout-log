@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 
-import ewoloConstants from '../../ewoloConstants';
+import ewoloConstants from '../../common/ewoloConstants';
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
 

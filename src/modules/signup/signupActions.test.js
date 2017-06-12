@@ -4,7 +4,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import signupActions from './signupActions';
-import ewoloConstants from '../../ewoloConstants';
+import ewoloConstants from '../../common/ewoloConstants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
