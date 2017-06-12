@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import logWorkoutReducer from './logWorkoutReducer';
-import userDataReducer from './userDataReducer';
+import logWorkoutReducer from './log-workout/logWorkoutReducer';
+import userDataReducer from './user-data/userDataReducer';
 
 const userReducer = combineReducers({
   logWorkout: logWorkoutReducer,

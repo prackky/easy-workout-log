@@ -1,7 +1,5 @@
 import React from 'react';
 
-import logWorkoutActions from '../../actions/logWorkoutActions';
-
 const LogExercise = (props) => {
 
   const handleWeightKgToLbs = (event) => {

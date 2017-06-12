@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
 import userReducer from './userReducer';
-import globalReducer from './globalReducer';
-import signupReducer from './signupReducer';
+import globalReducer from './global/globalReducer';
+import signupReducer from './signup/signupReducer';
 
 const appReducer = combineReducers({ 
   user: userReducer, 

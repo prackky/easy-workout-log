@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
 
-import signupActions from '../../actions/signupActions';
+import signupActions from '../../modules/signup/signupActions';
 
 const mapStateToProps = (state) => {
   return {signup: state.signup};

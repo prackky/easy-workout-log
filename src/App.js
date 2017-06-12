@@ -24,7 +24,7 @@ import Loader from './components/Loader';
 import Signup from './components/auth/Signup';
 import Dashboard from './components/dashboard/Dashboard';
 
-import appReducer from './reducers/appReducer';
+import appReducer from './modules/appReducer';
 
 import './App.css';
 

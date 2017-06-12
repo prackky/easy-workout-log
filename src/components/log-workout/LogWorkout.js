@@ -8,7 +8,7 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
 import LogWorkoutHelpModal from './LogWorkoutHelpModal';
 
-import logWorkoutActions from '../../actions/logWorkoutActions';
+import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 
 const weightHelpModalContent = [
   'Weight in lbs.',

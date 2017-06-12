@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
-import actions from '../actions/logWorkoutActions';
+import actions from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
   it('should reduce undefined state to initial state', () => {

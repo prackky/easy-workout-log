@@ -1,9 +1,9 @@
 import { push } from 'react-router-redux';
 
-import ewoloUtil, {RequestError} from '../ewoloUtil';
+import ewoloUtil, {RequestError} from '../../ewoloUtil';
 
-import globalActions from './globalActions';
-import userDataActions from './userDataActions';
+import globalActions from '../global/globalActions';
+import userDataActions from '../user-data/userDataActions';
 
 const signupActions = {
   signupSetData: (name, email, password) => {

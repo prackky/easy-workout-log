@@ -1,8 +1,8 @@
 import { push } from 'react-router-redux';
 
-import ewoloConstants from '../ewoloConstants';
-import globalActions from './globalActions';
-import signupActions from './signupActions';
+import ewoloConstants from '../../ewoloConstants';
+import globalActions from '../global/globalActions';
+import signupActions from '../signup/signupActions';
 
 const logWorkoutActions = {
   logWorkoutSuccess: (allExercises) => {

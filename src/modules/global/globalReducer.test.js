@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import globalReducer from './globalReducer';
-import actions from '../actions/globalActions';
+import actions from './globalActions';
 
 describe('globalReducer', () => {
   it('should reduce undefined state to initial state', () => {

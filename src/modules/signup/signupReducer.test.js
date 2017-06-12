@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import signupReducer, { initialState } from './signupReducer';
-import actions from '../actions/signupActions';
+import actions from './signupActions';
 
 describe('signupReducer', () => {
   it('should reduce undefined state to initial state', () => {

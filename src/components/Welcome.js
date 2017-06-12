@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import './welcome.css';
 
-import logWorkoutActions from '../actions/logWorkoutActions';
+import logWorkoutActions from '../modules/log-workout/logWorkoutActions';
 
 const mapStateToProps = (state) => {
   return {user: state.user};

@@ -5,7 +5,7 @@ import UserNotification from './UserNotification';
 
 import './user-notification-bar.css';
 
-import globalActions from '../../actions/globalActions';
+import globalActions from '../../modules/global/globalActions';
 
 const mapStateToProps = (state) => {
   return {userNotifications: state.global.userNotifications};

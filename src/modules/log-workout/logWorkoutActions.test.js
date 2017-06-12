@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import nock from 'nock';
 import { expect } from 'chai';
 
-import ewoloConstants from '../ewoloConstants';
+import ewoloConstants from '../../ewoloConstants';
 import logWorkoutActions from './logWorkoutActions';
 
 const middlewares = [thunk];

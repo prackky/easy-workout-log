@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
 import appReducer from './appReducer';
-import {initialState as signupInitialState} from './signupReducer';
-import {initialState as globalInitialState} from './globalReducer';
-import {initialState as userDataInitialState} from './userDataReducer';
+import {initialState as signupInitialState} from './signup/signupReducer';
+import {initialState as globalInitialState} from './global/globalReducer';
+import {initialState as userDataInitialState} from './user-data/userDataReducer';
 
 describe('appReducer', () => {
   it('should reduce undefined state to initial state', () => {
