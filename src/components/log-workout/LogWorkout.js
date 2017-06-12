@@ -73,6 +73,7 @@ class LogWorkout extends Component {
           key={index}
           index={index}
           exercise={exercise}
+          allExercises={this.props.logWorkout.allExercises}
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
           doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}
           doLogWorkoutSetShowTempoHelp={this.props.doLogWorkoutSetShowTempoHelp}

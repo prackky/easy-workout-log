@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AutoCompleteMenu from '../generic/AutoCompleteMenu';
+
 const LogExercise = (props) => {
 
   const handleWeightKgToLbs = (event) => {
@@ -23,6 +25,13 @@ const LogExercise = (props) => {
 
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
+
+  const handleNameAutoCompleteSelection = (value) => {
+    console.log(value);
+    const exercise = props.exercise;
+    exercise.name = value;
+    props.doLogWorkoutExerciseSetData(props.index, exercise);
+  }
 
   const handleShowAdvanced = (event) => {
     event.currentTarget.blur(); // hide the tooltip 
@@ -315,18 +324,10 @@ const LogExercise = (props) => {
                 onChange={handleChange}/>
               </div>
 
-              <ul className="menu">
-                <li className="menu-item">
-                  <a href="#">
-                    Squatsdffn,ms.ndfn s.,mfdn s.,dnfs.,dfmnsdf
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="#">
-                    Standing barbell shoulder press
-                  </a>
-                </li>
-              </ul>
+              <AutoCompleteMenu 
+              items={props.allExercises} 
+              input={props.exercise.name}
+              handleSelection={handleNameAutoCompleteSelection}/>
 
             </div>
             
