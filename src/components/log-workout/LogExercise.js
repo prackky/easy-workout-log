@@ -33,6 +33,34 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   }
 
+  let nameAutoCompleteMenu = null;
+
+  /**
+   * This is an incredibly dirty function that hooks into a child component
+   * and manipulates it directly!
+   * 
+   * @param {SyntheticEvent} event 
+   */
+  const handleInputNameKeyDown = (event) => {
+    const s = nameAutoCompleteMenu.state;
+    if (s.suggestions.length) {
+      if (event.keyCode === 27) { // escape
+        nameAutoCompleteMenu.handleCloseClick();
+      } else if (event.keyCode === 40) { // down arrow
+        nameAutoCompleteMenu.incrementCurrentHighlight();
+      } else if (event.keyCode === 38) { // up arrow
+        nameAutoCompleteMenu.decrementCurrentHighlight();
+      } else if (event.keyCode === 13) { // enter
+        event.preventDefault();
+
+        if (s.currentIndex >= 0) {
+          const value = s.suggestions[s.currentIndex];
+          handleNameAutoCompleteSelection(value);
+        }
+      }
+    }
+  };
+
   const handleShowAdvanced = (event) => {
     event.currentTarget.blur(); // hide the tooltip 
 
@@ -321,10 +349,12 @@ const LogExercise = (props) => {
                 placeholder="e.g. Squats"
                 value={props.exercise.name}
                 property="name"
+                onKeyDown={handleInputNameKeyDown}
                 onChange={handleChange}/>
               </div>
 
               <AutoCompleteMenu 
+              ref={(autoCompleteMenu) => {nameAutoCompleteMenu = autoCompleteMenu}}
               items={props.allExercises} 
               input={props.exercise.name}
               handleSelection={handleNameAutoCompleteSelection}/>
