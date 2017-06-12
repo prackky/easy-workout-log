@@ -6,7 +6,7 @@ import './log-workout.css';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
-import LogWorkoutHelpModal from './LogWorkoutHelpModal';
+import Modal from '../generic/Modal';
 
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 
@@ -142,21 +142,24 @@ class LogWorkout extends Component {
       <div>
         <UserNotificationBar/>
 
-        <LogWorkoutHelpModal 
-          doSetShowHelp={this.props.doLogWorkoutSetShowTempoHelp}
-          showHelp={this.props.logWorkout.showTempoHelp}
+        <Modal
+          doSetShowModal={this.props.doLogWorkoutSetShowTempoHelp}
+          showModal={this.props.logWorkout.showTempoHelp}
+          size="sm"
           title="Tempo"
           content={ewoloContent.tempoHelpModalContent} />
         
-        <LogWorkoutHelpModal 
-          doSetShowHelp={this.props.doLogWorkoutSetShowRestHelp}
-          showHelp={this.props.logWorkout.showRestHelp}
+        <Modal
+          doSetShowModal={this.props.doLogWorkoutSetShowRestHelp}
+          showModal={this.props.logWorkout.showRestHelp}
+          size="sm"
           title="Rest"
           content={ewoloContent.restHelpModalContent} />
 
-        <LogWorkoutHelpModal 
-          doSetShowHelp={this.props.doLogWorkoutSetShowWeightHelp}
-          showHelp={this.props.logWorkout.showWeightHelp}
+        <Modal
+          doSetShowModal={this.props.doLogWorkoutSetShowWeightHelp}
+          showModal={this.props.logWorkout.showWeightHelp}
+          size="sm``"
           title="Weight"
           content={ewoloContent.weightHelpModalContent} />
 

@@ -1,16 +1,18 @@
 import React from 'react';
 
-const LogWorkoutHelpModal = (props) => {
+const Modal = (props) => {
 
   const handleCloseClick = (event) => {
     event.preventDefault();
-    props.doSetShowHelp(false);
+    props.doSetShowModal(false);
   };
+
+  const sizeClass = 'modal-' + props.size;
 
   return (
 
     <div
-      className={"modal modal-sm" + (props.showHelp
+      className={"modal " + sizeClass + " " + (props.showModal
       ? ' active'
       : '')}>
       <div className="modal-overlay"></div>
@@ -30,7 +32,7 @@ const LogWorkoutHelpModal = (props) => {
                   </p>
                 );
               })
-            }
+}
           </div>
         </div>
         <div className="modal-footer">
@@ -41,4 +43,4 @@ const LogWorkoutHelpModal = (props) => {
   );
 };
 
-export default LogWorkoutHelpModal;
+export default Modal;
