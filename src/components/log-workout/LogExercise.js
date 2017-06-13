@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AutoCompleteMenu from '../generic/AutoCompleteMenu';
+import AutoComplete from '../generic/AutoComplete';
 
 const LogExercise = (props) => {
 
@@ -26,40 +26,12 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
 
-  const handleNameAutoCompleteSelection = (value) => {
+  const handleNameAutoCompleteChange = (value) => {
     console.log(value);
     const exercise = props.exercise;
     exercise.name = value;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   }
-
-  let nameAutoCompleteMenu = null;
-
-  /**
-   * This is an incredibly dirty function that hooks into a child component
-   * and manipulates it directly!
-   * 
-   * @param {SyntheticEvent} event 
-   */
-  const handleInputNameKeyDown = (event) => {
-    const s = nameAutoCompleteMenu.state;
-    if (s.suggestions.length) {
-      if (event.keyCode === 27) { // escape
-        nameAutoCompleteMenu.handleCloseClick();
-      } else if (event.keyCode === 40) { // down arrow
-        nameAutoCompleteMenu.incrementCurrentHighlight();
-      } else if (event.keyCode === 38) { // up arrow
-        nameAutoCompleteMenu.decrementCurrentHighlight();
-      } else if (event.keyCode === 13) { // enter
-        event.preventDefault();
-
-        if (s.currentIndex >= 0) {
-          const value = s.suggestions[s.currentIndex];
-          handleNameAutoCompleteSelection(value);
-        }
-      }
-    }
-  };
 
   const handleShowAdvanced = (event) => {
     event.currentTarget.blur(); // hide the tooltip 
@@ -341,26 +313,12 @@ const LogExercise = (props) => {
             </label>
           </div>
           <div className="col-9">
-            <div className="form-autocomplete">
-              <div className="form-autocomplete-input form-input">
-                <input
-                className="form-input input-lg"
-                type="text"
-                placeholder="e.g. Squats"
-                value={props.exercise.name}
-                property="name"
-                onKeyDown={handleInputNameKeyDown}
-                onChange={handleChange}/>
-              </div>
-
-              <AutoCompleteMenu 
-              ref={(autoCompleteMenu) => {nameAutoCompleteMenu = autoCompleteMenu}}
+            <AutoComplete
+              placeholder="e.g. Squats"
+              name="exerciseName"
               items={props.allExercises} 
               input={props.exercise.name}
-              handleSelection={handleNameAutoCompleteSelection}/>
-
-            </div>
-            
+              handleChange={handleNameAutoCompleteChange}/>
           </div>
         </div>
 

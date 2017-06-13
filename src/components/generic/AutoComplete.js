@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import './AutoCompleteMenu.css';
+import './AutoComplete.css';
 
 import autoCompleteSuggestions from '../../modules/generic/autoCompleteSuggestions';
 
-class AutoCompleteMenu extends Component {
+class AutoComplete extends Component {
 
   constructor(props) {
     super(props);
@@ -12,10 +12,9 @@ class AutoCompleteMenu extends Component {
   }
 
   getStateFromProps(props) {
-    const {items, input, handleSelection} = props;
+    const {items, input} = props;
     const suggestions = autoCompleteSuggestions(items, input);
-
-    return {handleSelection: handleSelection, suggestions: suggestions, currentIndex: -1};
+    return {suggestions: suggestions, currentIndex: -1};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,7 +61,35 @@ class AutoCompleteMenu extends Component {
     this.setState(newState);
   }
 
-  render() {
+  handleKeyDown(event) {
+    const s = this.state;
+
+    if (s.suggestions.length) {
+
+      if (event.keyCode === 27) { // escape
+        this.handleCloseClick();
+      } else if (event.keyCode === 40) { // down arrow
+        this.incrementCurrentHighlight();
+      } else if (event.keyCode === 38) { // up arrow
+        this.decrementCurrentHighlight();
+      } else if (event.keyCode === 13) { // enter
+        event.preventDefault();
+
+        if (s.currentIndex >= 0) {
+          const value = s.suggestions[s.currentIndex];
+          this
+            .props
+            .handleChange(value);
+        }
+      }
+    }
+  }
+
+  handleChange(event) {
+    this.props.handleChange(event.target.value);
+  }
+
+  renderMenu() {
     const self = this;
 
     if (self.state.suggestions.length === 0) {
@@ -87,12 +114,13 @@ class AutoCompleteMenu extends Component {
                 ? 'autocomplete-is-focused'
                 : '')}
                 key={index}>
-                <a href="#"
+                <a
+                  href="#"
                   onClick={(event) => {
                   event.preventDefault();
                   self
-                    .state
-                    .handleSelection(suggestion);
+                    .props
+                    .handleChange(suggestion);
                 }}>
                   {suggestion}
                 </a>
@@ -101,7 +129,27 @@ class AutoCompleteMenu extends Component {
           })}
       </ul>
     );
-  };
+  }
+
+  render() {
+    return (
+      <div className="form-autocomplete">
+        <div className="form-autocomplete-input form-input">
+          <input
+            className="form-input input-lg"
+            type="text"
+            placeholder={this.props.placeholder}
+            value={this.props.input}
+            name={this.props.name}
+            onKeyDown={this.handleKeyDown.bind(this)}
+            onChange={this.handleChange.bind(this)}/>
+        </div>
+
+        {this.renderMenu()}
+
+      </div>
+    );
+  }
 }
 
-export default AutoCompleteMenu;
+export default AutoComplete;
