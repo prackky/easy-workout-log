@@ -84,7 +84,7 @@ const LogExercise = (props) => {
     }
 
     return (
-      <div className={"form-group form-input-hint"}>
+      <div className={"form-group form-input-hint fade-in"}>
         <div className="col-3"></div>
         <div className="col-9">
           {hint}
