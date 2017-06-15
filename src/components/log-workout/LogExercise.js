@@ -315,7 +315,7 @@ const LogExercise = (props) => {
           <div className="col-9">
             <AutoComplete
               placeholder="e.g. Squats"
-              name="exerciseName"
+              // name="exerciseName"
               items={props.allExercises} 
               input={props.exercise.name}
               handleChange={handleNameAutoCompleteChange}/>
