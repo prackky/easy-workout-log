@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
-import actions from './logWorkoutActions';
+import actions, { c } from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
-  describe('LOG-WORKOUT-EXERCISE', () => {
-    it('should add an exercise for LOG-WORKOUT-EXERCISE', () => {
+  describe(c.LOG_WORKOUT_EXERCISE, () => {
+    it('should add an exercise', () => {
       // when
       const newState = logWorkoutReducer({
         type: 'weight',
@@ -35,7 +35,7 @@ describe('logWorkoutReducer', () => {
         });
     });
 
-    it('should add an exercise for with given properties for LOG-WORKOUT-EXERCISE', () => {
+    it('should add an exercise for with given properties', () => {
       // when
       const newState = logWorkoutReducer({
         type: 'weight',

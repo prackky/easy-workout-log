@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
-import actions from './logWorkoutActions';
+import actions, { c } from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
-  describe('LOG-WORKOUT-EXERCISE-SET-DATA', () => {
+  describe(c.LOG_WORKOUT_EXERCISE_SET_DATA, () => {
     it('should update the specified exercise', () => {
       // when
       const newState = logWorkoutReducer({

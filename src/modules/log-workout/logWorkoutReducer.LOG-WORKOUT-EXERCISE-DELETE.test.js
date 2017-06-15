@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
-import actions from './logWorkoutActions';
+import actions, {c} from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
-  describe('LOG-WORKOUT-EXERCISE-DELETE', () => {
-    it('should remove the specified exercise for LOG-WORKOUT-EXERCISE-DELETE', () => {
+  describe(c.LOG_WORKOUT_EXERCISE_DELETE, () => {
+    it('should remove the specified exercise', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
@@ -21,7 +21,7 @@ describe('logWorkoutReducer', () => {
         });
     });
 
-    it('should remove the first exercise for LOG-WORKOUT-EXERCISE-DELETE', () => {
+    it('should remove the first exercise', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
@@ -36,7 +36,7 @@ describe('logWorkoutReducer', () => {
         });
     });
 
-    it('should remove the last exercise for LOG-WORKOUT-EXERCISE-DELETE', () => {
+    it('should remove the last exercise', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b' }, { name: 'c' }]

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import logWorkoutReducer from './logWorkoutReducer';
-import actions from './logWorkoutActions';
+import actions, { c } from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -16,12 +16,12 @@ describe('logWorkoutReducer', () => {
       .equal({});
   });
 
-  describe('LOG-WORKOUT-SUCCESS', () => {
+  describe(c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS, () => {
     const today = moment().format('YYYY-MM-DD');
 
-    it('should add logWorkout for LOG-WORKOUT-SUCCESS', () => {
+    it('should add logWorkout', () => {
       // when
-      const newState = logWorkoutReducer(undefined, actions.logWorkoutSuccess(['a', 'b']));
+      const newState = logWorkoutReducer(undefined, actions.logWorkoutLoadExercisesSuccess(['a', 'b']));
 
       // then
       expect(newState)
@@ -39,11 +39,11 @@ describe('logWorkoutReducer', () => {
         });
     });
 
-    it('should maintain existing state for LOG-WORKOUT-SUCCESS', () => {
+    it('should maintain existing state', () => {
       // when
       const newState = logWorkoutReducer({
         snoop: 'dawg'
-      }, actions.logWorkoutSuccess([]));
+      }, actions.logWorkoutLoadExercisesSuccess([]));
 
       // then
       expect(newState)
@@ -63,7 +63,7 @@ describe('logWorkoutReducer', () => {
     });
   });
 
-  describe('LOG-WORKOUT-SET-DATA', () => {
+  describe(c.LOG_WORKOUT_SET_DATA, () => {
     it('should set data', () => {
       // when
       const now = new Date();
@@ -112,7 +112,7 @@ describe('logWorkoutReducer', () => {
 
   });
 
-  describe('LOG-WORKOUT-SET-SHOW-TEMPO-HELP', () => {
+  describe(c.LOG_WORKOUT_SET_SHOW_TEMPO_HELP, () => {
     it('should set help', () => {
       // when
       const newState = logWorkoutReducer({
@@ -136,7 +136,7 @@ describe('logWorkoutReducer', () => {
 
   });
 
-  describe('LOG-WORKOUT-SET-SHOW-REST-HELP', () => {
+  describe(c.LOG_WORKOUT_SET_SHOW_REST_HELP, () => {
     it('should set help', () => {
       // when
       const newState = logWorkoutReducer({
@@ -160,7 +160,7 @@ describe('logWorkoutReducer', () => {
 
   });
 
-  describe('LOG-WORKOUT-SET-SHOW-WEIGHT-HELP', () => {
+  describe(c.LOG_WORKOUT_SET_SHOW_WEIGHT_HELP, () => {
     it('should set help', () => {
       // when
       const newState = logWorkoutReducer({
@@ -178,7 +178,7 @@ describe('logWorkoutReducer', () => {
 
   });
 
-  describe('LOG-WORKOUT-SAVE', () => {
+  describe(c.LOG_WORKOUT_SAVE_SUCCESS, () => {
     const today = moment().format('YYYY-MM-DD');
 
     it('should clean data', () => {

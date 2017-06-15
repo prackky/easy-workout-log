@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import {c} from './logWorkoutActions.js';
+
 const copyExercises = (exercises) => {
   const result = [];
 
@@ -25,7 +27,7 @@ const calculateSetIndexes = (exercises) => {
 
 const logWorkoutReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'LOG-WORKOUT-SUCCESS':
+    case c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS:
       const today = moment().format('YYYY-MM-DD');
 
       return {
@@ -40,7 +42,7 @@ const logWorkoutReducer = (state = {}, action) => {
         allExercises: action.allExercises
       };
 
-    case 'LOG-WORKOUT-EXERCISE':
+    case c.LOG_WORKOUT_EXERCISE:
       {
         const exercises = copyExercises(state.exercises);
         const { name, reps, weight, sets, tempo, rest, showAdvanced } = action;
@@ -64,7 +66,7 @@ const logWorkoutReducer = (state = {}, action) => {
           exercises: exercises
         };
       }
-    case 'LOG-WORKOUT-EXERCISE-DELETE':
+    case c.LOG_WORKOUT_EXERCISE_DELETE:
       {
         const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.index;
@@ -77,7 +79,7 @@ const logWorkoutReducer = (state = {}, action) => {
           exercises: exercises
         };
       }
-    case 'LOG-WORKOUT-EXERCISE-SET-DATA':
+    case c.LOG_WORKOUT_EXERCISE_SET_DATA:
       {
         const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.exerciseIndex;
@@ -127,7 +129,7 @@ const logWorkoutReducer = (state = {}, action) => {
         */
       }
 
-    case 'LOG-WORKOUT-SET-DATA':
+    case c.LOG_WORKOUT_SET_DATA:
       {
         const { date, notes, showTempoHelp, showRestHelp } = action;
         const dateFormHint = action.date ? '' : 'Required or invalid'
@@ -142,7 +144,7 @@ const logWorkoutReducer = (state = {}, action) => {
         };
       }
 
-    case 'LOG-WORKOUT-SET-SHOW-TEMPO-HELP':
+    case c.LOG_WORKOUT_SET_SHOW_TEMPO_HELP:
       {
         return {
           ...state,
@@ -150,7 +152,7 @@ const logWorkoutReducer = (state = {}, action) => {
         };
       }
 
-    case 'LOG-WORKOUT-SET-SHOW-REST-HELP':
+    case c.LOG_WORKOUT_SET_SHOW_REST_HELP:
       {
         return {
           ...state,
@@ -158,7 +160,7 @@ const logWorkoutReducer = (state = {}, action) => {
         };
       }
 
-    case 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP':
+    case c.LOG_WORKOUT_SET_SHOW_WEIGHT_HELP:
       {
         return {
           ...state,
@@ -166,7 +168,7 @@ const logWorkoutReducer = (state = {}, action) => {
         };
       }
 
-    case 'LOG-WORKOUT-SAVE-SUCCESS':
+    case c.LOG_WORKOUT_SAVE_SUCCESS:
       {
         const today = moment().format('YYYY-MM-DD');
 

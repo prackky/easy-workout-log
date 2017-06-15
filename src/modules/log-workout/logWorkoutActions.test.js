@@ -4,7 +4,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import ewoloConstants from '../../common/ewoloConstants';
-import logWorkoutActions from './logWorkoutActions';
+import logWorkoutActions, {c} from './logWorkoutActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -15,7 +15,7 @@ describe('logWorkoutActions', () => {
   });
 
   describe('logWorkoutSave', () => {
-    it('creates LOG-WORKOUT-SAVE-SUCCESS when saving a workout for a logged in user', () => {
+    it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when saving a workout for a logged in user', () => {
       /*
       nock('http://example.com/')
         .get('/todos')
@@ -24,7 +24,7 @@ describe('logWorkoutActions', () => {
 
       const expectedActions = [
         { type: 'TASK-START' },
-        { type: 'LOG-WORKOUT-SAVE-SUCCESS' },
+        { type: c.LOG_WORKOUT_SAVE_SUCCESS },
         {
           type: 'USER-NOTIFICATION-ADD',
           userNotificationType: 'SUCCESS',
@@ -73,7 +73,7 @@ describe('logWorkoutActions', () => {
   });
 
   describe('logWorkout', () => {
-    it('creates LOG-WORKOUT-SUCCESS when creating a new workout for a logged in user', () => {
+    it('creates ' + c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS + ' when creating a new workout for a logged in user', () => {
       /*
       nock('http://example.com/')
         .get('/todos')
@@ -82,9 +82,9 @@ describe('logWorkoutActions', () => {
 
       const expectedActions = [
         { type: 'TASK-START' },
-        { type: 'LOG-WORKOUT-SUCCESS', allExercises: [] },
+        { type: c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS, allExercises: [] },
         {
-          type: 'LOG-WORKOUT-EXERCISE',
+          type: c.LOG_WORKOUT_EXERCISE,
           name: undefined,
           reps: undefined,
           weight: undefined,
@@ -105,12 +105,12 @@ describe('logWorkoutActions', () => {
         });
     });
 
-    it('creates LOG-WORKOUT-SUCCESS when creating a new workout for a not logged in user', () => {
+    it('creates ' + c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS + ' when creating a new workout for a not logged in user', () => {
 
       const expectedActions = [
-        { type: 'LOG-WORKOUT-SUCCESS', allExercises: ewoloConstants.allExercises },
+        { type: c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS, allExercises: ewoloConstants.allExercises },
         {
-          type: 'LOG-WORKOUT-EXERCISE',
+          type: c.LOG_WORKOUT_EXERCISE,
           name: undefined,
           reps: undefined,
           weight: undefined,
@@ -130,10 +130,10 @@ describe('logWorkoutActions', () => {
         });
     });
 
-    it('creates LOG-WORKOUT-SUCCESS when creating a new workout for a not logged in user and form already mounted', () => {
+    it('creates ' + c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS + ' when creating a new workout for a not logged in user and form already mounted', () => {
 
       const expectedActions = [
-        { type: 'LOG-WORKOUT-SUCCESS', allExercises: ewoloConstants.allExercises }
+        { type: c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS, allExercises: ewoloConstants.allExercises }
       ];
 
       const store = mockStore({ user: { logWorkout: {}, data: { authToken: undefined } } })
@@ -144,9 +144,5 @@ describe('logWorkoutActions', () => {
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });
-
-
   });
-
-
 });
