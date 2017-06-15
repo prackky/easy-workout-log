@@ -27,6 +27,8 @@ import Dashboard from './components/dashboard/Dashboard';
 
 import appReducer from './modules/appReducer';
 
+import userDataActions from './modules/user-data/userDataActions';
+
 import './App.css';
 
 const history = createHistory();
@@ -34,6 +36,11 @@ const history = createHistory();
 const store = createStore(appReducer, applyMiddleware(routerMiddleware(history), thunk, logger));
 
 class App extends Component {
+
+  componentDidMount() {
+    store.dispatch(userDataActions.fetchUserData());
+  }
+
   render() {
     return (
       <Provider store={store}>

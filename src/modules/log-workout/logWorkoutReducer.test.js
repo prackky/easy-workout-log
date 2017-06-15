@@ -16,12 +16,12 @@ describe('logWorkoutReducer', () => {
       .equal({});
   });
 
-  describe(c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS, () => {
+  describe(c.LOG_WORKOUT, () => {
     const today = moment().format('YYYY-MM-DD');
 
-    it('should add logWorkout', () => {
+    it('should add an empty workout', () => {
       // when
-      const newState = logWorkoutReducer(undefined, actions.logWorkoutLoadExercisesSuccess(['a', 'b']));
+      const newState = logWorkoutReducer(undefined, actions.logWorkout());
 
       // then
       expect(newState)
@@ -29,36 +29,11 @@ describe('logWorkoutReducer', () => {
         .deep
         .equal({
           componentMounted: true,
-          type: 'weight',
           notes: '',
           date: today,
           exercises: [],
           showTempoHelp: false,
-          showRestHelp: false,
-          allExercises: ['a', 'b']
-        });
-    });
-
-    it('should maintain existing state', () => {
-      // when
-      const newState = logWorkoutReducer({
-        snoop: 'dawg'
-      }, actions.logWorkoutLoadExercisesSuccess([]));
-
-      // then
-      expect(newState)
-        .to
-        .deep
-        .equal({
-          snoop: 'dawg',
-          componentMounted: true,
-          type: 'weight',
-          notes: '',
-          date: today,
-          exercises: [],
-          showTempoHelp: false,
-          showRestHelp: false,
-          allExercises: []
+          showRestHelp: false
         });
     });
   });

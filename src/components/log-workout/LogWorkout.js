@@ -13,13 +13,13 @@ import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 import ewoloContent from '../../common/ewoloContent';
 
 const mapStateToProps = (state) => {
-  return {logWorkout: state.user.logWorkout};
+  return {logWorkout: state.user.logWorkout, allExercises: state.user.data.allExercises};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    doLogWorkout: (shouldLogWorkoutExercise) => {
-      dispatch(logWorkoutActions.logWorkout(shouldLogWorkoutExercise));
+    doLogWorkout: () => {
+      dispatch(logWorkoutActions.logWorkout());
     },
     doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
       dispatch(logWorkoutActions.logWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced));
@@ -51,15 +51,13 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkout extends Component {
 
   componentDidMount() {
-    if (!this.props.logWorkout.componentMounted) {
+    if (!this.props.logWorkout.componentMounted) { // TODO: consider maintaining mount status in local state
       this
         .props
-        .doLogWorkout(true);
-      /*
+        .doLogWorkout();
       this
         .props
         .doLogWorkoutExercise();
-      */
     }
   }
 
@@ -73,7 +71,7 @@ class LogWorkout extends Component {
           key={index}
           index={index}
           exercise={exercise}
-          allExercises={this.props.logWorkout.allExercises}
+          allExercises={this.props.allExercises}
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
           doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}
           doLogWorkoutSetShowTempoHelp={this.props.doLogWorkoutSetShowTempoHelp}
@@ -83,8 +81,10 @@ class LogWorkout extends Component {
   }
 
   handleBtnAddExerciseClick(event) {
-    event.currentTarget.blur(); // hide the tooltip 
-    
+    event
+      .currentTarget
+      .blur(); // hide the tooltip
+
     const numExercises = this.props.logWorkout.exercises.length;
 
     if (numExercises) {
@@ -103,7 +103,9 @@ class LogWorkout extends Component {
         .doLogWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced);
 
       setTimeout(() => {
-        ReactDOM.findDOMNode(this.refs.btnAddExercise).scrollIntoView({block: 'end', behavior: 'smooth'});
+        ReactDOM
+          .findDOMNode(this.refs.btnAddExercise)
+          .scrollIntoView({block: 'end', behavior: 'smooth'});
       }, 0);
 
       return;
@@ -133,7 +135,6 @@ class LogWorkout extends Component {
       .doLogWorkoutSave();
   }
 
-
   render() {
     if (!this.props.logWorkout.componentMounted) {
       return <div></div>;
@@ -148,21 +149,21 @@ class LogWorkout extends Component {
           showModal={this.props.logWorkout.showTempoHelp}
           size="sm"
           title="Tempo"
-          content={ewoloContent.tempoHelpModalContent} />
-        
+          content={ewoloContent.tempoHelpModalContent}/>
+
         <Modal
           doSetShowModal={this.props.doLogWorkoutSetShowRestHelp}
           showModal={this.props.logWorkout.showRestHelp}
           size="sm"
           title="Rest"
-          content={ewoloContent.restHelpModalContent} />
+          content={ewoloContent.restHelpModalContent}/>
 
         <Modal
           doSetShowModal={this.props.doLogWorkoutSetShowWeightHelp}
           showModal={this.props.logWorkout.showWeightHelp}
           size="sm``"
           title="Weight"
-          content={ewoloContent.weightHelpModalContent} />
+          content={ewoloContent.weightHelpModalContent}/>
 
         <div className="container grid-480 section-content">
           <div className="columns">

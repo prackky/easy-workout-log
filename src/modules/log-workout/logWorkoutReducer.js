@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import {c} from './logWorkoutActions.js';
+import { c } from './logWorkoutActions.js';
 
 const copyExercises = (exercises) => {
   const result = [];
@@ -27,21 +27,17 @@ const calculateSetIndexes = (exercises) => {
 
 const logWorkoutReducer = (state = {}, action) => {
   switch (action.type) {
-    case c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS:
-      const today = moment().format('YYYY-MM-DD');
-
-      return {
-        ...state,
-        componentMounted: true,
-        type: 'weight',
-        notes: '',
-        date: today,
-        exercises: [],
-        showTempoHelp: false,
-        showRestHelp: false,
-        allExercises: action.allExercises
-      };
-
+    case c.LOG_WORKOUT:
+      {
+        return {
+          componentMounted: true,
+          date: moment().format('YYYY-MM-DD'),
+          notes: '',
+          exercises: [],
+          showTempoHelp: false,
+          showRestHelp: false
+        };
+      }
     case c.LOG_WORKOUT_EXERCISE:
       {
         const exercises = copyExercises(state.exercises);
@@ -70,7 +66,7 @@ const logWorkoutReducer = (state = {}, action) => {
       {
         const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.index;
-        
+
         exercises.splice(exerciseIndex, 1);
         calculateSetIndexes(exercises);
 
@@ -83,7 +79,7 @@ const logWorkoutReducer = (state = {}, action) => {
       {
         const exercises = copyExercises(state.exercises);
         const exerciseIndex = action.exerciseIndex;
-        
+
         const exercise = {
           ...exercises[exerciseIndex],
           ...action.exercise,

@@ -7,7 +7,7 @@ import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
 
 export const c = {
-  LOG_WORKOUT_LOAD_EXERCISES_SUCCESS: 'LOG-WORKOUT-LOAD-EXERCISES-SUCCESS',
+  LOG_WORKOUT: 'LOG-WORKOUT',
   LOG_WORKOUT_EXERCISE: 'LOG-WORKOUT-EXERCISE',
   LOG_WORKOUT_EXERCISE_DELETE: 'LOG-WORKOUT-EXERCISE-DELETE',
   LOG_WORKOUT_EXERCISE_SET_DATA: 'LOG-WORKOUT-EXERCISE-SET-DATA',
@@ -19,41 +19,15 @@ export const c = {
 };
 
 const logWorkoutActions = {
+  logWorkout: () => {
+    return {
+      type: c.LOG_WORKOUT
+    }
+  },
   logWorkoutLoadExercisesSuccess: (allExercises) => {
     return {
       type: c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS,
       allExercises: allExercises
-    };
-  },
-  logWorkout: (shouldLogWorkoutExercise) => {
-    return (dispatch, getState) => {
-      const authToken = getState().user.data.authToken;
-
-      if (!authToken) {
-        return Promise.resolve()
-          .then(() => {
-            dispatchLogWorkoutSuccess(dispatch, ewoloConstants.allExercises, shouldLogWorkoutExercise);
-          });
-      }
-
-      dispatch(globalActions.taskStart());
-
-      const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('done');
-        }, 1000);
-      });
-
-      return promise.then(result => {
-          dispatchLogWorkoutSuccess(dispatch, [], shouldLogWorkoutExercise);
-        })
-        .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading exercise data'));
-        })
-        .then(() => {
-          dispatch(globalActions.taskEnd());
-        });
     };
   },
   logWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
@@ -143,20 +117,13 @@ const logWorkoutActions = {
           dispatch(push('/dashboard'));
         })
         .catch(error => {
-          console.log(error);
+          handleError(error);
           dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when saving workout for ' + logWorkoutDate));
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
         });
     };
-  }
-};
-
-const dispatchLogWorkoutSuccess = (dispatch, allExercises, shouldLogWorkoutExercise) => {
-  dispatch(logWorkoutActions.logWorkoutLoadExercisesSuccess(allExercises));
-  if (shouldLogWorkoutExercise) {
-    dispatch(logWorkoutActions.logWorkoutExercise());
   }
 };
 
