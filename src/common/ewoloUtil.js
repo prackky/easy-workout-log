@@ -17,9 +17,31 @@ const ewoloUtil = {
     if (body) {
       options.body = JSON.stringify(body);
     }
-    
+
     return fetch(url, options);
-  }
+  },
+
+  validateEmail: (email) => {
+    if (!email) {
+      return 'Email is required.';
+    }
+    return '';
+  },
+
+  validatePassword: (password) => {
+    if (!password) {
+      return 'Password is required.';
+    }
+
+    if (password.length < 8) {
+      return 'Password must be minimum 8 characters in length.';
+    }
+    
+    return '';
+  },
+
+
+
 };
 
 export default ewoloUtil;

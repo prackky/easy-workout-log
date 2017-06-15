@@ -6,22 +6,23 @@ import { RequestError, handleError } from '../../common/errorHandler';
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
 
-export const loginConstants = Object.freeze({
+export const c = Object.freeze({
   LOGIN_SET_DATA: 'LOGIN-SET-DATA',
   LOGIN_SET_AFTER_SUCCESS: 'LOGIN-SET-AFTER-SUCCESS'
 });
 
 const loginActions = {
-  loginSetData: (email, password) => {
+  loginSetData: (email, password, text) => {
     return {
-      type: loginConstants.LOGIN_SET_DATA,
+      type: c.LOGIN_SET_DATA,
       email: email,
-      password: password
+      password: password,
+      text: text
     };
   },
   loginSetAfterSuccess: (action, redirect = '/dashboard') => {
     return {
-      type: loginConstants.LOGIN_SET_AFTER_SUCCESS,
+      type: c.LOGIN_SET_AFTER_SUCCESS,
       action: action,
       redirect: redirect
     };

@@ -1,33 +1,35 @@
 import ewoloUtil from '../../common/ewoloUtil';
+import { c } from './loginActions';
 
 export const initialState = {
-  name: '',
   email: '',
   emailFormHint: '',
   password: '',
   passwordFormHint: '',
+  text: null,
   afterSuccess: {
     action: undefined,
-    redirect: '/dashboard' // by default redirect to the dashboard after signup
+    redirect: '/dashboard' // by default redirect to the dashboard after login
   }
 };
 
-const signupReducer = (state = initialState, action) => {
+
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SIGNUP-SET-DATA':
+    case c.LOGIN_SET_DATA:
       {
-        const {name, email, password} = action;
+        const { email, password, text } = action;
 
         return {
           ...state,
-          name: name,
           email: email,
           password: password,
+          text: text,
           emailFormHint: ewoloUtil.validateEmail(email),
           passwordFormHint: ewoloUtil.validatePassword(password)
         };
       }
-    case 'SIGNUP-SET-AFTER-SUCCESS':
+    case c.LOGIN_SET_AFTER_SUCCESS:
       {
         const redirect = action.redirect;
         const actionAfterSuccess = action.action;
@@ -45,4 +47,4 @@ const signupReducer = (state = initialState, action) => {
   }
 };
 
-export default signupReducer;
+export default loginReducer;
