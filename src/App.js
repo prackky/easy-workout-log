@@ -26,6 +26,7 @@ import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/Loader';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
+import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
 
 import appReducer from './modules/appReducer';
@@ -38,13 +39,15 @@ const history = createHistory();
 
 const store = createStore(appReducer, applyMiddleware(routerMiddleware(history), thunk, logger));
 
+// initialize
+const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
+if (authToken) {
+  store.dispatch(userDataActions.userAuthSuccess(authToken));
+}
+
 class App extends Component {
 
   componentDidMount() {
-    const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-    if (authToken) {
-      store.dispatch(userDataActions.userAuthSuccess(authToken));
-    }
     store.dispatch(userDataActions.fetchUserData());
   }
 
@@ -59,6 +62,7 @@ class App extends Component {
             <Route exact path="/log-workout" component={LogWorkout}/>
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/login" component={Login}/>
+            <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/>
           </div>
         </ConnectedRouter>

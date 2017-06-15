@@ -61,6 +61,11 @@ const ewoloUtil = {
       }
     }
     return null;
+  },
+  removeObject: (key) => {
+    if (window.localStorage) {
+      window.localStorage.removeItem(key);
+    }
   }
 };
 

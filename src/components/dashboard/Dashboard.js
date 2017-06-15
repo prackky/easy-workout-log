@@ -6,7 +6,7 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.id,
+    authToken: state.user.data.authToken,
     dashboard: state.user.dashboard
   };
 };
@@ -22,11 +22,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    /*
-    if (!this.props.userId) {
+    if (!this.props.authToken) {
       return (<Redirect to="/" />);
     }
-    */
     
     return (
       <div>

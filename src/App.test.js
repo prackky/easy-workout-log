@@ -17,10 +17,18 @@ import App from './App';
 
 const history = createHistory();
 const mockStore = configureStore();
+const initialState = {
+  user: {
+    data: {
+      authToken: null,
+      allExercises: []
+    }
+  }
+};
 
 it('renders without crashing', () => {
   if (typeof document !== 'undefined') {
-    const store = mockStore();
+    const store = mockStore(initialState);
     const div = document.createElement('div');
 
     ReactDOM.render(<Provider store={store}>

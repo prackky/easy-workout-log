@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
+import {withRouter} from 'react-router'
+import {connect} from 'react-redux';
+
 import './header.css';
+
+const mapStateToProps = (state) => {
+  return {authToken: state.user.data.authToken};
+};
 
 class Header extends Component {
 
@@ -41,11 +48,37 @@ class Header extends Component {
             </section>
             <section className="navbar-section navbar-content">
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
+              {(() => {
+                if (this.props.authToken) {
+                  return (
+                    <NavLink exact to="/dashboard" className="btn btn-link">Dashboard</NavLink>
+                  );
+                }
+              })()}
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
             <section className="navbar-section navbar-content">
-              <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
-              <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
+              {(() => {
+                if (this.props.authToken) {
+                  return (
+                    <NavLink exact to="/logout" className="btn btn-link">Logout</NavLink>
+                  );
+                }
+              })()}
+              {(() => {
+                if (!this.props.authToken) {
+                  return (
+                    <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
+                  );
+                }
+              })()}
+              {(() => {
+                if (!this.props.authToken) {
+                  return (
+                    <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
+                  );
+                }
+              })()}
             </section>
           </header>
         </div>
@@ -78,6 +111,20 @@ class Header extends Component {
                     .handleSidebarCloseClick
                     .bind(this)}>Home</NavLink>
                 </li>
+                {(() => {
+                  if (this.props.authToken) {
+                    return (
+                      <li className="nav-item">
+                        <NavLink
+                          exact
+                          to="/dashboard"
+                          onClick={this
+                          .handleSidebarCloseClick
+                          .bind(this)}>Dashboard</NavLink>
+                      </li>
+                    );
+                  }
+                })()}
                 <li className="nav-item">
                   <NavLink
                     exact
@@ -86,23 +133,49 @@ class Header extends Component {
                     .handleSidebarCloseClick
                     .bind(this)}>Log workout</NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink
-                    exact
-                    to="/login"
-                    onClick={this
-                    .handleSidebarCloseClick
-                    .bind(this)}>Login</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
-                    exact
-                    to="/signup"
-                    onClick={this
-                    .handleSidebarCloseClick
-                    .bind(this)}>Signup</NavLink>
-                </li>
-                
+                {(() => {
+                  if (this.props.authToken) {
+                    return (
+                      <li className="nav-item">
+                        <NavLink
+                          exact
+                          to="/logout"
+                          onClick={this
+                          .handleSidebarCloseClick
+                          .bind(this)}>Logout</NavLink>
+                      </li>
+                    );
+                  }
+                })()}
+                {(() => {
+                  if (!this.props.authToken) {
+                    return (
+                      <li className="nav-item">
+                        <NavLink
+                          exact
+                          to="/login"
+                          onClick={this
+                          .handleSidebarCloseClick
+                          .bind(this)}>Login</NavLink>
+                      </li>
+                    );
+                  }
+                })()}
+                {(() => {
+                  if (!this.props.authToken) {
+                    return (
+                      <li className="nav-item">
+                        <NavLink
+                          exact
+                          to="/signup"
+                          onClick={this
+                          .handleSidebarCloseClick
+                          .bind(this)}>Signup</NavLink>
+                      </li>
+                    );
+                  }
+                })()}
+
                 {/*
                 <li className="nav-item">
                   <a href="#"><strong>Insights</strong></a>
@@ -138,4 +211,4 @@ class Header extends Component {
 
 };
 
-export default Header;
+export default withRouter(connect(mapStateToProps)(Header));
