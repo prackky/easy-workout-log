@@ -42,7 +42,6 @@ class App extends Component {
 
   componentDidMount() {
     const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-    console.log(authToken);
     if (authToken) {
       store.dispatch(userDataActions.userAuthSuccess(authToken));
     }

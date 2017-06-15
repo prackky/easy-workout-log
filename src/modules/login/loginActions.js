@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 
 import ewoloUtil from '../../common/ewoloUtil';
+import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
@@ -45,6 +46,7 @@ const loginActions = {
         .then(body => {
 
           const authToken = body.token;
+          ewoloUtil.storeObject(ewoloConstants.storage.authTokenKey, authToken);
           dispatch(userDataActions.userAuthSuccess(authToken));
 
           if (afterSuccess.action) {

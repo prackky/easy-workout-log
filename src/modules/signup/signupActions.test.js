@@ -5,6 +5,10 @@ import { expect } from 'chai';
 
 import signupActions from './signupActions';
 import ewoloConstants from '../../common/ewoloConstants';
+import ewoloUtil from '../../common/ewoloUtil';
+
+import {localStorageMock} from '../../common/ewoloTestUtil';
+window.localStorage = localStorageMock;
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -51,6 +55,8 @@ describe('signupActions', () => {
       .then(() => { // return of async actions
         const actions = store.getActions();
         delete actions[2].at;
+        const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
+        expect(authToken).to.equal('blah');
         expect(store.getActions()).to.deep.equal(expectedActions);
       });
   });

@@ -3,6 +3,8 @@ import fetch from 'isomorphic-fetch';
 import ewoloConstants from './ewoloConstants';
 import { RequestError } from './errorHandler';
 
+// export const ewoloConstants;
+
 const ewoloUtil = {
   getApiRequest: (route, method, body) => {
     const url = ewoloConstants.api.url + route;
