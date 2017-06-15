@@ -52,7 +52,7 @@ describe('logWorkoutActions', () => {
     it('redirects to /signup when saving a workout for non-logged in user', () => {
       const expectedActions = [
         {
-          type: 'SIGNUP-AFTER-SUCCESS',
+          type: 'SIGNUP-SET-AFTER-SUCCESS',
           redirect: '/dashboard'
         },
         {

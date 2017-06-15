@@ -2,13 +2,6 @@ import fetch from 'isomorphic-fetch';
 
 import ewoloConstants from './ewoloConstants';
 
-export class RequestError extends Error {
-  constructor(response) {
-    super(response.url + ' ' + response.status);
-    this.response = response;
-  }
-};
-
 const ewoloUtil = {
   getApiRequest: (route, method, body) => {
     const url = ewoloConstants.api.url + route;

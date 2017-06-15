@@ -39,7 +39,7 @@ const signupReducer = (state = initialState, action) => {
           passwordFormHint: passwordFormHint
         };
       }
-    case 'SIGNUP-AFTER-SUCCESS':
+    case 'SIGNUP-SET-AFTER-SUCCESS':
       {
         const redirect = action.redirect;
         const actionAfterSuccess = action.action;

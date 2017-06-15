@@ -75,10 +75,10 @@ describe('signupReducer', () => {
     });
 
   });
-  describe('SIGNUP-AFTER-SUCCESS', () => {
+  describe('SIGNUP-SET-AFTER-SUCCESS', () => {
     it('should set things to do after success', () => {
       // when
-      const newState = signupReducer(undefined, actions.signupAfterSuccess({ type: 'LOG-WORKOUT-SAVE' }, '/dashboard'));
+      const newState = signupReducer(undefined, actions.signupSetAfterSuccess({ type: 'LOG-WORKOUT-SAVE' }, '/dashboard'));
 
       // then
       const expectedState = {

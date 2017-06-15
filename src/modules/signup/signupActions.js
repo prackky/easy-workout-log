@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 
-import ewoloUtil, {RequestError} from '../../common/ewoloUtil';
+import ewoloUtil from '../../common/ewoloUtil';
+import { RequestError, handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
@@ -14,9 +15,9 @@ const signupActions = {
       password: password
     };
   },
-  signupAfterSuccess: (action, redirect = '/dashboard') => {
+  signupSetAfterSuccess: (action, redirect = '/dashboard') => {
     return {
-      type: 'SIGNUP-AFTER-SUCCESS',
+      type: 'SIGNUP-SET-AFTER-SUCCESS',
       action: action,
       redirect: redirect
     };
@@ -43,7 +44,7 @@ const signupActions = {
       */
 
       return promise.then(response => {
-          if (response.status > 400) {
+          if (response.status >= 400) {
             throw new RequestError(response);
           }
 

@@ -108,7 +108,7 @@ const logWorkoutActions = {
         return Promise.resolve()
           .then(() => {
             const action = logWorkoutActions.logWorkoutSave();
-            dispatch(signupActions.signupAfterSuccess(action));
+            dispatch(signupActions.signupSetAfterSuccess(action));
             dispatch(push('/signup'));
           });
       }
