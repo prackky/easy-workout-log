@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
@@ -144,7 +145,7 @@ class Signup extends Component {
 
                   <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
-                      Already have an account?
+                      <Link to="/login">Already have an account?</Link>
                     </div>
                   </div>
 

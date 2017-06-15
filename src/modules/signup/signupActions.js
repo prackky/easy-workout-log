@@ -60,7 +60,7 @@ const signupActions = {
           }
         })
         .catch(error => {
-          console.error(error);
+          handleError(error);
           let userNotificationText = 'An error occured when creating account for ' + signup.email;
 
           if (error.response && error.response.status === 409) {
