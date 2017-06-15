@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 import ewoloUtil from '../../common/ewoloUtil';
-import { RequestError, handleError } from '../../common/errorHandler';
+import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
@@ -43,12 +43,12 @@ const signupActions = {
       });
       */
 
-      return promise.then(response => {
-          if (response.status >= 400) {
-            throw new RequestError(response);
-          }
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          const authToken = body.token;
+          dispatch(userDataActions.userAuthSuccess(authToken));
 
-          dispatch(userDataActions.userAuthSuccess('blah'));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));
 
           if (afterSuccess.action) {

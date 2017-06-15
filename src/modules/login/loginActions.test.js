@@ -17,7 +17,7 @@ describe('loginActions', () => {
   it('should successfully login and redirect', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { body: { authToken: 'blah' } });
+      .reply(200, { token: 'blah' });
 
     const expectedActions = [
       { type: 'TASK-START' },
@@ -52,7 +52,7 @@ describe('loginActions', () => {
   it('should successfully login and follow through on action', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { body: { authToken: 'blah' } });
+      .reply(200, { token: 'blah' });
 
     const expectedActions = [
       { type: 'TASK-START' },

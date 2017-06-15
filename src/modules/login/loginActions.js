@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 import ewoloUtil from '../../common/ewoloUtil';
-import { RequestError, handleError } from '../../common/errorHandler';
+import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
@@ -39,13 +39,13 @@ const loginActions = {
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest('/authenticate', 'POST', { email: login.email, password: login.password });
-      
-      return promise.then(response => {
-          if (response.status >= 400) {
-            throw new RequestError(response);
-          }
 
-          dispatch(userDataActions.userAuthSuccess('blah'));
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+
+          const authToken = body.token;
+          dispatch(userDataActions.userAuthSuccess(authToken));
 
           if (afterSuccess.action) {
             dispatch(afterSuccess.action);

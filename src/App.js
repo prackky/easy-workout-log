@@ -17,6 +17,9 @@ import {
 } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
+import ewoloUtil from './common/ewoloUtil';
+import ewoloConstants from './common/ewoloConstants';
+
 import Header from './components/Header';
 import Welcome from './components/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
@@ -38,6 +41,11 @@ const store = createStore(appReducer, applyMiddleware(routerMiddleware(history),
 class App extends Component {
 
   componentDidMount() {
+    const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
+    console.log(authToken);
+    if (authToken) {
+      store.dispatch(userDataActions.userAuthSuccess(authToken));
+    }
     store.dispatch(userDataActions.fetchUserData());
   }
 

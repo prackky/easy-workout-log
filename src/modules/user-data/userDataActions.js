@@ -1,5 +1,5 @@
 import ewoloConstants from '../../common/ewoloConstants';
-import { RequestError, handleError } from '../../common/errorHandler';
+import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 

@@ -17,7 +17,7 @@ describe('signupActions', () => {
   it('creates SIGNUP-SUCCESS when signing up', () => {
     nock(ewoloConstants.api.url)
       .post('/users')
-      .reply(201, { body: { authToken: 'blah' } });
+      .reply(201, { token: 'blah' });
 
     const expectedActions = [
       { type: 'TASK-START' },

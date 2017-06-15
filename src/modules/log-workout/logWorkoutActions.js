@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
-import ewoloConstants from '../../common/ewoloConstants';
-import { RequestError, handleError } from '../../common/errorHandler';
+// import ewoloConstants from '../../common/ewoloConstants';
+import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';

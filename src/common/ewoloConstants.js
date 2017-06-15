@@ -4,6 +4,9 @@ const ewoloConstants = Object.freeze({
     apiKey: 'ewolo-general',
     url: process.env.NODE_ENV === 'production' ? '/api/v1' : 'http://localhost:9000/api/v1' // TODO: fix mocking of relative urls, https://github.com/wheresrhys/fetch-mock/issues/46
   },
+  storage: {
+    authTokenKey: 'EWOLO-AUTH-TOKEN'
+  },
   allExercises: [
     'Bench press',
     'Standing barbell shoulder press',
