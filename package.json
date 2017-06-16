@@ -29,8 +29,5 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "globals": {
-      "window": true
-    }
   }
 }
