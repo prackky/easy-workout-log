@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 
-// import ewoloConstants from '../../common/ewoloConstants';
+import ewoloConstants from '../../common/ewoloConstants';
+import ewoloUtil from '../../common/ewoloUtil';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
@@ -23,12 +24,6 @@ const logWorkoutActions = {
     return {
       type: c.LOG_WORKOUT
     }
-  },
-  logWorkoutLoadExercisesSuccess: (allExercises) => {
-    return {
-      type: c.LOG_WORKOUT_LOAD_EXERCISES_SUCCESS,
-      allExercises: allExercises
-    };
   },
   logWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
     return {
@@ -82,9 +77,10 @@ const logWorkoutActions = {
       showWeightHelp: showWeightHelp
     };
   },
-  logWorkoutSaveSuccess: () => {
+  logWorkoutSaveSuccess: (id) => {
     return {
-      type: c.LOG_WORKOUT_SAVE_SUCCESS
+      type: c.LOG_WORKOUT_SAVE_SUCCESS,
+      id: id
     };
   },
   logWorkoutSave: () => {
@@ -92,7 +88,6 @@ const logWorkoutActions = {
       const authToken = getState().user.data.authToken;
 
       if (!authToken) {
-        console.log('no auth token found!');
         return Promise.resolve()
           .then(() => {
             const action = logWorkoutActions.logWorkoutSave();
@@ -101,18 +96,17 @@ const logWorkoutActions = {
           });
       }
 
-      const logWorkoutDate = getState().user.logWorkout.date;
+      const logWorkout = getState().user.logWorkout;
+      const logWorkoutDate = logWorkout.date;
 
       dispatch(globalActions.taskStart());
 
-      const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('done');
-        }, 1000);
-      });
+      const promise = ewoloUtil.getApiRequest('/workouts', 'POST', logWorkout, authToken);
 
-      return promise.then(result => {
-          dispatch(logWorkoutActions.logWorkoutSaveSuccess());
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
           dispatch(push('/dashboard'));
         })

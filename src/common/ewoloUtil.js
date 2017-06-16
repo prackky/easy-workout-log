@@ -6,12 +6,15 @@ import { RequestError } from './errorHandler';
 // export const ewoloConstants;
 
 const ewoloUtil = {
-  getApiRequest: (route, method, body) => {
+  getApiRequest: (route, method, body, authToken) => {
     const url = ewoloConstants.api.url + route;
     const headers = {
       'Content-Type': 'application/json'
     };
     headers[ewoloConstants.api.apiKeyHeader] = ewoloConstants.api.apiKey;
+    if (authToken) {
+      headers[ewoloConstants.api.authorizationHeader] = 'Bearer ' + authToken;
+    }
 
     const options = {
       method: method,

@@ -4,7 +4,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import ewoloConstants from '../../common/ewoloConstants';
-import logWorkoutActions, {c} from './logWorkoutActions';
+import logWorkoutActions, { c } from './logWorkoutActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -16,15 +16,17 @@ describe('logWorkoutActions', () => {
 
   describe('logWorkoutSave', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when saving a workout for a logged in user', () => {
-      /*
-      nock('http://example.com/')
-        .get('/todos')
-        .reply(200, { body: { todos: ['do something'] }});
-      */
+      
+      nock(ewoloConstants.api.url)
+        .post('/workouts')
+        .reply(201, { id: 'xxx' });
 
       const expectedActions = [
         { type: 'TASK-START' },
-        { type: c.LOG_WORKOUT_SAVE_SUCCESS },
+        {
+          type: c.LOG_WORKOUT_SAVE_SUCCESS,
+          id: 'xxx'
+        },
         {
           type: 'USER-NOTIFICATION-ADD',
           userNotificationType: 'SUCCESS',
