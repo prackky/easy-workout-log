@@ -44,6 +44,7 @@ class Logout extends Component {
 
   componentDidMount() {
     ewoloUtil.removeObject(ewoloConstants.storage.authTokenKey);
+    ewoloUtil.removeObject(ewoloConstants.storage.userIdKey);
     setTimeout(() => {
       window.location.href = '/';
     }, 0);

@@ -11,10 +11,11 @@ export const c = {
 };
 
 const userDataActions = {
-  userAuthSuccess: (authToken) => {
+  userAuthSuccess: (authToken, id) => {
     return {
       type: c.USER_DATA_AUTH_SUCCESS,
-      authToken: authToken
+      authToken: authToken,
+      id: id
     };
   },
   userDataFetchSuccess: (allExercises) => {

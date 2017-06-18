@@ -21,13 +21,14 @@ describe('signupActions', () => {
   it('creates SIGNUP-SUCCESS when signing up', () => {
     nock(ewoloConstants.api.url)
       .post('/users')
-      .reply(201, { token: 'blah' });
+      .reply(201, { token: 'blah', id: 'snoop' });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah'
+        authToken: 'blah',
+        id: 'snoop'
       },
       {
         type: 'USER-NOTIFICATION-ADD',

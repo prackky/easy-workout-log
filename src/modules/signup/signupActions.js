@@ -36,20 +36,14 @@ const signupActions = {
 
       const promise = ewoloUtil.getApiRequest('/users', 'POST', { name: signup.name, email: signup.email, password: signup.password });
 
-      /*
-      const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('done');
-        }, 1000);
-      });
-      */
-
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           const authToken = body.token;
+          const id = body.id;
           ewoloUtil.storeObject(ewoloConstants.storage.authTokenKey, authToken);
-          dispatch(userDataActions.userAuthSuccess(authToken));
+          ewoloUtil.storeObject(ewoloConstants.storage.userIdKey, id);
+          dispatch(userDataActions.userAuthSuccess(authToken, id));
 
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));
 

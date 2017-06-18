@@ -46,8 +46,10 @@ const loginActions = {
         .then(body => {
 
           const authToken = body.token;
+          const id = body.id;
           ewoloUtil.storeObject(ewoloConstants.storage.authTokenKey, authToken);
-          dispatch(userDataActions.userAuthSuccess(authToken));
+          ewoloUtil.storeObject(ewoloConstants.storage.userIdKey, id);
+          dispatch(userDataActions.userAuthSuccess(authToken, id));
 
           if (afterSuccess.action) {
             dispatch(afterSuccess.action);

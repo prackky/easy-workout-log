@@ -21,13 +21,14 @@ describe('loginActions', () => {
   it('should successfully login and redirect', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { token: 'blah' });
+      .reply(200, { token: 'blah', id: 'abc' });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah'
+        authToken: 'blah',
+        id: 'abc'
       },
       {
         type: '@@router/CALL_HISTORY_METHOD',
@@ -58,13 +59,14 @@ describe('loginActions', () => {
   it('should successfully login and follow through on action', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { token: 'blah' });
+      .reply(200, { token: 'blah', id: 'abc' });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah'
+        authToken: 'blah',
+        id: 'abc'
       },
       {
         type: 'DO-SOMETHING-AFTER'

@@ -41,8 +41,9 @@ const store = createStore(appReducer, applyMiddleware(routerMiddleware(history),
 
 // initialize
 const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-if (authToken) {
-  store.dispatch(userDataActions.userAuthSuccess(authToken));
+const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
+if (authToken && id) {
+  store.dispatch(userDataActions.userAuthSuccess(authToken, id));
 }
 
 class App extends Component {

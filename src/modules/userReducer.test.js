@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import userReducer from './userReducer';
+import { initialState as userDataInitialState } from './user-data/userDataReducer';
 
 describe('userReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -12,7 +13,7 @@ describe('userReducer', () => {
     expect(newState)
       .to
       .deep
-      .equal({logWorkout: {}, data: {authToken: undefined, allExercises: []}});
+      .equal({ logWorkout: {}, data: userDataInitialState });
   });
 
 });
