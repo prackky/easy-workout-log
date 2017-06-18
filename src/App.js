@@ -40,6 +40,7 @@ const history = createHistory();
 const store = createStore(appReducer, applyMiddleware(routerMiddleware(history), thunk, logger));
 
 // initialize
+// authToken should really be the single source of truth
 const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
 const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
 if (authToken && id) {

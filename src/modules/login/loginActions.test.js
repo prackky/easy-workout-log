@@ -7,7 +7,7 @@ import loginActions from './loginActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
-import {localStorageMock} from '../../common/ewoloTestUtil';
+import ewoloTestUtil, {localStorageMock} from '../../common/ewoloTestUtil';
 window.localStorage = localStorageMock;
 
 const middlewares = [thunk];
@@ -21,14 +21,14 @@ describe('loginActions', () => {
   it('should successfully login and redirect', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { token: 'blah', id: 'abc' });
+      .reply(200, { token: ewoloTestUtil.authToken });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah',
-        id: 'abc'
+        authToken: ewoloTestUtil.authToken,
+        id: ewoloTestUtil.authTokenUserId
       },
       {
         type: '@@router/CALL_HISTORY_METHOD',
@@ -51,7 +51,7 @@ describe('loginActions', () => {
       .then(() => { // return of async actions
         const actions = store.getActions();
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-        expect(authToken).to.equal('blah');
+        expect(authToken).to.equal(ewoloTestUtil.authToken);
         expect(actions).to.deep.equal(expectedActions);
       });
   });
@@ -59,14 +59,14 @@ describe('loginActions', () => {
   it('should successfully login and follow through on action', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
-      .reply(200, { token: 'blah', id: 'abc' });
+      .reply(200, { token: ewoloTestUtil.authToken });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah',
-        id: 'abc'
+        authToken: ewoloTestUtil.authToken,
+        id: ewoloTestUtil.authTokenUserId
       },
       {
         type: 'DO-SOMETHING-AFTER'

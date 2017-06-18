@@ -7,7 +7,7 @@ import signupActions from './signupActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
-import {localStorageMock} from '../../common/ewoloTestUtil';
+import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
 window.localStorage = localStorageMock;
 
 const middlewares = [thunk];
@@ -21,14 +21,14 @@ describe('signupActions', () => {
   it('creates SIGNUP-SUCCESS when signing up', () => {
     nock(ewoloConstants.api.url)
       .post('/users')
-      .reply(201, { token: 'blah', id: 'snoop' });
+      .reply(201, { token: ewoloTestUtil.authToken });
 
     const expectedActions = [
       { type: 'TASK-START' },
       {
         type: 'USER-DATA-AUTH-SUCCESS',
-        authToken: 'blah',
-        id: 'snoop'
+        authToken: ewoloTestUtil.authToken,
+        id: ewoloTestUtil.authTokenUserId
       },
       {
         type: 'USER-NOTIFICATION-ADD',
@@ -57,7 +57,7 @@ describe('signupActions', () => {
         const actions = store.getActions();
         delete actions[2].at;
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-        expect(authToken).to.equal('blah');
+        expect(authToken).to.equal(ewoloTestUtil.authToken);
         expect(store.getActions()).to.deep.equal(expectedActions);
       });
   });

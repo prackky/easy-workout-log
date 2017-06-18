@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 import ewoloUtil from '../../common/ewoloUtil';
-import ewoloConstants from '../../common/ewoloConstants';
+// import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
@@ -39,11 +39,8 @@ const signupActions = {
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          const authToken = body.token;
-          const id = body.id;
-          ewoloUtil.storeObject(ewoloConstants.storage.authTokenKey, authToken);
-          ewoloUtil.storeObject(ewoloConstants.storage.userIdKey, id);
-          dispatch(userDataActions.userAuthSuccess(authToken, id));
+          
+          dispatch(userDataActions.processUserAuthSuccess(body.token));
 
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));
 

@@ -1,3 +1,6 @@
+import jwtDecode from 'jwt-decode';
+
+import ewoloUtil from '../../common/ewoloUtil';
 import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
@@ -53,8 +56,17 @@ const userDataActions = {
         .then(() => {
           dispatch(globalActions.taskEnd());
         });
-    };
+    }
   },
+  processUserAuthSuccess: (authToken) => {
+    return (dispatch, getState) => {
+      const decoded = jwtDecode(authToken);
+      const id = decoded.id;
+      ewoloUtil.storeObject(ewoloConstants.storage.authTokenKey, authToken);
+      ewoloUtil.storeObject(ewoloConstants.storage.userIdKey, id);
+      dispatch(userDataActions.userAuthSuccess(authToken, id));
+    }
+  }
 };
 
 export default userDataActions;
