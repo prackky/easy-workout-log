@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import /*React,*/ {Component} from 'react';
 // import {Redirect} from 'react-router'; import {Link} from 'react-router-dom';
 // import {connect} from 'react-redux'; import UserNotificationBar from
 // '../notification/UserNotificationBar'; import loginActions from

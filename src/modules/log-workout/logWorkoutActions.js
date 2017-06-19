@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 
-import ewoloConstants from '../../common/ewoloConstants';
+// import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 import { handleError } from '../../common/errorHandler';
 

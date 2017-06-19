@@ -6,6 +6,10 @@
   margin-top: 2rem;
 }
 
+.margin-auto {
+  margin: auto;
+}
+
 .margin-top-3rem {
   margin-top: 3rem;
 }
@@ -41,6 +45,10 @@
   color: #667189;
 }
 
+.width-100 {
+  width: 100%;
+}
+
 
 /**
  * Spectre overrides
@@ -61,6 +69,14 @@
 
 .divider-vert::before {
   border-left: .1rem solid #d6d6d6;
+}
+
+.accordion .accordion-item .accordion-body-show {
+  margin-bottom: .8rem;
+  overflow: hidden;
+  padding: .2rem .8rem;
+  max-height: 100rem;
+  transition: max-height 1s ease;
 }
 
 

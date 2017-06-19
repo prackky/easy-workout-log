@@ -1,7 +1,8 @@
 import { c } from './userWorkoutsActions';
 
 export const initialState = {
-  workouts: []
+  workouts: [],
+  workoutsViewDetails: {}
 };
 
 const userWorkoutsReducer = (state = initialState, action) => {
@@ -13,6 +14,19 @@ const userWorkoutsReducer = (state = initialState, action) => {
         return {
           ...state,
           workouts: workouts
+        };
+      }
+    case c.USER_WORKOUTS_SET_VIEW_DETAILS:
+      {
+        const { workoutId, show } = action;
+        const workoutsViewDetails = {
+          ...state.workoutsViewDetails
+        }
+        workoutsViewDetails[workoutId] = show;
+        
+        return {
+          ...state,
+          workoutsViewDetails: workoutsViewDetails
         };
       }
     default:

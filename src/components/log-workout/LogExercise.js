@@ -53,9 +53,11 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
 
+  /*
   const handlePopover = (event) => {
     event.preventDefault();
   };
+  */
 
   const handleSetShowTempoHelpClick = (event) => {
     props.doLogWorkoutSetShowTempoHelp(true);
@@ -69,6 +71,7 @@ const LogExercise = (props) => {
     props.doLogWorkoutSetShowWeightHelp(true);
   };
 
+  /*
   const handleExercisePropertiesToggle = (event) => {
     // console.log('wtf');
     const exercise = {
@@ -77,6 +80,7 @@ const LogExercise = (props) => {
     exercise.showProperties = !exercise.showProperties;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
+  */
 
   const renderPropertyFormHint = (hint) => {
     if (!hint) {

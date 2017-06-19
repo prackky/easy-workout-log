@@ -1,5 +1,5 @@
 import ewoloUtil from '../../common/ewoloUtil';
-import ewoloConstants from '../../common/ewoloConstants';
+// import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
@@ -7,7 +7,8 @@ import globalActions from '../global/globalActions';
 // import { push } from 'react-router-redux';
 
 export const c = {
-  USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS'
+  USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS',
+  USER_WORKOUTS_SET_VIEW_DETAILS: 'USER-WORKOUTS-SET-VIEW-DETAILS'
 };
 
 const userWorkoutsActions = {
@@ -39,6 +40,13 @@ const userWorkoutsActions = {
           dispatch(globalActions.taskEnd());
         });
     }
+  },
+  userWorkoutsSetViewDetails: (workoutId, show) => {
+    return {
+      type: c.USER_WORKOUTS_SET_VIEW_DETAILS,
+      workoutId: workoutId,
+      show: show
+    };
   }
 };
 
