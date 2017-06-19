@@ -22,11 +22,12 @@
     "chai": "3.5.0",
     "nock": "9.0.13",
     "react-scripts": "1.0.7",
+    "react-snapshot": "1.1.0",
     "redux-mock-store": "1.2.3"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && react-snapshot",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
