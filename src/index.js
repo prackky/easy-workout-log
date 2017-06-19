@@ -9,6 +9,9 @@ import React from 'react';
 import { render } from 'react-snapshot';
 import App from './App';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-41172423-4');
+
 // ReactDOM.render(
 render(
   <App/>, document.getElementById('root'));

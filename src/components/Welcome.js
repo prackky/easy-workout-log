@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router';
 import {connect} from 'react-redux';
 
+import ReactGA from 'react-ga';
+
 import './welcome.css';
 
 import logWorkoutActions from '../modules/log-workout/logWorkoutActions';
@@ -36,6 +38,8 @@ class Welcome extends Component {
     if (this.state.redirect) {
       return (<Redirect push to={this.state.redirect}/>);
     }
+
+    ReactGA.pageview('/');
 
     return (
       <div className="container">
