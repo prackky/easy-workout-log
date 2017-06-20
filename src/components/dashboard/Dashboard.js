@@ -67,7 +67,7 @@ class Dashboard extends Component {
             <div className="column col-12">
               <h4>Workouts</h4>
               <p>
-                Click on a workout for details.
+                Click on a workout to toggle details.
               </p>
               <p>
                 Tempo (default 101) and Rest (default 60) are only displayed if not default values.

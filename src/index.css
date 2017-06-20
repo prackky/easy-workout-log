@@ -1,3 +1,7 @@
+/**
+ * Spectre overrides
+ */
+
 body {
   background: white;
   font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -9,4 +13,39 @@ body {
 p {
   line-height: 2.6rem;
   margin: 0 0 1.6rem;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+.input-group .input-group-addon {
+  padding: 0.8rem .8rem;
+}
+
+.form-input-hint {
+  margin-top: -0.5rem;
+}
+
+.divider[data-content]::after,
+.divider-vert[data-content]::after {
+  color: #a0a0a0;
+}
+
+.divider-vert::before {
+  border-left: .1rem solid #d6d6d6;
+}
+
+.accordion .accordion-item .accordion-body-show {
+  margin-bottom: .8rem;
+  overflow: hidden;
+  padding: .2rem .8rem;
+  max-height: 100rem;
+  transition: max-height 1s ease;
 }

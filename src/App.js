@@ -23,7 +23,7 @@ import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
 import Header from './components/Header';
-import Welcome from './components/Welcome';
+import Welcome from './components/welcome/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/Loader';
 import Signup from './components/auth/Signup';
