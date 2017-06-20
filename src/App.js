@@ -5,9 +5,11 @@ import {/*BrowserRouter,*/
 
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+import reduxLogger from 'redux-logger';
 import {
-  applyMiddleware, createStore/*, combineReducers*/
+  applyMiddleware, createStore,
+  /*, combineReducers*/
+  compose
 } from 'redux';
 
 import {
@@ -37,10 +39,15 @@ import './App.css';
 
 const history = createHistory();
 
-const store = createStore(appReducer, applyMiddleware(routerMiddleware(history), thunk, logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const storeMiddlware = [routerMiddleware(history), thunk];
+// only enable state logging in debug
+if (process.env.NODE_ENV !== 'production') {
+  storeMiddlware.push(reduxLogger);
+}
+const store = createStore(appReducer, composeEnhancers(applyMiddleware(...storeMiddlware)));
 
-// initialize
-// authToken should really be the single source of truth
+// initialize authToken should really be the single source of truth
 const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
 const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
 if (authToken && id) {
