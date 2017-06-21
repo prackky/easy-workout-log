@@ -17,6 +17,28 @@ const features = [
   'Optionally track rest times between individual sets'
 ];
 
+const highlights = [
+  {
+    title: 'Log workouts within minutes',
+    text: `Add an exercise, optionally choose from a list of over 100 exercises 
+    or type in your own exercise name. Add reps and weight for each set, 
+    optionally add multiple sets for the same exercise. Save.`,
+    icon: 'fa-clock-o'
+  }, {
+    title: 'Available everywhere',
+    text: `Log workouts anywhere. No need to install another app on the phone. 
+    The UI has been designed from the ground up to be a pleasure to use on a 
+    mobile device. Log workouts and track progress on Windows, iOS, Linux, 
+    iPhone, android.`,
+    icon: 'fa-globe'
+  }, {
+    title: 'Track your progress',
+    text: `Get insights in your past workout results and find out how you’re 
+    progressing through useful stats and graphs.`,
+    icon: 'fa-line-chart'
+  }
+];
+
 const mapStateToProps = (state) => {
   return {user: state.user};
 };
@@ -78,29 +100,9 @@ class Welcome extends Component {
         <section className="highlights">
           <div className="container">
             <div className="columns">
-              <div className="column col-sm-12 col-4 highlight">
-                <h4>Log workouts within minutes</h4>
-                <p>
-                  Add an exercise, optionally choose from a list of over 100 exercises or type in
-                  your own exercise name. Add reps and weight for each set, optionally add
-                  multiple sets for the same exercise. Save.
-                </p>
-              </div>
-              <div className="column col-sm-12 col-4 highlight">
-                <h4>Available everywhere</h4>
-                <p>
-                  Log workouts anywhere. No need to install another app on the phone. The UI has
-                  been designed from the ground up to be a pleasure to use on a mobile device. Log
-                  workouts and track progress on Windows, iOS, Linux, iPhone, android.
-                </p>
-              </div>
-              <div className="column col-sm-12 col-4 highlight">
-                <h4>Track your progress</h4>
-                <p>
-                  Get insights in your past workout results and find out how you’re progressing
-                  through useful stats and graphs.
-                </p>
-              </div>
+              {highlights.map((highlight, index) => {
+                return this.renderHighlightItem(highlight, index);
+              })}
             </div>
           </div>
         </section>
@@ -111,9 +113,11 @@ class Welcome extends Component {
               <div className="column col-6 col-md-12">
                 <div className="feature-list">
                   <h3 className="text-center">Features</h3>
-                  {features.map((feature, index) => {
-                    return this.renderFeatureListItem(feature, index);
-                  })}
+                  <ul className="fa-ul">
+                    {features.map((feature, index) => {
+                      return this.renderFeatureListItem(feature, index);
+                    })}
+                  </ul>
                 </div>
               </div>
               <div className="column col-3 col-md-12"></div>
@@ -140,6 +144,17 @@ class Welcome extends Component {
     );
   }
 
+  renderHighlightItem(highlight, index) {
+    return (
+      <div className="column col-sm-12 col-4 highlight" key={index}>
+        <i className={"fa fa-4x " + highlight.icon}></i>
+        <h4>{highlight.title}</h4>
+        <p>{highlight.text}</p>
+      </div>
+    )
+  }
+
+  /*
   renderFeatureListItem(text, index) {
     return (
       <div key={index} className="feature-list-item columns">
@@ -148,6 +163,13 @@ class Welcome extends Component {
         </div>
         <div className="column col-11">{text}</div>
       </div>
+    );
+  }
+  */
+  renderFeatureListItem(text, index) {
+    return (
+      <li key={index} className="feature-list-item">
+        <i className="fa-li fa fa-check feature-list-item"></i>{text}</li>
     );
   }
 };

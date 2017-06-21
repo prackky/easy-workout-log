@@ -68,6 +68,10 @@ h3 {
   padding: 5rem;
 }
 
+.home .highlights .highlight i {
+  margin-bottom: 1rem;
+}
+
 .home .features {
   padding-top: 3rem;
   padding-bottom: 3rem;
