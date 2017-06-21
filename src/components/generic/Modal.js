@@ -1,46 +1,67 @@
-import React from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-const Modal = (props) => {
+class Modal extends Component {
 
-  const handleCloseClick = (event) => {
+  constructor(props) {
+    super(props);
+    this.sizeClass = 'modal-' + props.size;
+    // PropTypes.checkPropTypes(this.propTypes, props, ...props);
+  }
+
+  handleCloseClick(event) {
     event.preventDefault();
-    props.doSetShowModal(false);
-  };
+    this
+      .props
+      .doSetShowModal(false);
+  }
 
-  const sizeClass = 'modal-' + props.size;
+  render() {
+    return (
 
-  return (
-
-    <div
-      className={"modal " + sizeClass + " " + (props.showModal
-      ? ' active'
-      : '')}>
-      <div className="modal-overlay"></div>
-      <div className="modal-container" role="document">
-        <div className="modal-header">
-          {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
-          <div className="modal-title">{props.title}</div>
-        </div>
-        <div className="modal-body">
-          <div className="content">
-            {props
-              .content
-              .map((para, index) => {
-                return (
-                  <p key={index}>
-                    {para}
-                  </p>
-                );
-              })
+      <div
+        className={"modal " + this.sizeClass + " " + (this.props.showModal
+        ? ' active'
+        : '')}>
+        <div className="modal-overlay"></div>
+        <div className="modal-container" role="document">
+          <div className="modal-header">
+            {/*<button type="button" className="btn btn-clear float-right" aria-label="Close"></button>*/}
+            <div className="modal-title">{this.props.title}</div>
+          </div>
+          <div className="modal-body">
+            <div className="content">
+              {this
+                .props
+                .content
+                .map((para, index) => {
+                  return (
+                    <p key={index}>
+                      {para}
+                    </p>
+                  );
+                })
 }
+            </div>
+          </div>
+          <div className="modal-footer">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={this
+              .handleCloseClick
+              .bind(this)}>Close</button>
           </div>
         </div>
-        <div className="modal-footer">
-          <button className="btn btn-primary" type="button" onClick={handleCloseClick}>Close</button>
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
+};
+
+Modal.propTypes = {
+  size: PropTypes.oneOf(['News', 'Photos']),
+  content: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string.isRequired
 };
 
 export default Modal;
