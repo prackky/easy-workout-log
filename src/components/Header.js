@@ -5,6 +5,7 @@ import {withRouter} from 'react-router'
 import {connect} from 'react-redux';
 
 import './header.css';
+import ewoloLogo from './ewolo-logo.png';
 
 const mapStateToProps = (state) => {
   return {authToken: state.user.data.authToken};
@@ -44,7 +45,7 @@ class Header extends Component {
                 <i className="icon icon-menu"></i>
               </button>
 
-              <Link to="/" className="navbar-brand mr-10">Ewolo</Link>
+              <Link to="/" className="navbar-brand mr-10"><img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/></Link>
             </section>
             <section className="navbar-section navbar-content">
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
@@ -100,13 +101,12 @@ class Header extends Component {
 
               <ul className="docs-nav nav">
                 <li className="brand">
-                  Ewolo
+                  <img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/>
                 </li>
                 <li className="nav-item">
                   <NavLink
                     exact
                     to="/"
-                    className="navbar-brand mr-10"
                     onClick={this
                     .handleSidebarCloseClick
                     .bind(this)}>Home</NavLink>
