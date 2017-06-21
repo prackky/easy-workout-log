@@ -14,7 +14,8 @@ const features = [
   'Log multiple workouts in a single day',
   'Support for super-sets via an optional rest field',
   'Track rep intensity via an optional tempo field',
-  'Optionally track rest times between individual sets'
+  'Optionally track rest times between individual sets',
+  'and more ...'
 ];
 
 const highlights = [
@@ -35,7 +36,7 @@ const highlights = [
     title: 'Track your progress',
     text: `Get insights in your past workout results and find out how you’re 
     progressing through useful stats and graphs.`,
-    icon: 'fa-line-chart'
+    icon: 'fa-bar-chart'
   }
 ];
 
@@ -109,8 +110,8 @@ class Welcome extends Component {
         <section className="features">
           <div className="container">
             <div className="columns">
-              <div className="column col-3 col-md-12"></div>
-              <div className="column col-6 col-md-12">
+              <div className="column col-4 col-md-12"></div>
+              <div className="column col-4 col-md-12">
                 <div className="feature-list">
                   <h3 className="text-center">Features</h3>
                   <ul className="fa-ul">
@@ -120,13 +121,13 @@ class Welcome extends Component {
                   </ul>
                 </div>
               </div>
-              <div className="column col-3 col-md-12"></div>
+              <div className="column col-4 col-md-12"></div>
             </div>
           </div>
         </section>
         <section className="last-call">
           <div className="content text-center">
-            <h3>No complicated setup</h3>
+            <h3>Simple setup</h3>
             <p>
               Logging a workout shouldn't take more than a few minutes. Try Ewolo for free.
             </p>
