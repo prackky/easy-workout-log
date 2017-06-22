@@ -23,6 +23,7 @@ import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
 import Header from './components/page/Header';
+import Footer from './components/page/Footer';
 import Welcome from './components/welcome/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/page/Loader';
@@ -73,6 +74,7 @@ class App extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/>
+            <Footer/>
           </div>
         </ConnectedRouter>
       </Provider>

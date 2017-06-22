@@ -59,7 +59,7 @@ class Modal extends Component {
 };
 
 Modal.propTypes = {
-  size: PropTypes.oneOf(['News', 'Photos']),
+  // size: PropTypes.oneOf(['sm']),
   content: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired
 };

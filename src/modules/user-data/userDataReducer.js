@@ -3,7 +3,7 @@ import { c } from './userDataActions';
 export const initialState = {
   authToken: undefined,
   id: undefined,
-  allExercises: []
+  exerciseNames: []
 };
 
 const userDataReducer = (state = initialState, action) => {
