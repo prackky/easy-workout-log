@@ -26,7 +26,7 @@ describe('userDataActions', () => {
         { type: 'TASK-START' },
         {
           type: c.USER_DATA_FETCH_SUCCESS,
-          allExercises: ewoloConstants.allExercises
+          exerciseNames: ewoloConstants.exerciseNames
         },
         { type: 'TASK-END' }
       ];
@@ -50,7 +50,7 @@ describe('userDataActions', () => {
       const expectedActions = [
         {
           type: c.USER_DATA_FETCH_SUCCESS,
-          allExercises: ewoloConstants.allExercises
+          exerciseNames: ewoloConstants.exerciseNames
         }
       ];
 

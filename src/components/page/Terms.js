@@ -9,7 +9,7 @@ const Terms = (props) => {
           <h3 className="text-center">Terms of Service</h3>
 
           <h6>
-            <u>Last updated</u>: June 22<sup>nd</sup>, 2017. Inspired by <a href="https://monicahq.com/terms" target="_blank">Monica</a></h6>
+            <u>Last updated</u>: June 22<sup>nd</sup>, 2017. Inspired by <a href="https://monicahq.com/terms" target="_blank" rel="noopener noreferrer">Monica</a></h6>
 
           <h5 className="margin-top-5rem">Scope of service</h5>
           <p>

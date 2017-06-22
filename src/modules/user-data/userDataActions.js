@@ -34,7 +34,7 @@ const userDataActions = {
       if (!authToken) {
         return Promise.resolve()
           .then(() => {
-            dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.allExercises));
+            dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames));
           });
       }
 
@@ -47,7 +47,7 @@ const userDataActions = {
       });
 
       return promise.then(result => {
-          dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.allExercises));
+          dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames));
         })
         .catch(error => {
           handleError(error);

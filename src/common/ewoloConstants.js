@@ -9,7 +9,7 @@ const ewoloConstants = Object.freeze({
     authTokenKey: 'EWOLO-AUTH-TOKEN',
     userIdKey: 'EWOLO-USER-ID'
   },
-  allExercises: [
+  exerciseNames: [
     'Bench press',
     'Standing barbell shoulder press',
     'Deadlift',

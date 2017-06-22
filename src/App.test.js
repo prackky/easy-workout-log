@@ -21,7 +21,7 @@ const initialState = {
   user: {
     data: {
       authToken: null,
-      allExercises: []
+      exerciseNames: []
     }
   }
 };

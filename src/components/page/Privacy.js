@@ -31,7 +31,7 @@ const Privacy = (props) => {
           <p>The site does not show ads. <b>It also does not sell data to any third party.</b> Google Analytics is used to track visits, keywords search and to get to know the
             audience. Google Analytics uses <a
               href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage"
-              target="_blank">cookies</a>.</p>
+              target="_blank" rel="noopener noreferrer">cookies</a>.</p>
           {/*We use Stripe to collect payments made to access the paid version. We do not store credit card information or anything concerning the transactions themselves on our servers. As per the open source library we use to process the payments (Laravel Cashier), we store the last 4 digits of the credit card, the brand name (VISA or MasterCard). As a user, you are identified on Stripe by a random number that they generate and use.*/}
           <p>You will be notified of any changes to this document via this page.</p>
           <p>Ewolo does not specifically market to children under the age of 13 years old.</p>
