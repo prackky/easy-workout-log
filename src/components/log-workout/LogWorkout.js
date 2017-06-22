@@ -15,7 +15,7 @@ import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 import ewoloContent from '../../common/ewoloContent';
 
 const mapStateToProps = (state) => {
-  return {logWorkout: state.user.logWorkout, allExercises: state.user.data.allExercises};
+  return {logWorkout: state.user.logWorkout, exerciseNames: state.user.data.exerciseNames};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -73,7 +73,7 @@ class LogWorkout extends Component {
           key={index}
           index={index}
           exercise={exercise}
-          allExercises={this.props.allExercises}
+          exerciseNames={this.props.exerciseNames}
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
           doLogWorkoutExerciseSetData={this.props.doLogWorkoutExerciseSetData}
           doLogWorkoutSetShowTempoHelp={this.props.doLogWorkoutSetShowTempoHelp}

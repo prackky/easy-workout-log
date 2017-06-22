@@ -21,10 +21,10 @@ const userDataActions = {
       id: id
     };
   },
-  userDataFetchSuccess: (allExercises) => {
+  userDataFetchSuccess: (exerciseNames) => {
     return {
       type: c.USER_DATA_FETCH_SUCCESS,
-      allExercises: allExercises
+      exerciseNames: exerciseNames
     }
   },
   fetchUserData: () => {

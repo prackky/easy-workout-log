@@ -20,11 +20,11 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_FETCH_SUCCESS:
       {
-        const { allExercises } = action;
+        const { exerciseNames } = action;
         return {
           ...state,
-          allExercises: [
-            ...allExercises
+          exerciseNames: [
+            ...exerciseNames
           ]
         };
       }
