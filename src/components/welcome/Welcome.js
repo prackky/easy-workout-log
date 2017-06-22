@@ -99,7 +99,7 @@ class Welcome extends Component {
           </div>
         </section>
         <section className="highlights">
-          <div className="container">
+          <div className="container grid-1280">
             <div className="columns">
               {highlights.map((highlight, index) => {
                 return this.renderHighlightItem(highlight, index);
@@ -108,7 +108,7 @@ class Welcome extends Component {
           </div>
         </section>
         <section className="features">
-          <div className="container">
+          <div className="container grid-1280">
             <div className="columns">
               <div className="column col-4 col-md-12"></div>
               <div className="column col-4 col-md-12">
@@ -126,19 +126,21 @@ class Welcome extends Component {
           </div>
         </section>
         <section className="last-call">
-          <div className="content text-center">
-            <h3>Simple setup</h3>
-            <p>
-              Logging a workout shouldn't take more than a few minutes. Try Ewolo for free.
-            </p>
-            <button
-              className="btn btn-welcome-log-workout"
-              onClick={this
-              .handleBtnLogWorkoutClick
-              .bind(this)}>Log a workout</button>
-            <p>
-              Account only required if you wish to save your workouts.
-            </p>
+          <div className="container grid-1280">
+            <div className="content text-center">
+              <h3>Simple setup</h3>
+              <p>
+                Logging a workout shouldn't take more than a few minutes. Try Ewolo for free.
+              </p>
+              <button
+                className="btn btn-welcome-log-workout"
+                onClick={this
+                .handleBtnLogWorkoutClick
+                .bind(this)}>Log a workout</button>
+              <p>
+                Account only required if you wish to save your workouts.
+              </p>
+            </div>
           </div>
         </section>
       </div>
