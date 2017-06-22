@@ -7,11 +7,11 @@ import {Route} from 'react-router-dom';
 import { ConnectedRouter, /*routerReducer,*/ routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
-import Header from './components/Header';
-import Welcome from './components/Welcome';
+import Header from './components/page/Header';
+import Welcome from './components/welcome/Welcome';
 import UserNotificationBar from './components/notification/UserNotificationBar';
 import LogWorkout from './components/log-workout/LogWorkout';
-import Loader from './components/Loader';
+import Loader from './components/page/Loader';
 
 import App from './App';
 

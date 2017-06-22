@@ -22,10 +22,10 @@ import createHistory from 'history/createBrowserHistory';
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
-import Header from './components/Header';
+import Header from './components/page/Header';
 import Welcome from './components/welcome/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
-import Loader from './components/Loader';
+import Loader from './components/page/Loader';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Logout from './components/auth/Logout';

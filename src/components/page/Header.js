@@ -4,7 +4,7 @@ import {Link, NavLink} from 'react-router-dom';
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux';
 
-import './header.css';
+import './Header.css';
 import ewoloLogo from './ewolo-logo.png';
 
 const mapStateToProps = (state) => {

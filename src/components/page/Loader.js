@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import './loader.css';
+import './Loader.css';
 
 const mapStateToProps = (state) => {
   return {loadingCounter: state.global.loadingCounter};
