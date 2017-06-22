@@ -7,9 +7,13 @@ footer {
 
 .grid-footer {
   color: #acb3c2;
-  margin: 2rem 5rem 1rem 5rem;
+  margin: 2rem 3rem 1rem 3rem;
 }
 
 .grid-footer a {
   color: #727e96;
+}
+
+.grid-footer .r {
+  margin-top: 0.5rem;
 }

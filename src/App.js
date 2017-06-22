@@ -24,6 +24,7 @@ import ewoloConstants from './common/ewoloConstants';
 
 import Header from './components/page/Header';
 import Footer from './components/page/Footer';
+import Privacy from './components/page/Privacy';
 import Welcome from './components/welcome/Welcome';
 import LogWorkout from './components/log-workout/LogWorkout';
 import Loader from './components/page/Loader';
@@ -69,6 +70,7 @@ class App extends Component {
             <Loader/>
             <Header/>
             <Route exact path="/" component={Welcome}/>
+            <Route exact path="/privacy" component={Privacy}/>
             <Route exact path="/log-workout" component={LogWorkout}/>
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/login" component={Login}/>
