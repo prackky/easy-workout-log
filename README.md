@@ -15,3 +15,8 @@ Use `react-snapshot` to pre-render the initial html page:
 - Start local server with live-reload: `npm start`
 - Start tests and watch for changes: `npm test`
 - Count lines of js code: `find . -name '*.js' | xargs wc -l`
+
+## Releases
+
+Dry run: `release-it -n -d`
+Release: `release-it`

@@ -2,9 +2,21 @@
 
 cd ~/npq/easy-workout-log/
 
-echo "syncing repo"
-git fetch
-git reset --hard origin/master
+echo "get new tags from remote"
+git fetch --tags
+
+tag=$1
+
+if [ $tag ]
+then
+  echo "use specified tag"
+else
+  echo "get latest tag name"
+  tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+fi
+
+echo "checkout tag"
+git checkout $tag
 
 echo "install dependencies"
 npm install
