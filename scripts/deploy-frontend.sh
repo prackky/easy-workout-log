@@ -18,6 +18,12 @@ fi
 echo "checkout tag"
 git checkout $tag
 
+if [ $? -ne 0 ]
+then
+  echo "could not checkout tag"
+  exit 1  
+fi
+
 echo "install dependencies"
 npm install
 
