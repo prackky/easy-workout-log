@@ -71,9 +71,7 @@ class Signup extends Component {
                         type="text"
                         placeholder="Full Name"
                         value={this.props.signup.name}
-                        onChange={this
-                        .handleNameChange
-                        .bind(this)}/>
+                        onChange={this.handleNameChange}/>
                     </div>
                   </div>
 
@@ -84,9 +82,7 @@ class Signup extends Component {
                         type="email"
                         placeholder="Email"
                         value={this.props.signup.email}
-                        onChange={this
-                        .handleEmailChange
-                        .bind(this)}/>
+                        onChange={this.handleEmailChange}/>
                     </div>
 
                   </div>
@@ -107,9 +103,7 @@ class Signup extends Component {
                         type="password"
                         placeholder="Password"
                         value={this.props.signup.password}
-                        onChange={this
-                        .handlePasswordChange
-                        .bind(this)}/>
+                        onChange={this.handlePasswordChange}/>
                     </div>
 
                   </div>
@@ -141,9 +135,7 @@ class Signup extends Component {
                         className={"btn btn-primary btn-lg " + ((this.props.signup.emailFormHint || this.props.signup.passwordFormHint || !this.props.signup.email || !this.props.signup)
                         ? 'disabled'
                         : '')}
-                        onClick={this
-                        .handleBtnSignupClick
-                        .bind(this)}>Signup</button>
+                        onClick={this.handleBtnSignupClick}>Signup</button>
                     </div>
                   </div>
 
@@ -155,7 +147,8 @@ class Signup extends Component {
 
                   <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
-                      By signing up you agree to our <Link to="/terms">Terms of Service</Link>.
+                      By signing up you agree to our
+                      <Link to="/terms">Terms of Service</Link>.
                     </div>
                   </div>
 

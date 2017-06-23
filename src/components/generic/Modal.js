@@ -9,7 +9,7 @@ class Modal extends Component {
     // PropTypes.checkPropTypes(this.propTypes, props, ...props);
   }
 
-  handleCloseClick(event) {
+  handleCloseClick = (event) => {
     event.preventDefault();
     this
       .props
@@ -49,8 +49,7 @@ class Modal extends Component {
               className="btn btn-primary"
               type="button"
               onClick={this
-              .handleCloseClick
-              .bind(this)}>Close</button>
+              .handleCloseClick}>Close</button>
           </div>
         </div>
       </div>

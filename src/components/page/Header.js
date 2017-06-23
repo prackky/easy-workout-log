@@ -21,11 +21,11 @@ class Header extends Component {
     };
   }
 
-  handleSidebarShowClick() {
+  handleSidebarShowClick = () => {
     this.setState({docsSidebarClass: 'show', sidebarCloseClass: 'show'});
   }
 
-  handleSidebarCloseClick() {
+  handleSidebarCloseClick = () => {
     this.setState({docsSidebarClass: '', sidebarCloseClass: ''});
   }
 
@@ -39,9 +39,7 @@ class Header extends Component {
               <button
                 id="sidebar-show"
                 className="btn btn-link btn-action btn-lg"
-                onClick={this
-                .handleSidebarShowClick
-                .bind(this)}>
+                onClick={this.handleSidebarShowClick}>
                 <i className="icon icon-menu"></i>
               </button>
 
@@ -92,9 +90,7 @@ class Header extends Component {
                 <button
                   id="btn-sidebar-close"
                   className="btn btn-link btn-action btn-lg"
-                  onClick={this
-                  .handleSidebarCloseClick
-                  .bind(this)}>
+                  onClick={this.handleSidebarCloseClick}>
                   <i className="icon icon-cross"></i>
                 </button>
               </div>
@@ -104,45 +100,25 @@ class Header extends Component {
                   <img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/>
                 </li>
                 <li className="nav-item">
-                  <NavLink
-                    exact
-                    to="/"
-                    onClick={this
-                    .handleSidebarCloseClick
-                    .bind(this)}>Home</NavLink>
+                  <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>Home</NavLink>
                 </li>
                 {(() => {
                   if (this.props.authToken) {
                     return (
                       <li className="nav-item">
-                        <NavLink
-                          exact
-                          to="/dashboard"
-                          onClick={this
-                          .handleSidebarCloseClick
-                          .bind(this)}>Dashboard</NavLink>
+                        <NavLink exact to="/dashboard" onClick={this.handleSidebarCloseClick}>Dashboard</NavLink>
                       </li>
                     );
                   }
                 })()}
                 <li className="nav-item">
-                  <NavLink
-                    exact
-                    to="/log-workout"
-                    onClick={this
-                    .handleSidebarCloseClick
-                    .bind(this)}>Log workout</NavLink>
+                  <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
                 {(() => {
                   if (this.props.authToken) {
                     return (
                       <li className="nav-item">
-                        <NavLink
-                          exact
-                          to="/logout"
-                          onClick={this
-                          .handleSidebarCloseClick
-                          .bind(this)}>Logout</NavLink>
+                        <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
                       </li>
                     );
                   }
@@ -151,12 +127,7 @@ class Header extends Component {
                   if (!this.props.authToken) {
                     return (
                       <li className="nav-item">
-                        <NavLink
-                          exact
-                          to="/login"
-                          onClick={this
-                          .handleSidebarCloseClick
-                          .bind(this)}>Login</NavLink>
+                        <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
                       </li>
                     );
                   }
@@ -165,12 +136,7 @@ class Header extends Component {
                   if (!this.props.authToken) {
                     return (
                       <li className="nav-item">
-                        <NavLink
-                          exact
-                          to="/signup"
-                          onClick={this
-                          .handleSidebarCloseClick
-                          .bind(this)}>Signup</NavLink>
+                        <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
                       </li>
                     );
                   }
@@ -198,9 +164,7 @@ class Header extends Component {
             <a
               id="sidebar-close"
               className={"docs-nav-clear " + this.state.sidebarCloseClass}
-              onClick={this
-              .handleSidebarCloseClick
-              .bind(this)}></a>
+              onClick={this.handleSidebarCloseClick}></a>
 
           </div>
         </div>

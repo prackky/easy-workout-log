@@ -53,7 +53,8 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkout extends Component {
 
   componentDidMount() {
-    if (!this.props.logWorkout.componentMounted) { // TODO: consider maintaining mount status in local state
+    if (!this.props.logWorkout.componentMounted) {
+      // TODO: consider maintaining mount status in local state
       this
         .props
         .doLogWorkout();
@@ -82,7 +83,8 @@ class LogWorkout extends Component {
       });
   }
 
-  handleBtnAddExerciseClick(event) {
+  // Stage 1 fat arrow class methods auto scope this!
+  handleBtnAddExerciseClick = (event) => {
     event
       .currentTarget
       .blur(); // hide the tooltip
@@ -118,19 +120,19 @@ class LogWorkout extends Component {
       .doLogWorkoutExercise();
   };
 
-  handleDateChange(event) {
+  handleDateChange = (event) => {
     this
       .props
       .doLogWorkoutSetData(event.target.value, this.props.logWorkout.notes);
   }
 
-  handleNotesChange(event) {
+  handleNotesChange = (event) => {
     this
       .props
       .doLogWorkoutSetData(this.props.logWorkout.date, event.target.value);
   }
 
-  handleSave(event) {
+  handleSave = (event) => {
     event.preventDefault();
     this
       .props
@@ -199,9 +201,7 @@ class LogWorkout extends Component {
                       className="form-input"
                       type="date"
                       value={this.props.logWorkout.date}
-                      onChange={this
-                      .handleDateChange
-                      .bind(this)}/>
+                      onChange={this.handleDateChange}/>
                   </div>
                 </div>
                 <div
@@ -224,9 +224,7 @@ class LogWorkout extends Component {
                       type="text"
                       placeholder="e.g. chest and legs"
                       value={this.props.logWorkout.notes}
-                      onChange={this
-                      .handleNotesChange
-                      .bind(this)}/>
+                      onChange={this.handleNotesChange}/>
                   </div>
 
                 </div>
@@ -241,9 +239,7 @@ class LogWorkout extends Component {
                       className="btn btn-action btn-lg circle btn-exercise-action tooltip"
                       data-tooltip="Add exercise"
                       type="button"
-                      onClick={this
-                      .handleBtnAddExerciseClick
-                      .bind(this)}>
+                      onClick={this.handleBtnAddExerciseClick}>
                       <i className="icon icon-plus"></i>
                     </button>
                   </div>
@@ -254,9 +250,7 @@ class LogWorkout extends Component {
                     <button
                       id="btn-save-workout"
                       className="btn btn-primary btn-lg"
-                      onClick={this
-                      .handleSave
-                      .bind(this)}>
+                      onClick={this.handleSave}>
                       Save Workout
                     </button>
                   </div>

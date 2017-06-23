@@ -60,9 +60,7 @@ class Login extends Component {
                         type="email"
                         placeholder="Email"
                         value={this.props.login.email}
-                        onChange={this
-                        .handleEmailChange
-                        .bind(this)}/>
+                        onChange={this.handleEmailChange}/>
                     </div>
 
                   </div>
@@ -83,9 +81,7 @@ class Login extends Component {
                         type="password"
                         placeholder="Password"
                         value={this.props.login.password}
-                        onChange={this
-                        .handlePasswordChange
-                        .bind(this)}/>
+                        onChange={this.handlePasswordChange}/>
                     </div>
 
                   </div>
@@ -105,9 +101,7 @@ class Login extends Component {
                         className={"btn btn-primary btn-lg " + ((this.props.login.emailFormHint || this.props.login.passwordFormHint || !this.props.login.email || !this.props.login)
                         ? 'disabled'
                         : '')}
-                        onClick={this
-                        .handleBtnLoginClick
-                        .bind(this)}>Login</button>
+                        onClick={this.handleBtnLoginClick}>Login</button>
                     </div>
                   </div>
 

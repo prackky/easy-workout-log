@@ -92,8 +92,7 @@ class Welcome extends Component {
               <button
                 className="btn btn-welcome-log-workout"
                 onClick={this
-                .handleBtnLogWorkoutClick
-                .bind(this)}>Log a workout</button>
+                .handleBtnLogWorkoutClick}>Log a workout</button>
 
             </div>
           </div>
@@ -135,8 +134,7 @@ class Welcome extends Component {
               <button
                 className="btn btn-welcome-log-workout"
                 onClick={this
-                .handleBtnLogWorkoutClick
-                .bind(this)}>Log a workout</button>
+                .handleBtnLogWorkoutClick}>Log a workout</button>
               <p>
                 Account only required if you wish to save your workouts.
               </p>

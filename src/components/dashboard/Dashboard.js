@@ -70,7 +70,8 @@ class Dashboard extends Component {
                 Click on a workout to toggle details.
               </p>
               <p>
-                Tempo (default 101) and Rest (default 60) are only displayed if not default values.
+                Tempo (default 101) and Rest (default 60) are only displayed if not default
+                values.
               </p>
             </div>
             <div className="accordion width-100">
@@ -94,11 +95,7 @@ class Dashboard extends Component {
             <h4 className="empty-title">You have no workouts logged</h4>
             <p className="empty-subtitle">Click the button to log a new workout</p>
             <div className="empty-action">
-              <button
-                className="btn btn-primary"
-                onClick={this
-                .onLogWorkoutClick
-                .bind(this)}>Log Workout</button>
+              <button className="btn btn-primary" onClick={this.onLogWorkoutClick}>Log Workout</button>
             </div>
           </div>
         </div>
@@ -112,15 +109,14 @@ class Dashboard extends Component {
         return (<WorkoutView
           key={index}
           workout={workout}
-          showWorkoutDetails={this.props.workoutsViewDetails[workout.id] ? true : false}
-          doToggleViewWorkoutDetails={this
-          .props
-          .doToggleViewWorkoutDetails
-          .bind(this)}/>);
+          showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
+          ? true
+          : false}
+          doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}/>);
       });
   }
 
-  onLogWorkoutClick(event) {
+  onLogWorkoutClick = (event) => {
     event.preventDefault();
     this
       .props

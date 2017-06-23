@@ -61,7 +61,7 @@ class AutoComplete extends Component {
     this.setState(newState);
   }
 
-  handleKeyDown(event) {
+  handleKeyDown = (event) => {
     const s = this.state;
 
     if (s.suggestions.length) {
@@ -85,8 +85,10 @@ class AutoComplete extends Component {
     }
   }
 
-  handleChange(event) {
-    this.props.handleChange(event.target.value);
+  handleChange = (event) => {
+    this
+      .props
+      .handleChange(event.target.value);
   }
 
   renderMenu() {
@@ -141,8 +143,8 @@ class AutoComplete extends Component {
             placeholder={this.props.placeholder}
             value={this.props.input}
             name={this.props.name}
-            onKeyDown={this.handleKeyDown.bind(this)}
-            onChange={this.handleChange.bind(this)}/>
+            onKeyDown={this.handleKeyDown}
+            onChange={this.handleChange}/>
         </div>
 
         {this.renderMenu()}
