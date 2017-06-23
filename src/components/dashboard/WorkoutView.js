@@ -37,7 +37,7 @@ const WorkoutView = (props) => {
     return exercises.map((exercise, index) => {
       if (exercise.setHeader) {
         return (
-          <div key={index} className="column col-12 workout-exercise row">
+          <div key={index + '-' + exercise.name} className="column col-12 workout-exercise row">
             {exercise.name}
           </div>
         );
@@ -56,7 +56,7 @@ const WorkoutView = (props) => {
       const showDivider = showTempo && showRest;
 
       return (
-        <div className="column col-12 row" key={index}>
+        <div className="column col-12 row" key={exercise.id}>
           <div className="columns">
             <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
                 ? 'x ' + exercise.weight

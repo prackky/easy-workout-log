@@ -70,6 +70,7 @@ class LogWorkout extends Component {
       .logWorkout
       .exercises
       .map((exercise, index) => {
+        // index is actually the right thing to do in this case!
         return (<LogExercise
           key={index}
           index={index}

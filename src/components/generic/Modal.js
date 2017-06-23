@@ -35,6 +35,7 @@ class Modal extends Component {
                 .props
                 .content
                 .map((para, index) => {
+                  // TODO: Consider a better index here (para length?)
                   return (
                     <p key={index}>
                       {para}

@@ -25,6 +25,7 @@ const UserNotificationBar = (props) => {
     return props
       .userNotifications
       .map((userNotification, index) => {
+        // TODO: check if using an id in the user notification list makes more sense?!
         return (<UserNotification
           key={index}
           index={index}

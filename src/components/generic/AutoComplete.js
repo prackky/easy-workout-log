@@ -110,6 +110,7 @@ class AutoComplete extends Component {
           .state
           .suggestions
           .map((suggestion, index) => {
+            // Note that the suggestion list is static!
             return (
               <li
                 className={"menu-item " + (self.state.currentIndex === index

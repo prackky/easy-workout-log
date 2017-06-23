@@ -105,9 +105,9 @@ class Dashboard extends Component {
     return this
       .props
       .workouts
-      .map((workout, index) => {
+      .map((workout) => {
         return (<WorkoutView
-          key={index}
+          key={workout.id}
           workout={workout}
           showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
           ? true
