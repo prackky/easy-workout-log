@@ -47,37 +47,21 @@ class Header extends Component {
             </section>
             <section className="navbar-section navbar-content">
               <NavLink exact to="/" className="btn btn-link">Home</NavLink>
-              {(() => {
-                if (this.props.authToken) {
-                  return (
-                    <NavLink exact to="/dashboard" className="btn btn-link">Dashboard</NavLink>
-                  );
-                }
-              })()}
+              {this.props.authToken && (
+                <NavLink exact to="/dashboard" className="btn btn-link">Dashboard</NavLink>
+              )}
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
             <section className="navbar-section navbar-content">
-              {(() => {
-                if (this.props.authToken) {
-                  return (
-                    <NavLink exact to="/logout" className="btn btn-link">Logout</NavLink>
-                  );
-                }
-              })()}
-              {(() => {
-                if (!this.props.authToken) {
-                  return (
-                    <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
-                  );
-                }
-              })()}
-              {(() => {
-                if (!this.props.authToken) {
-                  return (
-                    <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
-                  );
-                }
-              })()}
+              {this.props.authToken && (
+                <NavLink exact to="/logout" className="btn btn-link">Logout</NavLink>
+              )}
+              {!this.props.authToken && (
+                <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
+              )}
+              {!this.props.authToken && (
+                <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
+              )}
             </section>
           </header>
         </div>
@@ -102,45 +86,29 @@ class Header extends Component {
                 <li className="nav-item">
                   <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>Home</NavLink>
                 </li>
-                {(() => {
-                  if (this.props.authToken) {
-                    return (
-                      <li className="nav-item">
-                        <NavLink exact to="/dashboard" onClick={this.handleSidebarCloseClick}>Dashboard</NavLink>
-                      </li>
-                    );
-                  }
-                })()}
+                {this.props.authToken && (
+                  <li className="nav-item">
+                    <NavLink exact to="/dashboard" onClick={this.handleSidebarCloseClick}>Dashboard</NavLink>
+                  </li>
+                )}
                 <li className="nav-item">
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
-                {(() => {
-                  if (this.props.authToken) {
-                    return (
-                      <li className="nav-item">
-                        <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
-                      </li>
-                    );
-                  }
-                })()}
-                {(() => {
-                  if (!this.props.authToken) {
-                    return (
-                      <li className="nav-item">
-                        <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
-                      </li>
-                    );
-                  }
-                })()}
-                {(() => {
-                  if (!this.props.authToken) {
-                    return (
-                      <li className="nav-item">
-                        <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
-                      </li>
-                    );
-                  }
-                })()}
+                {this.props.authToken && (
+                  <li className="nav-item">
+                    <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
+                  </li>
+                )}
+                {!this.props.authToken && (
+                  <li className="nav-item">
+                    <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
+                  </li>
+                )}
+                {!this.props.authToken && (
+                  <li className="nav-item">
+                    <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
+                  </li>
+                )}
 
                 {/*
                 <li className="nav-item">
