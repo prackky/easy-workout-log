@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 
 class Modal extends Component {
 
+  static propTypes = {
+    size: PropTypes.oneOf(['sm']),
+    content: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string.isRequired,
+    showModal: PropTypes.bool.isRequired,
+    doSetShowModal: PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.sizeClass = 'modal-' + props.size;
@@ -49,19 +57,12 @@ class Modal extends Component {
             <button
               className="btn btn-primary"
               type="button"
-              onClick={this
-              .handleCloseClick}>Close</button>
+              onClick={this.handleCloseClick}>Close</button>
           </div>
         </div>
       </div>
     );
   }
-};
-
-Modal.propTypes = {
-  // size: PropTypes.oneOf(['sm']),
-  content: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired
 };
 
 export default Modal;

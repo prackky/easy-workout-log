@@ -168,7 +168,7 @@ class LogWorkout extends Component {
         <Modal
           doSetShowModal={this.props.doLogWorkoutSetShowWeightHelp}
           showModal={this.props.logWorkout.showWeightHelp}
-          size="sm``"
+          size="sm"
           title="Weight"
           content={ewoloContent.weightHelpModalContent}/>
 

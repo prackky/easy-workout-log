@@ -13,13 +13,10 @@ const mapStateToProps = (state) => {
 
 class Header extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      docsSidebarClass: '',
-      sidebarCloseClass: ''
-    };
-  }
+  state = {
+    docsSidebarClass: '',
+    sidebarCloseClass: ''
+  };
 
   handleSidebarShowClick = () => {
     this.setState({docsSidebarClass: 'show', sidebarCloseClass: 'show'});

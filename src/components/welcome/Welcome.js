@@ -54,14 +54,9 @@ const mapDispatchToProps = (dispatch) => {
 
 class Welcome extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: ''
-    };
-    console.log(this.state);
-
-  }
+  state = {
+    redirect: ''
+  };
 
   handleBtnLogWorkoutClick = () => {
     this.setState({redirect: '/log-workout'}); // using react-router with a button is not straightforward at all
@@ -91,8 +86,7 @@ class Welcome extends Component {
               </div>
               <button
                 className="btn btn-welcome-log-workout"
-                onClick={this
-                .handleBtnLogWorkoutClick}>Log a workout</button>
+                onClick={this.handleBtnLogWorkoutClick}>Log a workout</button>
 
             </div>
           </div>
@@ -133,8 +127,7 @@ class Welcome extends Component {
               </p>
               <button
                 className="btn btn-welcome-log-workout"
-                onClick={this
-                .handleBtnLogWorkoutClick}>Log a workout</button>
+                onClick={this.handleBtnLogWorkoutClick}>Log a workout</button>
               <p>
                 Account only required if you wish to save your workouts.
               </p>

@@ -35,7 +35,8 @@ const logWorkoutReducer = (state = {}, action) => {
           notes: '',
           exercises: [],
           showTempoHelp: false,
-          showRestHelp: false
+          showRestHelp: false,
+          showWeightHelp: false
         };
       }
     case c.LOG_WORKOUT_EXERCISE:

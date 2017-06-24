@@ -33,7 +33,8 @@ describe('logWorkoutReducer', () => {
           date: today,
           exercises: [],
           showTempoHelp: false,
-          showRestHelp: false
+          showRestHelp: false,
+          showWeightHelp: false
         });
     });
   });

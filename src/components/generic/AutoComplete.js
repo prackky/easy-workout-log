@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import './AutoComplete.css';
 
 import autoCompleteSuggestions from '../../modules/generic/autoCompleteSuggestions';
 
 class AutoComplete extends Component {
+
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.string),
+    placeholder: PropTypes.string.isRequired,
+    input: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired
+  };
 
   constructor(props) {
     super(props);

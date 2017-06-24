@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const UserNotification = (props) => {
 
@@ -38,6 +39,12 @@ const UserNotification = (props) => {
       </div>
     </div>
   );
-}
+};
+
+UserNotification.propTypes = {
+  index: PropTypes.number.isRequired,
+  doUpdateUserNotification: PropTypes.func.isRequired,
+  userNotification: PropTypes.object.isRequired
+};
 
 export default UserNotification;

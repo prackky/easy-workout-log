@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 import AutoComplete from '../generic/AutoComplete';
 
@@ -332,6 +334,17 @@ const LogExercise = (props) => {
       </div>
     </div>
   );
+};
+
+LogExercise.propTypes = {
+  exerciseNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  index: PropTypes.number.isRequired,
+  exercise: PropTypes.object.isRequired,
+  doLogWorkoutExerciseDelete: PropTypes.func.isRequired,
+  doLogWorkoutExerciseSetData: PropTypes.func.isRequired,
+  doLogWorkoutSetShowTempoHelp: PropTypes.func.isRequired,
+  doLogWorkoutSetShowRestHelp: PropTypes.func.isRequired,
+  doLogWorkoutSetShowWeightHelp: PropTypes.func.isRequired
 };
 
 export default LogExercise;
