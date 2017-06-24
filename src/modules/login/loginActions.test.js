@@ -47,7 +47,7 @@ describe('loginActions', () => {
       }
     })
 
-    return store.dispatch(loginActions.login())
+    return store.dispatch(loginActions.loginThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
@@ -86,7 +86,7 @@ describe('loginActions', () => {
       }
     })
 
-    return store.dispatch(loginActions.login())
+    return store.dispatch(loginActions.loginThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
         expect(actions).to.deep.equal(expectedActions);
@@ -114,7 +114,7 @@ describe('loginActions', () => {
       }
     });
 
-    return store.dispatch(loginActions.login())
+    return store.dispatch(loginActions.loginThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
         delete actions[1].at;

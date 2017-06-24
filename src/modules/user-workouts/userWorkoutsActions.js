@@ -18,7 +18,7 @@ const userWorkoutsActions = {
       workouts: workouts
     };
   },
-  fetchUserWorkouts: () => {
+  fetchUserWorkoutsThunk: () => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;

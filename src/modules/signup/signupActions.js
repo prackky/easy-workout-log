@@ -23,7 +23,7 @@ const signupActions = {
       redirect: redirect
     };
   },
-  signup: () => {
+  signupThunk: () => {
     return (dispatch, getState) => {
       const signup = {
         ...getState().signup

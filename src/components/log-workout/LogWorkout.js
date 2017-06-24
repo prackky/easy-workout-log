@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkoutSetShowWeightHelp: (showWeightHelp) => {
       dispatch(logWorkoutActions.logWorkoutSetShowWeightHelp(showWeightHelp));
     },
-    doLogWorkoutSave: () => {
-      dispatch(logWorkoutActions.logWorkoutSave());
+    doLogWorkoutSaveThunk: () => {
+      dispatch(logWorkoutActions.logWorkoutSaveThunk());
     },
     doLogWorkoutExerciseDelete: (index) => {
       dispatch(logWorkoutActions.logWorkoutExerciseDelete(index));
@@ -137,7 +137,7 @@ class LogWorkout extends Component {
     event.preventDefault();
     this
       .props
-      .doLogWorkoutSave();
+      .doLogWorkoutSaveThunk();
   }
 
   render() {

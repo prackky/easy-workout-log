@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   doLoginSetData: loginActions.loginSetData,
-  doLogin: loginActions.login
+  doLoginThunk: loginActions.loginThunk
 };
 
 class Login extends Component {
@@ -22,7 +22,7 @@ class Login extends Component {
     event.preventDefault();
     this
       .props
-      .doLogin();
+      .doLoginThunk();
   };
 
   handleEmailChange = (event) => {

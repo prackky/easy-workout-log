@@ -14,7 +14,7 @@ describe('userDataActions', () => {
     nock.cleanAll();
   });
 
-  describe('fetchUserData', () => {
+  describe('fetchUserDataThunk', () => {
     it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with user data when fetching data for a logged in user', () => {
       /*
       nock('http://example.com/')
@@ -33,7 +33,7 @@ describe('userDataActions', () => {
 
       const store = mockStore({ user: { logWorkout: {}, data: { authToken: 'blah' } } })
 
-      return store.dispatch(userDataActions.fetchUserData())
+      return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           expect(store.getActions()).to.deep.equal(expectedActions);
@@ -56,7 +56,7 @@ describe('userDataActions', () => {
 
       const store = mockStore({ user: { logWorkout: {}, data: { authToken: null } } })
 
-      return store.dispatch(userDataActions.fetchUserData())
+      return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           expect(store.getActions()).to.deep.equal(expectedActions);

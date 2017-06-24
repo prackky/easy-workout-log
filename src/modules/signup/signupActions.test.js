@@ -52,7 +52,7 @@ describe('signupActions', () => {
       }
     })
 
-    return store.dispatch(signupActions.signup())
+    return store.dispatch(signupActions.signupThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
         delete actions[2].at;

@@ -60,7 +60,7 @@ if (authToken && id) {
 class App extends Component {
 
   componentDidMount() {
-    store.dispatch(userDataActions.fetchUserData());
+    store.dispatch(userDataActions.fetchUserDataThunk());
   }
 
   render() {

@@ -46,7 +46,7 @@ describe('userWorkoutsActions', () => {
       }
     });
 
-    return store.dispatch(userWorkoutsActions.fetchUserWorkouts())
+    return store.dispatch(userWorkoutsActions.fetchUserWorkoutsThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
         expect(actions).to.deep.equal(expectedActions);

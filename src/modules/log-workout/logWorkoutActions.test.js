@@ -14,7 +14,7 @@ describe('logWorkoutActions', () => {
     nock.cleanAll();
   });
 
-  describe('logWorkoutSave', () => {
+  describe('logWorkoutSaveThunk', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when saving a workout for a logged in user', () => {
       
       nock(ewoloConstants.api.url)
@@ -42,7 +42,7 @@ describe('logWorkoutActions', () => {
 
       const store = mockStore({ user: { logWorkout: {}, data: { authToken: 'blah' } } })
 
-      return store.dispatch(logWorkoutActions.logWorkoutSave())
+      return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[2].at;
@@ -65,7 +65,7 @@ describe('logWorkoutActions', () => {
 
       const store = mockStore({ user: { logWorkout: {}, data: { authToken: undefined } } })
 
-      return store.dispatch(logWorkoutActions.logWorkoutSave())
+      return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[0].action;

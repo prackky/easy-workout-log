@@ -28,7 +28,7 @@ const loginActions = {
       redirect: redirect
     };
   },
-  login: () => {
+  loginThunk: () => {
     return (dispatch, getState) => {
       const login = {
         ...getState().login

@@ -83,14 +83,14 @@ const logWorkoutActions = {
       id: id
     };
   },
-  logWorkoutSave: () => {
+  logWorkoutSaveThunk: () => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
 
       if (!authToken) {
         return Promise.resolve()
           .then(() => {
-            const action = logWorkoutActions.logWorkoutSave();
+            const action = logWorkoutActions.logWorkoutSaveThunk();
             dispatch(signupActions.signupSetAfterSuccess(action));
             dispatch(push('/signup'));
           });

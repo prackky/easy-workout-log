@@ -27,7 +27,7 @@ const userDataActions = {
       exerciseNames: exerciseNames
     }
   },
-  fetchUserData: () => {
+  fetchUserDataThunk: () => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
 

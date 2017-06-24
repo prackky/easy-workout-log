@@ -19,7 +19,7 @@ const mapStateToProps = (state/*, ownProps*/) => {
 };
 
 const mapDispatchToProps = {
-  doFetchUserWorkouts: userWorkoutsActions.fetchUserWorkouts,
+  doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
   doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails
 };
 
@@ -43,7 +43,7 @@ class Dashboard extends Component {
     if (this.props.authToken) {
       this
         .props
-        .doFetchUserWorkouts();
+        .doFetchUserWorkoutsThunk();
     }
 
     console.log('mounted dashboard', this.props);

@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch) => {
     doSignupSetData: (name, email, password) => {
       dispatch(signupActions.signupSetData(name, email, password));
     },
-    doSignup: () => {
-      dispatch(signupActions.signup());
+    doSignupThunk: () => {
+      dispatch(signupActions.signupThunk());
     }
   };
 };
@@ -28,7 +28,7 @@ class Signup extends Component {
     event.preventDefault();
     this
       .props
-      .doSignup();
+      .doSignupThunk();
   };
 
   handleNameChange = (event) => {
