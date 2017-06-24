@@ -1,4 +1,5 @@
 {
+  "verbose": true,
   "src": {
     "beforeStartCommand": "CI=true npm test",
     "afterReleaseCommand": "echo Successfully released ${version}"
