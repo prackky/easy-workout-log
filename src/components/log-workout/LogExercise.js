@@ -29,7 +29,6 @@ const LogExercise = (props) => {
   };
 
   const handleNameAutoCompleteChange = (value) => {
-    console.log(value);
     const exercise = props.exercise;
     exercise.name = value;
     props.doLogWorkoutExerciseSetData(props.index, exercise);
@@ -55,12 +54,6 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   };
 
-  /*
-  const handlePopover = (event) => {
-    event.preventDefault();
-  };
-  */
-
   const handleSetShowTempoHelpClick = (event) => {
     props.doLogWorkoutSetShowTempoHelp(true);
   };
@@ -72,17 +65,6 @@ const LogExercise = (props) => {
   const handleSetShowWeightHelpClick = (event) => {
     props.doLogWorkoutSetShowWeightHelp(true);
   };
-
-  /*
-  const handleExercisePropertiesToggle = (event) => {
-    // console.log('wtf');
-    const exercise = {
-      ...props.exercise
-    };
-    exercise.showProperties = !exercise.showProperties;
-    props.doLogWorkoutExerciseSetData(props.index, exercise);
-  };
-  */
 
   const renderPropertyFormHint = (hint) => {
     if (!hint) {
@@ -103,6 +85,9 @@ const LogExercise = (props) => {
     if (!props.exercise.showProperties) {
       return renderExercisePropertiesShortForm();
     }
+
+    const renderedAdvancedProperties = renderAdvanced();
+    const renderedExerciseOperations = renderExerciseOperations();
 
     return (
       <div className="fade-in exercise-entry-details">
@@ -147,31 +132,12 @@ const LogExercise = (props) => {
               </div>
             </div>
 
-            {/*
-            <div className="form-group">
-              <div className="col-3">
-                <label className="form-label">Sets</label>
-              </div>
-              <div className="col-4">
-                <input
-                  className="form-input input-lg"
-                  type="number"
-                  min="0"
-                  max="1000"
-                  property="sets"
-                  value={props.exercise.sets}
-                  onChange={handleChange}/>
-              </div>
-            </div>
-            */}
-
-            {renderAdvanced()}
-
-            {renderExerciseOperations()}
+            {renderedAdvancedProperties}
+            {renderedExerciseOperations}
           </div>
         </div>
       </div>
-    );
+    )
   };
 
   const renderExercisePropertiesShortForm = () => {
@@ -181,7 +147,7 @@ const LogExercise = (props) => {
       <div className="exercise-entry-details">
         {sets && sets !== '1' ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
       </div>
-    );
+    )
   };
 
   const renderExerciseOperations = () => {
@@ -211,7 +177,7 @@ const LogExercise = (props) => {
           onClick={handleHideAdvanced}>
           <i className="icon icon-arrow-up"></i>
         </button>
-      );
+      )
     }
 
     return (
@@ -222,7 +188,7 @@ const LogExercise = (props) => {
         onClick={handleShowAdvanced}>
         <i className="icon icon-arrow-down"></i>
       </button>
-    );
+    )
   }
 
   const renderAdvanced = () => {
@@ -246,40 +212,7 @@ const LogExercise = (props) => {
               value={props.exercise.tempo}
               onChange={handleChange}/>
           </div>
-          {/*
-          <div className="col-5">
-            <button
-              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
-              data-tooltip="Show help"
-              type="button"
-              onClick={handleSetShowTempoHelpClick}>
-              <i className="icon icon-message"></i>
-            </button>
-            
-            <div className="popover popover-top">
-              <button
-                className="btn btn-action btn-lg circle btn-exercise-action"
-                onClick={handlePopover}>
-                type="button"
-                <i className="icon icon-message"></i>
-              </button>
-              <div className="popover-container">
-                <div className="card">
-                  <div className="card-body">
-                    <p>
-                    The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0
-                    second mid-point and 1 second concentric (positive).
-                    </p>
-                    <p>
-                      Keep value at 101 (default) if unsure.
-                    </p> 
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          */}
+          
         </div>
 
         <div className="form-group">
@@ -298,7 +231,7 @@ const LogExercise = (props) => {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -309,11 +242,6 @@ const LogExercise = (props) => {
       <div className="exercise-entry">
         <div className="form-group">
           <div className="col-3">
-            {/*
-            <label className="form-label tooltip" data-tooltip="Toggle properties">
-              <a onClick={handleExercisePropertiesToggle}>Name</a>
-            </label>
-            */}
             <label className="form-label">
               Name
             </label>
@@ -333,7 +261,7 @@ const LogExercise = (props) => {
         {renderExerciseProperties()}
       </div>
     </div>
-  );
+  )
 };
 
 LogExercise.propTypes = {
