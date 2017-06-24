@@ -29,6 +29,9 @@ const Footer = (props) => {
           By using this service you agree to the <Link to="/privacy">Privacy policy</Link> and <Link to="/terms">Terms of service</Link>. Feel free to <a href="mailto:feedback@ewolo.fitness">get in touch</a> regarding questions/feedback.
         </div>
         <div className="r">
+          Version {props.clientVersion} / {window.SERVER_VERSION || props.apiVersion} {/*, Release Notes */}
+        </div>
+        <div className="r">
           Built with ❤ by&nbsp;<a href="https://smalldata.tech">SmallData</a>.
         </div>
       </section>

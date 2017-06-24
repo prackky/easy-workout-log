@@ -16,8 +16,10 @@ import {
   ConnectedRouter,
   /*routerReducer,*/
   routerMiddleware
-} from 'react-router-redux'
+} from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+
+import packageJson from './package.json.link';
 
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
@@ -78,7 +80,7 @@ class App extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/>
-            <Footer/>
+            <Footer clientVersion={packageJson.version} apiVersion={ewoloConstants.api.version}/>
           </div>
         </ConnectedRouter>
       </Provider>
