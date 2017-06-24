@@ -1,6 +1,6 @@
 {
   "name": "easy-workout-log",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "dependencies": {
     "font-awesome": "4.7.0",
