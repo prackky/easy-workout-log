@@ -1,4 +1,7 @@
+import ExerciseService from '../services/ExerciseService';
+
 const apiVersion = 'v1';
+const exerciseService = new ExerciseService();
 
 const ewoloConstants = Object.freeze({
   api: {
@@ -12,15 +15,7 @@ const ewoloConstants = Object.freeze({
     authTokenKey: 'EWOLO-AUTH-TOKEN',
     userIdKey: 'EWOLO-USER-ID'
   },
-  exerciseNames: [
-    'Bench press',
-    'Standing barbell shoulder press',
-    'Deadlift',
-    'Standing dumbell curls',
-    'Seated barbell shoulder press',
-    'Seated shoulder press',
-    'Seated military press'
-  ]
+  exerciseNames: exerciseService.exercises
 });
 
 export default ewoloConstants;
