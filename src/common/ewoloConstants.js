@@ -15,7 +15,7 @@ const ewoloConstants = Object.freeze({
     authTokenKey: 'EWOLO-AUTH-TOKEN',
     userIdKey: 'EWOLO-USER-ID'
   },
-  exerciseNames: exerciseService.exercises
+  exerciseNames: Array.from(exerciseService.exercises)
 });
 
 export default ewoloConstants;

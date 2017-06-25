@@ -40,14 +40,13 @@ const userDataActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('done');
-        }, 1000);
-      });
+      const promise = ewoloUtil.getApiRequest('/user-data', 'GET', null, authToken);
 
-      return promise.then(result => {
-          dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames));
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
+          dispatch(userDataActions.userDataFetchSuccess(allExercises));
         })
         .catch(error => {
           handleError(error);

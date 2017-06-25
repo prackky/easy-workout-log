@@ -16,18 +16,14 @@ describe('userDataActions', () => {
 
   describe('fetchUserDataThunk', () => {
     it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with user data when fetching data for a logged in user', () => {
-      /*
-      nock('http://example.com/')
-        .get('/todos')
-        .reply(200, { body: { todos: ['do something'] }});
-      */
+
+      nock(ewoloConstants.api.url)
+        .get('/user-data')
+        .reply(200, { exerciseNames: [] });
 
       const expectedActions = [
         { type: 'TASK-START' },
-        {
-          type: c.USER_DATA_FETCH_SUCCESS,
-          exerciseNames: ewoloConstants.exerciseNames
-        },
+        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames),
         { type: 'TASK-END' }
       ];
 
@@ -36,16 +32,16 @@ describe('userDataActions', () => {
       return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
+          // console.log(actions);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });
 
     it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with seed data when fetching data for a non-logged in user', () => {
-      /*
-      nock('http://example.com/')
-        .get('/todos')
-        .reply(200, { body: { todos: ['do something'] }});
-      */
+
+      nock(ewoloConstants.api.url)
+        .get('/user-data')
+        .reply(200, { exerciseNames: ewoloConstants.exerciseNames });
 
       const expectedActions = [
         {
@@ -59,10 +55,11 @@ describe('userDataActions', () => {
       return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
+          // console.log(actions);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });
 
   });
-  
+
 });
