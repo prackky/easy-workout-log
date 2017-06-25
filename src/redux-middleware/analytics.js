@@ -7,7 +7,6 @@ import { c as userDataActionNames } from '../modules/user-data/userDataActions';
 import { c as userWorkoutsActionNames } from '../modules/user-workouts/userWorkoutsActions';
 
 const analytics = store => next => action => {
-  console.log(action.type);
   switch (action.type) {
 
     case '@@router/LOCATION_CHANGE':

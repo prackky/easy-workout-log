@@ -48,11 +48,18 @@ import './App.css';
 const history = createHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const storeMiddlware = [routerMiddleware(history), thunk, analytics];
+const storeMiddlware = [routerMiddleware(history), thunk];
+
 // only enable state logging in debug
 if (process.env.NODE_ENV !== 'production') {
   storeMiddlware.push(reduxLogger);
 }
+
+// only enable analytics in production
+if (process.env.NODE_ENV === 'production') {
+  storeMiddlware.push(analytics);
+}
+
 const store = createStore(appReducer, composeEnhancers(applyMiddleware(...storeMiddlware)));
 
 // initialize authToken should really be the single source of truth
