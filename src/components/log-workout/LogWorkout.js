@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 
-import ReactGA from 'react-ga';
-
 import './log-workout.css';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
@@ -141,8 +139,6 @@ class LogWorkout extends Component {
   }
 
   render() {
-    ReactGA.pageview('/log-workout');
-
     if (!this.props.logWorkout.componentMounted) {
       return <div></div>;
     }

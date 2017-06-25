@@ -7,10 +7,16 @@ import { handleError } from '../../common/errorHandler';
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
 
+export const c = Object.freeze({
+  SIGNUP_SET_DATA: 'SIGNUP-SET-DATA',
+  SIGNUP_SET_AFTER_SUCCESS: 'SIGNUP-SET-AFTER-SUCCESS'
+});
+
+
 const signupActions = {
   signupSetData: (name, email, password) => {
     return {
-      type: 'SIGNUP-SET-DATA',
+      type: c.SIGNUP_SET_DATA,
       name: name,
       email: email,
       password: password
@@ -18,7 +24,7 @@ const signupActions = {
   },
   signupSetAfterSuccess: (action, redirect = '/dashboard') => {
     return {
-      type: 'SIGNUP-SET-AFTER-SUCCESS',
+      type: c.SIGNUP_SET_AFTER_SUCCESS,
       action: action,
       redirect: redirect
     };

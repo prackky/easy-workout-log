@@ -1,5 +1,7 @@
 import ewoloUtil from '../../common/ewoloUtil';
 
+import {c} from './signupActions';
+
 export const initialState = {
   name: '',
   email: '',
@@ -14,7 +16,7 @@ export const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SIGNUP-SET-DATA':
+    case c.SIGNUP_SET_DATA:
       {
         const {name, email, password} = action;
 
@@ -27,7 +29,7 @@ const signupReducer = (state = initialState, action) => {
           passwordFormHint: ewoloUtil.validatePassword(password)
         };
       }
-    case 'SIGNUP-SET-AFTER-SUCCESS':
+    case c.SIGNUP_SET_AFTER_SUCCESS:
       {
         const redirect = action.redirect;
         const actionAfterSuccess = action.action;

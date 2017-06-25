@@ -25,6 +25,7 @@ import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
 import thunk from './redux-middleware/thunk';
+import analytics from './redux-middleware/analytics';
 
 import Header from './components/page/Header';
 import Footer from './components/page/Footer';
@@ -47,7 +48,7 @@ import './App.css';
 const history = createHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const storeMiddlware = [routerMiddleware(history), thunk];
+const storeMiddlware = [routerMiddleware(history), thunk, analytics];
 // only enable state logging in debug
 if (process.env.NODE_ENV !== 'production') {
   storeMiddlware.push(reduxLogger);

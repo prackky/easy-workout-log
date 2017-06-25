@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import signupReducer, { initialState } from './signupReducer';
-import actions from './signupActions';
+import actions, { c } from './signupActions';
 
 describe('signupReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -15,7 +15,7 @@ describe('signupReducer', () => {
       .equal(initialState);
   });
 
-  describe('SIGNUP-SET-DATA', () => {
+  describe(c.SIGNUP_SET_DATA, () => {
     it('should set data', () => {
       // when
       const newState = signupReducer(undefined, actions.signupSetData('vic', 'vic@smalldata.tech', 'sdk;jhskljdghdksfljghf'));
@@ -75,7 +75,7 @@ describe('signupReducer', () => {
     });
 
   });
-  describe('SIGNUP-SET-AFTER-SUCCESS', () => {
+  describe(c.SIGNUP_SET_AFTER_SUCCESS, () => {
     it('should set things to do after success', () => {
       // when
       const newState = signupReducer(undefined, actions.signupSetAfterSuccess({ type: 'LOG-WORKOUT-SAVE' }, '/dashboard'));
