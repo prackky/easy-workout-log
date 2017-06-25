@@ -50,4 +50,36 @@ describe('userWorkoutsActions', () => {
       });
   });
 
+  it('should successfully delete user workouts', () => {
+    const workoutId = '42';
+
+    nock(ewoloConstants.api.url)
+      .delete(userWorkoutsRoute + '/' + workoutId)
+      .reply(204);
+
+    const expectedActions = [
+      { type: 'TASK-START' },
+      {
+        type: c.USER_WORKOUTS_DELETE_SUCCESS,
+        workoutId: workoutId
+      },
+      { type: 'TASK-END' }
+    ];
+
+    const store = mockStore({
+      user: {
+        data: {
+          authToken: 'blah',
+          id: userId
+        }
+      }
+    });
+
+    return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId))
+      .then(() => { // return of async actions
+        const actions = store.getActions();
+        expect(actions).to.deep.equal(expectedActions);
+      });
+  });
+
 });

@@ -48,6 +48,29 @@ const userWorkoutsActions = {
       workoutId: workoutId
     }
   },
+  deleteUserWorkoutThunk: (workoutId) => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+      const userId = getState().user.data.id;
+
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest('/users/' + userId + '/workouts/' + workoutId, 'DELETE', null, authToken);
+
+      return promise
+        .then(ewoloUtil.getApiResponseStatus)
+        .then(status => {
+          dispatch(userWorkoutsActions.userWorkoutsDeleteSuccess(workoutId));
+        })
+        .catch(error => {
+          handleError(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when deleting a workout'));
+        })
+        .then(() => {
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  },
   userWorkoutsSetViewDetails: (workoutId, show) => {
     return {
       type: c.USER_WORKOUTS_SET_VIEW_DETAILS,

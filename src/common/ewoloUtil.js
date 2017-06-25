@@ -32,6 +32,12 @@ const ewoloUtil = {
     }
     return response.json();
   },
+  getApiResponseStatus: (response) => {
+    if (response.status >= 400) {
+      throw new RequestError(response);
+    }
+    return Promise.resolve(response.status);
+  },
   validateEmail: (email) => {
     if (!email) {
       return 'Email is required.';
