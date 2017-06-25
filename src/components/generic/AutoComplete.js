@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './AutoComplete.css';
 
-import autoCompleteSuggestions from '../../modules/generic/autoCompleteSuggestions';
+import autoCompleteSuggestions from '../../services/autoCompleteSuggestions';
 
 const exactMatch = (input, items) => {
   for (const item of items) {
@@ -20,7 +20,7 @@ const exactMatch = (input, items) => {
  * - we start with a clean state, i.e. no suggestions
  * - everytime we receive props, if the new input is an exact match we close the suggestion list, this is to ensure that if we simply clicked something in the menu list we wouldn't show the list (this is similar to the clean slate at start behaviour)
  * - pressing enter is handled in the suggestions list and in the field, basically select value and noop
- * - 
+ * -
  */
 class AutoComplete extends Component {
 
