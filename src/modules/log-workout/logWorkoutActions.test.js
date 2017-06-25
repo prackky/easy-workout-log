@@ -1,13 +1,13 @@
-import configureMockStore from 'redux-mock-store';
 import nock from 'nock';
 import { expect } from 'chai';
 
-import thunk from '../../redux-middleware/thunk';
-import ewoloConstants from '../../common/ewoloConstants';
 import logWorkoutActions, { c } from './logWorkoutActions';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+import ewoloConstants from '../../common/ewoloConstants';
+import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
+window.localStorage = localStorageMock;
+
+const mockStore = ewoloTestUtil.getMockStore();
 
 describe('logWorkoutActions', () => {
   afterEach(() => {

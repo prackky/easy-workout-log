@@ -4,13 +4,6 @@ import {/*BrowserRouter,*/
 } from 'react-router-dom';
 
 import {Provider} from 'react-redux';
-// import thunk from 'redux-thunk';
-import reduxLogger from 'redux-logger';
-import {
-  applyMiddleware, createStore,
-  /*, combineReducers*/
-  compose
-} from 'redux';
 
 import {
   ConnectedRouter,
@@ -23,10 +16,6 @@ import packageJson from './package.json.link'; // Needed to create a symlink bec
 
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
-
-import thunk from './redux-middleware/thunk';
-import analytics from './redux-middleware/analytics';
-import authenticatedRoutesCheck from './redux-middleware/authenticated-routes-check';
 
 import Header from './components/page/Header';
 import Footer from './components/page/Footer';
@@ -41,6 +30,7 @@ import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
 
 import appReducer from './modules/appReducer';
+import createEwoloStore from './redux/createEwoloStore';
 
 import userDataActions from './modules/user-data/userDataActions';
 
@@ -48,20 +38,7 @@ import './App.css';
 
 const history = createHistory();
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const storeMiddlware = [routerMiddleware(history), thunk, authenticatedRoutesCheck];
-
-// only enable state logging in debug
-if (process.env.NODE_ENV !== 'production') {
-  storeMiddlware.push(reduxLogger);
-}
-
-// only enable analytics in production
-if (process.env.NODE_ENV === 'production') {
-  storeMiddlware.push(analytics);
-}
-
-const store = createStore(appReducer, composeEnhancers(applyMiddleware(...storeMiddlware)));
+const store = createEwoloStore(appReducer, [routerMiddleware(history)]);
 
 // initialize authToken should really be the single source of truth
 const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);

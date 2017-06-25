@@ -1,10 +1,10 @@
 import ReactGA from 'react-ga';
 
-import { c as logWorkoutActionNames } from '../modules/log-workout/logWorkoutActions';
-import { c as signupActionNames } from '../modules/signup/signupActions';
-import { c as loginActionNames } from '../modules/login/loginActions';
-import { c as userDataActionNames } from '../modules/user-data/userDataActions';
-import { c as userWorkoutsActionNames } from '../modules/user-workouts/userWorkoutsActions';
+import { c as logWorkoutActionNames } from '../../modules/log-workout/logWorkoutActions';
+import { c as signupActionNames } from '../../modules/signup/signupActions';
+import { c as loginActionNames } from '../../modules/login/loginActions';
+import { c as userDataActionNames } from '../../modules/user-data/userDataActions';
+import { c as userWorkoutsActionNames } from '../../modules/user-workouts/userWorkoutsActions';
 
 const analytics = store => next => action => {
   switch (action.type) {

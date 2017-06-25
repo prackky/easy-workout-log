@@ -1,5 +1,5 @@
 import configureMockStore from 'redux-mock-store';
-import thunk from '../redux-middleware/thunk';
+import thunk from '../redux/middleware/thunk';
 
 import jwtDecode from 'jwt-decode';
 
