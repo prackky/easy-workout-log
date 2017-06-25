@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 // import PropTypes from 'prop-types'
-import {Redirect} from 'react-router';
 // import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -11,7 +10,6 @@ import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions
 const mapStateToProps = (state/*, ownProps*/) => {
   return {
     // ...ownProps,
-    authToken: state.user.data.authToken,
     dashboard: state.user.dashboard,
     workouts: state.user.workouts.workouts,
     workoutsViewDetails: state.user.workouts.workoutsViewDetails
@@ -37,19 +35,12 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    if (this.props.authToken) {
-      this
-        .props
-        .doFetchUserWorkoutsThunk();
-    }
-
-    console.log('mounted dashboard', this.props);
+    this
+      .props
+      .doFetchUserWorkoutsThunk();
   }
 
   render() {
-    if (!this.props.authToken) {
-      return (<Redirect to="/"/>);
-    }
 
     return (
       <div>

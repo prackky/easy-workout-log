@@ -47,6 +47,8 @@ const analytics = store => next => action => {
         action: action.type
       });
       break;
+    default:
+      break;
   }
 
   return next(action);

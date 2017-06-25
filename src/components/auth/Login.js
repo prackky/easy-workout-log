@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -8,7 +7,7 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import loginActions from '../../modules/login/loginActions';
 
 const mapStateToProps = (state) => {
-  return {login: state.login, authToken: state.user.data.authToken};
+  return {login: state.login};
 };
 
 const mapDispatchToProps = {
@@ -39,9 +38,6 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.authToken) {
-      return (<Redirect to="/"/>);
-    }
 
     return (
       <div>
