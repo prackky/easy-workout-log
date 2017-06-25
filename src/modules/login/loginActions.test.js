@@ -1,5 +1,3 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import nock from 'nock';
 import { expect } from 'chai';
 
@@ -7,11 +5,10 @@ import loginActions from './loginActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
-import ewoloTestUtil, {localStorageMock} from '../../common/ewoloTestUtil';
+import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
 window.localStorage = localStorageMock;
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = ewoloTestUtil.getMockStore();
 
 describe('loginActions', () => {
   afterEach(() => {
@@ -92,7 +89,7 @@ describe('loginActions', () => {
         expect(actions).to.deep.equal(expectedActions);
       });
   });
-  
+
   it('should show an error message on invalid credentials', () => {
     nock(ewoloConstants.api.url)
       .post('/authenticate')
@@ -100,10 +97,12 @@ describe('loginActions', () => {
 
     const expectedActions = [
       { type: 'TASK-START' },
-      { type: 'USER-NOTIFICATION-ADD',
-          userNotificationType: 'ERROR',
-          userNotificationText: 'Invalid username / password',
-          markPreviousAsRead: false },
+      {
+        type: 'USER-NOTIFICATION-ADD',
+        userNotificationType: 'ERROR',
+        userNotificationText: 'Invalid username / password',
+        markPreviousAsRead: false
+      },
       { type: 'TASK-END' }
     ];
 

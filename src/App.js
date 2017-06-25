@@ -4,7 +4,7 @@ import {/*BrowserRouter,*/
 } from 'react-router-dom';
 
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 import {
   applyMiddleware, createStore,
@@ -23,6 +23,8 @@ import packageJson from './package.json.link';
 
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
+
+import thunk from './redux-middleware/thunk';
 
 import Header from './components/page/Header';
 import Footer from './components/page/Footer';

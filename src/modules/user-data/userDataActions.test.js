@@ -1,13 +1,11 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import nock from 'nock';
 import { expect } from 'chai';
 
+import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
 import ewoloConstants from '../../common/ewoloConstants';
 import userDataActions, { c } from './userDataActions.js';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = ewoloTestUtil.getMockStore();
 
 describe('userDataActions', () => {
   afterEach(() => {

@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import nock from 'nock';
 import { expect } from 'chai';
 
+import thunk from '../../redux-middleware/thunk';
 import ewoloConstants from '../../common/ewoloConstants';
 import logWorkoutActions, { c } from './logWorkoutActions';
 

@@ -1,22 +1,19 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import nock from 'nock';
 import { expect } from 'chai';
 import moment from 'moment';
 
-import userWorkoutsActions, {c} from './userWorkoutsActions';
+import userWorkoutsActions, { c } from './userWorkoutsActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
-import ewoloTestUtil, {localStorageMock} from '../../common/ewoloTestUtil';
+import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
 window.localStorage = localStorageMock;
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = ewoloTestUtil.getMockStore();
 
 const userId = 'snoop';
 const userWorkoutsRoute = '/users/' + userId + '/workouts';
-const workouts = [{id: 1, date: moment().format('YYYY-MM-DD'), notes: 'abc'}];
+const workouts = [{ id: 1, date: moment().format('YYYY-MM-DD'), notes: 'abc' }];
 
 describe('userWorkoutsActions', () => {
   afterEach(() => {
