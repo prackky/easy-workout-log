@@ -75,6 +75,13 @@ class Dashboard extends Component {
               {this.renderWorkouts()}
             </div>
           </div>
+          <div className="columns">
+            <div className="column col-12 text-center">
+              <button
+                className="btn btn-primary btn-lg"
+                onClick={this.handleBtnLogWorkoutClick}>Log a new workout</button>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -92,7 +99,7 @@ class Dashboard extends Component {
             <h4 className="empty-title">You have no workouts logged</h4>
             <p className="empty-subtitle">Click the button to log a new workout</p>
             <div className="empty-action">
-              <button className="btn btn-primary" onClick={this.onLogWorkoutClick}>Log Workout</button>
+              <button className="btn btn-primary" onClick={this.handleBtnLogWorkoutClick}>Log Workout</button>
             </div>
           </div>
         </div>
@@ -113,7 +120,7 @@ class Dashboard extends Component {
       });
   }
 
-  onLogWorkoutClick = (event) => {
+  handleBtnLogWorkoutClick = (event) => {
     event.preventDefault();
     this
       .props

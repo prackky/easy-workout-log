@@ -34,7 +34,7 @@ const WorkoutView = (props) => {
     if (exercises.length === 0) {
       return (
         <div className="column col-12 row">
-          *No exercises logged
+          <i>No exercises logged</i>
         </div>
       )
     }
