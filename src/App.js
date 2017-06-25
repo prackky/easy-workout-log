@@ -19,7 +19,7 @@ import {
 } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
-import packageJson from './package.json.link';
+import packageJson from './package.json.link'; // Needed to create a symlink because of https://github.com/facebookincubator/create-react-app/issues/2466
 
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
