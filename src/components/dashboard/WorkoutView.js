@@ -30,6 +30,12 @@ const WorkoutView = (props) => {
     props.doToggleViewWorkoutDetails(workout.id, !showWorkoutDetails);
   }
 
+  const handleWorkoutDelete = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    props.doDeleteUserWorkoutThunk(workout.id);
+  }
+
   const renderExercises = () => {
     if (exercises.length === 0) {
       return (
@@ -86,7 +92,13 @@ const WorkoutView = (props) => {
           </div>
           <div className="columns col-xs-5 col-8 centered workout-panel-notes">{workout.notes}</div>
           <div className="columns col-xs-2 col-1 centered text-right">
-            {/* Space for stuff */}
+            <button
+              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+              data-tooltip="Delete workout"
+              type="button"
+              onClick={handleWorkoutDelete}>
+              <i className="icon icon-delete"></i>
+            </button>
           </div>
         </div>
       </label>

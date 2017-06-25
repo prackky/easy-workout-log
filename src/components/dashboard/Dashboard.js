@@ -18,6 +18,7 @@ const mapStateToProps = (state/*, ownProps*/) => {
 
 const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
+  doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
   doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails
 };
 
@@ -107,6 +108,7 @@ class Dashboard extends Component {
           showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
           ? true
           : false}
+          doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
           doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}/>);
       });
   }
