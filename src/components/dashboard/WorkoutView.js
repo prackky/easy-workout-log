@@ -1,5 +1,4 @@
 import React from 'react';
-// import moment from 'moment';
 
 import './WorkoutView.css';
 
@@ -32,23 +31,23 @@ const WorkoutView = (props) => {
   }
 
   const renderExercises = () => {
-    let exerciseName = null;
+    if (exercises.length === 0) {
+      return (
+        <div className="column col-12 row">
+          *No exercises logged
+        </div>
+      )
+    }
 
     return exercises.map((exercise, index) => {
       if (exercise.setHeader) {
         return (
-          <div key={index + '-' + exercise.name} className="column col-12 workout-exercise row">
+          <div
+            key={index + '-' + exercise.name}
+            className="column col-12 workout-exercise row">
             {exercise.name}
           </div>
         );
-
-        /*
-        return (
-          <th key={index}>
-            <td colSpan="2">{exercise.name}</td>
-          </th>
-        );
-        */
       }
 
       const showTempo = exercise.tempo !== '101';
@@ -72,22 +71,6 @@ const WorkoutView = (props) => {
           </div>
         </div>
       );
-
-      /*
-      return (
-        <tr key={index}>
-          <td className="text-right">{exercise.reps} {exercise.weight > 0
-              ? 'x ' + exercise.weight
-              : ''}</td>
-          <td>{exercise.tempo === '101'
-              ? ''
-              : exercise.tempo}
-            / {exercise.rest === 60
-              ? ''
-              : exercise.rest}</td>
-        </tr>
-      );
-      */
     });
 
   }
@@ -111,13 +94,6 @@ const WorkoutView = (props) => {
         className={props.showWorkoutDetails
         ? "accordion-body-show"
         : "accordion-body"}>
-        {/*
-        <table className="table workout-details">
-          <tbody>
-            {renderExercises()}
-          </tbody>
-        </table>
-        */}
         <div className="columns workout-details">
           {renderExercises()}
         </div>
