@@ -16,6 +16,19 @@ const userWorkoutsReducer = (state = initialState, action) => {
           workouts: workouts
         };
       }
+    case c.USER_WORKOUTS_DELETE_SUCCESS:
+      {
+        const { workoutId } = action;
+
+        const workouts = state.workouts.filter(workout => {
+          return (workout.id !== workoutId);
+        });
+
+        return {
+          ...state,
+          workouts: workouts
+        }
+      }
     case c.USER_WORKOUTS_SET_VIEW_DETAILS:
       {
         const { workoutId, show } = action;
@@ -23,7 +36,7 @@ const userWorkoutsReducer = (state = initialState, action) => {
           ...state.workoutsViewDetails
         }
         workoutsViewDetails[workoutId] = show;
-        
+
         return {
           ...state,
           workoutsViewDetails: workoutsViewDetails

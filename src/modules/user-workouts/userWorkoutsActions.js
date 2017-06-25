@@ -8,6 +8,7 @@ import globalActions from '../global/globalActions';
 
 export const c = {
   USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS',
+  USER_WORKOUTS_DELETE_SUCCESS: 'USER-WORKOUTS-DELETE-SUCCESS',
   USER_WORKOUTS_SET_VIEW_DETAILS: 'USER-WORKOUTS-SET-VIEW-DETAILS'
 };
 
@@ -39,6 +40,12 @@ const userWorkoutsActions = {
         .then(() => {
           dispatch(globalActions.taskEnd());
         });
+    }
+  },
+  userWorkoutsDeleteSuccess: (workoutId) => {
+    return {
+      type: c.USER_WORKOUTS_DELETE_SUCCESS,
+      workoutId: workoutId
     }
   },
   userWorkoutsSetViewDetails: (workoutId, show) => {

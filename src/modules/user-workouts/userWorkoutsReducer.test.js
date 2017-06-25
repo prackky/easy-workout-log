@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import userWorkoutsReducer, { initialState } from './userWorkoutsReducer';
-import actions, {c} from './userWorkoutsActions';
+import actions, { c } from './userWorkoutsActions';
 
 describe('userWorkoutsReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -18,7 +18,7 @@ describe('userWorkoutsReducer', () => {
   describe(c.USER_WORKOUTS_FETCH_SUCCESS, () => {
     it('should set data', () => {
       // when
-      const workouts = [{snoop: 'dawg'}];
+      const workouts = [{ snoop: 'dawg' }];
       const newState = userWorkoutsReducer(undefined, actions.userWorkoutsFetchSuccess(workouts));
 
       // then
@@ -33,7 +33,75 @@ describe('userWorkoutsReducer', () => {
         .equal(expectedState);
     });
   });
-  
+
+  describe(c.USER_WORKOUTS_DELETE_SUCCESS, () => {
+    it('should delete the first workout', () => {
+      // given
+      const state = {
+        ...initialState,
+        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
+      };
+
+      // when
+      const newState = userWorkoutsReducer(state, actions.userWorkoutsDeleteSuccess(1));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workouts: [{ id: 2 }, { id: 3 }]
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+
+    it('should delete the second workout', () => {
+      // given
+      const state = {
+        ...initialState,
+        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
+      };
+
+      // when
+      const newState = userWorkoutsReducer(state, actions.userWorkoutsDeleteSuccess(2));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workouts: [{ id: 1, snoop: 'dawg' }, { id: 3 }]
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+
+    it('should delete the last workout', () => {
+      // given
+      const state = {
+        ...initialState,
+        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
+      };
+
+      // when
+      const newState = userWorkoutsReducer(state, actions.userWorkoutsDeleteSuccess(3));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }]
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+  });
+
   describe(c.USER_WORKOUTS_SET_VIEW_DETAILS, () => {
     it('should set data', () => {
       // when
