@@ -69,7 +69,7 @@ describe('autoCompleteSuggestions', () => {
 
   it('should return an empty array for a full exact match', () => {
     // when
-    const result = autoCompleteSuggestions(['ya BA da ba'], 'ya BA da ba');
+    const result = autoCompleteSuggestions(['ya BA da ba', 'xxx'], 'ya BA da ba');
 
     // then
     expect(result)

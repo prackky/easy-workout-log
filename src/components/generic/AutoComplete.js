@@ -5,6 +5,23 @@ import './AutoComplete.css';
 
 import autoCompleteSuggestions from '../../modules/generic/autoCompleteSuggestions';
 
+const exactMatch = (input, items) => {
+  for (const item of items) {
+    if (input === item) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * This component is a royal mess
+ * - we start with a clean state, i.e. no suggestions
+ * - everytime we receive props, if the new input is an exact match we close the suggestion list, this is to ensure that if we simply clicked something in the menu list we wouldn't show the list (this is similar to the clean slate at start behaviour)
+ * - pressing enter is handled in the suggestions list and in the field, basically select value and noop
+ * - 
+ */
 class AutoComplete extends Component {
 
   static propTypes = {
@@ -16,7 +33,10 @@ class AutoComplete extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.getStateFromProps(props);
+    this.state = {
+      suggestions: [],
+      currentIndex: -1
+    };
   }
 
   getStateFromProps(props) {
@@ -26,7 +46,16 @@ class AutoComplete extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState(this.getStateFromProps(nextProps));
+    console.log(this.props.input + ' received ' + nextProps.input);
+
+    if (this.props.input !== nextProps.input) {
+      if (!exactMatch(nextProps.input, nextProps.items)) {
+        this.setState(this.getStateFromProps(nextProps));
+        return;
+      }
+    }
+
+    this.handleCloseClick();
   }
 
   handleCloseClick = () => {
@@ -85,10 +114,15 @@ class AutoComplete extends Component {
 
         if (s.currentIndex >= 0) {
           const value = s.suggestions[s.currentIndex];
-          this
-            .props
-            .handleChange(value);
+          this.handleSelectValue(value);
+        } else {
+          this.handleCloseClick();
         }
+      }
+    } else { // no suggestions means the click was fired on the input field
+      if (event.keyCode === 13) {
+        event.preventDefault(); // we don't want to submit the form in this case
+        this.handleCloseClick();
       }
     }
   }
@@ -97,6 +131,17 @@ class AutoComplete extends Component {
     this
       .props
       .handleChange(event.target.value);
+  }
+
+  handleSelectValue = (value) => {
+    this
+      .props
+      .handleChange(value);
+  }
+
+  handleMenuClick = (suggestion, event) => {
+    event.preventDefault();
+    this.handleSelectValue(suggestion);
   }
 
   renderMenu() {
@@ -127,12 +172,9 @@ class AutoComplete extends Component {
                 key={index}>
                 <a
                   href="#"
-                  onClick={(event) => {
-                  event.preventDefault();
-                  self
-                    .props
-                    .handleChange(suggestion);
-                }}>
+                  onClick={self
+                  .handleMenuClick
+                  .bind(self, suggestion)}>
                   {suggestion}
                 </a>
               </li>
