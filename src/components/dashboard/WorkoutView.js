@@ -92,9 +92,18 @@ const WorkoutView = (props) => {
           </div>
           <div className="columns col-xs-5 col-8 centered workout-panel-notes">{workout.notes}</div>
           <div className="columns col-xs-2 col-1 centered text-right">
+            {/*
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
               data-tooltip="Delete workout"
+              type="button"
+              onClick={handleWorkoutDelete}>
+              <i className="icon icon-delete"></i>
+            </button>
+            */}
+
+            <button
+              className="btn btn-action btn-lg circle btn-exercise-action"
               type="button"
               onClick={handleWorkoutDelete}>
               <i className="icon icon-delete"></i>
