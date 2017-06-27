@@ -52,7 +52,7 @@ const userWorkoutsActions = {
       workoutId: workoutId
     }
   },
-  deleteUserWorkoutThunk: (workoutId) => {
+  deleteUserWorkoutThunk: (workoutId, workoutDate) => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;
@@ -75,6 +75,7 @@ const userWorkoutsActions = {
           dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when deleting a workout'));
         })
         .then(() => {
+          dispatch(globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`));
           dispatch(globalActions.taskEnd());
         });
     }

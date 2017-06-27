@@ -26,7 +26,7 @@ class WorkoutView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.workout = props.workout,
+    this.workout = props.workout;
 
     this.exercises = orderExercises(this.workout.exercises);
 
@@ -45,7 +45,7 @@ class WorkoutView extends React.Component {
   handleModalWorkoutDeleteExecute = () => {
     this
       .props
-      .doDeleteUserWorkoutThunk(this.workout.id);
+      .doDeleteUserWorkoutThunk(this.workout.id, this.workout.date);
   }
 
   handleModalWorkoutDeleteCancel = () => {

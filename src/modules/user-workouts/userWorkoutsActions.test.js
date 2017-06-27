@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 import moment from 'moment';
 
+import globalActions from '../global/globalActions';
 import userWorkoutsActions, { c } from './userWorkoutsActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
@@ -52,6 +53,7 @@ describe('userWorkoutsActions', () => {
 
   it('should successfully delete user workouts', () => {
     const workoutId = '42';
+    const workoutDate = 'sfdsf'
 
     nock(ewoloConstants.api.url)
       .delete(userWorkoutsRoute + '/' + workoutId)
@@ -63,6 +65,7 @@ describe('userWorkoutsActions', () => {
         type: c.USER_WORKOUTS_DELETE_SUCCESS,
         workoutId: workoutId
       },
+      globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`),
       { type: 'TASK-END' }
     ];
 
@@ -75,9 +78,11 @@ describe('userWorkoutsActions', () => {
       }
     });
 
-    return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId))
+    return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId, workoutDate))
       .then(() => { // return of async actions
         const actions = store.getActions();
+        delete actions[2].at;
+        delete expectedActions[2].at;
         expect(actions).to.deep.equal(expectedActions);
       });
   });
