@@ -101,7 +101,12 @@ const logWorkoutActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/workouts', 'POST', logWorkout, authToken);
+      const promise = ewoloUtil.getApiRequest({
+        route: '/workouts',
+        method: 'POST',
+        body: logWorkout,
+        authToken: authToken
+      });
 
       return promise
         .then(ewoloUtil.getApiResponse)

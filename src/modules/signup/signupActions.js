@@ -40,12 +40,16 @@ const signupActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/users', 'POST', { name: signup.name, email: signup.email, password: signup.password });
+      const promise = ewoloUtil.getApiRequest({
+        route: '/users',
+        method: 'POST',
+        body: { name: signup.name, email: signup.email, password: signup.password }
+      });
 
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          
+
           dispatch(userDataActions.processUserAuthSuccess(body.token));
 
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));

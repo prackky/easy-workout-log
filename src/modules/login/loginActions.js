@@ -39,7 +39,11 @@ const loginActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/authenticate', 'POST', { email: login.email, password: login.password });
+      const promise = ewoloUtil.getApiRequest({
+        route: '/authenticate',
+        method: 'POST',
+        body: { email: login.email, password: login.password }
+      });
 
       return promise
         .then(ewoloUtil.getApiResponse)

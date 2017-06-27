@@ -26,7 +26,11 @@ const userWorkoutsActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/users/' + userId + '/workouts', 'GET', null, authToken);
+      const promise = ewoloUtil.getApiRequest({
+        route: `/users/${userId}/workouts`,
+        method: 'GET',
+        authToken: authToken
+      });
 
       return promise
         .then(ewoloUtil.getApiResponse)
@@ -55,7 +59,11 @@ const userWorkoutsActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/users/' + userId + '/workouts/' + workoutId, 'DELETE', null, authToken);
+      const promise = ewoloUtil.getApiRequest({
+        route: `/users/${userId}/workouts/${workoutId}`,
+        method: 'DELETE',
+        authToken: authToken
+      });
 
       return promise
         .then(ewoloUtil.getApiResponseStatus)

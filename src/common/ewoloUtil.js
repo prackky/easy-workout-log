@@ -6,7 +6,7 @@ import { RequestError } from './errorHandler';
 // export const ewoloConstants;
 
 const ewoloUtil = {
-  getApiRequest: (route, method, body, authToken) => {
+  getApiRequest: ({route, method, body, authToken}) => {
     const url = ewoloConstants.api.url + route;
     const headers = {
       'Content-Type': 'application/json'

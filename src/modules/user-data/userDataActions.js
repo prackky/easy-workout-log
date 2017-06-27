@@ -40,7 +40,11 @@ const userDataActions = {
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest('/user-data', 'GET', null, authToken);
+      const promise = ewoloUtil.getApiRequest({
+        route: '/user-data',
+        method: 'GET',
+        authToken: authToken
+      });
 
       return promise
         .then(ewoloUtil.getApiResponse)
