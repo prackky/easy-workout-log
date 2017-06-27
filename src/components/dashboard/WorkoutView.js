@@ -2,6 +2,8 @@ import React from 'react';
 
 import './WorkoutView.css';
 
+import Modal from '../generic/Modal';
+
 const orderExercises = (exercises) => {
   const result = [];
 
@@ -20,24 +22,53 @@ const orderExercises = (exercises) => {
   return result;
 };
 
-const WorkoutView = (props) => {
+class WorkoutView extends React.Component {
 
-  const {workout, showWorkoutDetails} = props;
-  const exercises = orderExercises(workout.exercises);
+  constructor(props) {
+    super(props);
+    this.workout = props.workout,
 
-  const toggleViewWorkoutDetails = (event) => {
-    event.preventDefault();
-    props.doToggleViewWorkoutDetails(workout.id, !showWorkoutDetails);
+    this.exercises = orderExercises(this.workout.exercises);
+
+    this.state = {
+      showDeleteConfirmModal: false
+    };
   }
 
-  const handleWorkoutDelete = (event) => {
+  toggleViewWorkoutDetails = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doToggleViewWorkoutDetails(this.workout.id, !(this.props.showWorkoutDetails));
+  }
+
+  handleModalWorkoutDeleteExecute = () => {
+    this
+      .props
+      .doDeleteUserWorkoutThunk(this.workout.id);
+  }
+
+  handleModalWorkoutDeleteCancel = () => {
+    const state = this.state;
+    this.setState({
+      ...state,
+      showDeleteConfirmModal: false
+    });
+  }
+
+  handleWorkoutDelete = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    props.doDeleteUserWorkoutThunk(workout.id);
+
+    const state = this.state;
+    this.setState({
+      ...state,
+      showDeleteConfirmModal: true
+    });
   }
 
-  const renderExercises = () => {
-    if (exercises.length === 0) {
+  renderExercises = () => {
+    if (this.exercises.length === 0) {
       return (
         <div className="column col-12 row">
           <i>No exercises logged</i>
@@ -45,54 +76,66 @@ const WorkoutView = (props) => {
       )
     }
 
-    return exercises.map((exercise, index) => {
-      if (exercise.setHeader) {
+    return this
+      .exercises
+      .map((exercise, index) => {
+        if (exercise.setHeader) {
+          return (
+            <div
+              key={index + '-' + exercise.name}
+              className="column col-12 workout-exercise row">
+              {exercise.name}
+            </div>
+          );
+        }
+
+        const showTempo = exercise.tempo !== '101';
+        const showRest = exercise.rest !== 60;
+        const showDivider = showTempo && showRest;
+
         return (
-          <div
-            key={index + '-' + exercise.name}
-            className="column col-12 workout-exercise row">
-            {exercise.name}
+          <div className="column col-12 row" key={exercise.id}>
+            <div className="columns">
+              <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
+                  ? 'x ' + exercise.weight
+                  : ''}</div>
+              <div className="column col-6 row">{showTempo
+                  ? exercise.tempo
+                  : ''} {showDivider
+                  ? ' / '
+                  : ''}
+                {showRest
+                  ? exercise.rest
+                  : ''}</div>
+            </div>
           </div>
         );
-      }
-
-      const showTempo = exercise.tempo !== '101';
-      const showRest = exercise.rest !== 60;
-      const showDivider = showTempo && showRest;
-
-      return (
-        <div className="column col-12 row" key={exercise.id}>
-          <div className="columns">
-            <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
-                ? 'x ' + exercise.weight
-                : ''}</div>
-            <div className="column col-6 row">{showTempo
-                ? exercise.tempo
-                : ''} {showDivider
-                ? ' / '
-                : ''}
-              {showRest
-                ? exercise.rest
-                : ''}</div>
-          </div>
-        </div>
-      );
-    });
+      });
 
   }
 
-  return (
-    <div className="accordion-item">
-      <label
-        className="accordion-header hand workout-panel"
-        onClick={toggleViewWorkoutDetails}>
-        <div className="columns">
-          <div className="columns col-xs-5 col-3 centered">
-            {workout.date}
-          </div>
-          <div className="columns col-xs-5 col-8 centered workout-panel-notes">{workout.notes}</div>
-          <div className="columns col-xs-2 col-1 centered text-right">
-            {/*
+  render() {
+    return (
+      <div className="accordion-item">
+        <Modal
+          doModalActionCancel={this.handleModalWorkoutDeleteCancel}
+          doModalActionExecute={this.handleModalWorkoutDeleteExecute}
+          modalActionExecute="Delete"
+          showModal={this.state.showDeleteConfirmModal}
+          size="sm"
+          title="Delete workout"
+          content={['Are you sure you want to delete this workout?']}/>
+
+        <label
+          className="accordion-header hand workout-panel"
+          onClick={this.toggleViewWorkoutDetails}>
+          <div className="columns">
+            <div className="columns col-xs-5 col-3 centered">
+              {this.workout.date}
+            </div>
+            <div className="columns col-xs-5 col-8 centered workout-panel-notes">{this.workout.notes}</div>
+            <div className="columns col-xs-2 col-1 centered text-right">
+              {/*
             <button
               className="btn btn-action btn-lg circle btn-exercise-action tooltip"
               data-tooltip="Delete workout"
@@ -102,25 +145,26 @@ const WorkoutView = (props) => {
             </button>
             */}
 
-            <button
-              className="btn btn-action btn-lg circle btn-exercise-action"
-              type="button"
-              onClick={handleWorkoutDelete}>
-              <i className="icon icon-delete"></i>
-            </button>
+              <button
+                className="btn btn-action btn-lg circle btn-exercise-action"
+                type="button"
+                onClick={this.handleWorkoutDelete}>
+                <i className="icon icon-delete"></i>
+              </button>
+            </div>
+          </div>
+        </label>
+        <div
+          className={this.props.showWorkoutDetails
+          ? "accordion-body-show"
+          : "accordion-body"}>
+          <div className="columns workout-details">
+            {this.renderExercises()}
           </div>
         </div>
-      </label>
-      <div
-        className={props.showWorkoutDetails
-        ? "accordion-body-show"
-        : "accordion-body"}>
-        <div className="columns workout-details">
-          {renderExercises()}
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default WorkoutView;
