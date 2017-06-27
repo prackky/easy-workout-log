@@ -138,6 +138,24 @@ class LogWorkout extends Component {
       .doLogWorkoutSaveThunk();
   }
 
+  doCloseTempoHelp = () => {
+    this
+      .props
+      .doLogWorkoutSetShowTempoHelp(false);
+  }
+
+  doCloseRestHelp = () => {
+    this
+      .props
+      .doLogWorkoutSetShowRestHelp(false);
+  }
+
+  doCloseWeightHelp = () => {
+    this
+      .props
+      .doLogWorkoutSetShowWeightHelp(false);
+  }
+
   render() {
     if (!this.props.logWorkout.componentMounted) {
       return <div></div>;
@@ -148,21 +166,21 @@ class LogWorkout extends Component {
         <UserNotificationBar/>
 
         <Modal
-          doSetShowModal={this.props.doLogWorkoutSetShowTempoHelp}
+          doModalActionCancel={this.doCloseTempoHelp}
           showModal={this.props.logWorkout.showTempoHelp}
           size="sm"
           title="Tempo"
           content={ewoloContent.tempoHelpModalContent}/>
 
         <Modal
-          doSetShowModal={this.props.doLogWorkoutSetShowRestHelp}
+          doModalActionCancel={this.doCloseRestHelp}
           showModal={this.props.logWorkout.showRestHelp}
           size="sm"
           title="Rest"
           content={ewoloContent.restHelpModalContent}/>
 
         <Modal
-          doSetShowModal={this.props.doLogWorkoutSetShowWeightHelp}
+          doModalActionCancel={this.doCloseWeightHelp}
           showModal={this.props.logWorkout.showWeightHelp}
           size="sm"
           title="Weight"

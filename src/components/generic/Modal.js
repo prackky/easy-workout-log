@@ -8,7 +8,9 @@ class Modal extends Component {
     content: PropTypes.arrayOf(PropTypes.string),
     title: PropTypes.string.isRequired,
     showModal: PropTypes.bool.isRequired,
-    doSetShowModal: PropTypes.func.isRequired
+    doModalActionCancel: PropTypes.func.isRequired,
+    modalActionExecute: PropTypes.string,
+    doModalActionExecute: PropTypes.func
   };
 
   constructor(props) {
@@ -17,11 +19,18 @@ class Modal extends Component {
     // PropTypes.checkPropTypes(this.propTypes, props, ...props);
   }
 
-  handleCloseClick = (event) => {
+  handleCancelClick = (event) => {
     event.preventDefault();
     this
       .props
-      .doSetShowModal(false);
+      .doModalActionCancel();
+  }
+
+  handleOkClick = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doModalActionExecute();
   }
 
   render() {
@@ -54,14 +63,37 @@ class Modal extends Component {
             </div>
           </div>
           <div className="modal-footer">
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={this.handleCloseClick}>Close</button>
+            {this.renderButtonClose()}
+            {this.renderButtonExecute()}
           </div>
         </div>
       </div>
     );
+  }
+
+  renderButtonClose() {
+    if (this.props.doModalActionExecute) {
+      return (
+        <button className="btn btn-link" type="button" onClick={this.handleCancelClick}>Cancel</button>
+      )
+    }
+
+    return (
+      <button
+        className="btn btn-primary"
+        type="button"
+        onClick={this.handleCancelClick}>Close</button>
+    )
+  }
+
+  renderButtonExecute() {
+    if (this.props.doModalActionExecute) {
+      return (
+        <button className="btn btn-primary" type="button" onClick={this.handleOkClick}>{this.props.modalActionExecute}</button>
+      )
+    }
+
+    return null;
   }
 };
 
