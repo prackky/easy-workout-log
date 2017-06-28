@@ -2,6 +2,12 @@
 
 cd ~/npq/easy-workout-log/
 
+echo "clean up modifications"
+git checkout .
+
+echo "clean dependencies"
+rm -rf node_modules/
+
 echo "get new tags from remote"
 git fetch --tags
 
