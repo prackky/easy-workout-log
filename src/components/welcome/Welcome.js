@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import './Welcome.css';
 
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
+import iPhone6 from './iphone-6.png';
+// import iPhone6black from './iphone-6-black.png';
 
 const features = [
   'Intuitive UI makes data entry pleasurable',
@@ -99,7 +101,7 @@ class Welcome extends Component {
         <section className="features">
           <div className="container grid-1280">
             <div className="columns">
-              <div className="column col-4 col-md-12"></div>
+              <div className="column col-3 col-md-12"></div>
               <div className="column col-4 col-md-12">
                 <div className="feature-list">
                   <h3 className="text-center">Features</h3>
@@ -110,7 +112,11 @@ class Welcome extends Component {
                   </ul>
                 </div>
               </div>
-              <div className="column col-4 col-md-12"></div>
+              <div className="column col-4 col-md-12">
+                <img src={iPhone6} className="img-responsive centered" alt="iphone6 application ui example"/>
+                {/*<img src={iPhone6black} className="img-responsive"/>*/}
+              </div>
+              <div className="column col-1 col-md-12"></div>
             </div>
           </div>
         </section>
