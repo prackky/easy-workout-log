@@ -113,21 +113,27 @@ class Header extends Component {
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
                 <li className="divider"></li>
-                {this.props.authToken && (
-                  <li className="nav-item">
-                    <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
-                  </li>
-                )}
-                {!this.props.authToken && (
-                  <li className="nav-item">
-                    <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
-                  </li>
-                )}
-                {!this.props.authToken && (
-                  <li className="nav-item">
-                    <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
-                  </li>
-                )}
+
+                <li className="nav-item">
+                  Account
+                  <ul className="nav">
+                    {this.props.authToken && (
+                      <li className="nav-item">
+                        <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
+                      </li>
+                    )}
+                    {!this.props.authToken && (
+                      <li className="nav-item">
+                        <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
+                      </li>
+                    )}
+                    {!this.props.authToken && (
+                      <li className="nav-item">
+                        <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
+                      </li>
+                    )}
+                  </ul>
+                </li>
 
                 {/*
                 <li className="nav-item">
