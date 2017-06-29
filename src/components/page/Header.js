@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
-import {withRouter} from 'react-router'
 import {connect} from 'react-redux';
 
 import './Header.css';
@@ -168,4 +167,4 @@ class Header extends Component {
 
 };
 
-export default withRouter(connect(mapStateToProps)(Header));
+export default connect(mapStateToProps)(Header);
