@@ -10,7 +10,7 @@ import ewoloLogo from './ewolo-logo.png';
 import LinkWithChildren from '../generic/LinkWithChildren';
 
 const mapStateToProps = (state) => {
-  return {authToken: state.user.data.authToken};
+  return {authToken: state.user.data.authToken, name: state.user.data.name};
 };
 
 class Header extends Component {
@@ -33,7 +33,8 @@ class Header extends Component {
     const userAccountMenu = (
       <div className="dropdown dropdown-right">
         <a href="#" className="btn btn-link dropdown-toggle" tabIndex="0">
-          <i className="fa fa-user" aria-hidden="true"></i>
+          {this.props.name}
+          {/*<i className="fa fa-user" aria-hidden="true"></i>*/}
           <i className="icon icon-caret"></i>
         </a>
         <ul className="menu">
