@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import './Header.css';
 import ewoloLogo from './ewolo-logo.png';
 
+import LinkWithChildren from '../generic/LinkWithChildren';
+
 const mapStateToProps = (state) => {
   return {authToken: state.user.data.authToken};
 };
@@ -27,6 +29,23 @@ class Header extends Component {
   }
 
   render() {
+
+    const userAccountMenu = (
+      <div className="dropdown dropdown-right">
+        <a href="#" className="btn btn-link dropdown-toggle" tabIndex="0">
+          <i className="fa fa-user" aria-hidden="true"></i>
+          <i className="icon icon-caret"></i>
+        </a>
+        <ul className="menu">
+          <li className="menu-item">
+            <LinkWithChildren exact to="/logout">
+              <i className="fa fa-sign-out" aria-hidden="true"></i>
+              Logout
+            </LinkWithChildren>
+          </li>
+        </ul>
+      </div>
+    );
 
     return (
       <div className="bg-gray">
@@ -50,9 +69,7 @@ class Header extends Component {
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
             <section className="navbar-section navbar-content">
-              {this.props.authToken && (
-                <NavLink exact to="/logout" className="btn btn-link">Logout</NavLink>
-              )}
+              {this.props.authToken && userAccountMenu}
               {!this.props.authToken && (
                 <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
               )}
@@ -91,6 +108,7 @@ class Header extends Component {
                 <li className="nav-item">
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
+                <li className="divider"></li>
                 {this.props.authToken && (
                   <li className="nav-item">
                     <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>

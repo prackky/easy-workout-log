@@ -24,7 +24,7 @@
   font-size: 70%;
 }
 
-.navbar .dropdown .icon {
+.navbar .dropdown-toggle .icon {
   vertical-align: inherit;
   top: -10%;
 }
