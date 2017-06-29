@@ -17,11 +17,11 @@ describe('userDataActions', () => {
 
       nock(ewoloConstants.api.url)
         .get('/user-data')
-        .reply(200, { exerciseNames: [] });
+        .reply(200, { exerciseNames: [], name: 'snoop' });
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames),
+        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames, 'snoop'),
         { type: 'TASK-END' }
       ];
 
@@ -37,14 +37,11 @@ describe('userDataActions', () => {
 
     it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with seed data when fetching data for a non-logged in user', () => {
 
-      nock(ewoloConstants.api.url)
-        .get('/user-data')
-        .reply(200, { exerciseNames: ewoloConstants.exerciseNames });
-
       const expectedActions = [
         {
           type: c.USER_DATA_FETCH_SUCCESS,
-          exerciseNames: ewoloConstants.exerciseNames
+          exerciseNames: ewoloConstants.exerciseNames,
+          name: undefined
         }
       ];
 
@@ -53,7 +50,6 @@ describe('userDataActions', () => {
       return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          // console.log(actions);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });

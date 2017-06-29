@@ -3,7 +3,8 @@ import { c } from './userDataActions';
 export const initialState = {
   authToken: undefined,
   id: undefined,
-  exerciseNames: []
+  exerciseNames: [],
+  name: undefined
 };
 
 const userDataReducer = (state = initialState, action) => {
@@ -20,12 +21,13 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_FETCH_SUCCESS:
       {
-        const { exerciseNames } = action;
+        const { exerciseNames, name } = action;
         return {
           ...state,
           exerciseNames: [
             ...exerciseNames
-          ]
+          ],
+          name: name
         };
       }
     default:
