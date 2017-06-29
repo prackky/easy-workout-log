@@ -21,13 +21,14 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_FETCH_SUCCESS:
       {
-        const { exerciseNames, name } = action;
+        const { exerciseNames, name, email } = action;
         return {
           ...state,
           exerciseNames: [
             ...exerciseNames
           ],
-          name: name
+          name: name,
+          email: email
         };
       }
     default:

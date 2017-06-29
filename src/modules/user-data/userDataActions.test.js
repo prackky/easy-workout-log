@@ -17,11 +17,11 @@ describe('userDataActions', () => {
 
       nock(ewoloConstants.api.url)
         .get('/user-data')
-        .reply(200, { exerciseNames: [], name: 'snoop' });
+        .reply(200, { exerciseNames: [], name: 'snoop', email: 'snoop@dawg.yo' });
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames, 'snoop'),
+        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo'),
         { type: 'TASK-END' }
       ];
 
@@ -30,7 +30,6 @@ describe('userDataActions', () => {
       return store.dispatch(userDataActions.fetchUserDataThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          // console.log(actions);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });
@@ -41,7 +40,8 @@ describe('userDataActions', () => {
         {
           type: c.USER_DATA_FETCH_SUCCESS,
           exerciseNames: ewoloConstants.exerciseNames,
-          name: undefined
+          name: undefined,
+          email: undefined
         }
       ];
 

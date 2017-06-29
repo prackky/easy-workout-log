@@ -21,11 +21,12 @@ const userDataActions = {
       id: id
     };
   },
-  userDataFetchSuccess: (exerciseNames, name) => {
+  userDataFetchSuccess: (exerciseNames, name, email) => {
     return {
       type: c.USER_DATA_FETCH_SUCCESS,
       exerciseNames: exerciseNames,
-      name: name
+      name: name,
+      email: email
     }
   },
   fetchUserDataThunk: () => {
@@ -51,7 +52,7 @@ const userDataActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
-          dispatch(userDataActions.userDataFetchSuccess(allExercises, body.name));
+          dispatch(userDataActions.userDataFetchSuccess(allExercises, body.name, body.email));
         })
         .catch(error => {
           handleError(error);
