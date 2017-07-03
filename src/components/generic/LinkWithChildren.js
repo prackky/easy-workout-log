@@ -13,6 +13,11 @@ class LinkWithChildren extends Link {
       ...props
     } = this.props; // eslint-disable-line no-unused-vars
 
+    // delete exact because it is not necessary at this point
+    if (props.hasOwnProperty('exact')) {
+      delete props.exact;
+    }
+
     const href = this
       .context
       .router
