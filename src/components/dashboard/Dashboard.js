@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types'
-// import {Link} from 'react-router-dom';
+// import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
 import UserNotificationBar from '../notification/UserNotificationBar';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
@@ -31,9 +31,51 @@ class Dashboard extends Component {
   }
   */
 
-  state = {
-    accordionShow: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      accordionShow: false,
+      rows: [
+        [
+          new Date('2012-01-01'), 65
+        ],
+        [
+          new Date('2017-01-23'), 70
+        ],
+        [
+          new Date('2017-03-15'), 57.7
+        ],
+        [
+          new Date('2017-03-17'), 60
+        ],
+        [
+          new Date('2017-05-23'), 60.5
+        ],
+        [new Date('2017-06-26'), 67]
+      ],
+      columns: [
+        {
+          type: 'date',
+          label: 'Date'
+        }, {
+          type: 'number',
+          label: 'Volume'
+        }
+      ],
+      chartEvents: [
+        {
+          eventName: 'select',
+          callback(Chart) {
+            // Returns Chart so you can access props and  the ChartWrapper object from
+            // chart.wrapper
+            console.log('Selected ', Chart.chart.getSelection());
+          }
+        }
+      ]
+    };
+
+  }
 
   componentDidMount() {
     this
@@ -50,6 +92,10 @@ class Dashboard extends Component {
           <div className="columns">
             <div className="column col-12">
               <h4>Progress</h4>
+              <DateVsWeightScatterChart
+                rows={this.state.rows}
+                columns={this.state.columns}
+                chartEvents={this.state.chartEvents}/>
             </div>
           </div>
           <div className="columns">
