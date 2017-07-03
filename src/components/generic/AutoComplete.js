@@ -171,7 +171,7 @@ class AutoComplete extends Component {
                 : '')}
                 key={index}>
                 <a
-                  href="#"
+                  href="#/selected"
                   onClick={self
                   .handleMenuClick
                   .bind(self, suggestion)}>

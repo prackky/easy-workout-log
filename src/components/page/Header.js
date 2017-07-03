@@ -31,7 +31,7 @@ class Header extends Component {
 
     const userAccountMenu = (
       <div className="dropdown dropdown-right">
-        <a href="#" className="btn btn-link dropdown-toggle" tabIndex="0">
+        <a href="#/account" className="btn btn-link dropdown-toggle" tabIndex="0">
           {/*this.props.name*/}
           <i className="fa fa-user" aria-hidden="true"></i>
           <i className="icon icon-caret"></i>
@@ -156,7 +156,7 @@ class Header extends Component {
             <a
               id="sidebar-close"
               className={"docs-nav-clear " + this.state.sidebarCloseClass}
-              onClick={this.handleSidebarCloseClick}></a>
+              onClick={this.handleSidebarCloseClick}>&nbsp;</a>
 
           </div>
         </div>
