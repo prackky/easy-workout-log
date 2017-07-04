@@ -36,7 +36,6 @@ const userWorkoutsActions = {
 
       dispatch(globalActions.taskStart());
 
-      /*
       const promise = ewoloUtil.getApiRequest({
         route: `/users/${userId}/analysis/workouts`,
         method: 'GET',
@@ -47,12 +46,6 @@ const userWorkoutsActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           dispatch(userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(body));
-        })
-      */
-
-      return Promise.resolve()
-        .then(() => {
-          dispatch(userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(ewoloTestUtil.workoutsAnalysisResponseData));
         })
         .catch(error => {
           handleError(error);
