@@ -35,16 +35,16 @@ describe('userWorkoutsReducer', () => {
     });
   });
 
-  describe(c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS, () => {
+  describe(c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS, () => {
     it('should set data', () => {
       // when
-      const workoutsProgress = ewoloTestUtil.workoutsProgressResponseData;
-      const newState = userWorkoutsReducer(undefined, actions.userWorkoutsProgressFetchSuccess(workoutsProgress));
+      const workoutsAnalysis = ewoloTestUtil.workoutsAnalysisResponseData;
+      const newState = userWorkoutsReducer(undefined, actions.userWorkoutsAnalysisFetchSuccess(workoutsAnalysis));
 
       // then
       const expectedState = {
         ...initialState,
-        workoutsProgress: workoutsProgress
+        workoutsAnalysis: workoutsAnalysis
       };
 
       expect(newState)

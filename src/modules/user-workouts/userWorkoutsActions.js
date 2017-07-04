@@ -12,17 +12,17 @@ export const c = {
   USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS',
   USER_WORKOUTS_DELETE_SUCCESS: 'USER-WORKOUTS-DELETE-SUCCESS',
   USER_WORKOUTS_SET_VIEW_DETAILS: 'USER-WORKOUTS-SET-VIEW-DETAILS',
-  USER_WORKOUTS_PROGRESS_FETCH_SUCCESS: 'USER-WORKOUTS-PROGRESS-FETCH-SUCCESS'
+  USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS: 'USER-WORKOUTS-ANALYSIS-FETCH-SUCCESS'
 };
 
 const userWorkoutsActions = {
-  userWorkoutsProgressFetchSuccess: (workoutsProgress) => {
+  userWorkoutsAnalysisFetchSuccess: (workoutsAnalysis) => {
     return {
-      type: c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS,
-      workoutsProgress: workoutsProgress
+      type: c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS,
+      workoutsAnalysis: workoutsAnalysis
     };
   },
-  fetchUserWorkoutsProgressThunk: () => {
+  fetchUserWorkoutsAnalysisThunk: () => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;
@@ -38,7 +38,7 @@ const userWorkoutsActions = {
 
       /*
       const promise = ewoloUtil.getApiRequest({
-        route: `/users/${userId}/workouts-progress`,
+        route: `/users/${userId}/analysis/workouts`,
         method: 'GET',
         authToken: authToken
       });
@@ -46,13 +46,13 @@ const userWorkoutsActions = {
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          dispatch(userWorkoutsActions.userWorkoutsProgressFetchSuccess(body));
+          dispatch(userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(body));
         })
       */
 
       return Promise.resolve()
         .then(() => {
-          dispatch(userWorkoutsActions.userWorkoutsProgressFetchSuccess(ewoloTestUtil.workoutsProgressResponseData));
+          dispatch(userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(ewoloTestUtil.workoutsAnalysisResponseData));
         })
         .catch(error => {
           handleError(error);

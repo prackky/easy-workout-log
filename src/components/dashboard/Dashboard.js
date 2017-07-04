@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import getChartData from '../../services/workoutsProgressChartService';
+import getChartData from '../../services/workoutsAnalysisChartService';
 
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
@@ -15,13 +15,13 @@ const mapStateToProps = (state/*, ownProps*/) => {
     dashboard: state.user.dashboard,
     workouts: state.user.workouts.workouts,
     workoutsViewDetails: state.user.workouts.workoutsViewDetails,
-    workoutsProgress: state.user.workouts.workoutsProgress
+    workoutsAnalysis: state.user.workouts.workoutsAnalysis
   };
 };
 
 const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
-  doFetchUserWorkoutsProgressThunk: userWorkoutsActions.fetchUserWorkoutsProgressThunk,
+  doFetchUserWorkoutsAnalysisThunk: userWorkoutsActions.fetchUserWorkoutsAnalysisThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
   doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails
 };
@@ -38,7 +38,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    const workoutsProgressChartData = getChartData(props.workoutsProgress);
+    const workoutsAnalysisChartData = getChartData(props.workoutsAnalysis);
 
     const state = {
       accordionShow: false,
@@ -52,8 +52,8 @@ class Dashboard extends Component {
           }
         }
       ],
-      rows: workoutsProgressChartData.rows,
-      columns: workoutsProgressChartData.columns
+      rows: workoutsAnalysisChartData.rows,
+      columns: workoutsAnalysisChartData.columns
     };
 
     this.state = state;
@@ -65,15 +65,15 @@ class Dashboard extends Component {
       .doFetchUserWorkoutsThunk();
     this
       .props
-      .doFetchUserWorkoutsProgressThunk();
+      .doFetchUserWorkoutsAnalysisThunk();
   }
 
   componentWillReceiveProps(newProps) {
     // only update chart if something changed
-    if (this.props.workoutsProgress !== newProps.workoutsProgress) {
-      const workoutsProgressChartData = getChartData(newProps.workoutsProgress);
+    if (this.props.workoutsAnalysis !== newProps.workoutsAnalysis) {
+      const workoutsAnalysisChartData = getChartData(newProps.workoutsAnalysis);
       const newState = this.state;
-      newState.rows = workoutsProgressChartData.rows;
+      newState.rows = workoutsAnalysisChartData.rows;
       this.setState(newState);
     }
   }

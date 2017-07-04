@@ -3,7 +3,7 @@ import { c } from './userWorkoutsActions';
 export const initialState = {
   workouts: [],
   workoutsViewDetails: {},
-  workoutsProgress: []
+  workoutsAnalysis: []
 };
 
 const userWorkoutsReducer = (state = initialState, action) => {
@@ -17,13 +17,13 @@ const userWorkoutsReducer = (state = initialState, action) => {
           workouts: workouts
         };
       }
-    case c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS:
+    case c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS:
       {
-        const { workoutsProgress } = action;
+        const { workoutsAnalysis } = action;
 
         return {
           ...state,
-          workoutsProgress: workoutsProgress
+          workoutsAnalysis: workoutsAnalysis
         };
       }
     case c.USER_WORKOUTS_DELETE_SUCCESS:

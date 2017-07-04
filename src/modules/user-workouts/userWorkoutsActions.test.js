@@ -14,7 +14,7 @@ const mockStore = ewoloTestUtil.getMockStore();
 
 const userId = 'snoop';
 const userWorkoutsRoute = `/users/${userId}/workouts`;
-const userWorkoutsProgressRoute = `/users/${userId}/workouts-progress`;
+const userWorkoutsAnalysisRoute = `/users/${userId}/analysis/workouts`;
 const workouts = [{ id: 1, date: moment().format('YYYY-MM-DD'), notes: 'abc' }];
 
 describe('userWorkoutsActions', () => {
@@ -92,17 +92,17 @@ describe('userWorkoutsActions', () => {
     });
   });
 
-  describe('fetchUserWorkoutsProgressThunk', () => {
-    it('should successfully fetch user workouts progress', () => {
-      const workoutsProgress = ewoloTestUtil.workoutsProgressResponseData;
+  describe('fetchUserWorkoutsAnalysisThunk', () => {
+    it('should successfully fetch user workouts analysis', () => {
+      const workoutsAnalysis = ewoloTestUtil.workoutsAnalysisResponseData;
       
       nock(ewoloConstants.api.url)
-        .get(userWorkoutsProgressRoute)
-        .reply(200, workoutsProgress);
+        .get(userWorkoutsAnalysisRoute)
+        .reply(200, workoutsAnalysis);
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userWorkoutsActions.userWorkoutsProgressFetchSuccess(workoutsProgress), 
+        userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(workoutsAnalysis), 
         { type: 'TASK-END' }
       ];
 
@@ -115,14 +115,14 @@ describe('userWorkoutsActions', () => {
         }
       });
 
-      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsProgressThunk())
+      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsAnalysisThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           expect(actions).to.deep.equal(expectedActions);
         });
     });
 
-    it('should error when fetch user workouts progress for non-logged in user', () => {
+    it('should error when fetch user workouts analysis for non-logged in user', () => {
       
       const expectedActions = [
         globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.')
@@ -136,7 +136,7 @@ describe('userWorkoutsActions', () => {
         }
       });
 
-      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsProgressThunk())
+      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsAnalysisThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete expectedActions[0].at;

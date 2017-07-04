@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 
 import ewoloTestUtil from '../common/ewoloTestUtil';
-import getChartData from './workoutsProgressChartService';
+import getChartData from './workoutsAnalysisChartService';
 
 describe('getChartData', () => {
   it('should get chart data', () => {
     // when
-    const result = getChartData(ewoloTestUtil.workoutsProgressResponseData);
+    const result = getChartData(ewoloTestUtil.workoutsAnalysisResponseData);
 
     // then
     result.rows.length = 1 // who wants to type up all the data?
@@ -23,7 +23,7 @@ describe('getChartData', () => {
       });
   });
 
-  it('should get dummy rows when do data provided', () => {
+  it('should get dummy rows when no data provided', () => {
     // when
     const result = getChartData([]);
 

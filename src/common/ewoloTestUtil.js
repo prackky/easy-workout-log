@@ -32,7 +32,7 @@ const ewoloTestUtil = {
   getMockStore: () => {
     return configureMockStore(middlewares);
   },
-  workoutsProgressResponseData: [
+  workoutsAnalysisResponseData: [
     ['2012-01-01', 65],
     ['2017-01-23', 70],
     ['2017-03-15', 57.7],
