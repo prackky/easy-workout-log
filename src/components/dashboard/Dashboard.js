@@ -69,10 +69,13 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const workoutsProgressChartData = getChartData(newProps.workoutsProgress);
-    const newState = this.state;
-    newState.rows = workoutsProgressChartData.rows;
-    this.setState(newState);
+    // only update chart if something changed
+    if (this.props.workoutsProgress !== newProps.workoutsProgress) {
+      const workoutsProgressChartData = getChartData(newProps.workoutsProgress);
+      const newState = this.state;
+      newState.rows = workoutsProgressChartData.rows;
+      this.setState(newState);
+    }
   }
 
   render() {
