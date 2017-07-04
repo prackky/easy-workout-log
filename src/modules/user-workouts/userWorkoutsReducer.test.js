@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 
+import ewoloTestUtil from '../../common/ewoloTestUtil';
 import userWorkoutsReducer, { initialState } from './userWorkoutsReducer';
 import actions, { c } from './userWorkoutsActions';
 
@@ -25,6 +26,25 @@ describe('userWorkoutsReducer', () => {
       const expectedState = {
         ...initialState,
         workouts: workouts
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+  });
+
+  describe(c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS, () => {
+    it('should set data', () => {
+      // when
+      const workoutsProgress = ewoloTestUtil.workoutsProgressResponseData;
+      const newState = userWorkoutsReducer(undefined, actions.userWorkoutsProgressFetchSuccess(workoutsProgress));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workoutsProgress: workoutsProgress
       };
 
       expect(newState)

@@ -2,7 +2,8 @@ import { c } from './userWorkoutsActions';
 
 export const initialState = {
   workouts: [],
-  workoutsViewDetails: {}
+  workoutsViewDetails: {},
+  workoutsProgress: []
 };
 
 const userWorkoutsReducer = (state = initialState, action) => {
@@ -14,6 +15,15 @@ const userWorkoutsReducer = (state = initialState, action) => {
         return {
           ...state,
           workouts: workouts
+        };
+      }
+    case c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS:
+      {
+        const { workoutsProgress } = action;
+
+        return {
+          ...state,
+          workoutsProgress: workoutsProgress
         };
       }
     case c.USER_WORKOUTS_DELETE_SUCCESS:
