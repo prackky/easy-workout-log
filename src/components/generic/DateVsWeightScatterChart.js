@@ -5,6 +5,8 @@ class DateVsWeightScatterChart extends React.Component {
   constructor(props) {
     super(props);
 
+    // https://github.com/RakanNimer/react-google-charts/issues/145
+    // using 'Arial' here will get rid of the error: Not enough columns given to draw the requested chart.
     const globalFontName = 'Lato';
     const textStyle = {
       fontName: globalFontName
