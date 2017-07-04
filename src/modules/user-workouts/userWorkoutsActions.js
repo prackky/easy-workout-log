@@ -9,10 +9,51 @@ import globalActions from '../global/globalActions';
 export const c = {
   USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS',
   USER_WORKOUTS_DELETE_SUCCESS: 'USER-WORKOUTS-DELETE-SUCCESS',
-  USER_WORKOUTS_SET_VIEW_DETAILS: 'USER-WORKOUTS-SET-VIEW-DETAILS'
+  USER_WORKOUTS_SET_VIEW_DETAILS: 'USER-WORKOUTS-SET-VIEW-DETAILS',
+  USER_WORKOUTS_PROGRESS_FETCH_SUCCESS: 'USER-WORKOUTS-PROGRESS-FETCH-SUCCESS'
 };
 
 const userWorkoutsActions = {
+  userWorkoutsProgressFetchSuccess: (workoutsProgress) => {
+    return {
+      type: c.USER_WORKOUTS_PROGRESS_FETCH_SUCCESS,
+      workoutsProgress: workoutsProgress
+    };
+  },
+  fetchUserWorkoutsProgressThunk: () => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+      const userId = getState().user.data.id;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.'));
+          });
+      }
+
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: `/users/${userId}/workouts-progress`,
+        method: 'GET',
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          dispatch(userWorkoutsActions.userWorkoutsProgressFetchSuccess(body));
+        })
+        .catch(error => {
+          handleError(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user workouts progress data.'));
+        })
+        .then(() => {
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  },
   userWorkoutsFetchSuccess: (workouts) => {
     return {
       type: c.USER_WORKOUTS_FETCH_SUCCESS,

@@ -31,7 +31,15 @@ const ewoloTestUtil = {
   authTokenUserId: jwtDecode(authToken).id,
   getMockStore: () => {
     return configureMockStore(middlewares);
-  }
+  },
+  workoutsProgressResponseData: [
+    ['2012-01-01', 65],
+    ['2017-01-23', 70],
+    ['2017-03-15', 57.7],
+    ['2017-03-17', 60],
+    ['2017-05-23', 60.5],
+    ['2017-06-26', 67]
+  ]
 };
 
 export default ewoloTestUtil;
