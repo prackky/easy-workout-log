@@ -32,7 +32,7 @@ describe('getChartData', () => {
       .to
       .deep
       .equal({
-        rows: [[new Date('2017-01-01'), 0], [new Date('2017-01-02'), 1]],
+        rows: [[new Date('2017-01-01'), 0]],
         columns: [
           { type: 'date', label: 'Date' },
           { type: 'number', label: 'Volume' }
