@@ -1,3 +1,5 @@
+import ewoloTestUtil from '../../common/ewoloTestUtil';
+
 import ewoloUtil from '../../common/ewoloUtil';
 // import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
@@ -34,6 +36,7 @@ const userWorkoutsActions = {
 
       dispatch(globalActions.taskStart());
 
+      /*
       const promise = ewoloUtil.getApiRequest({
         route: `/users/${userId}/workouts-progress`,
         method: 'GET',
@@ -44,6 +47,12 @@ const userWorkoutsActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           dispatch(userWorkoutsActions.userWorkoutsProgressFetchSuccess(body));
+        })
+      */
+
+      return Promise.resolve()
+        .then(() => {
+          dispatch(userWorkoutsActions.userWorkoutsProgressFetchSuccess(ewoloTestUtil.workoutsProgressResponseData));
         })
         .catch(error => {
           handleError(error);

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import getChartData from '../../services/workoutsProgressChartService';
+
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
 import UserNotificationBar from '../notification/UserNotificationBar';
@@ -12,12 +14,14 @@ const mapStateToProps = (state/*, ownProps*/) => {
     // ...ownProps,
     dashboard: state.user.dashboard,
     workouts: state.user.workouts.workouts,
-    workoutsViewDetails: state.user.workouts.workoutsViewDetails
+    workoutsViewDetails: state.user.workouts.workoutsViewDetails,
+    workoutsProgress: state.user.workouts.workoutsProgress
   };
 };
 
 const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
+  doFetchUserWorkoutsProgressThunk: userWorkoutsActions.fetchUserWorkoutsProgressThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
   doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails
 };
@@ -34,35 +38,10 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    const workoutsProgressChartData = getChartData(props.workoutsProgress);
+
+    const state = {
       accordionShow: false,
-      rows: [
-        [
-          new Date('2012-01-01'), 65
-        ],
-        [
-          new Date('2017-01-23'), 70
-        ],
-        [
-          new Date('2017-03-15'), 57.7
-        ],
-        [
-          new Date('2017-03-17'), 60
-        ],
-        [
-          new Date('2017-05-23'), 60.5
-        ],
-        [new Date('2017-06-26'), 67]
-      ],
-      columns: [
-        {
-          type: 'date',
-          label: 'Date'
-        }, {
-          type: 'number',
-          label: 'Volume'
-        }
-      ],
       chartEvents: [
         {
           eventName: 'select',
@@ -72,15 +51,28 @@ class Dashboard extends Component {
             console.log('Selected ', Chart.chart.getSelection());
           }
         }
-      ]
+      ],
+      rows: workoutsProgressChartData.rows,
+      columns: workoutsProgressChartData.columns
     };
 
+    this.state = state;
   }
 
   componentDidMount() {
     this
       .props
       .doFetchUserWorkoutsThunk();
+    this
+      .props
+      .doFetchUserWorkoutsProgressThunk();
+  }
+
+  componentWillReceiveProps(newProps) {
+    const workoutsProgressChartData = getChartData(newProps.workoutsProgress);
+    const newState = this.state;
+    newState.rows = workoutsProgressChartData.rows;
+    this.setState(newState);
   }
 
   render() {
