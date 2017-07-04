@@ -1,7 +1,7 @@
 {
   "verbose": true,
   "src": {
-    "beforeStartCommand": "CI=true npm test",
+    "beforeStartCommand": "CI=true npm test; json -I -f package-lock.json -e 'this.version=\"${version}\"'",
     "afterReleaseCommand": "echo Successfully released ${version}"
   }
 }
