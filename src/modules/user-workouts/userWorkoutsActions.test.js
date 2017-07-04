@@ -21,70 +21,72 @@ describe('userWorkoutsActions', () => {
     nock.cleanAll();
   });
 
-  it('should successfully fetch user workouts', () => {
-    nock(ewoloConstants.api.url)
-      .get(userWorkoutsRoute)
-      .reply(200, workouts);
+  describe('fetchUserWorkoutsThunk', () => {
+    it('should successfully fetch user workouts', () => {
+      nock(ewoloConstants.api.url)
+        .get(userWorkoutsRoute)
+        .reply(200, workouts);
 
-    const expectedActions = [
-      { type: 'TASK-START' },
-      {
-        type: c.USER_WORKOUTS_FETCH_SUCCESS,
-        workouts: workouts
-      },
-      { type: 'TASK-END' }
-    ];
+      const expectedActions = [
+        { type: 'TASK-START' }, {
+          type: c.USER_WORKOUTS_FETCH_SUCCESS,
+          workouts: workouts
+        }, { type: 'TASK-END' }
+      ];
 
-    const store = mockStore({
-      user: {
-        data: {
-          authToken: 'blah',
-          id: userId
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
         }
-      }
+      });
+
+      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsThunk())
+        .then(() => { // return of async actions
+          const actions = store.getActions();
+          expect(actions).to.deep.equal(expectedActions);
+        });
     });
 
-    return store.dispatch(userWorkoutsActions.fetchUserWorkoutsThunk())
-      .then(() => { // return of async actions
-        const actions = store.getActions();
-        expect(actions).to.deep.equal(expectedActions);
-      });
-  });
+    it('should successfully delete user workouts', () => {
+      const workoutId = '42';
+      const workoutDate = 'sfdsf'
 
-  it('should successfully delete user workouts', () => {
-    const workoutId = '42';
-    const workoutDate = 'sfdsf'
+      nock(ewoloConstants.api.url)
+        .delete(userWorkoutsRoute + '/' + workoutId)
+        .reply(204);
 
-    nock(ewoloConstants.api.url)
-      .delete(userWorkoutsRoute + '/' + workoutId)
-      .reply(204);
+      const expectedActions = [
+        { type: 'TASK-START' },
+        {
+          type: c.USER_WORKOUTS_DELETE_SUCCESS,
+          workoutId: workoutId
+        },
+        globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`),
+        { type: 'TASK-END' }
+      ];
 
-    const expectedActions = [
-      { type: 'TASK-START' },
-      {
-        type: c.USER_WORKOUTS_DELETE_SUCCESS,
-        workoutId: workoutId
-      },
-      globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`),
-      { type: 'TASK-END' }
-    ];
-
-    const store = mockStore({
-      user: {
-        data: {
-          authToken: 'blah',
-          id: userId
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
         }
-      }
-    });
-
-    return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId, workoutDate))
-      .then(() => { // return of async actions
-        const actions = store.getActions();
-        delete actions[2].at;
-        delete expectedActions[2].at;
-        expect(actions).to.deep.equal(expectedActions);
       });
+
+      return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId, workoutDate))
+        .then(() => { // return of async actions
+          const actions = store.getActions();
+          delete actions[2].at;
+          delete expectedActions[2].at;
+          expect(actions).to.deep.equal(expectedActions);
+        });
+    });
   });
+
+
 
 });
