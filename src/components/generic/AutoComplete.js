@@ -28,7 +28,8 @@ class AutoComplete extends Component {
     items: PropTypes.arrayOf(PropTypes.string),
     placeholder: PropTypes.string.isRequired,
     input: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired
+    handleChange: PropTypes.func.isRequired,
+    autoFocus: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -191,6 +192,7 @@ class AutoComplete extends Component {
           <input
             className="form-input input-lg"
             type="text"
+            autoFocus={this.props.autoFocus}
             placeholder={this.props.placeholder}
             value={this.props.input}
             name={this.props.name}

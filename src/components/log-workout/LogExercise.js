@@ -249,6 +249,7 @@ const LogExercise = (props) => {
           <div className="col-9">
             <AutoComplete
               placeholder="e.g. Squats"
+              autoFocus={true}
               // name="exerciseName"
               items={props.exerciseNames} 
               input={props.exercise.name}
