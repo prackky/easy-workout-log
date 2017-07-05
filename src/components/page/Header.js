@@ -114,7 +114,7 @@ class Header extends Component {
                 <li className="divider"></li>
 
                 <li className="nav-item">
-                  Account
+                  {this.props.email}
                   <ul className="nav">
                     {this.props.authToken && (
                       <li className="nav-item">

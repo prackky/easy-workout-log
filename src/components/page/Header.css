@@ -38,6 +38,10 @@
   color: #5764c6;
 }
 
+.docs-sidebar .docs-nav .nav-item {
+  word-break: break-all;
+}
+
 /*
 @media screen and (min-width: 601px) {
   #sidebar {
