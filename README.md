@@ -22,3 +22,7 @@ Use `"build": "react-scripts build && react-snapshot",` in `package.json`
 
 Dry run: `release-it -n -d`
 Release: `release-it`
+
+# License
+
+See [LICENSE](LICENSE)
