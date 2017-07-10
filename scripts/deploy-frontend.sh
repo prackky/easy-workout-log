@@ -39,3 +39,6 @@ npm run build
 echo "deploy"
 rm -rf ~/npq/ewolo-api/public
 cp -r build ~/npq/ewolo-api/public
+
+echo "restart server"
+~/npq/ewolo-api/scripts/start.sh
