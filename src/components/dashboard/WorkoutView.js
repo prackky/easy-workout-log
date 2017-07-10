@@ -3,6 +3,7 @@ import React from 'react';
 import './WorkoutView.css';
 
 import Modal from '../generic/Modal';
+import calculateSuperSetIndexes from '../../services/superSetService';
 
 const orderExercises = (exercises) => {
   const result = [];
@@ -11,14 +12,23 @@ const orderExercises = (exercises) => {
     return a.workoutOrder - b.workoutOrder;
   });
 
-  let exerciseName = null;
+  let previous = {
+    name: null
+  };
+
   exercises.forEach((exercise, i) => {
-    if (exerciseName !== exercise.name) {
-      exerciseName = exercise.name;
-      result.push({name: exerciseName, setHeader: true});
+    if (previous.name !== exercise.name) {
+      previous = exercise;
+      
+      result.push({
+        name: previous.name, 
+        setHeader: true, 
+        isSuperSet: previous.superSetIndex > 1 ? true : false
+      });
     }
     result.push(exercise);
   });
+
   return result;
 };
 
@@ -28,6 +38,7 @@ class WorkoutView extends React.Component {
     super(props);
     this.workout = props.workout;
 
+    this.exercises = calculateSuperSetIndexes(this.workout.exercises);
     this.exercises = orderExercises(this.workout.exercises);
 
     this.state = {
@@ -84,7 +95,7 @@ class WorkoutView extends React.Component {
             <div
               key={index + '-' + exercise.name}
               className="column col-12 workout-exercise row">
-              {exercise.name}
+              {exercise.isSuperSet ? '+' : ''} {exercise.name}
             </div>
           );
         }
