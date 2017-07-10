@@ -64,79 +64,81 @@ describe('logWorkoutReducer', () => {
         });
     });
 
-    it('should set the correct setIndex when adding a second exercise', () => {
-      // when
-      const newState = logWorkoutReducer({
-        exercises: [{ name: '2', setIndex: 1 }]
-      }, actions.logWorkoutExercise('2'));
+    describe('setIndex', () => {
+      it('should set the correct setIndex when adding a second exercise', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: [{ name: '2', setIndex: 1 }]
+        }, actions.logWorkoutExercise('2'));
 
-      // then
-      expect(newState)
-        .to
-        .deep
-        .equal({
-          exercises: [{ name: '2', setIndex: 1 }, {
-            name: '2',
-            reps: '8',
-            weight: '100',
-            sets: '1',
-            tempo: '101',
-            rest: '60',
-            showAdvanced: false,
-            showProperties: true,
-            setIndex: 2
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [{ name: '2', setIndex: 1 }, {
+              name: '2',
+              reps: '8',
+              weight: '100',
+              sets: '1',
+              tempo: '101',
+              rest: '60',
+              showAdvanced: false,
+              showProperties: true,
+              setIndex: 2
           }]
-        });
-    });
+          });
+      });
 
-    it('should set the correct setIndex when adding a third exercise', () => {
-      // when
-      const newState = logWorkoutReducer({
-        exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }]
-      }, actions.logWorkoutExercise('3'));
+      it('should set the correct setIndex when adding a third exercise', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }]
+        }, actions.logWorkoutExercise('3'));
 
-      // then
-      expect(newState)
-        .to
-        .deep
-        .equal({
-          exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }, {
-            name: '3',
-            reps: '8',
-            weight: '100',
-            sets: '1',
-            tempo: '101',
-            rest: '60',
-            showAdvanced: false,
-            showProperties: true,
-            setIndex: 3
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }, {
+              name: '3',
+              reps: '8',
+              weight: '100',
+              sets: '1',
+              tempo: '101',
+              rest: '60',
+              showAdvanced: false,
+              showProperties: true,
+              setIndex: 3
           }]
-        });
-    });
+          });
+      });
 
-    it('should set the correct setIndex when adding a new exercise after a set', () => {
-      // when
-      const newState = logWorkoutReducer({
-        exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }]
-      }, actions.logWorkoutExercise('b'));
+      it('should set the correct setIndex when adding a new exercise after a set', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }]
+        }, actions.logWorkoutExercise('b'));
 
-      // then
-      expect(newState)
-        .to
-        .deep
-        .equal({
-          exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }, {
-            name: 'b',
-            reps: '8',
-            weight: '100',
-            sets: '1',
-            tempo: '101',
-            rest: '60',
-            showAdvanced: false,
-            showProperties: true,
-            setIndex: 1
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }, {
+              name: 'b',
+              reps: '8',
+              weight: '100',
+              sets: '1',
+              tempo: '101',
+              rest: '60',
+              showAdvanced: false,
+              showProperties: true,
+              setIndex: 1
           }]
-        });
+          });
+      });
     });
 
   });
