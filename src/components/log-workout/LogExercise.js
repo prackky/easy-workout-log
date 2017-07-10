@@ -89,10 +89,14 @@ const LogExercise = (props) => {
     const renderedAdvancedProperties = renderAdvanced();
     const renderedExerciseOperations = renderExerciseOperations();
 
+    const renderedDivider = (
+      <div className="divider-vert" data-content={'#' + (props.exercise.superSetIndex > 0 ? props.exercise.setIndex + '.' + props.exercise.superSetIndex : props.exercise.setIndex)}></div>
+    );
+
     return (
       <div className="fade-in exercise-entry-details">
         <div className="columns">
-          <div className="divider-vert" data-content={'#' + (props.exercise.setIndex)}></div>
+          {renderedDivider}
           <div className="column col-11">
             <div className="form-group">
               <div className="col-3">

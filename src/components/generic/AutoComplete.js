@@ -47,7 +47,7 @@ class AutoComplete extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.input + ' received ' + nextProps.input);
+    // console.log(this.props.input + ' received ' + nextProps.input);
 
     if (this.props.input !== nextProps.input) {
       if (!exactMatch(nextProps.input, nextProps.items)) {

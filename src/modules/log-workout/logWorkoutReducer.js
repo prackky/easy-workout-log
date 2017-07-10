@@ -125,6 +125,7 @@ const logWorkoutReducer = (state = {}, action) => {
           ...exercises[exerciseIndex],
           ...action.exercise,
           setIndex: 1,
+          superSetIndex: 0,
           nameFormHint: action.exercise.name ? '' : 'Required.',
           repsFormHint: action.exercise.reps ? '' : 'Required.'
         };
