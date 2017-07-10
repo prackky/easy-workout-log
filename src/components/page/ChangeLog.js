@@ -15,6 +15,7 @@ const ChangeLog = (props) => {
             <li>Super-set indicators on logging and viewing workouts</li>
             <li>Tighter workout view</li>
             <li>Change log</li>
+            <li>Additional welcome page progress graphic + copy</li>
           </ul>
           
         </div>
