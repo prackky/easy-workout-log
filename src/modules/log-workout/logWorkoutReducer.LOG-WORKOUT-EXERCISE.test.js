@@ -29,13 +29,14 @@ describe('logWorkoutReducer', () => {
               rest: '60',
               showAdvanced: false,
               showProperties: true,
-              setIndex: 1
+              setIndex: 1,
+              superSetIndex: 0
             }
           ]
         });
     });
 
-    it('should add an exercise for with given properties', () => {
+    it('should add an exercise with given properties', () => {
       // when
       const newState = logWorkoutReducer({
         type: 'weight',
@@ -58,7 +59,8 @@ describe('logWorkoutReducer', () => {
               rest: '200',
               showAdvanced: true,
               showProperties: true,
-              setIndex: 1
+              setIndex: 1,
+              superSetIndex: 0
             }
           ]
         });
@@ -76,7 +78,7 @@ describe('logWorkoutReducer', () => {
           .to
           .deep
           .equal({
-            exercises: [{ name: '2', setIndex: 1 }, {
+            exercises: [{ name: '2', setIndex: 1, superSetIndex: 0 }, {
               name: '2',
               reps: '8',
               weight: '100',
@@ -85,7 +87,8 @@ describe('logWorkoutReducer', () => {
               rest: '60',
               showAdvanced: false,
               showProperties: true,
-              setIndex: 2
+              setIndex: 2,
+              superSetIndex: 0
           }]
           });
       });
@@ -101,24 +104,32 @@ describe('logWorkoutReducer', () => {
           .to
           .deep
           .equal({
-            exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }, {
-              name: '3',
-              reps: '8',
-              weight: '100',
-              sets: '1',
-              tempo: '101',
-              rest: '60',
-              showAdvanced: false,
-              showProperties: true,
-              setIndex: 3
-          }]
+            exercises: [
+              { name: '3', setIndex: 1, superSetIndex: 0 },
+              { name: '3', setIndex: 2, superSetIndex: 0 },
+              {
+                name: '3',
+                reps: '8',
+                weight: '100',
+                sets: '1',
+                tempo: '101',
+                rest: '60',
+                showAdvanced: false,
+                showProperties: true,
+                setIndex: 3,
+                superSetIndex: 0
+              }
+            ]
           });
       });
 
       it('should set the correct setIndex when adding a new exercise after a set', () => {
         // when
         const newState = logWorkoutReducer({
-          exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }]
+          exercises: [
+            { name: 'a', setIndex: 1 },
+            { name: 'a', setIndex: 2 }
+          ]
         }, actions.logWorkoutExercise('b'));
 
         // then
@@ -126,19 +137,119 @@ describe('logWorkoutReducer', () => {
           .to
           .deep
           .equal({
-            exercises: [{ name: 'a', setIndex: 1 }, { name: 'a', setIndex: 2 }, {
-              name: 'b',
+            exercises: [
+              { name: 'a', setIndex: 1, superSetIndex: 0 },
+              { name: 'a', setIndex: 2, superSetIndex: 0 },
+              {
+                name: 'b',
+                reps: '8',
+                weight: '100',
+                sets: '1',
+                tempo: '101',
+                rest: '60',
+                showAdvanced: false,
+                showProperties: true,
+                setIndex: 1,
+                superSetIndex: 0
+              }
+            ]
+          });
+      });
+    });
+
+    describe('superSetIndex', () => {
+      it('should set superSetIndex when adding the first set of a superset', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: []
+        }, actions.logWorkoutExercise('super', '8', '100', '1', '101', '0', true));
+
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [{
+              name: 'super',
               reps: '8',
               weight: '100',
               sets: '1',
               tempo: '101',
-              rest: '60',
-              showAdvanced: false,
+              rest: '0',
+              showAdvanced: true,
               showProperties: true,
-              setIndex: 1
-          }]
+              setIndex: 1,
+              superSetIndex: 1
+            }]
           });
       });
+
+      it('should set superSetIndex when adding the third set of a superset', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: [
+            { name: 'super1', rest: '0' },
+            { name: 'super2', rest: '0' }
+          ]
+        }, actions.logWorkoutExercise('super3'));
+
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [
+              { name: 'super1', rest: '0', setIndex: 1, superSetIndex: 1 },
+              { name: 'super2', rest: '0', setIndex: 1, superSetIndex: 2 },
+              {
+                name: 'super3',
+                reps: '8',
+                weight: '100',
+                sets: '1',
+                tempo: '101',
+                rest: '60',
+                showAdvanced: false,
+                showProperties: true,
+                setIndex: 1,
+                superSetIndex: 3
+              },
+            ]
+          });
+      });
+
+      it('should set superSetIndex when wrapping up a superset', () => {
+        // when
+        const newState = logWorkoutReducer({
+          exercises: [
+            { name: 'super1', rest: '0' },
+            { name: 'super2', rest: '60' }
+          ]
+        }, actions.logWorkoutExercise('normal'));
+
+        // then
+        expect(newState)
+          .to
+          .deep
+          .equal({
+            exercises: [
+              { name: 'super1', rest: '0', setIndex: 1, superSetIndex: 1 },
+              { name: 'super2', rest: '60', setIndex: 1, superSetIndex: 2 },
+              {
+                name: 'normal',
+                reps: '8',
+                weight: '100',
+                sets: '1',
+                tempo: '101',
+                rest: '60',
+                showAdvanced: false,
+                showProperties: true,
+                setIndex: 1,
+                superSetIndex: 0
+              },
+            ]
+          });
+      });
+
     });
 
   });
