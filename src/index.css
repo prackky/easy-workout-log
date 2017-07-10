@@ -64,6 +64,7 @@ h6 {
 .divider[data-content]::after,
 .divider-vert[data-content]::after {
   color: #a0a0a0;
+  font-size: 1.3rem;
 }
 
 .divider-vert::before {
