@@ -10,6 +10,7 @@
 .workout-details {
   margin-left: 1rem;
   font-weight: 300;
+  font-size: 1.6rem;
 }
 
 .workout-details td {
@@ -21,7 +22,11 @@
   border-bottom: .1rem solid #727e96;
 }
 
-.workout-details .row {
+.workout-details .workout-exercise.row {
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+}
+
+.workout-details .row {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
