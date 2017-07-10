@@ -26,7 +26,10 @@ const Footer = (props) => {
         */}
 
         <div className="r">
-          By using this service you agree to the <Link to="/privacy">Privacy policy</Link> and <Link to="/terms">Terms of service</Link>. Feel free to <a href="mailto:feedback@ewolo.fitness">get in touch</a> regarding questions/feedback.
+          <a href="mailto:feedback@ewolo.fitness">Contact</a> &#8226; <Link to="/change-log">Change log</Link>
+        </div>
+        <div className="r">
+          By using this service you agree to the <Link to="/privacy">Privacy policy</Link> and <Link to="/terms">Terms of service</Link>. 
         </div>
         <div className="r">
           Version {props.clientVersion} / {window.SERVER_VERSION === '__SERVER_VERSION__' ? props.apiVersion : window.SERVER_VERSION} {/*, Release Notes */}

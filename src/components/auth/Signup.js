@@ -143,8 +143,7 @@ class Signup extends Component {
 
                   <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
-                      By signing up you agree to our
-                      <Link to="/terms">Terms of Service</Link>.
+                      By signing up you agree to our <Link to="/terms">Terms of Service</Link>.
                     </div>
                   </div>
 
