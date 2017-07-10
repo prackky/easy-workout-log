@@ -22,7 +22,15 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(logWorkoutActions.logWorkout());
     },
     doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
-      dispatch(logWorkoutActions.logWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced));
+      dispatch(logWorkoutActions.logWorkoutExercise({
+        name,
+        reps,
+        weight,
+        sets,
+        tempo,
+        rest,
+        showAdvanced
+      }));
     },
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));

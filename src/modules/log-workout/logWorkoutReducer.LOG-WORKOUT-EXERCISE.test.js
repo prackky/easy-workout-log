@@ -11,7 +11,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: []
-      }, actions.logWorkoutExercise());
+      }, actions.logWorkoutExercise({}));
 
       // then
       expect(newState)
@@ -41,7 +41,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: []
-      }, actions.logWorkoutExercise('existing', '24', '200', '2', '202', '200', true));
+      }, actions.logWorkoutExercise({ name: 'existing', reps: '24', weight: '200', sets: '2', tempo: '202', rest: '200', showAdvanced: true }));
 
       // then
       expect(newState)
@@ -71,7 +71,7 @@ describe('logWorkoutReducer', () => {
         // when
         const newState = logWorkoutReducer({
           exercises: [{ name: '2', setIndex: 1 }]
-        }, actions.logWorkoutExercise('2'));
+        }, actions.logWorkoutExercise({ name: '2' }));
 
         // then
         expect(newState)
@@ -97,7 +97,7 @@ describe('logWorkoutReducer', () => {
         // when
         const newState = logWorkoutReducer({
           exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }]
-        }, actions.logWorkoutExercise('3'));
+        }, actions.logWorkoutExercise({ name: '3' }));
 
         // then
         expect(newState)
@@ -130,7 +130,7 @@ describe('logWorkoutReducer', () => {
             { name: 'a', setIndex: 1 },
             { name: 'a', setIndex: 2 }
           ]
-        }, actions.logWorkoutExercise('b'));
+        }, actions.logWorkoutExercise({ name: 'b' }));
 
         // then
         expect(newState)
@@ -162,7 +162,7 @@ describe('logWorkoutReducer', () => {
         // when
         const newState = logWorkoutReducer({
           exercises: []
-        }, actions.logWorkoutExercise('super', '8', '100', '1', '101', '0', true));
+        }, actions.logWorkoutExercise({ name: 'super', reps: '8', weight: '100', sets: '1', tempo: '101', rest: '0', showAdvanced: true }));
 
         // then
         expect(newState)
@@ -191,7 +191,7 @@ describe('logWorkoutReducer', () => {
             { name: 'super1', rest: '0' },
             { name: 'super2', rest: '0' }
           ]
-        }, actions.logWorkoutExercise('super3'));
+        }, actions.logWorkoutExercise({ name: 'super3' }));
 
         // then
         expect(newState)
@@ -224,7 +224,7 @@ describe('logWorkoutReducer', () => {
             { name: 'super1', rest: '0' },
             { name: 'super2', rest: '60' }
           ]
-        }, actions.logWorkoutExercise('normal'));
+        }, actions.logWorkoutExercise({ name: 'normal' }));
 
         // then
         expect(newState)

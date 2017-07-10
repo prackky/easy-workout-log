@@ -25,7 +25,7 @@ const logWorkoutActions = {
       type: c.LOG_WORKOUT
     }
   },
-  logWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
+  logWorkoutExercise: ({ name, reps, weight, sets, tempo, rest, showAdvanced }) => {
     return {
       type: c.LOG_WORKOUT_EXERCISE,
       name: name,
