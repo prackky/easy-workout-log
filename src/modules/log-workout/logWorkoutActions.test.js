@@ -16,7 +16,7 @@ describe('logWorkoutActions', () => {
 
   describe('logWorkoutSaveThunk', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when saving a workout for a logged in user', () => {
-      
+
       nock(ewoloConstants.api.url)
         .post('/workouts')
         .reply(201, { id: 'xxx' });
@@ -69,6 +69,30 @@ describe('logWorkoutActions', () => {
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[0].action;
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        });
+    });
+  });
+
+  describe('logWorkoutCopyThunk', () => {
+    it('creates ' + c.LOG_WORKOUT_COPY + ' when copying a workout', () => {
+
+      const expectedActions = [
+        {
+          type: c.LOG_WORKOUT_COPY,
+          workout: { id: 1 }
+        },
+        {
+          type: '@@router/CALL_HISTORY_METHOD',
+          payload: { method: 'push', args: ['/log-workout'] }
+        }
+      ];
+
+      const store = mockStore({ user: { logWorkout: {} } });
+
+      return store.dispatch(logWorkoutActions.logWorkoutCopyThunk({id: 1}))
+        .then(() => { // return of async actions
+          const actions = store.getActions();
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });

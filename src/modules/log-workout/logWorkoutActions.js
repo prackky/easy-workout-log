@@ -133,8 +133,11 @@ const logWorkoutActions = {
   },
   logWorkoutCopyThunk: (workout) => {
     return (dispatch, getState) => {
-      dispatch(logWorkoutActions.logWorkoutCopy(workout));
-      dispatch(push('/log-workout'));
+      return Promise.resolve()
+        .then(() => {
+          dispatch(logWorkoutActions.logWorkoutCopy(workout));
+          dispatch(push('/log-workout'));
+        });
     };
   }
 };
