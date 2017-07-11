@@ -70,6 +70,30 @@ const logWorkoutReducer = (state = {}, action) => {
           showWeightHelp: false
         }
       }
+    case c.LOG_WORKOUT_EDIT:
+      {
+        const workout = action.workout;
+        const exercises = copyExercises(workout.exercises);
+
+        for (const exercise of exercises) {
+          exercise.showProperties = true;
+          exercise.showAdvanced = false;
+        }
+
+        calculateSetIndexes(exercises);
+        calculateSuperSetIndexes(exercises);
+
+        return {
+          id: workout.id,
+          componentMounted: true,
+          date: workout.date,
+          notes: workout.notes,
+          exercises: exercises,
+          showTempoHelp: false,
+          showRestHelp: false,
+          showWeightHelp: false
+        }
+      }
     case c.LOG_WORKOUT_EXERCISE:
       {
         const exercises = copyExercises(state.exercises);

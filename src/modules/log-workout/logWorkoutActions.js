@@ -17,7 +17,8 @@ export const c = {
   LOG_WORKOUT_SET_SHOW_REST_HELP: 'LOG-WORKOUT-SET-SHOW-REST-HELP',
   LOG_WORKOUT_SET_SHOW_WEIGHT_HELP: 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP',
   LOG_WORKOUT_SAVE_SUCCESS: 'LOG-WORKOUT-SAVE-SUCCESS',
-  LOG_WORKOUT_COPY: 'LOG-WORKOUT-COPY'
+  LOG_WORKOUT_COPY: 'LOG-WORKOUT-COPY',
+  LOG_WORKOUT_EDIT: 'LOG-WORKOUT-EDIT'
 };
 
 const logWorkoutActions = {
@@ -98,21 +99,38 @@ const logWorkoutActions = {
       }
 
       const logWorkout = getState().user.logWorkout;
+      const userId = getState().user.data.id;
       const logWorkoutDate = logWorkout.date;
+      const logWorkoutId = logWorkout.id;
 
       dispatch(globalActions.taskStart());
 
-      const promise = ewoloUtil.getApiRequest({
-        route: '/workouts',
-        method: 'POST',
-        body: logWorkout,
-        authToken: authToken
-      });
+      let promise = null;
+
+      if (logWorkoutId) {
+        promise = ewoloUtil.getApiRequest({
+          route: `/users/${userId}/workouts/${logWorkoutId}`,
+          method: 'PUT',
+          body: logWorkout
+        });
+      } else {
+        promise = ewoloUtil.getApiRequest({
+          route: '/workouts',
+          method: 'POST',
+          body: logWorkout,
+          authToken: authToken
+        });
+      }
 
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
+          if (logWorkoutId) {
+            dispatch(logWorkoutActions.logWorkoutSaveSuccess(logWorkoutId));
+          } else {
+            dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
+          }
+          
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
           dispatch(push('/dashboard'));
         })
@@ -136,6 +154,21 @@ const logWorkoutActions = {
       return Promise.resolve()
         .then(() => {
           dispatch(logWorkoutActions.logWorkoutCopy(workout));
+          dispatch(push('/log-workout'));
+        });
+    };
+  },
+  logWorkoutEdit: (workout) => {
+    return {
+      type: c.LOG_WORKOUT_EDIT,
+      workout
+    };
+  },
+  logWorkoutEditThunk: (workout) => {
+    return (dispatch, getState) => {
+      return Promise.resolve()
+        .then(() => {
+          dispatch(logWorkoutActions.logWorkoutEdit(workout));
           dispatch(push('/log-workout'));
         });
     };

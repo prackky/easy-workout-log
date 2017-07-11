@@ -113,6 +113,82 @@ describe('logWorkoutReducer', () => {
         });
     });
   });
+  
+  describe(c.LOG_WORKOUT_EDIT, () => {
+    it('should edit a workout', () => {
+      // when
+      const newState = logWorkoutReducer(undefined, actions.logWorkoutEdit(ewoloTestUtil.mock.savedWorkout));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          id: 21,
+          componentMounted: true,
+          notes: 'bla',
+          date: '2017-06-24',
+          exercises: [
+            {
+              id: 92,
+              name: 'Bench Press',
+              reps: 8,
+              sets: 1,
+              weight: 88,
+              tempo: '101',
+              rest: 0,
+              workoutOrder: 1,
+              superSetIndex: 1,
+              setIndex: 1,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              id: 93,
+              name: 'Bent Over Barbell Rows',
+              reps: 8,
+              sets: 1,
+              weight: 88,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 2,
+              superSetIndex: 2,
+              setIndex: 1,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              id: 100,
+              name: 'Incline Barbell Bench Press',
+              reps: 8,
+              sets: 1,
+              weight: 66,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 3,
+              setIndex: 1,
+              superSetIndex: 0,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              id: 101,
+              name: 'Incline Barbell Bench Press',
+              reps: 6,
+              sets: 1,
+              weight: 66,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 4,
+              setIndex: 2,
+              superSetIndex: 0,
+              showProperties: true,
+              showAdvanced: false
+            }
+          ],
+          showTempoHelp: false,
+          showRestHelp: false,
+          showWeightHelp: false
+        });
+    });
+  });
 
   describe(c.LOG_WORKOUT_SET_DATA, () => {
     it('should set data', () => {
