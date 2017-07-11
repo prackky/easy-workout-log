@@ -1,44 +1,66 @@
-import React from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-const UserNotification = (props) => {
+import ewoloUtil from '../../common/ewoloUtil';
 
-  const handleClearNotification = (event) => {
-    event.preventDefault();
-    props.doUpdateUserNotification(props.index, true);
-  };
-
-  const getNotificationClassName = (type) => {
-    if (type === 'SUCCESS') {
-      return 'toast-success';
-    } else if (type === 'ERROR') {
-      return 'toast-error';
-    }
-
-    return '';
-  };
-
-  if (props.userNotification.isRead) {
-    return null;
+const getNotificationClassName = (type) => {
+  if (type === 'SUCCESS') {
+    return 'toast-success';
+  } else if (type === 'ERROR') {
+    return 'toast-error';
   }
 
-  return (
-    <div className="columns">
-      <div className="column col-xs-12">
-        <div
-          className={"toast user-notification " + getNotificationClassName(props.userNotification.type)}>
-          <button className="btn btn-clear float-right" onClick={handleClearNotification}></button>
-          <div>
-            {props.userNotification.text}
-          </div>
-          <div className="notification-timestamp">
-            {moment(props.userNotification.at).fromNow()}
+  return '';
+};
+
+class UserNotification extends Component {
+
+  constructor(props) {
+    super(props);
+    this.refUserNotification = `user-notification-${props.index}`;
+  }
+
+  handleClearNotification = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doUpdateUserNotification(this.props.index, true);
+  }
+
+  componentDidMount() {
+    // only scroll the top one into view
+    if (this.props.index === 0) {
+      ewoloUtil.scrollElementIntoView(this.refs[this.refUserNotification]);
+    }
+  }
+
+  render() {
+
+    if (this.props.userNotification.isRead) {
+      return null;
+    }
+
+    return (
+      <div className="columns">
+        <div className="column col-xs-12">
+          <div
+            ref={this.refUserNotification}
+            className={"toast user-notification " + getNotificationClassName(this.props.userNotification.type)}>
+            <button
+              className="btn btn-clear float-right"
+              onClick={this.handleClearNotification}></button>
+            <div>
+              {this.props.userNotification.text}
+            </div>
+            <div className="notification-timestamp">
+              {moment(this.props.userNotification.at).fromNow()}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 UserNotification.propTypes = {
