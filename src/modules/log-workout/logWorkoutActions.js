@@ -84,12 +84,6 @@ const logWorkoutActions = {
       id: id
     };
   },
-  logWorkoutCopy: (workout) => {
-    return {
-      type: c.LOG_WORKOUT_COPY,
-      workout
-    };
-  },
   logWorkoutSaveThunk: () => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
@@ -129,6 +123,18 @@ const logWorkoutActions = {
         .then(() => {
           dispatch(globalActions.taskEnd());
         });
+    };
+  },
+  logWorkoutCopy: (workout) => {
+    return {
+      type: c.LOG_WORKOUT_COPY,
+      workout
+    };
+  },
+  logWorkoutCopyThunk: (workout) => {
+    return (dispatch, getState) => {
+      dispatch(logWorkoutActions.logWorkoutCopy(workout));
+      dispatch(push('/log-workout'));
     };
   }
 };

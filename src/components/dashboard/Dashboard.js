@@ -8,6 +8,7 @@ import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
 import UserNotificationBar from '../notification/UserNotificationBar';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
+import logWorkoutActions from '../../modules/log-workout/logWorkoutActions'
 
 const mapStateToProps = (state/*, ownProps*/) => {
   return {
@@ -23,7 +24,8 @@ const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
   doFetchUserWorkoutsAnalysisThunk: userWorkoutsActions.fetchUserWorkoutsAnalysisThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
-  doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails
+  doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails,
+  doCopyWorkoutThunk: logWorkoutActions.logWorkoutCopyThunk
 };
 
 class Dashboard extends Component {
@@ -150,7 +152,8 @@ class Dashboard extends Component {
           ? true
           : false}
           doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
-          doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}/>);
+          doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}
+          doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}/>);
       });
   }
 

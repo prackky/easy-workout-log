@@ -78,6 +78,13 @@ class WorkoutView extends React.Component {
     });
   }
 
+  handleWorkoutCopy = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.props.doCopyWorkoutThunk(this.workout);
+  }
+
   renderExercises = () => {
     if (this.exercises.length === 0) {
       return (
@@ -156,6 +163,12 @@ class WorkoutView extends React.Component {
             </button>
             */}
 
+              <button
+                className="btn btn-action btn-lg circle btn-exercise-action"
+                type="button"
+                onClick={this.handleWorkoutCopy}>
+                <i className="icon icon-plus"></i>
+              </button>
               <button
                 className="btn btn-action btn-lg circle btn-exercise-action"
                 type="button"

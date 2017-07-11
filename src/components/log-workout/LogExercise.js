@@ -149,7 +149,7 @@ const LogExercise = (props) => {
 
     return (
       <div className="exercise-entry-details">
-        {sets && sets !== '1' ? sets + ' x ' : ''} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
+        {/*{sets && sets !== '1' ? sets + ' x ' : ''}*/} {reps} reps {weight ? ' @ ' + weight + ' lbs' : ''} {tempo && tempo !== '101' ? ' / ' + tempo : ''} {rest && rest !== '60' ? ' / ' + rest + ' secs': ''}
       </div>
     )
   };
