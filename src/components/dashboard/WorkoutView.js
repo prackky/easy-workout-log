@@ -19,11 +19,13 @@ const orderExercises = (exercises) => {
   exercises.forEach((exercise, i) => {
     if (previous.name !== exercise.name) {
       previous = exercise;
-      
+
       result.push({
-        name: previous.name, 
-        setHeader: true, 
-        isSuperSet: previous.superSetIndex > 1 ? true : false
+        name: previous.name,
+        setHeader: true,
+        isSuperSet: previous.superSetIndex > 1
+          ? true
+          : false
       });
     }
     result.push(exercise);
@@ -82,7 +84,14 @@ class WorkoutView extends React.Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.props.doCopyWorkoutThunk(this.workout);
+    this
+      .props
+      .doCopyWorkoutThunk(this.workout);
+  }
+
+  handleWorkoutMenuClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   renderExercises = () => {
@@ -102,7 +111,10 @@ class WorkoutView extends React.Component {
             <div
               key={index + '-' + exercise.name}
               className="column col-12 workout-exercise row">
-              {exercise.isSuperSet ? '+' : ''} {exercise.name}
+              {exercise.isSuperSet
+                ? '+'
+                : ''}
+              {exercise.name}
             </div>
           );
         }
@@ -163,18 +175,26 @@ class WorkoutView extends React.Component {
             </button>
             */}
 
-              <button
-                className="btn btn-action btn-lg circle btn-exercise-action"
-                type="button"
-                onClick={this.handleWorkoutCopy}>
-                <i className="icon icon-plus"></i>
-              </button>
-              <button
-                className="btn btn-action btn-lg circle btn-exercise-action"
-                type="button"
-                onClick={this.handleWorkoutDelete}>
-                <i className="icon icon-delete"></i>
-              </button>
+              <div className="dropdown dropdown-right">
+                <button
+                  className="btn btn-action btn-lg circle btn-exercise-action dropdown-toggle"
+                  type="button"
+                  onClick={this.handleWorkoutMenuClick}>
+                  <i className="icon icon-menu"></i>
+                </button>
+
+                <ul className="menu">
+                  <li className="menu-item">
+                    <a href="#/workout-copy" onClick={this.handleWorkoutCopy}>
+                      <i className="fa fa-clone" aria-hidden="true"></i>Copy workout {this.workout.date}</a>
+                  </li>
+                  <li className="menu-item">
+                    <a href="#/workout-delete" onClick={this.handleWorkoutDelete}>
+                      <i className="fa fa-trash" aria-hidden="true"></i>Delete workout {this.workout.date}</a>
+                  </li>
+                </ul>
+              </div>
+
             </div>
           </div>
         </label>
