@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import moment from 'moment';
 
+import ewoloTestUtil from '../../common/ewoloTestUtil';
 import ewoloUtil from '../../common/ewoloUtil';
 import logWorkoutReducer from './logWorkoutReducer';
 import actions, { c } from './logWorkoutActions';
@@ -33,6 +34,79 @@ describe('logWorkoutReducer', () => {
           notes: '',
           date: today,
           exercises: [],
+          showTempoHelp: false,
+          showRestHelp: false,
+          showWeightHelp: false
+        });
+    });
+  });
+
+  describe(c.LOG_WORKOUT_COPY, () => {
+    const today = ewoloUtil.getTodaysDate();
+
+    it('should copy a workout', () => {
+      // when
+      const newState = logWorkoutReducer(undefined, actions.logWorkoutCopy(ewoloTestUtil.mock.savedWorkout));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          componentMounted: true,
+          notes: 'bla',
+          date: today,
+          exercises: [
+            {
+              name: 'Bench Press',
+              reps: 8,
+              sets: 1,
+              weight: 88,
+              tempo: '101',
+              rest: 0,
+              workoutOrder: 1,
+              superSetIndex: 1,
+              setIndex: 1,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              name: 'Bent Over Barbell Rows',
+              reps: 8,
+              sets: 1,
+              weight: 88,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 2,
+              superSetIndex: 2,
+              setIndex: 1,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              name: 'Incline Barbell Bench Press',
+              reps: 8,
+              sets: 1,
+              weight: 66,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 3,
+              setIndex: 1,
+              superSetIndex: 0,
+              showProperties: true,
+              showAdvanced: false
+            }, {
+              name: 'Incline Barbell Bench Press',
+              reps: 6,
+              sets: 1,
+              weight: 66,
+              tempo: '101',
+              rest: 60,
+              workoutOrder: 4,
+              setIndex: 2,
+              superSetIndex: 0,
+              showProperties: true,
+              showAdvanced: false
+            }
+          ],
           showTempoHelp: false,
           showRestHelp: false,
           showWeightHelp: false

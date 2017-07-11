@@ -46,6 +46,30 @@ const logWorkoutReducer = (state = {}, action) => {
           showWeightHelp: false
         };
       }
+    case c.LOG_WORKOUT_COPY:
+      {
+        const workout = action.workout;
+        const exercises = copyExercises(workout.exercises);
+
+        for (const exercise of exercises) {
+          delete exercise.id;
+          exercise.showProperties = true;
+          exercise.showAdvanced = false;
+        }
+
+        calculateSetIndexes(exercises);
+        calculateSuperSetIndexes(exercises);
+
+        return {
+          componentMounted: true,
+          date: ewoloUtil.getTodaysDate(),
+          notes: workout.notes,
+          exercises: exercises,
+          showTempoHelp: false,
+          showRestHelp: false,
+          showWeightHelp: false
+        }
+      }
     case c.LOG_WORKOUT_EXERCISE:
       {
         const exercises = copyExercises(state.exercises);

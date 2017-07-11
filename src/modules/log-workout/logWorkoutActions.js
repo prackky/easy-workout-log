@@ -16,7 +16,8 @@ export const c = {
   LOG_WORKOUT_SET_SHOW_TEMPO_HELP: 'LOG-WORKOUT-SET-SHOW-TEMPO-HELP',
   LOG_WORKOUT_SET_SHOW_REST_HELP: 'LOG-WORKOUT-SET-SHOW-REST-HELP',
   LOG_WORKOUT_SET_SHOW_WEIGHT_HELP: 'LOG-WORKOUT-SET-SHOW-WEIGHT-HELP',
-  LOG_WORKOUT_SAVE_SUCCESS: 'LOG-WORKOUT-SAVE-SUCCESS'
+  LOG_WORKOUT_SAVE_SUCCESS: 'LOG-WORKOUT-SAVE-SUCCESS',
+  LOG_WORKOUT_COPY: 'LOG-WORKOUT-COPY'
 };
 
 const logWorkoutActions = {
@@ -81,6 +82,12 @@ const logWorkoutActions = {
     return {
       type: c.LOG_WORKOUT_SAVE_SUCCESS,
       id: id
+    };
+  },
+  logWorkoutCopy: (workout) => {
+    return {
+      type: c.LOG_WORKOUT_COPY,
+      workout
     };
   },
   logWorkoutSaveThunk: () => {
