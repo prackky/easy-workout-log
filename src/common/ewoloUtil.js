@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
+import ReactDOM from 'react-dom';
 
 import ewoloConstants from './ewoloConstants';
 import { RequestError } from './errorHandler';
@@ -7,7 +8,7 @@ import { RequestError } from './errorHandler';
 // export const ewoloConstants;
 
 const ewoloUtil = {
-  getApiRequest: ({route, method, body, authToken}) => {
+  getApiRequest: ({ route, method, body, authToken }) => {
     const url = ewoloConstants.api.url + route;
     const headers = {
       'Content-Type': 'application/json'
@@ -79,6 +80,13 @@ const ewoloUtil = {
   },
   getTodaysDate: () => {
     return moment().format('YYYY-MM-DD');
+  },
+  scrollElementIntoView: (element) => {
+    setTimeout(() => {
+      ReactDOM
+        .findDOMNode(element)
+        .scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }, 0);
   }
 };
 

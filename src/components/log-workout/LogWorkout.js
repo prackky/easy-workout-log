@@ -10,6 +10,7 @@ import Modal from '../generic/Modal';
 
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 
+import ewoloUtil from '../../common/ewoloUtil';
 import ewoloContent from '../../common/ewoloContent';
 
 const mapStateToProps = (state) => {
@@ -113,11 +114,7 @@ class LogWorkout extends Component {
         .props
         .doLogWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced);
 
-      setTimeout(() => {
-        ReactDOM
-          .findDOMNode(this.refs.btnAddExercise)
-          .scrollIntoView({block: 'end', behavior: 'smooth'});
-      }, 0);
+      ewoloUtil.scrollElementIntoView(this.refs.btnAddExercise);
 
       return;
     }
