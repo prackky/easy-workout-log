@@ -4,6 +4,7 @@ import thunk from '../redux/middleware/thunk';
 import jwtDecode from 'jwt-decode';
 
 import ewoloConstants from './ewoloConstants';
+import { workout } from './testData';
 
 let localStorage = {};
 
@@ -39,7 +40,10 @@ const ewoloTestUtil = {
     ['2017-03-17', 60],
     ['2017-05-23', 60.5],
     ['2017-06-26', 67]
-  ]
+  ],
+  mock: {
+    workout: workout
+  }
 };
 
 export default ewoloTestUtil;
