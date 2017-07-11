@@ -25,7 +25,8 @@ const mapDispatchToProps = {
   doFetchUserWorkoutsAnalysisThunk: userWorkoutsActions.fetchUserWorkoutsAnalysisThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
   doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails,
-  doCopyWorkoutThunk: logWorkoutActions.logWorkoutCopyThunk
+  doCopyWorkoutThunk: logWorkoutActions.logWorkoutCopyThunk,
+  doEditWorkoutThunk: logWorkoutActions.logWorkoutEditThunk
 };
 
 class Dashboard extends Component {
@@ -153,7 +154,8 @@ class Dashboard extends Component {
           : false}
           doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
           doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}
-          doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}/>);
+          doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}
+          doEditWorkoutThunk={this.props.doEditWorkoutThunk}/>);
       });
   }
 

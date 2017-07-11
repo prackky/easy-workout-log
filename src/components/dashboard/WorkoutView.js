@@ -89,6 +89,15 @@ class WorkoutView extends React.Component {
       .doCopyWorkoutThunk(this.workout);
   }
 
+  handleWorkoutEdit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this
+      .props
+      .doEditWorkoutThunk(this.workout);
+  }
+
   handleWorkoutMenuClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -184,6 +193,10 @@ class WorkoutView extends React.Component {
                 </button>
 
                 <ul className="menu">
+                  <li className="menu-item">
+                    <a href="#/workout-copy" onClick={this.handleWorkoutEdit}>
+                      <i className="fa fa-pencil" aria-hidden="true"></i>Edit workout {this.workout.date}</a>
+                  </li>
                   <li className="menu-item">
                     <a href="#/workout-copy" onClick={this.handleWorkoutCopy}>
                       <i className="fa fa-clone" aria-hidden="true"></i>Copy workout {this.workout.date}</a>

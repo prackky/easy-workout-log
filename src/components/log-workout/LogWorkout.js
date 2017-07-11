@@ -169,6 +169,12 @@ class LogWorkout extends Component {
       return <div></div>;
     }
 
+    const pageTitle = (
+      <h4>{this.props.logWorkout.id
+          ? `Edit workout for ${this.props.logWorkout.date}`
+          : 'Log a new workout.'}</h4>
+    );
+
     return (
       <div>
         <UserNotificationBar/>
@@ -197,7 +203,7 @@ class LogWorkout extends Component {
         <div className="container grid-480 section-content">
           <div className="columns">
             <div className="column col-12">
-              <h4>Log a new workout.</h4>
+              {pageTitle}
               <p>
                 Click + to add a new exercise. Use the same exercise name for multiple sets.
               </p>
