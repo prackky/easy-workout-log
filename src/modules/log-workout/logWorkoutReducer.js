@@ -1,5 +1,5 @@
-import moment from 'moment';
 
+import ewoloUtil from '../../common/ewoloUtil';
 import { c } from './logWorkoutActions.js';
 import calculateSuperSetIndexes from '../../services/superSetService';
 
@@ -38,7 +38,7 @@ const logWorkoutReducer = (state = {}, action) => {
       {
         return {
           componentMounted: true,
-          date: moment().format('YYYY-MM-DD'),
+          date: ewoloUtil.getTodaysDate(),
           notes: '',
           exercises: [],
           showTempoHelp: false,
@@ -179,12 +179,10 @@ const logWorkoutReducer = (state = {}, action) => {
 
     case c.LOG_WORKOUT_SAVE_SUCCESS:
       {
-        const today = moment().format('YYYY-MM-DD');
-
         return {
           componentMounted: false,
           notes: '',
-          date: today,
+          date: ewoloUtil.getTodaysDate(),
           exercises: []
         };
       }

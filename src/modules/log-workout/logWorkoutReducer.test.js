@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import moment from 'moment';
 
+import ewoloUtil from '../../common/ewoloUtil';
 import logWorkoutReducer from './logWorkoutReducer';
 import actions, { c } from './logWorkoutActions';
 
@@ -17,7 +18,7 @@ describe('logWorkoutReducer', () => {
   });
 
   describe(c.LOG_WORKOUT, () => {
-    const today = moment().format('YYYY-MM-DD');
+    const today = ewoloUtil.getTodaysDate();
 
     it('should add an empty workout', () => {
       // when
@@ -155,7 +156,7 @@ describe('logWorkoutReducer', () => {
   });
 
   describe(c.LOG_WORKOUT_SAVE_SUCCESS, () => {
-    const today = moment().format('YYYY-MM-DD');
+    const today = ewoloUtil.getTodaysDate();
 
     it('should clean data', () => {
       // when

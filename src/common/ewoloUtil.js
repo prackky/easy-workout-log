@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import moment from 'moment';
 
 import ewoloConstants from './ewoloConstants';
 import { RequestError } from './errorHandler';
@@ -75,6 +76,9 @@ const ewoloUtil = {
     if (window.localStorage) {
       window.localStorage.removeItem(key);
     }
+  },
+  getTodaysDate: () => {
+    return moment().format('YYYY-MM-DD');
   }
 };
 

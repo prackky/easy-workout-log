@@ -15,7 +15,7 @@ const mockStore = ewoloTestUtil.getMockStore();
 const userId = 'snoop';
 const userWorkoutsRoute = `/users/${userId}/workouts`;
 const userWorkoutsAnalysisRoute = `/users/${userId}/analysis/workouts`;
-const workouts = [{ id: 1, date: moment().format('YYYY-MM-DD'), notes: 'abc' }];
+const workouts = [{ id: 1, date: ewoloUtil.getTodaysDate(), notes: 'abc' }];
 
 describe('userWorkoutsActions', () => {
   afterEach(() => {
