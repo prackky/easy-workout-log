@@ -6,6 +6,7 @@ import { initialState as loginInitialState } from './login/loginReducer';
 import { initialState as globalInitialState } from './global/globalReducer';
 import { initialState as userDataInitialState } from './user-data/userDataReducer';
 import { initialState as userWorkoutsInitialState } from './user-workouts/userWorkoutsReducer';
+import { initialState as accountInitialState } from './account/accountReducer';
 
 describe('appReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -22,6 +23,7 @@ describe('appReducer', () => {
       signup: signupInitialState,
       login: loginInitialState,
       global: globalInitialState,
+      account: accountInitialState
     });
   })
 });

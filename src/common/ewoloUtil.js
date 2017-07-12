@@ -46,6 +46,12 @@ const ewoloUtil = {
     }
     return '';
   },
+  validateRequired: (str, name) => {
+    if (!str) {
+      return `${name} is required.`;
+    }
+    return '';
+  },
   validatePassword: (password) => {
     if (!password) {
       return 'Password is required.';
