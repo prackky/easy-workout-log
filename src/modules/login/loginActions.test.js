@@ -117,6 +117,7 @@ describe('loginActions', () => {
       .then(() => { // return of async actions
         const actions = store.getActions();
         delete actions[1].at;
+        delete actions[1].id;
         expect(actions).to.deep.equal(expectedActions);
       });
   });

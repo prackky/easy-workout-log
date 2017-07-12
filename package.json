@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "private": true,
   "dependencies": {
+    "chance": "1.0.10",
     "font-awesome": "4.7.0",
     "isomorphic-fetch": "2.2.1",
     "json": "9.0.6",

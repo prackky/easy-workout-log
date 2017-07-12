@@ -73,6 +73,7 @@ describe('globalReducer', () => {
       const now = new Date();
       const action = actions.userNotificationAdd('SUCCESS', 'yay!');
       action.at = now;
+      action.id = 'xxx';
 
       const newState = globalReducer({
         userNotifications: []
@@ -88,7 +89,8 @@ describe('globalReducer', () => {
               type: 'SUCCESS',
               text: 'yay!',
               isRead: false,
-              at: now
+              at: now,
+              id: 'xxx'
             }
           ]
         });
@@ -99,6 +101,7 @@ describe('globalReducer', () => {
       const now = new Date();
       const action = actions.userNotificationAdd('SUCCESS', 'yay!');
       action.at = now;
+      action.id = 'xxx';
 
       const newState = globalReducer({
         userNotifications: [{ text: '0', isRead: true }]
@@ -114,7 +117,8 @@ describe('globalReducer', () => {
               type: 'SUCCESS',
               text: 'yay!',
               isRead: false,
-              at: now
+              at: now,
+              id: 'xxx'
             },
             {
               text: '0',
@@ -129,6 +133,7 @@ describe('globalReducer', () => {
       const now = new Date();
       const action = actions.userNotificationAdd('SUCCESS', 'yay!', true);
       action.at = now;
+      action.id = 'xxx';
 
       const newState = globalReducer({
         userNotifications: [{ text: '0', isRead: false }, { text: '1', isRead: false }]
@@ -144,7 +149,8 @@ describe('globalReducer', () => {
               type: 'SUCCESS',
               text: 'yay!',
               isRead: false,
-              at: now
+              at: now,
+              id: 'xxx'
             },
             {
               text: '0',
@@ -168,18 +174,21 @@ describe('globalReducer', () => {
           {
             type: 'SUCCESS',
             text: '0',
-            isRead: false
+            isRead: false,
+            id: '0'
           }, {
             type: 'SUCCESS',
             text: '1',
-            isRead: false
+            isRead: false,
+            id: 'xxx'
           }, {
             type: 'SUCCESS',
             text: '2',
-            isRead: false
+            isRead: false,
+            id: 'yyy'
           }
         ]
-      }, actions.userNotificationUpdate(0, true));
+      }, actions.userNotificationUpdate('0', true));
 
       // then
       expect(newState)
@@ -190,15 +199,67 @@ describe('globalReducer', () => {
             {
               type: 'SUCCESS',
               text: '0',
-              isRead: true
+              isRead: true,
+              id: '0'
             }, {
               type: 'SUCCESS',
               text: '1',
-              isRead: false
+              isRead: false,
+              id: 'xxx'
             }, {
               type: 'SUCCESS',
               text: '2',
-              isRead: false
+              isRead: false,
+              id: 'yyy'
+            }
+          ]
+        });
+    });
+
+    it('should not do anything if no matching notification', () => {
+      // when
+      const newState = globalReducer({
+        userNotifications: [
+          {
+            type: 'SUCCESS',
+            text: '0',
+            isRead: false,
+            id: '0'
+          }, {
+            type: 'SUCCESS',
+            text: '1',
+            isRead: false,
+            id: 'xxx'
+          }, {
+            type: 'SUCCESS',
+            text: '2',
+            isRead: false,
+            id: 'yyy'
+          }
+        ]
+      }, actions.userNotificationUpdate('a', true));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          userNotifications: [
+            {
+              type: 'SUCCESS',
+              text: '0',
+              isRead: false,
+              id: '0'
+            }, {
+              type: 'SUCCESS',
+              text: '1',
+              isRead: false,
+              id: 'xxx'
+            }, {
+              type: 'SUCCESS',
+              text: '2',
+              isRead: false,
+              id: 'yyy'
             }
           ]
         });

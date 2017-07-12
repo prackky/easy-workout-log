@@ -1,5 +1,8 @@
 // import { push } from 'react-router-redux';
 
+import ewoloUtil from '../../common/ewoloUtil';
+
+
 const globalActions = {
   taskStart: () => {
     return {
@@ -17,14 +20,15 @@ const globalActions = {
       userNotificationType: type,
       userNotificationText: text,
       at: new Date(),
-      markPreviousAsRead: markPreviousAsRead
+      markPreviousAsRead: markPreviousAsRead,
+      id: ewoloUtil.chance.guid()
     };
   },
-  userNotificationUpdate: (index, isRead) => {
+  userNotificationUpdate: (id, isRead) => {
     return {
       type: 'USER-NOTIFICATION-UPDATE',
-      index: index,
-      isRead: isRead
+      id,
+      isRead
     };
   }
 };

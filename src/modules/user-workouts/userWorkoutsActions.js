@@ -1,5 +1,3 @@
-import ewoloTestUtil from '../../common/ewoloTestUtil';
-
 import ewoloUtil from '../../common/ewoloUtil';
 // import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';

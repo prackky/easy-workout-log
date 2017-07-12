@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    doUpdateUserNotification: (index, isRead) => {
-      dispatch(globalActions.userNotificationUpdate(index, isRead));
+    doUpdateUserNotification: (id, isRead) => {
+      dispatch(globalActions.userNotificationUpdate(id, isRead));
     }
   };
 };
@@ -25,9 +25,8 @@ const UserNotificationBar = (props) => {
     return props
       .userNotifications
       .map((userNotification, index) => {
-        // TODO: check if using an id in the user notification list makes more sense?!
         return (<UserNotification
-          key={index}
+          key={userNotification.id}
           index={index}
           doUpdateUserNotification={props.doUpdateUserNotification}
           userNotification={userNotification}/>);

@@ -46,6 +46,7 @@ describe('logWorkoutActions', () => {
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[2].at;
+          delete actions[2].id;
 
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
@@ -82,6 +83,7 @@ describe('logWorkoutActions', () => {
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[2].at;
+          delete actions[2].id;
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });

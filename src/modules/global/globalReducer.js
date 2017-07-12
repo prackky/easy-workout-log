@@ -41,7 +41,8 @@ const globalReducer = (state = initialState, action) => {
               type: action.userNotificationType,
               text: action.userNotificationText,
               isRead: false,
-              at: action.at
+              at: action.at,
+              id: action.id
             },
             ...userNotifications
           ]
@@ -49,21 +50,35 @@ const globalReducer = (state = initialState, action) => {
       }
     case 'USER-NOTIFICATION-UPDATE':
       {
-        const index = action.index;
+        const id = action.id;
         const userNotifications = state.userNotifications;
-        const userNotification = userNotifications[index];
 
-        return {
-          ...state,
-          userNotifications: [
+        let index = -1;
+        let userNotification = null;
+
+        for (let i = 0; i < userNotifications.length; ++i) {
+          if (userNotifications[i].id === id) {
+            index = i;
+            userNotification = userNotifications[i];
+            break;
+          }
+        }
+
+        if (index > -1) {
+          return {
+            ...state,
+            userNotifications: [
             ...userNotifications.slice(0, index),
-            {
-              ...userNotification,
-              isRead: action.isRead
+              {
+                ...userNotification,
+                isRead: action.isRead
             },
             ...userNotifications.slice(index + 1)
           ]
-        };
+          };
+        }
+
+        return state;
       }
     default:
       return state;

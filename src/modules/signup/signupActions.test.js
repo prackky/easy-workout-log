@@ -53,6 +53,7 @@ describe('signupActions', () => {
       .then(() => { // return of async actions
         const actions = store.getActions();
         delete actions[2].at;
+        delete actions[2].id;
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
         expect(authToken).to.equal(ewoloTestUtil.authToken);
         expect(store.getActions()).to.deep.equal(expectedActions);

@@ -25,7 +25,7 @@ class UserNotification extends Component {
     event.preventDefault();
     this
       .props
-      .doUpdateUserNotification(this.props.index, true);
+      .doUpdateUserNotification(this.props.userNotification.id, true);
   }
 
   componentDidMount() {

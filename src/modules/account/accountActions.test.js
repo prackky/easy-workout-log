@@ -23,10 +23,14 @@ describe('accountActions', () => {
         .reply(201, { id: 'xxx' });
       */
 
+      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account information', true);
+      delete userNotificationAction.id;
+      delete userNotificationAction.at;
+
       const expectedActions = [
         globalActions.taskStart(),
         accountActions.accountUpdateSuccess(),
-        globalActions.userNotificationAdd('SUCCESS', 'Updated account information', true),
+        userNotificationAction,
         /*
         {
           type: '@@router/CALL_HISTORY_METHOD',
@@ -53,8 +57,8 @@ describe('accountActions', () => {
       return store.dispatch(accountActions.accountUpdateThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
+          delete actions[2].id;
           delete actions[2].at;
-          delete expectedActions[2].at;
 
           console.log(actions);
 

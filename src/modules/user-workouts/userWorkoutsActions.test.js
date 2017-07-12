@@ -29,10 +29,9 @@ describe('userWorkoutsActions', () => {
         .reply(200, workouts);
 
       const expectedActions = [
-        { type: 'TASK-START' }, {
-          type: c.USER_WORKOUTS_FETCH_SUCCESS,
-          workouts: workouts
-        }, { type: 'TASK-END' }
+        globalActions.taskStart(),
+        userWorkoutsActions.userWorkoutsFetchSuccess(workouts),
+        globalActions.taskEnd()
       ];
 
       const store = mockStore({
@@ -64,13 +63,10 @@ describe('userWorkoutsActions', () => {
         .reply(204);
 
       const expectedActions = [
-        { type: 'TASK-START' },
-        {
-          type: c.USER_WORKOUTS_DELETE_SUCCESS,
-          workoutId: workoutId
-        },
+        globalActions.taskStart(),
+        userWorkoutsActions.userWorkoutsDeleteSuccess(workoutId),
         globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`),
-        { type: 'TASK-END' }
+        globalActions.taskEnd()
       ];
 
       const store = mockStore({
@@ -86,7 +82,9 @@ describe('userWorkoutsActions', () => {
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[2].at;
+          delete actions[2].id;
           delete expectedActions[2].at;
+          delete expectedActions[2].id;
           expect(actions).to.deep.equal(expectedActions);
         });
     });
@@ -101,9 +99,9 @@ describe('userWorkoutsActions', () => {
         .reply(200, workoutsAnalysis);
 
       const expectedActions = [
-        { type: 'TASK-START' },
+        globalActions.taskStart(),
         userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(workoutsAnalysis), 
-        { type: 'TASK-END' }
+        globalActions.taskEnd()
       ];
 
       const store = mockStore({
@@ -140,7 +138,9 @@ describe('userWorkoutsActions', () => {
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete expectedActions[0].at;
+          delete expectedActions[0].id;
           delete actions[0].at;
+          delete actions[0].id;
           expect(actions).to.deep.equal(expectedActions);
         });
     });

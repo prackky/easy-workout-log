@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
+import Chance from 'chance';
 
 import ewoloConstants from './ewoloConstants';
 import { RequestError } from './errorHandler';
@@ -93,7 +94,8 @@ const ewoloUtil = {
         .findDOMNode(element)
         .scrollIntoView({ block: 'end', behavior: 'smooth' });
     }, 0);
-  }
+  },
+  chance: new Chance()
 };
 
 export default ewoloUtil;
