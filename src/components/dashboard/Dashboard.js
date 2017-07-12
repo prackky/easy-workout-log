@@ -72,7 +72,8 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // only update chart if something changed
+    // update chart if something changed
+    // most likely this will happen in the case that we roll back to this page 
     if (this.props.workoutsAnalysis !== newProps.workoutsAnalysis) {
       const workoutsAnalysisChartData = getChartData(newProps.workoutsAnalysis);
       const newState = this.state;
