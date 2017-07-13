@@ -14,6 +14,13 @@ import App from './App';
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-41172423-4');
 
+/*
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+  console.error([msg, url, lineNo, columnNo, error]);
+  return false;
+}
+*/
+
 // ReactDOM.render(
 render(
   <App/>, document.getElementById('root'));
