@@ -18,6 +18,12 @@ Use `"build": "react-scripts build && react-snapshot",` in `package.json`
 - Start tests and watch for changes: `npm test`
 - Count lines of js code: `find . -name '*.js' | xargs wc -l`
 
+## Misc
+
+### Delete map files on production build
+
+https://github.com/facebookincubator/create-react-app/issues/1341
+
 ## Releases
 
 Dry run: `release-it -n -d`
