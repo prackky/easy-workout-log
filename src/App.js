@@ -78,9 +78,11 @@ class App extends Component {
   }
 }
 
+/*
 history.listen((location) => {
   console.log('location', location); // TODO: Think about clearing the message bar when transitioning to certain states
   // TODO: save to localstorage on transition
 });
+*/
 
 export default App;
