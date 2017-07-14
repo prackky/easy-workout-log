@@ -18,9 +18,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    doLogWorkout: () => {
-      dispatch(logWorkoutActions.logWorkout());
-    },
     doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
       dispatch(logWorkoutActions.logWorkoutExercise({
         name,
@@ -57,18 +54,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class LogWorkout extends Component {
-
-  componentDidMount() {
-    if (!this.props.logWorkout.componentMounted) {
-      // TODO: consider maintaining mount status in local state
-      this
-        .props
-        .doLogWorkout();
-      this
-        .props
-        .doLogWorkoutExercise();
-    }
-  }
 
   renderExercises() {
     return this
@@ -161,9 +146,6 @@ class LogWorkout extends Component {
   }
 
   render() {
-    if (!this.props.logWorkout.componentMounted) {
-      return <div></div>;
-    }
 
     const pageTitle = (
       <h4>{this.props.logWorkout.id
