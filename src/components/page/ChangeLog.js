@@ -10,7 +10,7 @@ const ChangeLog = (props) => {
         <div className="column col-12">
           <h3 className="text-center">Change Log</h3>
 
-          <h5 className="margin-top-5rem">Version 0.5.0</h5>
+          <h5 className="margin-top-5rem">Version 1.0.1</h5>
           <ul className="change-log">
             <li>Workout operations menu</li>
             <li>Copy workouts</li>
