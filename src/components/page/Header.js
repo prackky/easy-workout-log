@@ -80,10 +80,10 @@ class Header extends Component {
             <section className="navbar-section navbar-content">
               {this.props.authToken && userAccountMenu}
               {!this.props.authToken && (
-                <NavLink exact to="/login" className="btn btn-link">Login</NavLink>
+                <NavLink exact to="/signup" className="btn btn-link"><i className="fa fa-fw fa-user-plus" aria-hidden="true"></i> Sign-up</NavLink>
               )}
               {!this.props.authToken && (
-                <NavLink exact to="/signup" className="btn btn-link">Signup</NavLink>
+                <NavLink exact to="/login" className="btn btn-link"><i className="fa fa-fw fa-sign-in" aria-hidden="true"></i> Login</NavLink>
               )}
             </section>
           </header>
@@ -139,14 +139,17 @@ class Header extends Component {
                     )}
                     {!this.props.authToken && (
                       <li className="nav-item">
-                        <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
+                        <i className="fa fa-fw fa-user-plus" aria-hidden="true"></i>
+                        <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Sign-up</NavLink>
                       </li>
                     )}
                     {!this.props.authToken && (
                       <li className="nav-item">
-                        <NavLink exact to="/signup" onClick={this.handleSidebarCloseClick}>Signup</NavLink>
+                        <i className="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+                        <NavLink exact to="/login" onClick={this.handleSidebarCloseClick}>Login</NavLink>
                       </li>
                     )}
+
                   </ul>
                 </li>
 
