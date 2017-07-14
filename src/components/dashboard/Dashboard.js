@@ -69,6 +69,7 @@ class Dashboard extends Component {
     this
       .props
       .doFetchUserWorkoutsAnalysisThunk();
+      // console.log('dashboard mount');
   }
 
   componentWillReceiveProps(newProps) {
@@ -81,6 +82,12 @@ class Dashboard extends Component {
       this.setState(newState);
     }
   }
+
+  /*
+  componentDidUpdate() {
+    console.log('dashboard update');
+  }
+  */
 
   render() {
 

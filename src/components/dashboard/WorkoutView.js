@@ -38,10 +38,6 @@ class WorkoutView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.workout = props.workout;
-
-    this.exercises = calculateSuperSetIndexes(this.workout.exercises);
-    this.exercises = orderExercises(this.workout.exercises);
 
     this.state = {
       showDeleteConfirmModal: false
@@ -52,13 +48,13 @@ class WorkoutView extends React.Component {
     event.preventDefault();
     this
       .props
-      .doToggleViewWorkoutDetails(this.workout.id, !(this.props.showWorkoutDetails));
+      .doToggleViewWorkoutDetails(this.props.workout.id, !(this.props.showWorkoutDetails));
   }
 
   handleModalWorkoutDeleteExecute = () => {
     this
       .props
-      .doDeleteUserWorkoutThunk(this.workout.id, this.workout.date);
+      .doDeleteUserWorkoutThunk(this.props.workout.id, this.props.workout.date);
   }
 
   handleModalWorkoutDeleteCancel = () => {
@@ -86,7 +82,7 @@ class WorkoutView extends React.Component {
 
     this
       .props
-      .doCopyWorkoutThunk(this.workout);
+      .doCopyWorkoutThunk(this.props.workout);
   }
 
   handleWorkoutEdit = (event) => {
@@ -95,7 +91,7 @@ class WorkoutView extends React.Component {
 
     this
       .props
-      .doEditWorkoutThunk(this.workout);
+      .doEditWorkoutThunk(this.props.workout);
   }
 
   handleWorkoutMenuClick = (event) => {
@@ -104,7 +100,10 @@ class WorkoutView extends React.Component {
   }
 
   renderExercises = () => {
-    if (this.exercises.length === 0) {
+    let exercises = calculateSuperSetIndexes(this.props.workout.exercises);
+    exercises = orderExercises(exercises);
+
+    if (exercises.length === 0) {
       return (
         <div className="column col-12 row">
           <i>No exercises logged</i>
@@ -112,44 +111,42 @@ class WorkoutView extends React.Component {
       )
     }
 
-    return this
-      .exercises
-      .map((exercise, index) => {
-        if (exercise.setHeader) {
-          return (
-            <div
-              key={index + '-' + exercise.name}
-              className="column col-12 workout-exercise row">
-              {exercise.isSuperSet
-                ? '+'
-                : ''}
-              {exercise.name}
-            </div>
-          );
-        }
-
-        const showTempo = exercise.tempo !== '101';
-        const showRest = exercise.rest !== 60;
-        const showDivider = showTempo && showRest;
-
+    return exercises.map((exercise, index) => {
+      if (exercise.setHeader) {
         return (
-          <div className="column col-12 row" key={exercise.id}>
-            <div className="columns">
-              <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
-                  ? 'x ' + exercise.weight
-                  : ''}</div>
-              <div className="column col-6 row">{showTempo
-                  ? exercise.tempo
-                  : ''} {showDivider
-                  ? ' / '
-                  : ''}
-                {showRest
-                  ? exercise.rest
-                  : ''}</div>
-            </div>
+          <div
+            key={index + '-' + exercise.name}
+            className="column col-12 workout-exercise row">
+            {exercise.isSuperSet
+              ? '+'
+              : ''}
+            {exercise.name}
           </div>
         );
-      });
+      }
+
+      const showTempo = exercise.tempo !== '101';
+      const showRest = exercise.rest !== 60;
+      const showDivider = showTempo && showRest;
+
+      return (
+        <div className="column col-12 row" key={exercise.id}>
+          <div className="columns">
+            <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
+                ? 'x ' + exercise.weight
+                : ''}</div>
+            <div className="column col-6 row">{showTempo
+                ? exercise.tempo
+                : ''} {showDivider
+                ? ' / '
+                : ''}
+              {showRest
+                ? exercise.rest
+                : ''}</div>
+          </div>
+        </div>
+      );
+    });
 
   }
 
@@ -170,9 +167,9 @@ class WorkoutView extends React.Component {
           onClick={this.toggleViewWorkoutDetails}>
           <div className="columns">
             <div className="columns col-xs-5 col-3 centered">
-              {this.workout.date}
+              {this.props.workout.date}
             </div>
-            <div className="columns col-xs-5 col-8 centered workout-panel-notes">{this.workout.notes}</div>
+            <div className="columns col-xs-5 col-8 centered workout-panel-notes">{this.props.workout.notes}</div>
             <div className="columns col-xs-2 col-1 centered text-right">
               {/*
             <button
@@ -195,15 +192,15 @@ class WorkoutView extends React.Component {
                 <ul className="menu">
                   <li className="menu-item">
                     <a href="#/workout-copy" onClick={this.handleWorkoutEdit}>
-                      <i className="fa fa-pencil" aria-hidden="true"></i>Edit workout {this.workout.date}</a>
+                      <i className="fa fa-pencil" aria-hidden="true"></i>Edit workout {this.props.workout.date}</a>
                   </li>
                   <li className="menu-item">
                     <a href="#/workout-copy" onClick={this.handleWorkoutCopy}>
-                      <i className="fa fa-clone" aria-hidden="true"></i>Copy workout {this.workout.date}</a>
+                      <i className="fa fa-clone" aria-hidden="true"></i>Copy workout {this.props.workout.date}</a>
                   </li>
                   <li className="menu-item">
                     <a href="#/workout-delete" onClick={this.handleWorkoutDelete}>
-                      <i className="fa fa-trash" aria-hidden="true"></i>Delete workout {this.workout.date}</a>
+                      <i className="fa fa-trash" aria-hidden="true"></i>Delete workout {this.props.workout.date}</a>
                   </li>
                 </ul>
               </div>
