@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Link, NavLink} from 'react-router-dom';
-
+import {Link, NavLink, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import './Header.css';
@@ -128,12 +127,14 @@ class Header extends Component {
                   <ul className="nav">
                     {this.props.authToken && (
                       <li className="nav-item">
-                        <i className="fa fa-fw fa-cogs" aria-hidden="true"></i> <NavLink exact to="/account" onClick={this.handleSidebarCloseClick}>Account</NavLink>
+                        <i className="fa fa-fw fa-cogs" aria-hidden="true"></i>
+                        <NavLink exact to="/account" onClick={this.handleSidebarCloseClick}>Account</NavLink>
                       </li>
                     )}
                     {this.props.authToken && (
                       <li className="nav-item">
-                        <i className="fa fa-fw fa-sign-out" aria-hidden="true"></i> <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
+                        <i className="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+                        <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
                       </li>
                     )}
                     {!this.props.authToken && (
@@ -182,4 +183,4 @@ class Header extends Component {
 
 };
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header)); // router integration required for NavLink to set active state

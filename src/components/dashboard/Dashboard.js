@@ -69,7 +69,8 @@ class Dashboard extends Component {
     this
       .props
       .doFetchUserWorkoutsAnalysisThunk();
-      // console.log('dashboard mount');
+
+    // console.log(this.props);
   }
 
   componentWillReceiveProps(newProps) {
