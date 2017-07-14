@@ -26,7 +26,7 @@ const Footer = (props) => {
         */}
 
         <div className="r">
-          <a href="mailto:feedback@ewolo.fitness">Contact</a> &#8226; <Link to="/change-log">Change log</Link>
+          <a href="mailto:feedback@ewolo.fitness">Contact</a> &#8226; <Link to="/change-log">Change log</Link> &#8226; <a href="https://github.com/victorparmar/easy-workout-log">Github</a>
         </div>
         <div className="r">
           By using this service you agree to the <Link to="/privacy">Privacy policy</Link> and <Link to="/terms">Terms of service</Link>. 

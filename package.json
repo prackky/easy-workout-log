@@ -2,6 +2,12 @@
   "name": "easy-workout-log",
   "version": "0.4.0",
   "private": true,
+  "homepage": "https://ewolo.fitness",
+  "author": {
+    "name": "Victor Parmar",
+    "email": "vic@smalldata.tech",
+    "url": "https://smalldata.tech"
+  },
   "dependencies": {
     "chance": "1.0.10",
     "font-awesome": "4.7.0",
