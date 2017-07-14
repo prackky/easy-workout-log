@@ -50,6 +50,11 @@ class Signup extends Component {
   };
 
   render() {
+    const forwardingText = (typeof this.props.signup.afterSuccess.action) === 'function'
+      ? (
+        <p className="text-left">Your workout will automatically be saved after signing up!</p>
+      )
+      : null;
 
     return (
       <div>
@@ -59,6 +64,9 @@ class Signup extends Component {
             <div className="column col-12">
               <div className="text-center">
                 <h4>Create an account</h4>
+
+                {forwardingText}
+
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -84,7 +92,7 @@ class Signup extends Component {
 
                   </div>
 
-                  <EwoloFormHint formHint={this.props.signup.emailFormHint} />
+                  <EwoloFormHint formHint={this.props.signup.emailFormHint}/>
 
                   <div className="form-group">
                     <div className="col-12">
@@ -98,9 +106,7 @@ class Signup extends Component {
 
                   </div>
 
-                  <EwoloFormHint formHint={this.props.signup.passwordFormHint} />
-
-                  {/*
+                  <EwoloFormHint formHint={this.props.signup.passwordFormHint}/> {/*
                   <div className="form-group">
                     <div className="col-12 text-left">
                       <label className="form-switch">
@@ -130,7 +136,8 @@ class Signup extends Component {
 
                   <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
-                      By signing up you agree to our <Link to="/terms">Terms of Service</Link>.
+                      By signing up you agree to our&nbsp;
+                      <Link to="/terms">Terms of Service</Link>.
                     </div>
                   </div>
 
