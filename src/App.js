@@ -30,6 +30,7 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
+import Account from './components/account/Account';
 
 import appReducer from './modules/appReducer';
 import createEwoloStore from './redux/createEwoloStore';
@@ -72,6 +73,7 @@ class App extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/>
+            <Route exact path="/account" component={Account}/>
             <Footer clientVersion={packageJson.version} apiVersion={ewoloConstants.api.version}/>
           </div>
         </ConnectedRouter>

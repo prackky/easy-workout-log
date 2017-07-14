@@ -41,8 +41,14 @@ class Header extends Component {
             <div className="tile tile-centered">{this.props.email}</div>
           </li>
           <li className="menu-item">
+            <LinkWithChildren exact to="/account">
+              <i className="fa fa-fw fa-cogs" aria-hidden="true"></i>
+              Account
+            </LinkWithChildren>
+          </li>
+          <li className="menu-item">
             <LinkWithChildren exact to="/logout">
-              <i className="fa fa-sign-out" aria-hidden="true"></i>
+              <i className="fa fa-fw fa-sign-out" aria-hidden="true"></i>
               Logout
             </LinkWithChildren>
           </li>
@@ -118,7 +124,12 @@ class Header extends Component {
                   <ul className="nav">
                     {this.props.authToken && (
                       <li className="nav-item">
-                        <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
+                        <i className="fa fa-fw fa-cogs" aria-hidden="true"></i> <NavLink exact to="/account" onClick={this.handleSidebarCloseClick}>Account</NavLink>
+                      </li>
+                    )}
+                    {this.props.authToken && (
+                      <li className="nav-item">
+                        <i className="fa fa-fw fa-sign-out" aria-hidden="true"></i> <NavLink exact to="/logout" onClick={this.handleSidebarCloseClick}>Logout</NavLink>
                       </li>
                     )}
                     {!this.props.authToken && (
