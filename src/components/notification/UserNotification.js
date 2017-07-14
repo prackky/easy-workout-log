@@ -29,8 +29,8 @@ class UserNotification extends Component {
   }
 
   componentDidMount() {
-    // only scroll the top one into view
-    if (this.props.index === 0) {
+    // only scroll the top one into view if not read
+    if (this.props.index === 0 && !this.props.userNotification.isRead) {
       ewoloUtil.scrollElementIntoView(this.refs[this.refUserNotification]);
     }
   }
