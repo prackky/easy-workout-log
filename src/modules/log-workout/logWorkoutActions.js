@@ -111,7 +111,8 @@ const logWorkoutActions = {
         promise = ewoloUtil.getApiRequest({
           route: `/users/${userId}/workouts/${logWorkoutId}`,
           method: 'PUT',
-          body: logWorkout
+          body: logWorkout,
+          authToken: authToken
         });
       } else {
         promise = ewoloUtil.getApiRequest({
@@ -125,12 +126,7 @@ const logWorkoutActions = {
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          if (logWorkoutId) {
-            dispatch(logWorkoutActions.logWorkoutSaveSuccess(logWorkoutId));
-          } else {
-            dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
-          }
-          
+          dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
           dispatch(push('/dashboard'));
         })

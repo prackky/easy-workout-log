@@ -56,7 +56,7 @@ describe('logWorkoutActions', () => {
 
       nock(ewoloConstants.api.url)
         .put('/users/snoop/workouts/42')
-        .reply(204, {});
+        .reply(200, { id: 42 });
 
       const expectedActions = [
         { type: 'TASK-START' },
