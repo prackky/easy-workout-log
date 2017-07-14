@@ -24,6 +24,7 @@ import Terms from './components/page/Terms';
 import ChangeLog from './components/page/ChangeLog';
 import Welcome from './components/welcome/Welcome';
 import LogWorkoutNew from './components/log-workout/LogWorkoutNew';
+import LogWorkoutEdit from './components/log-workout/LogWorkoutEdit';
 import Loader from './components/page/Loader';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
@@ -66,6 +67,7 @@ class App extends Component {
             <Route exact path="/terms" component={Terms}/>
             <Route exact path="/change-log" component={ChangeLog}/>
             <Route exact path="/log-workout" component={LogWorkoutNew}/>
+            <Route path="/edit-workout/:workoutId" component={LogWorkoutEdit}/>
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>

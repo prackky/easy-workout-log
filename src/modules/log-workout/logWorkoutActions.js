@@ -160,7 +160,7 @@ const logWorkoutActions = {
       workout
     };
   },
-  logWorkoutEditThunk: (workout) => {
+  logWorkoutEditThunk: (workout) => { // TODO: this should load the correct workout based on id if no workout provided
     return (dispatch, getState) => {
       return Promise.resolve()
         .then(() => {
