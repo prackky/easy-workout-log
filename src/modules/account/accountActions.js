@@ -7,26 +7,25 @@ import { handleError } from '../../common/errorHandler';
 import globalActions from '../global/globalActions';
 
 export const c = Object.freeze({
-  ACCOUNT_SET_DATA: 'ACCOUNT-SET-DATA',
-  ACCOUNT_UPDATE_SUCCESS: 'ACCOUNT-UPDATE-SUCCESS'
+  ACCOUNT_SET_PASSWORD_DATA: 'ACCOUNT-SET-PASSWORD-DATA',
+  ACCOUNT_PASSWORD_UPDATE_SUCCESS: 'ACCOUNT-PASSWORD-UPDATE-SUCCESS'
 });
 
 
 const accountActions = {
-  accountSetFormData: (name, oldPassword, password) => {
+  accountSetPasswordData: (oldPassword, password) => {
     return {
-      type: c.ACCOUNT_SET_DATA,
-      name,
+      type: c.ACCOUNT_SET_PASSWORD_DATA,
       oldPassword,
       password
     };
   },
-  accountUpdateSuccess: (action) => {
+  accountPasswordUpdateSuccess: (action) => {
     return {
-      type: c.ACCOUNT_UPDATE_SUCCESS
+      type: c.ACCOUNT_PASSWORD_UPDATE_SUCCESS
     };
   },
-  accountUpdateThunk: () => {
+  accountPasswordUpdateThunk: () => {
     return (dispatch, getState) => {
       
       dispatch(globalActions.taskStart());
@@ -39,13 +38,13 @@ const accountActions = {
 
       return promise
         .then(() => {
-          dispatch(accountActions.accountUpdateSuccess());
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account information', true));
+          dispatch(accountActions.accountPasswordUpdateSuccess());
+          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
         })
         .catch(error => {
           handleError(error);
           
-          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account information`));
+          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating password`));
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());

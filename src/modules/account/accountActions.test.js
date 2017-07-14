@@ -14,8 +14,8 @@ describe('accountActions', () => {
     nock.cleanAll();
   });
 
-  describe('accountUpdateThunk', () => {
-    it('creates ' + c.ACCOUNT_UPDATE_SUCCESS + ' when updating account information', () => {
+  describe('accountPasswordUpdateThunk', () => {
+    it('creates ' + c.ACCOUNT_PASSWORD_UPDATE_SUCCESS + ' when updating password', () => {
 
       /*
       nock(ewoloConstants.api.url)
@@ -23,13 +23,13 @@ describe('accountActions', () => {
         .reply(201, { id: 'xxx' });
       */
 
-      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account information', true);
+      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated password', true);
       delete userNotificationAction.id;
       delete userNotificationAction.at;
 
       const expectedActions = [
         globalActions.taskStart(),
-        accountActions.accountUpdateSuccess(),
+        accountActions.accountPasswordUpdateSuccess(),
         userNotificationAction,
         /*
         {
@@ -54,13 +54,11 @@ describe('accountActions', () => {
         }
       });
 
-      return store.dispatch(accountActions.accountUpdateThunk())
+      return store.dispatch(accountActions.accountPasswordUpdateThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
           delete actions[2].id;
           delete actions[2].at;
-
-          console.log(actions);
 
           expect(store.getActions()).to.deep.equal(expectedActions);
         });

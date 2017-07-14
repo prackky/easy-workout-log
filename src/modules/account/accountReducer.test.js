@@ -15,60 +15,16 @@ describe('accountReducer', () => {
       .equal(initialState);
   });
 
-  describe(c.ACCOUNT_SET_DATA, () => {
+  describe(c.ACCOUNT_SET_PASSWORD_DATA, () => {
     it('should set data', () => {
       // when
-      const newState = accountReducer(undefined, actions.accountSetFormData('vic', 'oldPassword', 'password'));
+      const newState = accountReducer(undefined, actions.accountSetPasswordData('oldPassword', 'password'));
 
       // then
       const expectedState = {
         ...initialState,
-        name: 'vic',
         oldPassword: 'oldPassword',
         password: 'password',
-        nameFormHint: '',
-        oldPasswordFormHint: '',
-        passwordFormHint: ''
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
-
-    it('should set data when no password information provided', () => {
-      // when
-      const newState = accountReducer(undefined, actions.accountSetFormData('vic', '', ''));
-
-      // then
-      const expectedState = {
-        ...initialState,
-        name: 'vic',
-        oldPassword: '',
-        password: '',
-        nameFormHint: '',
-        oldPasswordFormHint: '',
-        passwordFormHint: ''
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
-
-    it('should set name form hint for missing name', () => {
-      // when
-      const newState = accountReducer(undefined, actions.accountSetFormData('', '', ''));
-
-      // then
-      const expectedState = {
-        ...initialState,
-        name: '',
-        oldPassword: '',
-        password: '',
-        nameFormHint: 'Name is required.',
         oldPasswordFormHint: '',
         passwordFormHint: ''
       };
@@ -81,13 +37,11 @@ describe('accountReducer', () => {
 
     it('should set password form hint for password less than 8 characters', () => {
       // when
-      const newState = accountReducer(undefined, actions.accountSetFormData('vic', 'oldPassword', '1234567'));
+      const newState = accountReducer(undefined, actions.accountSetPasswordData('oldPassword', '1234567'));
 
       // then
       const expectedState = {
         ...initialState,
-        name: 'vic',
-        nameFormHint: '',
         oldPassword: 'oldPassword',
         oldPasswordFormHint: '',
         password: '1234567',
@@ -102,14 +56,26 @@ describe('accountReducer', () => {
 
   });
 
-  describe(c.ACCOUNT_UPDATE_SUCCESS, () => {
-    it('should reset account form after success to hide password information', () => {
+  describe(c.ACCOUNT_PASSWORD_UPDATE_SUCCESS, () => {
+    it('should reset password information after success', () => {
+      // given 
+      const is = {
+        ...initialState,
+        name: 'vic',
+        oldPassword: 'oldPassword',
+        password: 'xxx'
+      };
+
       // when
-      const newState = accountReducer(undefined, actions.accountUpdateSuccess());
+      const newState = accountReducer(is, actions.accountPasswordUpdateSuccess());
 
       // then
       const expectedState = {
-        ...initialState
+        ...is,
+        oldPassword: '',
+        oldPasswordFormHint: '',
+        password: '',
+        passwordFormHint: ''
       };
 
       expect(newState)

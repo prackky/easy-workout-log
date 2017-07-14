@@ -13,25 +13,26 @@ export const initialState = {
 
 const accountReducer = (state = initialState, action) => {
   switch (action.type) {
-    case c.ACCOUNT_SET_DATA:
+    case c.ACCOUNT_SET_PASSWORD_DATA:
       {
-        const { name, oldPassword, password } = action;
+        const { oldPassword, password } = action;
 
         return {
           ...state,
-          name,
           oldPassword,
           password,
-          nameFormHint: ewoloUtil.validateRequired(name, 'Name'),
           oldPasswordFormHint: oldPassword ? ewoloUtil.validatePassword(oldPassword) : '',
           passwordFormHint: password ? ewoloUtil.validatePassword(password) : ''
         };
       }
-    case c.ACCOUNT_UPDATE_SUCCESS:
+    case c.ACCOUNT_PASSWORD_UPDATE_SUCCESS:
       {
         return {
           ...state,
-          ...initialState
+          oldPassword: '',
+          oldPasswordFormHint: '',
+          password: '',
+          passwordFormHint: ''
         };
       }
     default:
