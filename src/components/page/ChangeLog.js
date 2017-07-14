@@ -16,6 +16,7 @@ const ChangeLog = (props) => {
             <li>Copy workouts</li>
             <li>Edit workouts</li>
             <li>Improved user notifications</li>
+            <li>Why Ewolo?</li>
           </ul>
           <h5 className="margin-top-5rem">Version 0.4.0</h5>
           <ul className="change-log">
