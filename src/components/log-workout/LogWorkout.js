@@ -6,6 +6,7 @@ import './log-workout.css';
 import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
 import Modal from '../generic/Modal';
+import {EwoloFormHintSplit} from '../generic/EwoloFormHint';
 
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 
@@ -211,15 +212,8 @@ class LogWorkout extends Component {
                       onChange={this.handleDateChange}/>
                   </div>
                 </div>
-                <div
-                  className={"form-group form-input-hint " + (this.props.logWorkout.dateFormHint
-                  ? ''
-                  : 'hide')}>
-                  <div className="col-3"></div>
-                  <div className="col-9">
-                    {this.props.logWorkout.dateFormHint}
-                  </div>
-                </div>
+
+                <EwoloFormHintSplit formHint={this.props.logWorkout.dateFormHint}/>
 
                 <div className="form-group">
                   <div className="col-3">

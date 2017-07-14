@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+import {EwoloFormHintSplit} from '../generic/EwoloFormHint';
 import AutoComplete from '../generic/AutoComplete';
 
 const LogExercise = (props) => {
@@ -66,21 +66,6 @@ const LogExercise = (props) => {
     props.doLogWorkoutSetShowWeightHelp(true);
   };
 
-  const renderPropertyFormHint = (hint) => {
-    if (!hint) {
-      return;
-    }
-
-    return (
-      <div className={"form-group form-input-hint fade-in"}>
-        <div className="col-3"></div>
-        <div className="col-9">
-          {hint}
-        </div>
-      </div>
-    )
-  };
-
   const renderExerciseProperties = () => {
     if (!props.exercise.showProperties) {
       return renderExercisePropertiesShortForm();
@@ -114,7 +99,7 @@ const LogExercise = (props) => {
               </div>
             </div>
 
-            {renderPropertyFormHint(props.exercise.repsFormHint)}
+            <EwoloFormHintSplit formHint={props.exercise.repsFormHint} />
 
             <div className="form-group">
               <div className="col-3">
@@ -261,7 +246,7 @@ const LogExercise = (props) => {
           </div>
         </div>
 
-        {renderPropertyFormHint(props.exercise.nameFormHint)}
+        <EwoloFormHintSplit formHint={props.exercise.nameFormHint} />
 
         {renderExerciseProperties()}
       </div>

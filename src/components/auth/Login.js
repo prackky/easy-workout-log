@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
+import EwoloFormHint from '../generic/EwoloFormHint';
 
 import loginActions from '../../modules/login/loginActions';
 
@@ -61,14 +62,7 @@ class Login extends Component {
 
                   </div>
 
-                  <div
-                    className={"form-group form-input-hint fade-in " + (this.props.login.emailFormHint
-                    ? ''
-                    : 'hide')}>
-                    <div className="col-12 text-left">
-                      {this.props.login.emailFormHint}
-                    </div>
-                  </div>
+                  <EwoloFormHint formHint={this.props.login.emailFormHint} />
 
                   <div className="form-group">
                     <div className="col-12">
@@ -82,14 +76,7 @@ class Login extends Component {
 
                   </div>
 
-                  <div
-                    className={"form-group form-input-hint fade-in " + (this.props.login.passwordFormHint
-                    ? ''
-                    : 'hide')}>
-                    <div className="col-12 text-left">
-                      {this.props.login.passwordFormHint}
-                    </div>
-                  </div>
+                  <EwoloFormHint formHint={this.props.login.passwordFormHint} />
 
                   <div className="form-group">
                     <div className="col-12 text-center">
