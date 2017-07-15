@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import getChartData from '../../services/workoutsAnalysisChartService';
+import {getChartData} from '../../services/workoutsService';
 
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
