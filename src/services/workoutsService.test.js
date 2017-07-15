@@ -32,15 +32,16 @@ describe('workoutsDisplayService', () => {
 
   describe('segregateWorkoutsByMonth', () => {
     it('should split workouts by month', () => {
+      // when
       const segregatedWorkouts = segregateWorkoutsByMonth(workouts);
-      console.log(segregatedWorkouts);
 
+      // then
       expect(segregatedWorkouts)
         .to
         .deep
         .equal([
           {
-            key: '2017 June',
+            key: 'June, 2017',
             workouts: [
               {
                 date: '2017-06-23'
@@ -51,7 +52,7 @@ describe('workoutsDisplayService', () => {
               }
             ]
           }, {
-            key: '2017 May',
+            key: 'May, 2017',
             workouts: [
               {
                 date: '2017-05-15'
@@ -60,14 +61,14 @@ describe('workoutsDisplayService', () => {
               }
             ]
           }, {
-            key: '2017 January',
+            key: 'January, 2017',
             workouts: [
               {
                 date: '2017-01-01'
               }
             ]
           }, {
-            key: '2008 October',
+            key: 'October, 2008',
             workouts: [
               {
                 date: '2008-10-15'
@@ -76,7 +77,7 @@ describe('workoutsDisplayService', () => {
               }
             ]
           }, {
-            key: '2008 January',
+            key: 'January, 2008',
             workouts: [
               {
                 date: '2008-01-10'

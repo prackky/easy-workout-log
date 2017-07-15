@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {getChartData} from '../../services/workoutsService';
+import {getChartData, segregateWorkoutsByMonth} from '../../services/workoutsService';
 
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
@@ -50,8 +50,7 @@ class Dashboard extends Component {
           eventName: 'select',
           callback(Chart) {
             // Returns Chart so you can access props and  the ChartWrapper object from
-            // chart.wrapper
-            // console.log('Selected ', Chart.chart.getSelection());
+            // chart.wrapper console.log('Selected ', Chart.chart.getSelection());
           }
         }
       ],
@@ -74,8 +73,8 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // update chart if something changed
-    // most likely this will happen in the case that we roll back to this page 
+    // update chart if something changed most likely this will happen in the case
+    // that we roll back to this page
     if (this.props.workoutsAnalysis !== newProps.workoutsAnalysis) {
       const workoutsAnalysisChartData = getChartData(newProps.workoutsAnalysis);
       const newState = this.state;
@@ -151,21 +150,33 @@ class Dashboard extends Component {
       );
     }
 
-    return this
-      .props
-      .workouts
-      .map((workout) => {
-        return (<WorkoutView
-          key={workout.id}
-          workout={workout}
-          showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
-          ? true
-          : false}
-          doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
-          doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}
-          doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}
-          doEditWorkoutThunk={this.props.doEditWorkoutThunk}/>);
-      });
+    const monthlyWorkouts = segregateWorkoutsByMonth(this.props.workouts);
+
+    return monthlyWorkouts.map(monthlyWorkoutList => {
+      return (
+        <div key={monthlyWorkoutList.key}>
+          <div className="columns">
+            <div className="column col-12">
+              <h5 className="text-center">{monthlyWorkoutList.key}</h5>
+            </div>
+          </div>
+          {monthlyWorkoutList
+            .workouts
+            .map((workout) => {
+              return (<WorkoutView
+                key={workout.id}
+                workout={workout}
+                showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
+                ? true
+                : false}
+                doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
+                doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}
+                doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}
+                doEditWorkoutThunk={this.props.doEditWorkoutThunk}/>);
+            })}
+        </div>
+      );
+    });
   }
 
   handleBtnLogWorkoutClick = (event) => {

@@ -2,18 +2,19 @@ import moment from 'moment';
 
 export const segregateWorkoutsByMonth = (workouts) => {
   const result = [];
+  const keyFormat = 'MMMM, YYYY';
 
   if (!workouts.length) {
     return result;
   }
 
   let currentMonth = {
-    key: moment(workouts[0].date).format('YYYY MMMM'),
+    key: moment(workouts[0].date).format(keyFormat),
     workouts: []
   };
 
   for (const workout of workouts) {
-    const workoutMonth = moment(workout.date).format('YYYY MMMM');
+    const workoutMonth = moment(workout.date).format(keyFormat);
     
     if (currentMonth.key === workoutMonth) {
       currentMonth.workouts.push(workout);
