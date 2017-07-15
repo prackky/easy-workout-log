@@ -3,9 +3,10 @@ import { push } from 'react-router-redux';
 const authenticatedRoutesCheck = ({ dispatch, getState }) => next => action => {
 
   if ('@@router/LOCATION_CHANGE' === action.type) {
-    if (action.payload.pathname === '/dashboard') {
+    if (action.payload.pathname === '/dashboard' ||
+      action.payload.pathname === '/account') {
       if (!getState().user.data.authToken) {
-        console.log('Attempting to access authenticated resource');
+        // console.log('Attempting to access authenticated resource');
         dispatch(push('/'));
         return;
       }
@@ -14,7 +15,7 @@ const authenticatedRoutesCheck = ({ dispatch, getState }) => next => action => {
       action.payload.pathname === '/login'
     ) {
       if (getState().user.data.authToken) {
-        console.log('Attempting to access authentication resources when already authenticated');
+        // console.log('Attempting to access authentication resources when already authenticated');
         dispatch(push('/'));
         return;
       }

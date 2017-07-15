@@ -10,7 +10,7 @@ const analytics = store => next => action => {
   switch (action.type) {
 
     case '@@router/LOCATION_CHANGE':
-      console.log(action.payload.pathname);
+      // console.log(action.payload.pathname);
       // ReactGA.pageview(action.payload.pathname);
       ReactGA.event({
         category: 'LOCATION-CHANGE',

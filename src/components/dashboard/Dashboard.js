@@ -51,7 +51,7 @@ class Dashboard extends Component {
           callback(Chart) {
             // Returns Chart so you can access props and  the ChartWrapper object from
             // chart.wrapper
-            console.log('Selected ', Chart.chart.getSelection());
+            // console.log('Selected ', Chart.chart.getSelection());
           }
         }
       ],

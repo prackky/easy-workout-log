@@ -26,7 +26,6 @@ class Login extends Component {
   };
 
   handleEmailChange = (event) => {
-    console.log(event.target.value);
     this
       .props
       .doLoginSetData(event.target.value, this.props.login.password, this.props.login.text);

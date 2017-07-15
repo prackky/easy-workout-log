@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkoutEdit extends Component {
 
   componentDidMount() {
-    console.log(this.props.match.params.workoutId);
+    // console.log(this.props.match.params.workoutId);
     if (!this.props.logWorkout.componentMounted) {
       // TODO: fetch data here
     }
