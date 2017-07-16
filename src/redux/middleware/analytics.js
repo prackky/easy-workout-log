@@ -38,8 +38,12 @@ const analytics = store => next => action => {
         category: 'AUTH',
         action: action.type
       });
+
+      if (action.type === userDataActionNames.USER_DATA_AUTH_SUCCESS) {
+        ReactGA.set({ userId: action.id });
+      } 
+
       break;
-    
     case userWorkoutsActionNames.USER_WORKOUTS_FETCH_SUCCESS:
     case userWorkoutsActionNames.USER_WORKOUTS_SET_VIEW_DETAILS:
       ReactGA.event({
