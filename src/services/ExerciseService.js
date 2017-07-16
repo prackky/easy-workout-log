@@ -1,5 +1,6 @@
 import exercisesJson from './exercises';
 
+// TODO: refactor this out
 export default class ExerciseService {
 
   constructor() {

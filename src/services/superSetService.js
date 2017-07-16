@@ -1,3 +1,4 @@
+// TODO: refactor this to exercisesService
 
 const calculateSuperSetIndexes = (exercises) => {
   let isCircuit = false;

@@ -13,6 +13,7 @@ const ChangeLog = (props) => {
           <h5 className="margin-top-5rem">Version 1.1.0</h5>
           <ul className="change-log">
             <li>Split workout display by month</li>
+            <li>Update exercise list with current entries when logging a workout</li>
           </ul>
           <h5 className="margin-top-5rem">Version 1.0.1</h5>
           <ul className="change-log">

@@ -10,7 +10,8 @@ import globalActions from '../global/globalActions';
 
 export const c = {
   USER_DATA_AUTH_SUCCESS: 'USER-DATA-AUTH-SUCCESS',
-  USER_DATA_FETCH_SUCCESS: 'USER-DATA-FETCH-SUCCESS'
+  USER_DATA_FETCH_SUCCESS: 'USER-DATA-FETCH-SUCCESS',
+  USER_DATA_EXERCISE_NAME_ADD: 'USER-DATA-EXERCISE-NAME-ADD'
 };
 
 const userDataActions = {
@@ -71,6 +72,12 @@ const userDataActions = {
       ewoloUtil.storeObject(ewoloConstants.storage.userIdKey, id);
       dispatch(userDataActions.userAuthSuccess(authToken, id));
     }
+  },
+  userDataExerciseNameAdd: (name) => {
+    return {
+      type: c.USER_DATA_EXERCISE_NAME_ADD,
+      name: name
+    };
   }
 };
 

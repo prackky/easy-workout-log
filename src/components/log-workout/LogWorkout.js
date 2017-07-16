@@ -9,6 +9,7 @@ import Modal from '../generic/Modal';
 import {EwoloFormHintSplit} from '../generic/EwoloFormHint';
 
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
+import userDataActions from '../../modules/user-data/userDataActions';
 
 import ewoloUtil from '../../common/ewoloUtil';
 import ewoloContent from '../../common/ewoloContent';
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         rest,
         showAdvanced
       }));
+      dispatch(userDataActions.userDataExerciseNameAdd(name));
     },
     doLogWorkoutSetData: (date, notes) => {
       dispatch(logWorkoutActions.logWorkoutSetData(date, notes));

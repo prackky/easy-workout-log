@@ -1,5 +1,7 @@
 import { c } from './userDataActions';
 
+import { dedup } from '../../services/exerciseNamesService';
+
 export const initialState = {
   authToken: undefined,
   id: undefined,
@@ -29,6 +31,20 @@ const userDataReducer = (state = initialState, action) => {
           ],
           name: name,
           email: email
+        };
+      }
+    case c.USER_DATA_EXERCISE_NAME_ADD:
+      {
+        const { name } = action;
+
+        const exerciseNames = [
+          name,
+          ...state.exerciseNames
+        ];
+
+        return {
+          ...state,
+          exerciseNames: dedup(exerciseNames)
         };
       }
     default:
