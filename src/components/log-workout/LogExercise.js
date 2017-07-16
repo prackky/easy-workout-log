@@ -130,7 +130,7 @@ const LogExercise = (props) => {
   };
 
   const renderExercisePropertiesShortForm = () => {
-    const {sets, reps, weight, tempo, rest} = props.exercise;
+    const {reps, weight, tempo, rest} = props.exercise;
 
     return (
       <div className="exercise-entry-details">
