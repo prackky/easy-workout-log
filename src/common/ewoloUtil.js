@@ -33,7 +33,12 @@ const ewoloUtil = {
     if (response.status >= 400) {
       throw new RequestError(response);
     }
-    return response.json();
+    
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    }
+
+    return response.status;
   },
   getApiResponseStatus: (response) => {
     if (response.status >= 400) {

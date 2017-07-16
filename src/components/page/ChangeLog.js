@@ -14,6 +14,7 @@ const ChangeLog = (props) => {
           <ul className="change-log">
             <li>Split workout display by month</li>
             <li>Update exercise list with current entries when logging a workout</li>
+            <li>Enable account password updates</li>
           </ul>
           <h5 className="margin-top-5rem">Version 1.0.1</h5>
           <ul className="change-log">

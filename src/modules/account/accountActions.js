@@ -27,16 +27,28 @@ const accountActions = {
   },
   accountPasswordUpdateThunk: () => {
     return (dispatch, getState) => {
-      
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(push('/'));
+          });
+      }
+
+      const { oldPassword, password } = getState().account;
+
       dispatch(globalActions.taskStart());
 
-      const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve();
-        }, 1000);
+      const promise = ewoloUtil.getApiRequest({
+        route: '/credentials',
+        method: 'POST',
+        body: { oldPassword, password },
+        authToken: authToken
       });
 
       return promise
+        .then(ewoloUtil.getApiResponse)
         .then(() => {
           dispatch(accountActions.accountPasswordUpdateSuccess());
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
@@ -49,30 +61,6 @@ const accountActions = {
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
         });
-
-      /*
-      const promise = ewoloUtil.getApiRequest({
-        route: '/users',
-        method: 'POST',
-        body: { name: signup.name, email: signup.email, password: signup.password }
-      });
-      return promise
-        .then(ewoloUtil.getApiResponse)
-        .then(body => {
-
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account information'));
-          
-          // dispatch(push(afterSuccess.redirect));
-        })
-        .catch(error => {
-          handleError(error);
-          
-          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account information`));
-        })
-        .then(() => { // poor man's substitute for finally
-          dispatch(globalActions.taskEnd());
-        });
-      */
     };
   }
 };

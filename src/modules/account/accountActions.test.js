@@ -17,12 +17,10 @@ describe('accountActions', () => {
   describe('accountPasswordUpdateThunk', () => {
     it('creates ' + c.ACCOUNT_PASSWORD_UPDATE_SUCCESS + ' when updating password', () => {
 
-      /*
       nock(ewoloConstants.api.url)
-        .post('/workouts')
-        .reply(201, { id: 'xxx' });
-      */
-
+        .post('/credentials')
+        .reply(200, { id: 'xxx' });
+      
       const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated password', true);
       delete userNotificationAction.id;
       delete userNotificationAction.at;
@@ -31,12 +29,6 @@ describe('accountActions', () => {
         globalActions.taskStart(),
         accountActions.accountPasswordUpdateSuccess(),
         userNotificationAction,
-        /*
-        {
-          type: '@@router/CALL_HISTORY_METHOD',
-          payload: { method: 'push', args: ['/dashboard'] }
-        },
-        */
         globalActions.taskEnd()
       ];
 
