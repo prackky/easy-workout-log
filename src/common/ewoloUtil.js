@@ -8,7 +8,19 @@ import { RequestError } from './errorHandler';
 
 // export const ewoloConstants;
 
-const ewoloUtil = {
+const wrapLocalStorageAccess = (fn) => {
+  try {
+    return fn();
+  } catch (e) {
+    if (e && e.name === 'SecurityError') {
+      console.log('Please enable cookies to be auto logged-in');
+    } else {
+      console.error(e);
+    }
+  }
+}
+
+const ewoloUtil = { 
   getApiRequest: ({ route, method, body, authToken }) => {
     const url = ewoloConstants.api.url + route;
     const headers = {
@@ -33,7 +45,7 @@ const ewoloUtil = {
     if (response.status >= 400) {
       throw new RequestError(response);
     }
-    
+
     if (response.status === 200 || response.status === 201) {
       return response.json();
     }
@@ -72,23 +84,36 @@ const ewoloUtil = {
   // Note that stringify and parse may block the main thread
   // Also, consider using cookies for auth token storage: https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage
   storeObject: (key, obj) => {
-    if (window.localStorage) {
-      window.localStorage.setItem(key, JSON.stringify(obj));
-    }
-  },
-  getObject: (key) => {
-    if (window.localStorage) {
-      const value = window.localStorage.getItem(key);
-      if (value) {
-        return JSON.parse(value);
+    const fn = () => {
+      if (window.localStorage) {
+        window.localStorage.setItem(key, JSON.stringify(obj));
       }
     }
-    return null;
+
+    return wrapLocalStorageAccess(fn);
+  },
+  getObject: (key) => {
+    const fn = () => {
+      if (window.localStorage) {
+        const value = window.localStorage.getItem(key);
+        if (value) {
+          return JSON.parse(value);
+        }
+      }
+
+      return null;
+    }
+
+    return wrapLocalStorageAccess(fn);
   },
   removeObject: (key) => {
-    if (window.localStorage) {
-      window.localStorage.removeItem(key);
+    const fn = () => {
+      if (window.localStorage) {
+        window.localStorage.removeItem(key);
+      }
     }
+
+    return wrapLocalStorageAccess(fn);
   },
   getTodaysDate: () => {
     return moment().format('YYYY-MM-DD');
