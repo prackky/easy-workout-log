@@ -6,7 +6,8 @@ export const initialState = {
   authToken: undefined,
   id: undefined,
   exerciseNames: [],
-  name: undefined
+  name: undefined,
+  units: 1
 };
 
 const userDataReducer = (state = initialState, action) => {
@@ -23,14 +24,15 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_FETCH_SUCCESS:
       {
-        const { exerciseNames, name, email } = action;
+        const { exerciseNames, name, email, units } = action;
         return {
           ...state,
           exerciseNames: [
             ...exerciseNames
           ],
-          name: name,
-          email: email
+          name,
+          email,
+          units
         };
       }
     case c.USER_DATA_EXERCISE_NAME_ADD:

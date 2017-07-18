@@ -24,6 +24,7 @@ const userWorkoutsActions = {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;
+      const units = getState().user.data.units;
 
       if (!authToken) {
         return Promise.resolve()
@@ -35,7 +36,7 @@ const userWorkoutsActions = {
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest({
-        route: `/users/${userId}/analysis/workouts`,
+        route: `/users/${userId}/analysis/workouts?units=${units}`,
         method: 'GET',
         authToken: authToken
       });
