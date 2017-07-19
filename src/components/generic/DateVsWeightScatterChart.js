@@ -1,6 +1,8 @@
 import React from 'react';
 import {Chart} from 'react-google-charts';
 
+import ewoloUtil from '../../common/ewoloUtil';
+
 class DateVsWeightScatterChart extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ class DateVsWeightScatterChart extends React.Component {
           titleTextStyle: textStyle
         },
         vAxis: {
-          title: 'Weight (lbs)',
+          title: `Weight (${ewoloUtil.unitsToText(props.units)})`,
           viewWindowMode: 'pretty',
           textStyle: textStyle,
           titleTextStyle: textStyle
@@ -47,6 +49,10 @@ class DateVsWeightScatterChart extends React.Component {
         }
       }
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // TODO: set new vAxis text based on units
   }
 
   render() {

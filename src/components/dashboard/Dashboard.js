@@ -14,6 +14,7 @@ const mapStateToProps = (state/*, ownProps*/) => {
   return {
     // ...ownProps,
     dashboard: state.user.dashboard,
+    defaultUnits: state.user.data.units,
     workouts: state.user.workouts.workouts,
     workoutsViewDetails: state.user.workouts.workoutsViewDetails,
     workoutsAnalysis: state.user.workouts.workoutsAnalysis
@@ -99,6 +100,7 @@ class Dashboard extends Component {
             <div className="column col-12">
               <h4>Progress</h4>
               <DateVsWeightScatterChart
+                units={this.props.defaultUnits}
                 rows={this.state.rows}
                 columns={this.state.columns}
                 chartEvents={this.state.chartEvents}/>
