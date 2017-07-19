@@ -6,7 +6,7 @@ export const initialState = {
   oldPassword: '',
   oldPasswordFormHint: '',
   password: '',
-  passwordFormHint: '',
+  passwordFormHint: ''
 };
 
 const accountReducer = (state = initialState, action) => {

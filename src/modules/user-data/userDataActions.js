@@ -12,7 +12,7 @@ import accountActions from '../account/accountActions';
 
 export const c = {
   USER_DATA_AUTH_SUCCESS: 'USER-DATA-AUTH-SUCCESS',
-  USER_DATA_FETCH_SUCCESS: 'USER-DATA-FETCH-SUCCESS',
+  USER_DATA_SET: 'USER-DATA-SET',
   USER_DATA_EXERCISE_NAME_ADD: 'USER-DATA-EXERCISE-NAME-ADD',
   USER_DATA_UPDATE_SUCCESS: 'USER-DATA-UPDATE-SUCCESS'
 };
@@ -25,9 +25,9 @@ const userDataActions = {
       id: id
     };
   },
-  userDataFetchSuccess: (exerciseNames, name, email, units) => {
+  userDataSet: (exerciseNames, name, email, units) => {
     return {
-      type: c.USER_DATA_FETCH_SUCCESS,
+      type: c.USER_DATA_SET,
       exerciseNames: exerciseNames,
       name: name,
       email: email,
@@ -41,7 +41,7 @@ const userDataActions = {
       if (!authToken) {
         return Promise.resolve()
           .then(() => {
-            dispatch(userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames));
+            dispatch(userDataActions.userDataSet(ewoloConstants.exerciseNames));
           });
       }
 
@@ -57,7 +57,7 @@ const userDataActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
-          dispatch(userDataActions.userDataFetchSuccess(allExercises, body.name, body.email, body.units));
+          dispatch(userDataActions.userDataSet(allExercises, body.name, body.email, body.units));
         })
         .catch(error => {
           handleError(error);

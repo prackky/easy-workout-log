@@ -14,7 +14,7 @@ describe('userDataActions', () => {
   });
 
   describe('fetchUserDataThunk', () => {
-    it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with user data when fetching data for a logged in user', () => {
+    it('creates ' + c.USER_DATA_SET + ' with user data when fetching data for a logged in user', () => {
 
       nock(ewoloConstants.api.url)
         .get('/user-data')
@@ -22,7 +22,7 @@ describe('userDataActions', () => {
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userDataActions.userDataFetchSuccess(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo', 7),
+        userDataActions.userDataSet(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo', 7),
         { type: 'TASK-END' }
       ];
 
@@ -35,11 +35,11 @@ describe('userDataActions', () => {
         });
     });
 
-    it('creates ' + c.USER_DATA_FETCH_SUCCESS + ' with seed data when fetching data for a non-logged in user', () => {
+    it('creates ' + c.USER_DATA_SET + ' with seed data when fetching data for a non-logged in user', () => {
 
       const expectedActions = [
         {
-          type: c.USER_DATA_FETCH_SUCCESS,
+          type: c.USER_DATA_SET,
           exerciseNames: ewoloConstants.exerciseNames,
           name: undefined,
           email: undefined,

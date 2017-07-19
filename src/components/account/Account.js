@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(accountActions.accountPasswordUpdateThunk());
     },
     doSetUserData: ({exerciseNames, name, email, units}) => {
-      dispatch(userDataActions.userDataFetchSuccess(exerciseNames, name, email, units));
+      dispatch(userDataActions.userDataSet(exerciseNames, name, email, units));
     },
     doUserDataUpdateThunk: () => {
       dispatch(userDataActions.userDataUpdateThunk());
@@ -52,7 +52,7 @@ class Account extends Component {
   handleNameChange = (event) => {
     this
       .props
-      .doSetUserData({exerciseNames: this.props.userData.exerciseNames, name: event.target.value, email: this.props.userData.email, units: this.props.account.units});
+      .doSetUserData({exerciseNames: this.props.userData.exerciseNames, name: event.target.value, email: this.props.userData.email, units: this.props.userData.units});
   }
 
   handleUnitSelectionChange = (event) => {
@@ -85,7 +85,7 @@ class Account extends Component {
               <div>
                 <h5>Settings</h5>
                 <form className="form-horizontal">
-
+                  
                   <div className="form-group">
                     <div className="col-4">
                       <label className="form-label">Full name</label>
@@ -94,6 +94,7 @@ class Account extends Component {
                       <input
                         className="form-input"
                         type="text"
+                        placeholder="Full name"
                         value={this.props.userData.name}
                         onChange={this.handleNameChange}/>
                     </div>
