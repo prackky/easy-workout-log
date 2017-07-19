@@ -17,11 +17,26 @@ const mapDispatchToProps = (dispatch) => {
     },
     doAccountPasswordUpdateThunk: () => {
       dispatch(accountActions.accountPasswordUpdateThunk());
+    },
+    doAccountSetData: ({name, units}) => {
+      dispatch(accountActions.accountSetData({name, units}));
+    },
+    doAccountDataUpdateThunk: () => {
+      dispatch(accountActions.accountDataUpdateThunk());
     }
   };
 };
 
 class Account extends Component {
+
+  constructor(props) {
+    super(props);
+
+    // TODO: fetch current account data
+    this
+      .props
+      .doAccountSetData({name: 'xxx', units: 23});
+  }
 
   handleBtnUpdatePasswordClick = (event) => {
     event.preventDefault();
@@ -42,6 +57,25 @@ class Account extends Component {
       .doAccountSetPasswordData(this.props.account.oldPassword, event.target.value);
   };
 
+  handleNameChange = (event) => {
+    this
+      .props
+      .doAccountSetData({name: event.target.value, units: this.props.account.units});
+  }
+
+  handleUnitSelectionChange = (event) => {
+    this
+      .props
+      .doAccountSetData({name: this.props.account.name, units: event.target.value});
+  }
+
+  handleBtnUpdateAccountClick = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doAccountDataUpdateThunk();
+  }
+
   render() {
 
     return (
@@ -57,7 +91,52 @@ class Account extends Component {
             </div>
             <div className="column col-12">
               <div>
-                <h5>Update password</h5>
+                <h5>Settings</h5>
+                <form className="form-horizontal">
+
+                  <div className="form-group">
+                    <div className="col-4">
+                      <label className="form-label">Full name</label>
+                    </div>
+                    <div className="col-8">
+                      <input
+                        className="form-input"
+                        type="text"
+                        value={this.props.account.name}
+                        onChange={this.handleNameChange}/>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-4">
+                      <label className="form-label">Default weight units</label>
+                    </div>
+                    <div className="col-8">
+                      <select
+                        className="form-select"
+                        value={this.props.account.units}
+                        onChange={this.handleUnitSelectionChange}>
+                        <option value="1">Pounds (lbs)</option>
+                        <option value="2">Kilograms (kgs)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-12 text-center">
+                      <button
+                        className="btn btn-primary btn-lg"
+                        onClick={this.handleBtnUpdateAccountClick}>Update settings</button>
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+            <div className="column col-12">
+              <div>
+                <h5>Password</h5>
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -71,7 +150,7 @@ class Account extends Component {
                     </div>
                   </div>
 
-                  <EwoloFormHint formHint={this.props.account.oldPasswordFormHint} />
+                  <EwoloFormHint formHint={this.props.account.oldPasswordFormHint}/>
 
                   <div className="form-group">
                     <div className="col-12">
@@ -85,7 +164,7 @@ class Account extends Component {
 
                   </div>
 
-                  <EwoloFormHint formHint={this.props.account.passwordFormHint} />
+                  <EwoloFormHint formHint={this.props.account.passwordFormHint}/>
 
                   <div className="form-group">
                     <div className="col-12 text-center">
