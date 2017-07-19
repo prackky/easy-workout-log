@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     doAccountDataUpdateThunk: () => {
       dispatch(accountActions.accountDataUpdateThunk());
+    },
+    doAccountDataFetchThunk: () => {
+      dispatch(accountActions.accountDataFetchThunk());
     }
   };
 };
@@ -32,10 +35,9 @@ class Account extends Component {
   constructor(props) {
     super(props);
 
-    // TODO: fetch current account data
     this
       .props
-      .doAccountSetData({name: 'xxx', units: 23});
+      .doAccountDataFetchThunk();
   }
 
   handleBtnUpdatePasswordClick = (event) => {

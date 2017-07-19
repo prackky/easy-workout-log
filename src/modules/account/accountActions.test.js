@@ -20,7 +20,7 @@ describe('accountActions', () => {
       nock(ewoloConstants.api.url)
         .post('/credentials')
         .reply(200, { id: 'xxx' });
-      
+
       const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated password', true);
       delete userNotificationAction.id;
       delete userNotificationAction.at;
@@ -56,7 +56,7 @@ describe('accountActions', () => {
         });
     });
   });
-  
+
   describe('accountDataUpdateThunk', () => {
     it('creates ' + c.ACCOUNT_DATA_UPDATE_SUCCESS + ' when updating account data', () => {
 
@@ -65,8 +65,8 @@ describe('accountActions', () => {
       nock(ewoloConstants.api.url)
         .put('/users/' + userId)
         .reply(204);
-      
-      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account', true);
+
+      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true);
       delete userNotificationAction.id;
       delete userNotificationAction.at;
 
@@ -97,6 +97,44 @@ describe('accountActions', () => {
           delete actions[2].id;
           delete actions[2].at;
 
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        });
+    });
+  });
+
+  describe('accountDataFetchThunk', () => {
+    it('creates ' + c.ACCOUNT_SET_DATA + ' when fetching account data', () => {
+
+      const userId = 'xxx';
+      const data = { name: 'yoyo ma', units: 2 };
+
+      nock(ewoloConstants.api.url)
+        .get('/users/' + userId)
+        .reply(200, data);
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        accountActions.accountSetData(data),
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        account: {
+          name: 'abc',
+          units: 435
+        },
+        user: {
+          logWorkout: {},
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
+        }
+      });
+
+      return store.dispatch(accountActions.accountDataFetchThunk(false))
+        .then(() => { // return of async actions
+          const actions = store.getActions();
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });

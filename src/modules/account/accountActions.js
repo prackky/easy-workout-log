@@ -104,12 +104,50 @@ const accountActions = {
         .then(ewoloUtil.getApiResponse)
         .then(() => {
           dispatch(accountActions.accountDataUpdateSuccess());
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account', true));
+          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
         })
         .catch(error => {
           handleError(error);
           
           dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account`));
+        })
+        .then(() => { // poor man's substitute for finally
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  },
+  accountDataFetchThunk: (displaySuccessNotification) => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(push('/'));
+          });
+      }
+
+      const userId = getState().user.data.id;
+      
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: '/users/' + userId,
+        method: 'GET',
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          dispatch(accountActions.accountSetData({name: body.name, units: body.units}));
+          if (displaySuccessNotification) {
+            dispatch(globalActions.userNotificationAdd('SUCCESS', 'Successfully got account data', true));
+          }
+        })
+        .catch(error => {
+          handleError(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when getting account information`));
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
