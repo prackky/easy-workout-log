@@ -1,6 +1,6 @@
 import ExerciseService from '../services/ExerciseService';
 
-const apiVersion = 'v1';
+const apiVersion = 'v2';
 const exerciseService = new ExerciseService();
 
 const ewoloConstants = Object.freeze({

@@ -61,7 +61,6 @@ describe('accountReducer', () => {
       // given 
       const is = {
         ...initialState,
-        name: 'vic',
         oldPassword: 'oldPassword',
         password: 'xxx'
       };

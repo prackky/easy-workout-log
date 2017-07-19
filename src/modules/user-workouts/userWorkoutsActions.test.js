@@ -14,7 +14,7 @@ const mockStore = ewoloTestUtil.getMockStore();
 
 const userId = 'snoop';
 const userWorkoutsRoute = `/users/${userId}/workouts`;
-const userWorkoutsAnalysisRoute = `/users/${userId}/analysis/workouts`;
+const userWorkoutsAnalysisRoute = `/users/${userId}/analysis/workouts?units=`;
 const workouts = [{ id: 1, date: ewoloUtil.getTodaysDate(), notes: 'abc' }];
 
 describe('userWorkoutsActions', () => {
@@ -95,7 +95,7 @@ describe('userWorkoutsActions', () => {
       const workoutsAnalysis = ewoloTestUtil.workoutsAnalysisResponseData;
       
       nock(ewoloConstants.api.url)
-        .get(userWorkoutsAnalysisRoute)
+        .get(userWorkoutsAnalysisRoute + '6')
         .reply(200, workoutsAnalysis);
 
       const expectedActions = [
@@ -108,7 +108,8 @@ describe('userWorkoutsActions', () => {
         user: {
           data: {
             authToken: 'blah',
-            id: userId
+            id: userId,
+            units: 6
           }
         }
       });

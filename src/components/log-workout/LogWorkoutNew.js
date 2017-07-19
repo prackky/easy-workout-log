@@ -6,7 +6,7 @@ import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 import LogWorkout from './LogWorkout';
 
 const mapStateToProps = (state) => {
-  return {logWorkout: state.user.logWorkout};
+  return {logWorkout: state.user.logWorkout, defaultUnits: state.user.data.units};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -14,7 +14,16 @@ const mapDispatchToProps = (dispatch) => {
     doLogWorkout: () => {
       dispatch(logWorkoutActions.logWorkout());
     },
-    doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
+    doLogWorkoutExercise: ({
+      name,
+      reps,
+      weight,
+      sets,
+      tempo,
+      rest,
+      showAdvanced,
+      units
+    }) => {
       dispatch(logWorkoutActions.logWorkoutExercise({
         name,
         reps,
@@ -22,7 +31,8 @@ const mapDispatchToProps = (dispatch) => {
         sets,
         tempo,
         rest,
-        showAdvanced
+        showAdvanced,
+        units
       }));
     }
   };
@@ -38,7 +48,7 @@ class LogWorkoutNew extends Component {
         .doLogWorkout();
       this
         .props
-        .doLogWorkoutExercise();
+        .doLogWorkoutExercise({units: this.props.defaultUnits});
     }
   }
 
@@ -47,9 +57,7 @@ class LogWorkoutNew extends Component {
       return <div></div>;
     }
 
-    return (
-      <LogWorkout/>
-    );
+    return (<LogWorkout/>);
   }
 };
 

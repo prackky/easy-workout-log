@@ -20,7 +20,7 @@ const accountActions = {
       password
     };
   },
-  accountPasswordUpdateSuccess: (action) => {
+  accountPasswordUpdateSuccess: () => {
     return {
       type: c.ACCOUNT_PASSWORD_UPDATE_SUCCESS
     };
@@ -55,7 +55,7 @@ const accountActions = {
         })
         .catch(error => {
           handleError(error);
-          
+
           dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating password`));
         })
         .then(() => { // poor man's substitute for finally
@@ -63,6 +63,46 @@ const accountActions = {
         });
     };
   }
+  /*,
+  accountDataFetchThunk: (displaySuccessNotification) => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(push('/'));
+          });
+      }
+
+      const userId = getState().user.data.id;
+      
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: '/users/' + userId,
+        method: 'GET',
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          dispatch(accountActions.accountSetData({name: body.name, units: body.units}));
+          if (displaySuccessNotification) {
+            dispatch(globalActions.userNotificationAdd('SUCCESS', 'Successfully got account data', true));
+          }
+        })
+        .catch(error => {
+          handleError(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when getting account information`));
+        })
+        .then(() => { // poor man's substitute for finally
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  }
+  */
 };
 
 export default accountActions;

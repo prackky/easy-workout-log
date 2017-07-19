@@ -3,8 +3,6 @@ import ewoloUtil from '../../common/ewoloUtil';
 import { c } from './accountActions';
 
 export const initialState = {
-  name: '',
-  nameFormHint: '',
   oldPassword: '',
   oldPasswordFormHint: '',
   password: '',

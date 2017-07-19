@@ -5,6 +5,8 @@ import './WorkoutView.css';
 import Modal from '../generic/Modal';
 import calculateSuperSetIndexes from '../../services/superSetService';
 
+import ewoloUtil from '../../common/ewoloUtil';
+
 const orderExercises = (exercises) => {
   const result = [];
 
@@ -133,7 +135,7 @@ class WorkoutView extends React.Component {
         <div className="column col-12 row" key={exercise.id}>
           <div className="columns">
             <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
-                ? 'x ' + exercise.weight
+                ? 'x ' + exercise.weight + (exercise.units !== this.props.defaultUnits ? ' ' + ewoloUtil.unitsToText(exercise.units) : '') 
                 : ''}</div>
             <div className="column col-6 row">{showTempo
                 ? exercise.tempo

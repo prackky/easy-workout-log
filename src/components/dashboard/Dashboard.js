@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -14,6 +15,7 @@ const mapStateToProps = (state/*, ownProps*/) => {
   return {
     // ...ownProps,
     dashboard: state.user.dashboard,
+    defaultUnits: state.user.data.units,
     workouts: state.user.workouts.workouts,
     workoutsViewDetails: state.user.workouts.workoutsViewDetails,
     workoutsAnalysis: state.user.workouts.workoutsAnalysis
@@ -99,6 +101,7 @@ class Dashboard extends Component {
             <div className="column col-12">
               <h4>Progress</h4>
               <DateVsWeightScatterChart
+                units={this.props.defaultUnits}
                 rows={this.state.rows}
                 columns={this.state.columns}
                 chartEvents={this.state.chartEvents}/>
@@ -112,7 +115,7 @@ class Dashboard extends Component {
               </p>
               <p>
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
-                values.
+                values. Exercise weight units are only displayed when different from <Link to="/account">account settings</Link>.
               </p>
             </div>
             <div className="accordion width-100">
@@ -166,6 +169,7 @@ class Dashboard extends Component {
               return (<WorkoutView
                 key={workout.id}
                 workout={workout}
+                defaultUnits={this.props.defaultUnits}
                 showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
                 ? true
                 : false}

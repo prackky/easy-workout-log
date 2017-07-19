@@ -1,7 +1,7 @@
 const ewoloContent = Object.freeze({
   weightHelpModalContent: [
-    'Weight in lbs.',
-    'To convert from kilograms to pounds, enter the weight in kgs and hit the convert button. To re-enable the button delete and re-add the exercise.'
+    'Select the relevant units using the dropdown. You can change your default weight units in account settings.',
+    'Currently only lbs and kgs are supported. Calculations are done using 1 kg = 2.2 lbs.'
   ],
   tempoHelpModalContent: [
     'The speed of the exercise. For e.g. 101 means 1 second eccentric (negative), 0 second mid-point and 1 second concentric (positive).',

@@ -125,7 +125,14 @@ const ewoloUtil = {
         .scrollIntoView({ block: 'end', behavior: 'smooth' });
     }, 0);
   },
-  chance: new Chance()
+  chance: new Chance(),
+  unitsToText: (units) => {
+    if (units === 1) {
+      return 'lbs';
+    }
+
+    return 'kgs';
+  }
 };
 
 export default ewoloUtil;

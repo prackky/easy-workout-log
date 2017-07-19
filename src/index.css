@@ -57,6 +57,10 @@ h6 {
   padding: 0.8rem .8rem;
 }
 
+.form-select:not([multiple]) {
+    height: inherit;
+}
+
 .form-input-hint {
   margin-top: -0.5rem;
 }

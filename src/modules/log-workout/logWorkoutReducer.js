@@ -97,7 +97,7 @@ const logWorkoutReducer = (state = {}, action) => {
     case c.LOG_WORKOUT_EXERCISE:
       {
         const exercises = copyExercises(state.exercises);
-        const { name, reps, weight, sets, tempo, rest, showAdvanced } = action;
+        const { name, reps, weight, sets, tempo, rest, showAdvanced, units } = action;
 
         exercises.push({
           name: name ? name : 'squats',
@@ -109,7 +109,8 @@ const logWorkoutReducer = (state = {}, action) => {
           showAdvanced: showAdvanced ? true : false,
           showProperties: true,
           setIndex: 1,
-          superSetIndex: 0
+          superSetIndex: 0,
+          units
         });
 
         calculateSetIndexes(exercises);
