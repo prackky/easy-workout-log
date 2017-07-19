@@ -6,10 +6,9 @@ import AutoComplete from '../generic/AutoComplete';
 
 const LogExercise = (props) => {
 
-  const handleWeightKgToLbs = (event) => {
+  const handleUnitSelectionChange = (event) => {
     const exercise = props.exercise;
-    exercise.weight = parseInt(exercise.weight * 2.20462, 10);
-    exercise.converted = true;
+    exercise.units = parseInt(event.target.value, 10);
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   }
 
@@ -83,8 +82,9 @@ const LogExercise = (props) => {
         <div className="columns">
           {renderedDivider}
           <div className="column col-11">
+
             <div className="form-group">
-              <div className="col-3">
+              <div className="col-4">
                 <label className="form-label">Reps</label>
               </div>
               <div className="col-4">
@@ -102,10 +102,10 @@ const LogExercise = (props) => {
             <EwoloFormHintSplit formHint={props.exercise.repsFormHint} />
 
             <div className="form-group">
-              <div className="col-3">
-                <label className="form-label"><a onClick={handleSetShowWeightHelpClick}> Lbs</a></label>
+              <div className="col-4">
+                <label className="form-label"><a onClick={handleSetShowWeightHelpClick}> Weight</a></label>
               </div>
-              <div className="col-9">
+              <div className="col-8">
                 <div className="input-group">
                   <input
                     className="form-input input-lg"
@@ -115,14 +115,18 @@ const LogExercise = (props) => {
                     max="1000"
                     value={props.exercise.weight}
                     onChange={handleChange}/>
-                  {/*<span className="input-group-addon">lb</span>*/}
-                  <button className={"btn btn-primary btn-lg input-group-btn" + (props.exercise.converted ? ' hide ' : '')} type="button" onClick={handleWeightKgToLbs}>kg -> lbs</button>
+                  
+                  <select className="form-select" value={props.exercise.units} onChange={handleUnitSelectionChange}>
+                    <option value="1">lbs</option>
+                    <option value="2">kgs</option>
+                  </select>
                 </div>
               </div>
             </div>
 
             {renderedAdvancedProperties}
             {renderedExerciseOperations}
+
           </div>
         </div>
       </div>
@@ -188,7 +192,7 @@ const LogExercise = (props) => {
     return (
       <div className="fade-in margin-bottom-1rem">
         <div className="form-group">
-          <div className="col-3">
+          <div className="col-4">
             <label className="form-label"><a onClick={handleSetShowTempoHelpClick}>Tempo</a></label>
           </div>
           <div className="col-4">
@@ -205,7 +209,7 @@ const LogExercise = (props) => {
         </div>
 
         <div className="form-group">
-          <div className="col-3">
+          <div className="col-4">
             <label className="form-label"><a onClick={handleSetShowRestHelpClick}>Rest</a></label>
           </div>
           <div className="col-4">

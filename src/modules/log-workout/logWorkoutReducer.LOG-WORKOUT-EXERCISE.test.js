@@ -11,7 +11,7 @@ describe('logWorkoutReducer', () => {
       const newState = logWorkoutReducer({
         type: 'weight',
         exercises: []
-      }, actions.logWorkoutExercise({}));
+      }, actions.logWorkoutExercise({ units: 1 }));
 
       // then
       expect(newState)
@@ -30,7 +30,8 @@ describe('logWorkoutReducer', () => {
               showAdvanced: false,
               showProperties: true,
               setIndex: 1,
-              superSetIndex: 0
+              superSetIndex: 0,
+              units: 1
             }
           ]
         });
@@ -39,9 +40,20 @@ describe('logWorkoutReducer', () => {
     it('should add an exercise with given properties', () => {
       // when
       const newState = logWorkoutReducer({
-        type: 'weight',
-        exercises: []
-      }, actions.logWorkoutExercise({ name: 'existing', reps: '24', weight: '200', sets: '2', tempo: '202', rest: '200', showAdvanced: true }));
+          type: 'weight',
+          exercises: []
+        },
+        actions.logWorkoutExercise({
+          name: 'existing',
+          reps: '24',
+          weight: '200',
+          sets: '2',
+          tempo: '202',
+          rest: '200',
+          showAdvanced: true,
+          units: 43
+        })
+      );
 
       // then
       expect(newState)
@@ -60,7 +72,8 @@ describe('logWorkoutReducer', () => {
               showAdvanced: true,
               showProperties: true,
               setIndex: 1,
-              superSetIndex: 0
+              superSetIndex: 0,
+              units: 43
             }
           ]
         });
@@ -71,7 +84,7 @@ describe('logWorkoutReducer', () => {
         // when
         const newState = logWorkoutReducer({
           exercises: [{ name: '2', setIndex: 1 }]
-        }, actions.logWorkoutExercise({ name: '2' }));
+        }, actions.logWorkoutExercise({ name: '2', units: 1 }));
 
         // then
         expect(newState)
@@ -88,7 +101,8 @@ describe('logWorkoutReducer', () => {
               showAdvanced: false,
               showProperties: true,
               setIndex: 2,
-              superSetIndex: 0
+              superSetIndex: 0,
+              units: 1
           }]
           });
       });
@@ -97,7 +111,7 @@ describe('logWorkoutReducer', () => {
         // when
         const newState = logWorkoutReducer({
           exercises: [{ name: '3', setIndex: 1 }, { name: '3', setIndex: 2 }]
-        }, actions.logWorkoutExercise({ name: '3' }));
+        }, actions.logWorkoutExercise({ name: '3', units: 1 }));
 
         // then
         expect(newState)
@@ -117,7 +131,8 @@ describe('logWorkoutReducer', () => {
                 showAdvanced: false,
                 showProperties: true,
                 setIndex: 3,
-                superSetIndex: 0
+                superSetIndex: 0,
+                units: 1
               }
             ]
           });
@@ -130,7 +145,7 @@ describe('logWorkoutReducer', () => {
             { name: 'a', setIndex: 1 },
             { name: 'a', setIndex: 2 }
           ]
-        }, actions.logWorkoutExercise({ name: 'b' }));
+        }, actions.logWorkoutExercise({ name: 'b', units: 1 }));
 
         // then
         expect(newState)
@@ -150,7 +165,8 @@ describe('logWorkoutReducer', () => {
                 showAdvanced: false,
                 showProperties: true,
                 setIndex: 1,
-                superSetIndex: 0
+                superSetIndex: 0,
+                units: 1
               }
             ]
           });
@@ -161,8 +177,19 @@ describe('logWorkoutReducer', () => {
       it('should set superSetIndex when adding the first set of a superset', () => {
         // when
         const newState = logWorkoutReducer({
-          exercises: []
-        }, actions.logWorkoutExercise({ name: 'super', reps: '8', weight: '100', sets: '1', tempo: '101', rest: '0', showAdvanced: true }));
+            exercises: []
+          },
+          actions.logWorkoutExercise({
+            name: 'super',
+            reps: '8',
+            weight: '100',
+            sets: '1',
+            tempo: '101',
+            rest: '0',
+            showAdvanced: true,
+            units: 1
+          })
+        );
 
         // then
         expect(newState)
@@ -179,7 +206,8 @@ describe('logWorkoutReducer', () => {
               showAdvanced: true,
               showProperties: true,
               setIndex: 1,
-              superSetIndex: 1
+              superSetIndex: 1,
+              units: 1
             }]
           });
       });
@@ -191,7 +219,7 @@ describe('logWorkoutReducer', () => {
             { name: 'super1', rest: '0' },
             { name: 'super2', rest: '0' }
           ]
-        }, actions.logWorkoutExercise({ name: 'super3' }));
+        }, actions.logWorkoutExercise({ name: 'super3', units: 1 }));
 
         // then
         expect(newState)
@@ -211,7 +239,8 @@ describe('logWorkoutReducer', () => {
                 showAdvanced: false,
                 showProperties: true,
                 setIndex: 1,
-                superSetIndex: 3
+                superSetIndex: 3,
+                units: 1
               },
             ]
           });
@@ -224,7 +253,7 @@ describe('logWorkoutReducer', () => {
             { name: 'super1', rest: '0' },
             { name: 'super2', rest: '60' }
           ]
-        }, actions.logWorkoutExercise({ name: 'normal' }));
+        }, actions.logWorkoutExercise({ name: 'normal', units: 1 }));
 
         // then
         expect(newState)
@@ -244,7 +273,8 @@ describe('logWorkoutReducer', () => {
                 showAdvanced: false,
                 showProperties: true,
                 setIndex: 1,
-                superSetIndex: 0
+                superSetIndex: 0,
+                units: 1
               },
             ]
           });

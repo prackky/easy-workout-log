@@ -15,12 +15,21 @@ import ewoloUtil from '../../common/ewoloUtil';
 import ewoloContent from '../../common/ewoloContent';
 
 const mapStateToProps = (state) => {
-  return {logWorkout: state.user.logWorkout, exerciseNames: state.user.data.exerciseNames};
+  return {logWorkout: state.user.logWorkout, exerciseNames: state.user.data.exerciseNames, defaultUnits: state.user.data.units};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    doLogWorkoutExercise: (name, reps, weight, sets, tempo, rest, showAdvanced) => {
+    doLogWorkoutExercise: ({
+      name,
+      reps,
+      weight,
+      sets,
+      tempo,
+      rest,
+      showAdvanced,
+      units
+    }) => {
       dispatch(logWorkoutActions.logWorkoutExercise({
         name,
         reps,
@@ -28,7 +37,8 @@ const mapDispatchToProps = (dispatch) => {
         sets,
         tempo,
         rest,
-        showAdvanced
+        showAdvanced,
+        units
       }));
       dispatch(userDataActions.userDataExerciseNameAdd(name));
     },
@@ -94,12 +104,22 @@ class LogWorkout extends Component {
         sets,
         tempo,
         rest,
-        showAdvanced
+        showAdvanced,
+        units
       } = this.props.logWorkout.exercises[numExercises - 1];
 
       this
         .props
-        .doLogWorkoutExercise(name, reps, weight, sets, tempo, rest, showAdvanced);
+        .doLogWorkoutExercise({
+          name,
+          reps,
+          weight,
+          sets,
+          tempo,
+          rest,
+          showAdvanced,
+          units
+        });
 
       ewoloUtil.scrollElementIntoView(this.refs.btnAddExercise);
 
@@ -108,7 +128,7 @@ class LogWorkout extends Component {
 
     this
       .props
-      .doLogWorkoutExercise();
+      .doLogWorkoutExercise({units: this.props.defaultUnits});
   };
 
   handleDateChange = (event) => {
