@@ -8,7 +8,9 @@ import globalActions from '../global/globalActions';
 
 export const c = Object.freeze({
   ACCOUNT_SET_PASSWORD_DATA: 'ACCOUNT-SET-PASSWORD-DATA',
-  ACCOUNT_PASSWORD_UPDATE_SUCCESS: 'ACCOUNT-PASSWORD-UPDATE-SUCCESS'
+  ACCOUNT_PASSWORD_UPDATE_SUCCESS: 'ACCOUNT-PASSWORD-UPDATE-SUCCESS',
+  ACCOUNT_SET_DATA: 'ACCOUNT-SET-DATA',
+  ACCOUNT_DATA_UPDATE_SUCCESS: 'ACCOUNT-DATA-UPDATE-SUCCESS'
 });
 
 
@@ -20,7 +22,7 @@ const accountActions = {
       password
     };
   },
-  accountPasswordUpdateSuccess: (action) => {
+  accountPasswordUpdateSuccess: () => {
     return {
       type: c.ACCOUNT_PASSWORD_UPDATE_SUCCESS
     };
@@ -62,6 +64,57 @@ const accountActions = {
           dispatch(globalActions.taskEnd());
         });
     };
+  },
+  accountSetData: ({name, units}) => {
+    return {
+      type: c.ACCOUNT_SET_DATA,
+      name,
+      units
+    };
+  },
+  accountDataUpdateSuccess: () => {
+    return {
+      type: c.ACCOUNT_DATA_UPDATE_SUCCESS
+    };
+  },
+  accountDataUpdateThunk: () => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(push('/'));
+          });
+      }
+
+      const userId = getState().user.data.id;
+      const { name, units } = getState().account;
+
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: '/users/' + userId,
+        method: 'PUT',
+        body: {name, units},
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(() => {
+          dispatch(accountActions.accountDataUpdateSuccess());
+          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account', true));
+        })
+        .catch(error => {
+          handleError(error);
+          
+          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account`));
+        })
+        .then(() => { // poor man's substitute for finally
+          dispatch(globalActions.taskEnd());
+        });
+    }
   }
 };
 
