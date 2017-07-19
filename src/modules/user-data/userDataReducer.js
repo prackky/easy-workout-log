@@ -32,7 +32,7 @@ const userDataReducer = (state = initialState, action) => {
           ],
           name,
           email,
-          units
+          units: parseInt(units, 10)
         };
       }
     case c.USER_DATA_EXERCISE_NAME_ADD:

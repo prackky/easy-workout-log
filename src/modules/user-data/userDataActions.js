@@ -1,17 +1,20 @@
 import jwtDecode from 'jwt-decode';
+import { push } from 'react-router-redux';
 
 import ewoloUtil from '../../common/ewoloUtil';
 import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
+import accountActions from '../account/accountActions';
 
-// import { push } from 'react-router-redux';
+
 
 export const c = {
   USER_DATA_AUTH_SUCCESS: 'USER-DATA-AUTH-SUCCESS',
   USER_DATA_FETCH_SUCCESS: 'USER-DATA-FETCH-SUCCESS',
-  USER_DATA_EXERCISE_NAME_ADD: 'USER-DATA-EXERCISE-NAME-ADD'
+  USER_DATA_EXERCISE_NAME_ADD: 'USER-DATA-EXERCISE-NAME-ADD',
+  USER_DATA_UPDATE_SUCCESS: 'USER-DATA-UPDATE-SUCCESS'
 };
 
 const userDataActions = {
@@ -79,7 +82,51 @@ const userDataActions = {
       type: c.USER_DATA_EXERCISE_NAME_ADD,
       name: name
     };
-  }
+  },
+  userDataUpdateSuccess: () => {
+    return {
+      type: c.USER_DATA_UPDATE_SUCCESS
+    };
+  },
+  userDataUpdateThunk: () => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+
+      if (!authToken) {
+        return Promise.resolve()
+          .then(() => {
+            dispatch(push('/'));
+          });
+      }
+
+      const { id, name, units } = getState().user.data;
+
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: '/users/' + id,
+        method: 'PUT',
+        body: { name, units },
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(() => {
+          dispatch(userDataActions.userDataUpdateSuccess());
+          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
+        })
+        .catch(error => {
+          handleError(error);
+
+          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account`));
+        })
+        .then(() => { // poor man's substitute for finally
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  },
+
 };
 
 export default userDataActions;

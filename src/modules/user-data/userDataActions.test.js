@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
 import ewoloConstants from '../../common/ewoloConstants';
 import userDataActions, { c } from './userDataActions.js';
+import globalActions from '../global/globalActions';
 
 const mockStore = ewoloTestUtil.getMockStore();
 
@@ -55,6 +56,49 @@ describe('userDataActions', () => {
         });
     });
 
+  });
+
+  describe('userDataUpdateThunk', () => {
+    it('creates ' + c.USER_DATA_UPDATE_SUCCESS + ' when updating account data', () => {
+
+      const userId = 'xxx';
+
+      nock(ewoloConstants.api.url)
+        .put('/users/' + userId)
+        .reply(204);
+
+      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true);
+      delete userNotificationAction.id;
+      delete userNotificationAction.at;
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        userDataActions.userDataUpdateSuccess(),
+        userNotificationAction,
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        user: {
+          logWorkout: {},
+          data: {
+            authToken: 'blah',
+            id: userId,
+            name: 'xyz',
+            units: 3
+          }
+        }
+      });
+
+      return store.dispatch(userDataActions.userDataUpdateThunk())
+        .then(() => { // return of async actions
+          const actions = store.getActions();
+          delete actions[2].id;
+          delete actions[2].at;
+
+          expect(store.getActions()).to.deep.equal(expectedActions);
+        });
+    });
   });
 
 });

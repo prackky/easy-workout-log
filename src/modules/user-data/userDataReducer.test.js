@@ -36,7 +36,7 @@ describe('userDataReducer', () => {
   describe(c.USER_DATA_FETCH_SUCCESS, () => {
     it('should set the correct user data', () => {
       // when
-      const newState = userDataReducer({ units: 1 }, actions.userDataFetchSuccess([], 'a', 'a@a.com', 42));
+      const newState = userDataReducer({ units: 1 }, actions.userDataFetchSuccess([], 'a', 'a@a.com', '42'));
 
       // then
       const expectedState = {

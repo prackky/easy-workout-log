@@ -61,7 +61,6 @@ describe('accountReducer', () => {
       // given 
       const is = {
         ...initialState,
-        name: 'vic',
         oldPassword: 'oldPassword',
         password: 'xxx'
       };
@@ -76,51 +75,6 @@ describe('accountReducer', () => {
         oldPasswordFormHint: '',
         password: '',
         passwordFormHint: ''
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
-
-  });
-
-  describe(c.ACCOUNT_SET_DATA, () => {
-    it('should set account data', () => {
-      // when
-      const newState = accountReducer(undefined, actions.accountSetData({ name: 'vic', units: 3 }));
-
-      // then
-      const expectedState = {
-        ...initialState,
-        name: 'vic',
-        units: 3
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
-
-  });
-
-  describe(c.ACCOUNT_DATA_UPDATE_SUCCESS, () => {
-    it('should leave the state on data update success', () => {
-      // given 
-      const is = {
-        ...initialState,
-        name: 'vic',
-        units: 34
-      };
-
-      // when
-      const newState = accountReducer(is, actions.accountDataUpdateSuccess());
-
-      // then
-      const expectedState = {
-        ...is
       };
 
       expect(newState)
