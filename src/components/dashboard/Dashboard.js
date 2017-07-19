@@ -168,6 +168,7 @@ class Dashboard extends Component {
               return (<WorkoutView
                 key={workout.id}
                 workout={workout}
+                defaultUnits={this.props.defaultUnits}
                 showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
                 ? true
                 : false}
