@@ -5,7 +5,6 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import EwoloFormHint from '../generic/EwoloFormHint';
 
 import accountActions from '../../modules/account/accountActions';
-import userDataActions from '../../modules/user-data/userDataActions';
 
 const mapStateToProps = (state) => {
   return {account: state.account, userData: state.user.data};
@@ -19,16 +18,30 @@ const mapDispatchToProps = (dispatch) => {
     doAccountPasswordUpdateThunk: () => {
       dispatch(accountActions.accountPasswordUpdateThunk());
     },
-    doSetUserData: ({exerciseNames, name, email, units}) => {
-      dispatch(userDataActions.userDataSet(exerciseNames, name, email, units));
+    doAccountSetData: ({name, units}) => {
+      dispatch(accountActions.accountSetData({name, units}));
     },
-    doUserDataUpdateThunk: () => {
-      dispatch(userDataActions.userDataUpdateThunk());
+    doAccountDataUpdateThunk: () => {
+      dispatch(accountActions.accountDataUpdateThunk());
     }
   };
 };
 
 class Account extends Component {
+
+  componentDidMount() {
+    this
+      .props
+      .doAccountSetData({name: this.props.userData.name, units: this.props.userData.units});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userData.name !== nextProps.userData.name || this.props.userData.units !== nextProps.userData.units) {
+      this
+        .props
+        .doAccountSetData({name: nextProps.userData.name, units: nextProps.userData.units});
+    }
+  }
 
   handleBtnUpdatePasswordClick = (event) => {
     event.preventDefault();
@@ -52,20 +65,20 @@ class Account extends Component {
   handleNameChange = (event) => {
     this
       .props
-      .doSetUserData({exerciseNames: this.props.userData.exerciseNames, name: event.target.value, email: this.props.userData.email, units: this.props.userData.units});
+      .doAccountSetData({name: event.target.value, units: this.props.account.units});
   }
 
   handleUnitSelectionChange = (event) => {
     this
       .props
-      .doSetUserData({exerciseNames: this.props.userData.exerciseNames, name: this.props.userData.name, email: this.props.userData.email, units: event.target.value});
+      .doAccountSetData({name: this.props.account.name, units: event.target.value});
   }
 
   handleBtnUpdateAccountClick = (event) => {
     event.preventDefault();
     this
       .props
-      .doUserDataUpdateThunk();
+      .doAccountDataUpdateThunk();
   }
 
   render() {
@@ -85,7 +98,7 @@ class Account extends Component {
               <div>
                 <h5>Settings</h5>
                 <form className="form-horizontal">
-                  
+
                   <div className="form-group">
                     <div className="col-4">
                       <label className="form-label">Full name</label>
@@ -95,7 +108,7 @@ class Account extends Component {
                         className="form-input"
                         type="text"
                         placeholder="Full name"
-                        value={this.props.userData.name}
+                        value={this.props.account.name}
                         onChange={this.handleNameChange}/>
                     </div>
                   </div>
@@ -107,7 +120,7 @@ class Account extends Component {
                     <div className="col-8">
                       <select
                         className="form-select"
-                        value={this.props.userData.units}
+                        value={this.props.account.units}
                         onChange={this.handleUnitSelectionChange}>
                         <option value="1">Pounds (lbs)</option>
                         <option value="2">Kilograms (kgs)</option>

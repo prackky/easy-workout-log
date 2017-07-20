@@ -6,7 +6,9 @@ export const initialState = {
   oldPassword: '',
   oldPasswordFormHint: '',
   password: '',
-  passwordFormHint: ''
+  passwordFormHint: '',
+  name: '',
+  units: 1
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -31,6 +33,16 @@ const accountReducer = (state = initialState, action) => {
           oldPasswordFormHint: '',
           password: '',
           passwordFormHint: ''
+        };
+      }
+    case c.ACCOUNT_SET_DATA:
+      {
+        const {name, units} = action;
+
+        return {
+          ...state,
+          name,
+          units
         };
       }
     default:

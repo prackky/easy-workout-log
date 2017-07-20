@@ -56,6 +56,25 @@ describe('accountReducer', () => {
 
   });
 
+  describe(c.ACCOUNT_SET_DATA, () => {
+    it('should set account form data', () => {
+      // when
+      const newState = accountReducer(undefined, actions.accountSetData({name: 'vic', units: 34}));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        name: 'vic',
+        units: 34
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+  });
+
   describe(c.ACCOUNT_PASSWORD_UPDATE_SUCCESS, () => {
     it('should reset password information after success', () => {
       // given 
