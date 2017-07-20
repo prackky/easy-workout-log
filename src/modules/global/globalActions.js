@@ -2,6 +2,9 @@
 
 import ewoloUtil from '../../common/ewoloUtil';
 
+export const c = Object.freeze({
+  APP_NOTIFICATION_SET: 'APP-NOTIFICATION-SET'
+});
 
 const globalActions = {
   taskStart: () => {
@@ -29,6 +32,14 @@ const globalActions = {
       type: 'USER-NOTIFICATION-UPDATE',
       id,
       isRead
+    };
+  },
+  appNotificationSet: (id, text, showAll = true) => {
+    return {
+      type: c.APP_NOTIFICATION_SET,
+      id,
+      text,
+      showAll
     };
   }
 };

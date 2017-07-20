@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import globalReducer from './globalReducer';
-import actions from './globalActions';
+import globalReducer, { initialState } from './globalReducer';
+import actions, { c } from './globalActions';
 
 describe('globalReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -12,7 +12,7 @@ describe('globalReducer', () => {
     expect(newState)
       .to
       .deep
-      .equal({ loadingCounter: 0, userNotifications: [] });
+      .equal(initialState);
   });
 
   describe('TASK-START', () => {
@@ -21,10 +21,15 @@ describe('globalReducer', () => {
       const newState = globalReducer(undefined, actions.taskStart());
 
       // then
+      const expectedState = {
+        ...initialState,
+        loadingCounter: 1
+      };
+
       expect(newState)
         .to
         .deep
-        .equal({ loadingCounter: 1, userNotifications: [] });
+        .equal(expectedState);
     });
 
     it('should increment the loading counter for TASK-START', () => {
@@ -47,10 +52,15 @@ describe('globalReducer', () => {
       const newState = globalReducer(undefined, actions.taskEnd());
 
       // then
+      const expectedState = {
+        ...initialState,
+        loadingCounter: -1
+      };
+
       expect(newState)
         .to
         .deep
-        .equal({ loadingCounter: -1, userNotifications: [] });
+        .equal(expectedState);
     });
 
     it('should decrement the loading counter', () => {
@@ -262,6 +272,27 @@ describe('globalReducer', () => {
               id: 'yyy'
             }
           ]
+        });
+    });
+
+  });
+
+  describe(c.APP_NOTIFICATION_SET, () => {
+    it('should set app notification data', () => {
+      // when
+      const newState = globalReducer(undefined, actions.appNotificationSet('a', 'xxx'));
+
+      // then
+      expect(newState)
+        .to
+        .deep
+        .equal({
+          ...initialState,
+          appNotification: {
+            id: 'a',
+            text: 'xxx',
+            showAll: true
+          }
         });
     });
 

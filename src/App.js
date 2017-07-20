@@ -18,6 +18,7 @@ import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
 import Header from './components/page/Header';
+import AppNotification from './components/notification/AppNotification';
 import Footer from './components/page/Footer';
 import Privacy from './components/page/Privacy';
 import Terms from './components/page/Terms';
@@ -36,24 +37,36 @@ import Account from './components/account/Account';
 import appReducer from './modules/appReducer';
 import createEwoloStore from './redux/createEwoloStore';
 
+import * as appNotificationService from './services/appNotificationService'
+
+import globalActions from './modules/global/globalActions';
 import userDataActions from './modules/user-data/userDataActions';
 
 import './App.css';
+import './notifications.css';
 
 const history = createHistory();
 
 const store = createEwoloStore(appReducer, [routerMiddleware(history)]);
 
-// initialize authToken should really be the single source of truth
-const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
-if (authToken && id) {
-  store.dispatch(userDataActions.userAuthSuccess(authToken, id));
-}
-
 class App extends Component {
 
   componentDidMount() {
+
+    // initialize authToken should really be the single source of truth
+    const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
+    const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
+    if (authToken && id) {
+      store.dispatch(userDataActions.userAuthSuccess(authToken, id));
+    }
+
+    const appNotification = appNotificationService.getAppNotification();
+    const appNotificationSeen = ewoloUtil.getObject(appNotification.id);
+
+    if (appNotificationSeen === null) { // undefined means localStorage is disabled
+      store.dispatch(globalActions.appNotificationSet(appNotification.id, appNotification.text, appNotification.showAll));
+    }
+
     store.dispatch(userDataActions.fetchUserDataThunk());
   }
 
@@ -63,6 +76,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <div>
             <Loader/>
+            <AppNotification/>
             <Header/>
             <Route exact path="/" component={Welcome}/>
             <Route exact path="/why-ewolo" component={WhyEwolo}/>
@@ -76,7 +90,9 @@ class App extends Component {
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/>
             <Route exact path="/account" component={Account}/>
-            <Footer clientVersion={packageJson.version} apiVersion={ewoloConstants.api.version}/>
+            <Footer
+              clientVersion={packageJson.version}
+              apiVersion={ewoloConstants.api.version}/>
           </div>
         </ConnectedRouter>
       </Provider>

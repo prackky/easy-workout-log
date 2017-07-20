@@ -1,6 +1,13 @@
+import { c } from './globalActions';
+
 export const initialState = {
   loadingCounter: 0,
-  userNotifications: []
+  userNotifications: [],
+  appNotification: {
+    id: '',
+    text: '',
+    showAll: true
+  }
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -79,6 +86,19 @@ const globalReducer = (state = initialState, action) => {
         }
 
         return state;
+      }
+    case c.APP_NOTIFICATION_SET:
+      {
+        const { id, text, showAll } = action;
+
+        return {
+          ...state,
+          appNotification: {
+            id,
+            text,
+            showAll
+          }
+        };
       }
     default:
       return state;

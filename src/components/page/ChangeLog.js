@@ -10,6 +10,11 @@ const ChangeLog = (props) => {
         <div className="column col-12">
           <h3 className="text-center">Change Log</h3>
 
+          <h5 className="margin-top-5rem">Version 2.1.0</h5>
+          <ul className="change-log">
+            <li>Support for global notifications</li>
+          </ul>
+          
           <h5 className="margin-top-5rem">Version 2.0.0</h5>
           <ul className="change-log">
             <li>Enable setting custom weight units for exercises</li>

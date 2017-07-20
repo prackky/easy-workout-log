@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 
 import UserNotification from './UserNotification';
 
-import './user-notification-bar.css';
-
 import globalActions from '../../modules/global/globalActions';
 
 const mapStateToProps = (state) => {
