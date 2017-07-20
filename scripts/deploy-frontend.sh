@@ -31,7 +31,7 @@ then
 fi
 
 echo "install dependencies"
-npm install
+npm install --prefer-offline
 
 echo "package app"
 npm run build
