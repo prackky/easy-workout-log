@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {Route} from 'react-router-dom';
 
-import { ConnectedRouter, /*routerReducer,*/ routerMiddleware } from 'react-router-redux'
+import { ConnectedRouter, /*routerReducer,*/ routerMiddleware } from './react-router-redux/index';
 import createHistory from 'history/createBrowserHistory';
 
 import Header from './components/page/Header';

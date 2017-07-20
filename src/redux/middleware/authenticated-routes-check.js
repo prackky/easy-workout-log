@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { push } from '../../react-router-redux/index';
 
 const authenticatedRoutesCheck = ({ dispatch, getState }) => next => action => {
 

@@ -9,7 +9,7 @@ import {
   ConnectedRouter,
   /*routerReducer,*/
   routerMiddleware
-} from 'react-router-redux';
+} from './react-router-redux/index';
 import createHistory from 'history/createBrowserHistory';
 
 import packageJson from './package.json.link'; // Needed to create a symlink because of https://github.com/facebookincubator/create-react-app/issues/2466

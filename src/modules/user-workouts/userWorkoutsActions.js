@@ -4,7 +4,7 @@ import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 
-// import { push } from 'react-router-redux';
+// import { push } from '../../react-router-redux/index';
 
 export const c = {
   USER_WORKOUTS_FETCH_SUCCESS: 'USER-WORKOUTS-FETCH-SUCCESS',

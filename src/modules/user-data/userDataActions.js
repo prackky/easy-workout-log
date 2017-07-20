@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-// import { push } from 'react-router-redux';
+// import { push } from '../../react-router-redux/index';
 
 import ewoloUtil from '../../common/ewoloUtil';
 import ewoloConstants from '../../common/ewoloConstants';

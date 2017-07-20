@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { push } from '../../react-router-redux/index';
 
 // import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
