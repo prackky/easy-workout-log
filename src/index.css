@@ -42,6 +42,11 @@ p {
   line-height: 2.6rem;
   margin: 0 0 1.6rem;
   font-weight: 300;
+  font-family: "Merriweather", serif;
+}
+
+p.no-text {
+  font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1,

@@ -205,13 +205,13 @@ class LogWorkout extends Component {
           <div className="columns">
             <div className="column col-12">
               {pageTitle}
-              <p>
+              <p className="no-text">
                 Click + to add a new exercise. Use the same exercise name for multiple sets.
               </p>
-              <p>
+              <p className="no-text">
                 Clickable labels provide hints.
               </p>
-              <p>
+              <p className="no-text">
                 Hit the save button once finished.
               </p>
             </div>

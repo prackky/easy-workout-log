@@ -128,13 +128,13 @@ class Welcome extends Component {
           <div className="container grid-1280">
             <div className="content text-center">
               <h3>Simple setup</h3>
-              <p>
+              <p className="no-text">
                 Logging a workout shouldn't take more than a few minutes. Try Ewolo for free.
               </p>
               <button
                 className="btn btn-welcome-log-workout"
                 onClick={this.handleBtnLogWorkoutClick}>Log a workout</button>
-              <p>
+              <p className="no-text">
                 Account only required if you wish to save your workouts.
               </p>
             </div>
@@ -149,7 +149,7 @@ class Welcome extends Component {
       <div className="column col-sm-12 col-4 highlight" key={index}>
         <i className={"fa fa-4x " + highlight.icon}></i>
         <h4>{highlight.title}</h4>
-        <p>{highlight.text}</p>
+        <p className="no-text">{highlight.text}</p>
       </div>
     )
   }

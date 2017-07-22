@@ -110,10 +110,10 @@ class Dashboard extends Component {
           <div className="columns">
             <div className="column col-12">
               <h4>Workouts</h4>
-              <p>
+              <p className="no-text">
                 Click on a workout to toggle details.
               </p>
-              <p>
+              <p className="no-text">
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
                 values. Exercise weight units are only displayed when different from <Link to="/account">account settings</Link>.
               </p>

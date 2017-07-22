@@ -90,7 +90,7 @@ class Account extends Component {
           <div className="columns">
             <div className="column col-12">
               <h4>Account</h4>
-              <p>
+              <p className="no-text">
                 Use the following sections to modify your account.
               </p>
             </div>

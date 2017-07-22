@@ -11,7 +11,7 @@ const WhyEwolo = (props) => {
           <h3 className="text-center">Why Ewolo?</h3>
 
           <p>
-            Ewolo is a web application that allows you to log your workouts. It was designed and developed by Victor Parmar when he couldn't find a simple cross-platform solution for logging his workouts and tracking progress. While there exist quite a few apps that provide the ability to track workouts, they are either platform specific: only iOS, or only android or no web version, not user friendly: convoluted web interfaces, no simple way to start logging a workout or just not flexible: either need to create routines beforehand of use fixed routines, no support for supersets and non-listed exercises
+            Ewolo is a web application that allows you to log your workouts. It was designed and developed by Victor Parmar when he couldn't find a simple cross-platform solution for logging his workouts and tracking progress. While there exist quite a few apps that provide the ability to track workouts, they are either platform specific: only iOS, or only android or no web version, not user friendly: convoluted web interfaces, no simple way to start logging a workout or just not flexible: either need to create routines beforehand of use fixed routines, no support for supersets and non-listed exercises.
           </p>
           
           <p>
@@ -20,17 +20,17 @@ const WhyEwolo = (props) => {
 
           <p>
             <strong>
-             If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution.
-            </strong>
+             If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution:            </strong>
+            <ul className="why-ewolo">
+              <li><strong>It comes with a list of over 100 exercises but you can add any exercise you want.</strong></li>
+              <li><strong>Most fields are optional and you can log workouts in the past, present and future (to set up future routines).</strong></li>
+              <li><strong>Log multiple workouts for a single day.</strong></li>
+              <li><strong>Log supersets, circuits (2 or more exercises without rest) and optionally specify tempo for high intensity workouts.</strong></li>
+              <li><strong>Copy, edit and delete workouts.</strong></li> 
+              <li><strong>All of the above plus a simple interface that is navigable on the smallest mobile device!</strong></li>
+            </ul>
           </p>
-          <ul className="why-ewolo">
-            <li><strong>It comes with a list of over 100 exercises but you can add any exercise you want.</strong></li>
-            <li><strong>Most fields are optional and you can log workouts in the past, present and future (to set up future routines).</strong></li>
-            <li><strong>Log multiple workouts for a single day.</strong></li>
-            <li><strong>Log supersets, circuits (2 or more exercises without rest) and optionally specify tempo for high intensity workouts.</strong></li>
-            <li><strong>Copy, edit and delete workouts.</strong></li> 
-            <li><strong>All of the above plus a simple interface that is navigable on the smallest mobile device!</strong></li>
-          </ul>
+          
           
           <p>
             Any feedback is very much welcome and we hope that you like it as much as we enjoyed making it. Oh and in case you were wondering, Ewolo is simply short for &quot;easy workout log&quot; :)
