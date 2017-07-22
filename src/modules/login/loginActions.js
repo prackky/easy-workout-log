@@ -21,7 +21,7 @@ const loginActions = {
       text: text
     };
   },
-  loginSetAfterSuccess: (action, redirect = '/dashboard') => {
+  loginSetAfterSuccess: (action, redirect = '/') => {
     return {
       type: c.LOGIN_SET_AFTER_SUCCESS,
       action: action,

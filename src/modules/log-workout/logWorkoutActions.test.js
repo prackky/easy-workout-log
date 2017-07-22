@@ -35,7 +35,7 @@ describe('logWorkoutActions', () => {
         },
         {
           type: '@@router/CALL_HISTORY_METHOD',
-          payload: { method: 'push', args: ['/dashboard'] }
+          payload: { method: 'push', args: ['/'] }
         },
         { type: 'TASK-END' }
       ];
@@ -72,7 +72,7 @@ describe('logWorkoutActions', () => {
         },
         {
           type: '@@router/CALL_HISTORY_METHOD',
-          payload: { method: 'push', args: ['/dashboard'] }
+          payload: { method: 'push', args: ['/'] }
         },
         { type: 'TASK-END' }
       ];
@@ -92,7 +92,7 @@ describe('logWorkoutActions', () => {
       const expectedActions = [
         {
           type: 'SIGNUP-SET-AFTER-SUCCESS',
-          redirect: '/dashboard'
+          redirect: '/'
         },
         {
           type: '@@router/CALL_HISTORY_METHOD',

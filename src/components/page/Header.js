@@ -70,11 +70,8 @@ class Header extends Component {
               <Link to="/" className="navbar-brand mr-10"><img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/></Link>
             </section>
             <section className="navbar-section navbar-content">
-              <NavLink exact to="/" className="btn btn-link">Home</NavLink>
+              <NavLink exact to="/" className="btn btn-link">{this.props.authToken ? 'Dashboard' : 'Home'}</NavLink>
               <NavLink exact to="/why-ewolo" className="btn btn-link">Why Ewolo?</NavLink>
-              {this.props.authToken && (
-                <NavLink exact to="/dashboard" className="btn btn-link">Dashboard</NavLink>
-              )}
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
             </section>
             <section className="navbar-section navbar-content">
@@ -107,16 +104,11 @@ class Header extends Component {
                   <img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>Home</NavLink>
+                  <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>{this.props.authToken ? 'Dashboard' : 'Home'}</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink exact to="/why-ewolo" onClick={this.handleSidebarCloseClick}>Why Ewolo?</NavLink>
                 </li>
-                {this.props.authToken && (
-                  <li className="nav-item">
-                    <NavLink exact to="/dashboard" onClick={this.handleSidebarCloseClick}>Dashboard</NavLink>
-                  </li>
-                )}
                 <li className="nav-item">
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>

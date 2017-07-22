@@ -29,7 +29,7 @@ describe('loginActions', () => {
       },
       {
         type: '@@router/CALL_HISTORY_METHOD',
-        payload: { method: 'push', args: ['/dashboard'] }
+        payload: { method: 'push', args: ['/xxx'] }
       },
       { type: 'TASK-END' }
     ];
@@ -39,7 +39,7 @@ describe('loginActions', () => {
         email: 'vic@smalldata.tech',
         password: 'xxx',
         afterSuccess: {
-          redirect: '/dashboard'
+          redirect: '/xxx'
         }
       }
     })

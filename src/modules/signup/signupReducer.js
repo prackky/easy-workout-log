@@ -10,7 +10,7 @@ export const initialState = {
   passwordFormHint: '',
   afterSuccess: {
     action: undefined,
-    redirect: '/dashboard' // by default redirect to the dashboard after signup
+    redirect: '/' // by default redirect to home after signup
   }
 };
 

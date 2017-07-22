@@ -17,6 +17,7 @@ import packageJson from './package.json.link'; // Needed to create a symlink bec
 import ewoloUtil from './common/ewoloUtil';
 import ewoloConstants from './common/ewoloConstants';
 
+import Home from './components/page/Home';
 import Header from './components/page/Header';
 import AppNotification from './components/notification/AppNotification';
 import Footer from './components/page/Footer';
@@ -79,7 +80,7 @@ class App extends Component {
             <Loader/>
             <AppNotification/>
             <Header/>
-            <Route exact path="/" component={Welcome}/>
+            <Route exact path="/" component={Home}/>
             <Route exact path="/why-ewolo" component={WhyEwolo}/>
             <Route exact path="/privacy" component={Privacy}/>
             <Route exact path="/terms" component={Terms}/>
@@ -89,7 +90,7 @@ class App extends Component {
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>
-            <Route exact path="/dashboard" component={Dashboard}/>
+            <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
             <Route exact path="/account" component={Account}/>
             <Footer
               clientVersion={packageJson.version}

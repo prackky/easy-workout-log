@@ -22,7 +22,7 @@ const signupActions = {
       password: password
     };
   },
-  signupSetAfterSuccess: (action, redirect = '/dashboard') => {
+  signupSetAfterSuccess: (action, redirect = '/') => {
     return {
       type: c.SIGNUP_SET_AFTER_SUCCESS,
       action: action,

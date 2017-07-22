@@ -35,7 +35,7 @@ describe('signupActions', () => {
       },
       {
         type: '@@router/CALL_HISTORY_METHOD',
-        payload: { method: 'push', args: ['/dashboard'] }
+        payload: { method: 'push', args: ['/xxx'] }
       },
       { type: 'TASK-END' }
     ];
@@ -44,7 +44,7 @@ describe('signupActions', () => {
       signup: {
         email: 'vic@smalldata.tech',
         afterSuccess: {
-          redirect: '/dashboard'
+          redirect: '/xxx'
         }
       }
     })

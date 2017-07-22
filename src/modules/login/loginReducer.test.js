@@ -78,7 +78,7 @@ describe('loginReducer', () => {
   describe(c.LOGIN_SET_AFTER_SUCCESS, () => {
     it('should set things to do after success', () => {
       // when
-      const newState = loginReducer(undefined, actions.loginSetAfterSuccess({ type: 'LOG-WORKOUT-SAVE' }, '/dashboard'));
+      const newState = loginReducer(undefined, actions.loginSetAfterSuccess({ type: 'LOG-WORKOUT-SAVE' }, '/xxx'));
 
       // then
       const expectedState = {
@@ -87,7 +87,7 @@ describe('loginReducer', () => {
           action: {
             type: 'LOG-WORKOUT-SAVE'
           },
-          redirect: '/dashboard'
+          redirect: '/xxx'
         }
       };
 

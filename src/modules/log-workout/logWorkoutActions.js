@@ -129,7 +129,7 @@ const logWorkoutActions = {
         .then(body => {
           dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
-          dispatch(push('/dashboard'));
+          dispatch(push('/'));
         })
         .catch(error => {
           handleError(error);

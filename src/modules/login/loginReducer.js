@@ -9,7 +9,7 @@ export const initialState = {
   text: null,
   afterSuccess: {
     action: undefined,
-    redirect: '/dashboard' // by default redirect to the dashboard after login
+    redirect: '/' // by default redirect home after login
   }
 };
 
