@@ -85,8 +85,8 @@ h6 {
   overflow: hidden;
   padding: .2rem .8rem;
   /* max-height is required here for the ease transition */
-  max-height: 10000rem; 
-  transition: max-height 10s ease;
+  max-height: 5000rem; 
+  transition: max-height 8s ease;
 }
 
 .menu-item a i {
