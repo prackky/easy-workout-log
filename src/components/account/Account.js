@@ -89,14 +89,14 @@ class Account extends Component {
         <div className="container grid-480 section-content">
           <div className="columns">
             <div className="column col-12">
-              <h4>Account</h4>
+              <h3>Account</h3>
               <p className="no-text">
                 Use the following sections to modify your account.
               </p>
             </div>
             <div className="column col-12">
               <div>
-                <h5>Settings</h5>
+                <h4>Settings</h4>
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -142,7 +142,7 @@ class Account extends Component {
             </div>
             <div className="column col-12">
               <div>
-                <h5>Password</h5>
+                <h4>Password</h4>
                 <form className="form-horizontal">
 
                   <div className="form-group">

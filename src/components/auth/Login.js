@@ -46,7 +46,7 @@ class Login extends Component {
           <div className="columns">
             <div className="column col-12">
               <div className="text-center">
-                <h4>Login</h4>
+                <h3>Login</h3>
                 <form className="form-horizontal">
 
                   <div className="form-group">

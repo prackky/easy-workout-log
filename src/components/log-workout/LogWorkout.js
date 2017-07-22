@@ -171,9 +171,9 @@ class LogWorkout extends Component {
   render() {
 
     const pageTitle = (
-      <h4>{this.props.logWorkout.id
+      <h3>{this.props.logWorkout.id
           ? `Edit workout for ${this.props.logWorkout.date}`
-          : 'Log a new workout.'}</h4>
+          : 'Log a new workout'}</h3>
     );
 
     return (

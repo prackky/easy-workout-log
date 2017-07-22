@@ -63,7 +63,7 @@ class Signup extends Component {
           <div className="columns">
             <div className="column col-12">
               <div className="text-center">
-                <h4>Create an account</h4>
+                <h3>Create an account</h3>
 
                 {forwardingText}
 

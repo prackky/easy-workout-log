@@ -14,6 +14,7 @@ const ChangeLog = (props) => {
           <ul className="change-log">
             <li>Enable zooming and panning for progress charts</li>
             <li>Set dashboard to home page when logged in</li>
+            <li>Improved longform text legibility</li>
           </ul>
           
           <h5 className="margin-top-5rem">Version 2.1.0</h5>

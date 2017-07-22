@@ -13,7 +13,6 @@ html {
   box-sizing: inherit;
 }
 
-
 body {
   min-height: 100%;
   padding-bottom: 25rem;
@@ -26,13 +25,14 @@ body {
   }
 }
 
+
 /**
  * Spectre overrides
  */
 
 body {
   background: white;
-  font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, "Open Sans", sans-serif;
   color: #50596c;
   /* need to figure out a solution for global variables */
   font-size: 1.8rem;
@@ -46,7 +46,7 @@ p {
 }
 
 p.no-text {
-  font-family: Lato, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Lato, "Open Sans", sans-serif;
 }
 
 h1,
@@ -63,7 +63,7 @@ h6 {
 }
 
 .form-select:not([multiple]) {
-    height: inherit;
+  height: inherit;
 }
 
 .form-input-hint {
@@ -85,7 +85,7 @@ h6 {
   overflow: hidden;
   padding: .2rem .8rem;
   /* max-height is required here for the ease transition */
-  max-height: 5000rem; 
+  max-height: 5000rem;
   transition: max-height 8s ease;
 }
 

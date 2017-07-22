@@ -99,7 +99,7 @@ class Dashboard extends Component {
         <div className="container grid-960 section-content">
           <div className="columns">
             <div className="column col-12">
-              <h4>Progress</h4>
+              <h3>Progress</h3>
               <DateVsWeightScatterChart
                 units={this.props.defaultUnits}
                 rows={this.state.rows}
@@ -109,7 +109,7 @@ class Dashboard extends Component {
           </div>
           <div className="columns">
             <div className="column col-12">
-              <h4>Workouts</h4>
+              <h3>Workouts</h3>
               <p className="no-text">
                 Click on a workout to toggle details.
               </p>

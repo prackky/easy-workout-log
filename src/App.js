@@ -25,7 +25,6 @@ import Privacy from './components/page/Privacy';
 import Terms from './components/page/Terms';
 import WhyEwolo from './components/page/WhyEwolo';
 import ChangeLog from './components/page/ChangeLog';
-import Welcome from './components/welcome/Welcome';
 import LogWorkoutNew from './components/log-workout/LogWorkoutNew';
 import LogWorkoutEdit from './components/log-workout/LogWorkoutEdit';
 import Loader from './components/page/Loader';
