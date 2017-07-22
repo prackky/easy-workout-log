@@ -1,3 +1,7 @@
+import Chance from 'chance';
+
+const chance = new Chance();
+
 const quotes = [
   "Eat clean, train dirty.",
   "No pain, no gain.",
@@ -25,5 +29,6 @@ const quotes = [
 ];
 
 export const getRandomQuote = () => {
-  return quotes[0];
+  const index = chance.natural({ min: 0, max: quotes.length });
+  return quotes[index];
 }
