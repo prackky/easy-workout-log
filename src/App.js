@@ -49,16 +49,17 @@ const history = createHistory();
 
 const store = createEwoloStore(appReducer, [routerMiddleware(history)]);
 
+// initialize authToken should really be the single source of truth
+// this needs to be here so that the redirects on auth can work!
+const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
+const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
+if (authToken && id) {
+  store.dispatch(userDataActions.userAuthSuccess(authToken, id));
+}
+
 class App extends Component {
 
   componentDidMount() {
-
-    // initialize authToken should really be the single source of truth
-    const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
-    const id = ewoloUtil.getObject(ewoloConstants.storage.userIdKey);
-    if (authToken && id) {
-      store.dispatch(userDataActions.userAuthSuccess(authToken, id));
-    }
 
     const appNotification = appNotificationService.getAppNotification();
     const appNotificationSeen = ewoloUtil.getObject(appNotification.id);
