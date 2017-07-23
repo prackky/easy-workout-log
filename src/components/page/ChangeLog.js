@@ -8,15 +8,16 @@ const ChangeLog = (props) => {
     <div className="container grid-960 section-content">
       <div className="columns">
         <div className="column col-12">
-          <h3 className="text-center">Change Log</h3>
+          <h3>Change Log</h3>
 
-          <h5 className="margin-top-5rem">Version 2.2.0 (2017-07-23)</h5>
+          <h5 className="margin-top-5rem">Version 2.3.0 (2017-07-23)</h5>
           <ul className="change-log">
             <li>Enable zooming and panning for progress charts</li>
             <li>Set dashboard to home page when logged in</li>
             <li>Improved longform text legibility</li>
             <li>Allow canceling a workout in edit mode</li>
             <li>Add inspirational quotes when logging a new workout</li>
+            <li>Add blog post!</li>
           </ul>
           
           <h5 className="margin-top-5rem">Version 2.1.0</h5>
