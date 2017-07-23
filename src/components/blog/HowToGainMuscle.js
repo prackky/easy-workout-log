@@ -1,11 +1,12 @@
 import React from 'react';
 
-import './Article.css';
+import './Blog.css';
+import img from './alexander-redl-185764.jpg';
 
 const HowToGainMuscle = (props) => {
 
   return (
-    <div className="container grid-960 section-content blog">
+    <div className="container grid-640 section-content">
       <div className="columns">
         <div className="column col-12">
 
@@ -16,8 +17,8 @@ const HowToGainMuscle = (props) => {
               </figure>
             </div>
             <div className="tile-content">
-              <p className="tile-title">Victor Parmar</p>
-              <p className="tile-subtitle">July 23, 2017</p>
+              <div className="tile-title">Victor Parmar</div>
+              <div className="tile-subtitle">July 23, 2017</div>
             </div>
           </div>
               
@@ -38,6 +39,11 @@ When I started working out I had no idea what I was doing. I was 20 years old an
 <p>
 A year later when I was 21, I was lucky enough to reconnect with an old friend who was studying to become a nutritionist. He started coaching me and we started working out together. This time around, I started doing a lot of research online and we would discuss routines and diet together. With his help I went from skinnymalinky to someone whose clothes actually fit! I gained 40 lbs in the span of 6 months! It has been 13 years since I first started working out and I am finally comfortable enough to share my recommendations.
 </p>
+
+<figure className="figure margin-top-5rem">
+  <img src={img} className="img-responsive" alt="this isn't me just yet" />
+</figure>
+
           <h4 className="margin-top-5rem">We are what we eat!</h4>
 
 <p>        

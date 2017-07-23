@@ -34,8 +34,8 @@ import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
 import Account from './components/account/Account';
 
-import Article from './components/articles/Article';
-import HowToGainMuscle from './components/articles/HowToGainMuscle';
+import Blog from './components/blog/Blog';
+import HowToGainMuscle from './components/blog/HowToGainMuscle';
 
 import appReducer from './modules/appReducer';
 import createEwoloStore from './redux/createEwoloStore';
@@ -96,7 +96,7 @@ class App extends Component {
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
             <Route exact path="/account" component={Account}/>
-            <Route exact path="/blog" component={Article}/>
+            <Route exact path="/blog" component={Blog}/>
             <Route
               exact
               path="/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks"

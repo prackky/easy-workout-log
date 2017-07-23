@@ -1,0 +1,16 @@
+.entry {
+  font-family: "Merriweather", serif;
+  margin-bottom: 2rem;
+}
+
+.entry .link {
+  font-size: 3rem;
+}
+
+.entry .author {
+  margin-top: 1rem;
+}
+
+.entry .date {
+  color: #bbc1cd;
+}

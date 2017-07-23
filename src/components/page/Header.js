@@ -73,6 +73,7 @@ class Header extends Component {
               <NavLink exact to="/" className="btn btn-link">{this.props.authToken ? 'Dashboard' : 'Home'}</NavLink>
               <NavLink exact to="/why-ewolo" className="btn btn-link">Why Ewolo?</NavLink>
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
+              <NavLink exact to="/blog" className="btn btn-link">Blog</NavLink>
             </section>
             <section className="navbar-section navbar-content">
               {this.props.authToken && userAccountMenu}
@@ -111,6 +112,9 @@ class Header extends Component {
                 </li>
                 <li className="nav-item">
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink exact to="/blog" onClick={this.handleSidebarCloseClick}>Blog</NavLink>
                 </li>
                 <li className="divider"></li>
 
