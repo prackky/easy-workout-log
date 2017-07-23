@@ -3,10 +3,10 @@ import React from 'react';
 const Terms = (props) => {
 
   return (
-    <div className="container grid-960 section-content">
+    <div className="container grid-640 section-content">
       <div className="columns">
         <div className="column col-12">
-          <h3 className="text-center">Terms of Service</h3>
+          <h3>Terms of Service</h3>
 
           <h6>
             <u>Last updated</u>: June 22<sup>nd</sup>, 2017. Inspired by <a href="https://monicahq.com/terms" target="_blank" rel="noopener noreferrer">Monica</a></h6>

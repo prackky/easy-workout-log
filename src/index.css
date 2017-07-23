@@ -25,6 +25,9 @@ body {
   }
 }
 
+.grid-640 {
+  max-width: 620px;
+}
 
 /**
  * Spectre overrides
@@ -91,4 +94,12 @@ h6 {
 
 .menu-item a i {
   margin-right: 0.5rem;
+}
+
+.tile .tile-title {
+  line-height: 3rem;
+}
+
+.tile .tile-subtitle {
+  line-height: 3rem;
 }

@@ -5,10 +5,10 @@ import './WhyEwolo.css';
 const WhyEwolo = (props) => {
 
   return (
-    <div className="container grid-960 section-content">
+    <div className="container grid-640 section-content">
       <div className="columns">
         <div className="column col-12">
-          <h3 className="text-center">Why Ewolo?</h3>
+          <h3>Why Ewolo?</h3>
 
           <p>
             Ewolo is a web application that allows you to log your workouts. It was designed and developed by Victor Parmar when he couldn't find a simple cross-platform solution for logging his workouts and tracking progress. While there exist quite a few apps that provide the ability to track workouts, they are either platform specific: only iOS, or only android or no web version, not user friendly: convoluted web interfaces, no simple way to start logging a workout or just not flexible: either need to create routines beforehand of use fixed routines, no support for supersets and non-listed exercises.
