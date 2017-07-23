@@ -14,6 +14,12 @@
   margin-left: 1rem;
 }
 
-#btn-cancel-edit-workout {
+.secondary-operation {
   margin-top: 2rem;
+}
+
+.secondary-operation .quote {
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  font-style: italic;
 }

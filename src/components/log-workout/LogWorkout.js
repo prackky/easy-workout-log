@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import './LogWorkout.css';
 
+import * as quotesService from '../../services/quotesService';
+
 import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
 import Modal from '../generic/Modal';
@@ -186,6 +188,21 @@ class LogWorkout extends Component {
           : 'Log a new workout'}</h3>
     );
 
+    const secondaryOperation = this.props.logWorkout.id
+      ? (
+        <button
+          id="btn-cancel-edit-workout"
+          className="btn btn-link btn-lg"
+          onClick={this.handleCancelEdit}>
+          Cancel edit workout
+        </button>
+      )
+      : (
+        <div className="quote">{quotesService
+            .getRandomQuote()
+            .quote}</div>
+      );
+
     return (
       <div>
         <UserNotificationBar/>
@@ -289,14 +306,9 @@ class LogWorkout extends Component {
                   </div>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group secondary-operation">
                   <div className="col-12 text-center">
-                    <button
-                      id="btn-cancel-edit-workout"
-                      className="btn btn-link btn-lg"
-                      onClick={this.handleCancelEdit}>
-                      Cancel edit workout
-                    </button>
+                    {secondaryOperation}
                   </div>
                 </div>
 
