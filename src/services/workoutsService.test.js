@@ -2,9 +2,9 @@ import { expect } from 'chai';
 
 import ewoloTestUtil from '../common/ewoloTestUtil';
 
-import { segregateWorkoutsByMonth, getChartData } from './workoutsService';
+import { segregateWorkoutsByMonth, getChartData, orderWorkoutsByDate } from './workoutsService';
 
-const workouts = [
+const sordedWorkouts = [
   {
     id: 1,
     date: '2017-06-23'
@@ -38,12 +38,55 @@ const workouts = [
   }
 ];
 
+const workouts = {
+  '1': {
+    id: 1,
+    date: '2017-06-23'
+  },
+  '2': {
+    id: 2,
+    date: '2017-06-15'
+  },
+  '3': {
+    id: 3,
+    date: '2017-06-01'
+  },
+  '4': {
+    id: 4,
+    date: '2017-05-15'
+  },
+  '5': {
+    id: 5,
+    date: '2017-05-10'
+  },
+  '6': {
+    id: 6,
+    date: '2017-01-01'
+  },
+  '7': {
+    id: 7,
+    date: '2008-10-15'
+  },
+  '8': {
+    id: 8,
+    date: '2008-10-01'
+  },
+  '9': {
+    id: 9,
+    date: '2008-01-10'
+  },
+  '10': {
+    id: 10,
+    date: '2008-01-01'
+  }
+};
+
 describe('workoutsService', () => {
 
   describe('segregateWorkoutsByMonth', () => {
     it('should split workouts by month', () => {
       // when
-      const segregatedWorkouts = segregateWorkoutsByMonth(workouts);
+      const segregatedWorkouts = segregateWorkoutsByMonth(sordedWorkouts);
 
       // then
       expect(segregatedWorkouts)
@@ -105,6 +148,51 @@ describe('workoutsService', () => {
                 date: '2008-01-01'
               }
             ]
+          }
+        ]);
+    });
+  });
+
+  describe('orderWorkoutsByDate', () => {
+    it('should order all workouts linearly', () => {
+      // when
+      const orderedWorkouts = orderWorkoutsByDate(workouts);
+
+      // then
+      expect(orderedWorkouts)
+        .to
+        .deep
+        .equal([
+          {
+            id: 1,
+            date: '2017-06-23'
+          }, {
+            id: 2,
+            date: '2017-06-15'
+          }, {
+            id: 3,
+            date: '2017-06-01'
+          }, {
+            id: 4,
+            date: '2017-05-15'
+          }, {
+            id: 5,
+            date: '2017-05-10'
+          }, {
+            id: 6,
+            date: '2017-01-01'
+          }, {
+            id: 7,
+            date: '2008-10-15'
+          }, {
+            id: 8,
+            date: '2008-10-01'
+          }, {
+            id: 9,
+            date: '2008-01-10'
+          }, {
+            id: 10,
+            date: '2008-01-01'
           }
         ]);
     });

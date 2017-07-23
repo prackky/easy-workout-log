@@ -62,3 +62,19 @@ export const getChartData = (workoutsAnalysis) => {
 
   return result;
 };
+
+export const orderWorkoutsByDate = (workouts) => {
+  const result = [];
+
+  for (const workout of Object.values(workouts)) {
+    result.push({
+      ...workout
+    });
+  }
+
+  result.sort((a, b) => {
+    return moment(b.date).unix() - moment(a.date).unix();
+  });
+
+  return result;
+}
