@@ -73,6 +73,16 @@ const mapDispatchToProps = (dispatch) => {
 
 class LogWorkout extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      quote: quotesService
+        .getRandomQuote()
+        .quote
+    };
+  }
+
   renderExercises() {
     return this
       .props
@@ -198,9 +208,7 @@ class LogWorkout extends Component {
         </button>
       )
       : (
-        <div className="quote">{quotesService
-            .getRandomQuote()
-            .quote}</div>
+        <div className="quote">{this.state.quote}</div>
       );
 
     return (
