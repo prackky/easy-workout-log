@@ -52,6 +52,39 @@ describe('userWorkoutsActions', () => {
 
   });
 
+  describe('fetchUserWorkoutThunk', () => {
+    it('should successfully fetch user workout', () => {
+      const workout = { id: 42, date: '2001-01-01' };
+      const route = userWorkoutsRoute + `/${workout.id}`;
+      
+      nock(ewoloConstants.api.url)
+        .get(route)
+        .reply(200, workout);
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        userWorkoutsActions.userWorkoutsFetchSuccess([workout]),
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
+        }
+      });
+
+      return store.dispatch(userWorkoutsActions.fetchUserWorkoutThunk(userId, workout.id))
+        .then(() => { // return of async actions
+          const actions = store.getActions();
+          expect(actions).to.deep.equal(expectedActions);
+        });
+    });
+
+  });
+
   describe('deleteUserWorkoutThunk', () => {
 
     it('should successfully delete user workouts', () => {
@@ -93,14 +126,14 @@ describe('userWorkoutsActions', () => {
   describe('fetchUserWorkoutsAnalysisThunk', () => {
     it('should successfully fetch user workouts analysis', () => {
       const workoutsAnalysis = ewoloTestUtil.workoutsAnalysisResponseData;
-      
+
       nock(ewoloConstants.api.url)
         .get(userWorkoutsAnalysisRoute + '6')
         .reply(200, workoutsAnalysis);
 
       const expectedActions = [
         globalActions.taskStart(),
-        userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(workoutsAnalysis), 
+        userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(workoutsAnalysis),
         globalActions.taskEnd()
       ];
 
@@ -122,7 +155,7 @@ describe('userWorkoutsActions', () => {
     });
 
     it('should error when fetch user workouts analysis for non-logged in user', () => {
-      
+
       const expectedActions = [
         globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.')
       ];

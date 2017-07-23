@@ -88,6 +88,32 @@ const userWorkoutsActions = {
         });
     }
   },
+  fetchUserWorkoutThunk: (userId, workoutId) => {
+    return (dispatch, getState) => {
+      const authToken = getState().user.data.authToken;
+      
+      dispatch(globalActions.taskStart());
+
+      const promise = ewoloUtil.getApiRequest({
+        route: `/users/${userId}/workouts/${workoutId}`,
+        method: 'GET',
+        authToken: authToken
+      });
+
+      return promise
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          dispatch(userWorkoutsActions.userWorkoutsFetchSuccess([body]));
+        })
+        .catch(error => {
+          handleError(error);
+          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user workout'));
+        })
+        .then(() => {
+          dispatch(globalActions.taskEnd());
+        });
+    }
+  },
   userWorkoutsDeleteSuccess: (workoutId) => {
     return {
       type: c.USER_WORKOUTS_DELETE_SUCCESS,
