@@ -9,7 +9,7 @@ describe('getRandomQuote', () => {
     console.log(result);
 
     // then
-    expect(result.length)
+    expect(result.quote.length)
       .to
       .be
       .above(10);
