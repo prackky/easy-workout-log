@@ -7,6 +7,7 @@ import { initialState as globalInitialState } from './global/globalReducer';
 import { initialState as userDataInitialState } from './user-data/userDataReducer';
 import { initialState as userWorkoutsInitialState } from './user-workouts/userWorkoutsReducer';
 import { initialState as accountInitialState } from './account/accountReducer';
+import { initialState as logWorkoutInitialState } from './log-workout/logWorkoutReducer';
 
 describe('appReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -16,7 +17,7 @@ describe('appReducer', () => {
     // then
     expect(newState).to.deep.equal({
       user: {
-        logWorkout: {},
+        logWorkout: logWorkoutInitialState,
         data: userDataInitialState,
         workouts: userWorkoutsInitialState
       },

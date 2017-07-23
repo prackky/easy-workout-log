@@ -1,4 +1,3 @@
-
 import ewoloUtil from '../../common/ewoloUtil';
 import { c } from './logWorkoutActions.js';
 import calculateSuperSetIndexes from '../../services/superSetService';
@@ -32,7 +31,16 @@ const calculateSetIndexes = (exercises) => {
   }
 }
 
-const logWorkoutReducer = (state = {}, action) => {
+export const initialState = {
+  date: "",
+  exercises: [],
+  notes: "",
+  showRestHelp: false,
+  showTempoHelp: false,
+  showWeightHelp: false
+}
+
+const logWorkoutReducer = (state = initialState, action) => {
   switch (action.type) {
     case c.LOG_WORKOUT:
       {

@@ -113,7 +113,7 @@ const LogExercise = (props) => {
                     property="weight"
                     min="0"
                     max="1000"
-                    value={props.exercise.weight}
+                    value={props.exercise.weight !== null ? props.exercise.weight : ''}
                     onChange={handleChange}/>
                   
                   <select className="form-select" value={props.exercise.units} onChange={handleUnitSelectionChange}>
@@ -202,7 +202,7 @@ const LogExercise = (props) => {
               property="tempo"
               min="0"
               max="999"
-              value={props.exercise.tempo}
+              value={props.exercise.tempo !== null ? props.exercise.tempo : ''}
               onChange={handleChange}/>
           </div>
           
@@ -219,7 +219,7 @@ const LogExercise = (props) => {
               min="0"
               max="99999"
               property="rest"
-              value={props.exercise.rest}
+              value={props.exercise.rest !== null ? props.exercise.rest : ''}
               onChange={handleChange}/>
           </div>
         </div>

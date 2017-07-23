@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import ewoloTestUtil from '../../common/ewoloTestUtil';
 import ewoloUtil from '../../common/ewoloUtil';
-import logWorkoutReducer from './logWorkoutReducer';
+import logWorkoutReducer, { initialState } from './logWorkoutReducer';
 import actions, { c } from './logWorkoutActions';
 
 describe('logWorkoutReducer', () => {
@@ -15,7 +15,7 @@ describe('logWorkoutReducer', () => {
     expect(newState)
       .to
       .deep
-      .equal({});
+      .equal(initialState);
   });
 
   describe(c.LOG_WORKOUT, () => {
@@ -113,7 +113,7 @@ describe('logWorkoutReducer', () => {
         });
     });
   });
-  
+
   describe(c.LOG_WORKOUT_EDIT, () => {
     it('should edit a workout', () => {
       // when
