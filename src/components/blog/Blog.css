@@ -14,3 +14,8 @@
 .entry .date {
   color: #bbc1cd;
 }
+
+p .highlight {
+  font-style: italic;
+  text-decoration: underline;
+}
