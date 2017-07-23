@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -194,4 +194,4 @@ class Dashboard extends Component {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard)); // need to wrap this to allow history push
