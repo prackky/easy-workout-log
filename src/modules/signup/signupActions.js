@@ -63,14 +63,14 @@ const signupActions = {
           }
         })
         .catch(error => {
-          handleError(error);
-          let userNotificationText = 'An error occured when creating account for ' + signup.email;
-
-          if (error.response && error.response.status === 409) {
-            userNotificationText = 'An account with this email address already exists!';
-          }
-
-          dispatch(globalActions.userNotificationAdd('ERROR', userNotificationText));
+          handleError({
+            error,
+            dispatch,
+            notificationMessage: 'An error occured when creating account for ' + signup.email,
+            codeMessages: {
+              409: 'An account with this email address already exists!'
+            }
+          });
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());

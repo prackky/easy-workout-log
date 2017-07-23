@@ -57,8 +57,7 @@ const userDataActions = {
           dispatch(userDataActions.userDataSet(allExercises, body.name, body.email, body.units));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user data'));
+          handleError({error, dispatch, notificationMessage: 'An error occured when loading user data'});
         })
         .then(() => {
           dispatch(globalActions.taskEnd());

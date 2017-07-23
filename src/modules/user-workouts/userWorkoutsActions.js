@@ -1,6 +1,6 @@
 import ewoloUtil from '../../common/ewoloUtil';
 // import ewoloConstants from '../../common/ewoloConstants';
-import { handleError } from '../../common/errorHandler';
+import { handleError, RequestError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 
@@ -47,8 +47,7 @@ const userWorkoutsActions = {
           dispatch(userWorkoutsActions.userWorkoutsAnalysisFetchSuccess(body));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user workouts progress data.'));
+          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user workouts progress data.' });
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
@@ -80,8 +79,7 @@ const userWorkoutsActions = {
           dispatch(userWorkoutsActions.userWorkoutsFetchSuccess(body));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user workouts'));
+          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user workouts' });
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
@@ -91,7 +89,7 @@ const userWorkoutsActions = {
   fetchUserWorkoutThunk: (userId, workoutId) => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
-      
+
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest({
@@ -106,8 +104,7 @@ const userWorkoutsActions = {
           dispatch(userWorkoutsActions.userWorkoutsFetchSuccess([body]));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when loading user workout'));
+          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user workout' });
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
@@ -139,8 +136,7 @@ const userWorkoutsActions = {
           dispatch(userWorkoutsActions.userWorkoutsDeleteSuccess(workoutId));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when deleting a workout'));
+          handleError({ error, dispatch, notificationMessage: 'An error occured when deleting a workout' });
         })
         .then(() => {
           dispatch(globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`));

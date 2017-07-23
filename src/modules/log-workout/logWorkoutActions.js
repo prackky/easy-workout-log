@@ -132,8 +132,7 @@ const logWorkoutActions = {
           dispatch(push('/'));
         })
         .catch(error => {
-          handleError(error);
-          dispatch(globalActions.userNotificationAdd('ERROR', 'An error occured when saving workout for ' + logWorkoutDate));
+          handleError({error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate});
         })
         .then(() => {
           dispatch(globalActions.taskEnd());

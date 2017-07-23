@@ -56,9 +56,7 @@ const accountActions = {
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
         })
         .catch(error => {
-          handleError(error);
-
-          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating password`));
+          handleError({error, dispatch, notificationMessage: `An error occured when updating password`});
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
@@ -101,9 +99,7 @@ const accountActions = {
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
         })
         .catch(error => {
-          handleError(error);
-
-          dispatch(globalActions.userNotificationAdd('ERROR', `An error occured when updating account`));
+          handleError({error, dispatch, notificationMessage: `An error occured when updating account`});
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
