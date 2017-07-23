@@ -165,8 +165,8 @@ const logWorkoutActions = {
     return (dispatch, getState) => {
       return Promise.resolve()
         .then(() => {
-          dispatch(logWorkoutActions.logWorkoutEdit(workout));
-          dispatch(push('/log-workout'));
+          // dispatch(logWorkoutActions.logWorkoutEdit(workout));
+          dispatch(push(`/edit-workout/${workout.id}`));
         });
     };
   }
