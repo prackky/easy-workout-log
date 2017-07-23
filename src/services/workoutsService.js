@@ -15,7 +15,7 @@ export const segregateWorkoutsByMonth = (workouts) => {
 
   for (const workout of workouts) {
     const workoutMonth = moment(workout.date).format(keyFormat);
-    
+
     if (currentMonth.key === workoutMonth) {
       currentMonth.workouts.push(workout);
     } else {
@@ -62,4 +62,3 @@ export const getChartData = (workoutsAnalysis) => {
 
   return result;
 };
-
