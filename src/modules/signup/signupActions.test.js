@@ -52,8 +52,7 @@ describe('signupActions', () => {
     return store.dispatch(signupActions.signupThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
-        delete actions[2].at;
-        delete actions[2].id;
+        ewoloTestUtil.cleanUpNotification(actions[2]);
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
         expect(authToken).to.equal(ewoloTestUtil.authToken);
         expect(store.getActions()).to.deep.equal(expectedActions);

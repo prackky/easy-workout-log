@@ -56,7 +56,7 @@ describe('userWorkoutsActions', () => {
     it('should successfully fetch user workout', () => {
       const workout = { id: 42, date: '2001-01-01' };
       const route = userWorkoutsRoute + `/${workout.id}`;
-      
+
       nock(ewoloConstants.api.url)
         .get(route)
         .reply(200, workout);
@@ -83,6 +83,70 @@ describe('userWorkoutsActions', () => {
         });
     });
 
+    it('should redirect to login when token expired', async() => {
+      const workout = { id: 42, date: '2001-01-01' };
+      const route = userWorkoutsRoute + `/${workout.id}`;
+
+      nock(ewoloConstants.api.url)
+        .get(route)
+        .reply(401);
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Unauthorized to perform this action. Please try logging in again.')),
+        {
+          type: '@@router/CALL_HISTORY_METHOD',
+          payload: { method: 'push', args: ['/login'] }
+        },
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
+        }
+      });
+
+      await store.dispatch(userWorkoutsActions.fetchUserWorkoutThunk(userId, workout.id));
+
+      const actions = store.getActions();
+      ewoloTestUtil.cleanUpNotification(actions[1]);
+      expect(actions).to.deep.equal(expectedActions);
+    });
+
+    it('should show 403 error', async() => {
+      const workout = { id: 42, date: '2001-01-01' };
+      const route = userWorkoutsRoute + `/${workout.id}`;
+
+      nock(ewoloConstants.api.url)
+        .get(route)
+        .reply(403);
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Operation not permitted.')),
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
+        }
+      });
+
+      await store.dispatch(userWorkoutsActions.fetchUserWorkoutThunk(userId, workout.id));
+
+      const actions = store.getActions();
+      ewoloTestUtil.cleanUpNotification(actions[1]);
+      expect(actions).to.deep.equal(expectedActions);
+    });
+
   });
 
   describe('deleteUserWorkoutThunk', () => {
@@ -98,7 +162,7 @@ describe('userWorkoutsActions', () => {
       const expectedActions = [
         globalActions.taskStart(),
         userWorkoutsActions.userWorkoutsDeleteSuccess(workoutId),
-        globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`)),
         globalActions.taskEnd()
       ];
 
@@ -114,10 +178,7 @@ describe('userWorkoutsActions', () => {
       return store.dispatch(userWorkoutsActions.deleteUserWorkoutThunk(workoutId, workoutDate))
         .then(() => { // return of async actions
           const actions = store.getActions();
-          delete actions[2].at;
-          delete actions[2].id;
-          delete expectedActions[2].at;
-          delete expectedActions[2].id;
+          ewoloTestUtil.cleanUpNotification(actions[2]);
           expect(actions).to.deep.equal(expectedActions);
         });
     });
@@ -157,7 +218,7 @@ describe('userWorkoutsActions', () => {
     it('should error when fetch user workouts analysis for non-logged in user', () => {
 
       const expectedActions = [
-        globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.')
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.'))
       ];
 
       const store = mockStore({
@@ -171,10 +232,7 @@ describe('userWorkoutsActions', () => {
       return store.dispatch(userWorkoutsActions.fetchUserWorkoutsAnalysisThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          delete expectedActions[0].at;
-          delete expectedActions[0].id;
-          delete actions[0].at;
-          delete actions[0].id;
+          ewoloTestUtil.cleanUpNotification(actions[0]);
           expect(actions).to.deep.equal(expectedActions);
         });
     });

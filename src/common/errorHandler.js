@@ -1,3 +1,4 @@
+import { push } from '../react-router-redux/index';
 import globalActions from '../modules/global/globalActions';
 
 export class RequestError extends Error {
@@ -25,7 +26,13 @@ export const handleError = ({ error, dispatch, notificationMessage, codeMessages
   }
 
   if (errorCode === 403) {
-    dispatch(globalActions.userNotificationAdd('ERROR', 'Operation not allowed.'));
+    dispatch(globalActions.userNotificationAdd('ERROR', 'Operation not permitted.'));
+    return;
+  }
+
+  if (errorCode === 401) {
+    dispatch(globalActions.userNotificationAdd('ERROR', 'Unauthorized to perform this action. Please try logging in again.'));
+    dispatch(push('/login'));
     return;
   }
 

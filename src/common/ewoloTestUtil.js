@@ -44,6 +44,11 @@ const ewoloTestUtil = {
   mock: {
     savedWorkout: savedWorkout,
     allWorkouts: allWorkouts
+  },
+  cleanUpNotification: (action) => {
+    delete action.at;
+    delete action.id;
+    return action;
   }
 };
 

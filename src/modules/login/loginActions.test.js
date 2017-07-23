@@ -116,8 +116,7 @@ describe('loginActions', () => {
     return store.dispatch(loginActions.loginThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
-        delete actions[1].at;
-        delete actions[1].id;
+        ewoloTestUtil.cleanUpNotification(actions[1]);
         expect(actions).to.deep.equal(expectedActions);
       });
   });

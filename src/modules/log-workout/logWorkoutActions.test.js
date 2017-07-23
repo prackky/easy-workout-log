@@ -45,8 +45,7 @@ describe('logWorkoutActions', () => {
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          delete actions[2].at;
-          delete actions[2].id;
+          ewoloTestUtil.cleanUpNotification(actions[2]);
 
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
@@ -82,8 +81,7 @@ describe('logWorkoutActions', () => {
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          delete actions[2].at;
-          delete actions[2].id;
+          ewoloTestUtil.cleanUpNotification(actions[2]);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
     });
@@ -140,12 +138,8 @@ describe('logWorkoutActions', () => {
 
       const expectedActions = [
         {
-          type: c.LOG_WORKOUT_EDIT,
-          workout: { id: 1 }
-        },
-        {
           type: '@@router/CALL_HISTORY_METHOD',
-          payload: { method: 'push', args: ['/log-workout'] }
+          payload: { method: 'push', args: ['/edit-workout/1'] }
         }
       ];
 

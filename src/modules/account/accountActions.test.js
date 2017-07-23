@@ -22,9 +22,8 @@ describe('accountActions', () => {
         .post('/credentials')
         .reply(200, { id: 'xxx' });
 
-      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated password', true);
-      delete userNotificationAction.id;
-      delete userNotificationAction.at;
+      const userNotificationAction = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
+      
 
       const expectedActions = [
         globalActions.taskStart(),
@@ -50,8 +49,7 @@ describe('accountActions', () => {
       return store.dispatch(accountActions.accountPasswordUpdateThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          delete actions[2].id;
-          delete actions[2].at;
+          ewoloTestUtil.cleanUpNotification(actions[2]);
 
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
