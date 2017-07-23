@@ -7,5 +7,6 @@ const appNotifications = [
 ];
 
 export const getAppNotification = () => {
-  return appNotifications[0];
+  // return appNotifications[0];
+  return null;
 }
