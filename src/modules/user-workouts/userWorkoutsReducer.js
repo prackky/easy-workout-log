@@ -1,7 +1,9 @@
+import * as entityService from '../../services/entityService';
+
 import { c } from './userWorkoutsActions';
 
 export const initialState = {
-  workouts: [],
+  workouts: {},
   workoutsViewDetails: {},
   workoutsAnalysis: []
 };
@@ -12,9 +14,14 @@ const userWorkoutsReducer = (state = initialState, action) => {
       {
         const { workouts } = action;
 
+        const normalized = entityService.normalize(workouts);
+
         return {
           ...state,
-          workouts: workouts
+          workouts: {
+            ...state.workouts,
+            ...normalized
+          }
         };
       }
     case c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS:
@@ -30,9 +37,11 @@ const userWorkoutsReducer = (state = initialState, action) => {
       {
         const { workoutId } = action;
 
-        const workouts = state.workouts.filter(workout => {
-          return (workout.id !== workoutId);
-        });
+        const workouts = {
+          ...state.workouts
+        }
+
+        delete workouts[workoutId + ''];
 
         return {
           ...state,

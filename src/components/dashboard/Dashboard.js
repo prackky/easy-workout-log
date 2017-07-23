@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {getChartData, segregateWorkoutsByMonth} from '../../services/workoutsService';
+import {getChartData, segregateWorkoutsByMonth, orderWorkoutsByDate} from '../../services/workoutsService';
 
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
@@ -136,7 +136,9 @@ class Dashboard extends Component {
 
   renderWorkouts() {
 
-    if (this.props.workouts.length === 0) {
+    const sortedWorkouts = orderWorkoutsByDate(this.props.workouts);
+  
+    if (sortedWorkouts.length === 0) {
       return (
         <div className="columns col-12">
           <div className="empty width-100">
@@ -153,7 +155,7 @@ class Dashboard extends Component {
       );
     }
 
-    const monthlyWorkouts = segregateWorkoutsByMonth(this.props.workouts);
+    const monthlyWorkouts = segregateWorkoutsByMonth(sortedWorkouts);
 
     return monthlyWorkouts.map(monthlyWorkoutList => {
       return (

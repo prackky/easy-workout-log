@@ -17,15 +17,66 @@ describe('userWorkoutsReducer', () => {
   });
 
   describe(c.USER_WORKOUTS_FETCH_SUCCESS, () => {
-    it('should set data', () => {
+    it('should normalize and set data', () => {
       // when
-      const workouts = [{ snoop: 'dawg' }];
+      const workouts = [{ id: 1, snoop: 'dawg' }, { id: 2, yoyo: 'ma' }];
       const newState = userWorkoutsReducer(undefined, actions.userWorkoutsFetchSuccess(workouts));
 
       // then
       const expectedState = {
         ...initialState,
-        workouts: workouts
+        workouts: {
+          '1': {
+            id: 1,
+            snoop: 'dawg'
+          },
+          '2': {
+            id: 2,
+            yoyo: 'ma'
+          }
+        }
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+  });
+
+  describe(c.USER_WORKOUTS_FETCH_SUCCESS, () => {
+    it('should keep existing data data', () => {
+      // when
+      const workouts = [{ id: 1, snoop: 'dawg' }, { id: 2, yoyo: 'ma' }];
+      const originalState = {
+        ...initialState,
+        workouts: {
+          '1': {
+            id: 1,
+            snoop: 'dawg'
+          }
+        }
+      };
+
+      const newState = userWorkoutsReducer(originalState, actions.userWorkoutsFetchSuccess([{ id: 2, yoyo: 'ma' }, { id: 3, jimmy: 'jones' }]));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workouts: {
+          '1': {
+            id: 1,
+            snoop: 'dawg'
+          },
+          '2': {
+            id: 2,
+            yoyo: 'ma'
+          },
+          '3': {
+            id: 3,
+            jimmy: 'jones'
+          }
+        }
       };
 
       expect(newState)
@@ -59,7 +110,7 @@ describe('userWorkoutsReducer', () => {
       // given
       const state = {
         ...initialState,
-        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
+        workouts: { '1': { id: 1, snoop: 'dawg' }, '2': { id: 2 }, '3': { id: 3 } }
       };
 
       // when
@@ -68,7 +119,7 @@ describe('userWorkoutsReducer', () => {
       // then
       const expectedState = {
         ...initialState,
-        workouts: [{ id: 2 }, { id: 3 }]
+        workouts: { '2': { id: 2 }, '3': { id: 3 } }
       };
 
       expect(newState)
@@ -77,49 +128,6 @@ describe('userWorkoutsReducer', () => {
         .equal(expectedState);
     });
 
-    it('should delete the second workout', () => {
-      // given
-      const state = {
-        ...initialState,
-        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
-      };
-
-      // when
-      const newState = userWorkoutsReducer(state, actions.userWorkoutsDeleteSuccess(2));
-
-      // then
-      const expectedState = {
-        ...initialState,
-        workouts: [{ id: 1, snoop: 'dawg' }, { id: 3 }]
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
-
-    it('should delete the last workout', () => {
-      // given
-      const state = {
-        ...initialState,
-        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }, { id: 3 }]
-      };
-
-      // when
-      const newState = userWorkoutsReducer(state, actions.userWorkoutsDeleteSuccess(3));
-
-      // then
-      const expectedState = {
-        ...initialState,
-        workouts: [{ id: 1, snoop: 'dawg' }, { id: 2 }]
-      };
-
-      expect(newState)
-        .to
-        .deep
-        .equal(expectedState);
-    });
   });
 
   describe(c.USER_WORKOUTS_SET_VIEW_DETAILS, () => {
