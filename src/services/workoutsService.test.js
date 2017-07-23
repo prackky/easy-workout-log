@@ -6,25 +6,25 @@ import {segregateWorkoutsByMonth, getChartData} from './workoutsService';
 
 const workouts = [
   {
-    date: '2017-06-23'
+    id: 1, date: '2017-06-23'
   }, {
-    date: '2017-06-15'
+    id: 2, date: '2017-06-15'
   }, {
-    date: '2017-06-01'
+    id: 3, date: '2017-06-01'
   }, {
-    date: '2017-05-15'
+    id: 4, date: '2017-05-15'
   }, {
-    date: '2017-05-10'
+    id: 5, date: '2017-05-10'
   }, {
-    date: '2017-01-01'
+    id: 6, date: '2017-01-01'
   }, {
-    date: '2008-10-15'
+    id: 7, date: '2008-10-15'
   }, {
-    date: '2008-10-01'
+    id: 8, date: '2008-10-01'
   }, {
-    date: '2008-01-10'
+    id: 9, date: '2008-01-10'
   }, {
-    date: '2008-01-01'
+    id: 10, date: '2008-01-01'
   }
 ];
 
@@ -44,45 +44,45 @@ describe('workoutsDisplayService', () => {
             key: 'June, 2017',
             workouts: [
               {
-                date: '2017-06-23'
+                id: 1, date: '2017-06-23'
               }, {
-                date: '2017-06-15'
+                id: 2, date: '2017-06-15'
               }, {
-                date: '2017-06-01'
+                id: 3, date: '2017-06-01'
               }
             ]
           }, {
             key: 'May, 2017',
             workouts: [
               {
-                date: '2017-05-15'
+                id: 4, date: '2017-05-15'
               }, {
-                date: '2017-05-10'
+                id: 5, date: '2017-05-10'
               }
             ]
           }, {
             key: 'January, 2017',
             workouts: [
               {
-                date: '2017-01-01'
+                id: 6, date: '2017-01-01'
               }
             ]
           }, {
             key: 'October, 2008',
             workouts: [
               {
-                date: '2008-10-15'
+                id: 7, date: '2008-10-15'
               }, {
-                date: '2008-10-01'
+                id: 8, date: '2008-10-01'
               }
             ]
           }, {
             key: 'January, 2008',
             workouts: [
               {
-                date: '2008-01-10'
+                id: 9, date: '2008-01-10'
               }, {
-                date: '2008-01-01'
+                id: 10, date: '2008-01-01'
               }
             ]
           }
