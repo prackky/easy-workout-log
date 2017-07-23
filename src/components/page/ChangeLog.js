@@ -5,7 +5,7 @@ import './ChangeLog.css';
 const ChangeLog = (props) => {
 
   return (
-    <div className="container grid-960 section-content">
+    <div className="container grid-640 section-content">
       <div className="columns">
         <div className="column col-12">
           <h3>Change Log</h3>
