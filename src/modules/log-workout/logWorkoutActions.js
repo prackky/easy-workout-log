@@ -132,7 +132,7 @@ const logWorkoutActions = {
           dispatch(push('/'));
         })
         .catch(error => {
-          handleError({error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate});
+          handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate });
         })
         .then(() => {
           dispatch(globalActions.taskEnd());
@@ -168,6 +168,15 @@ const logWorkoutActions = {
           dispatch(push(`/edit-workout/${workout.id}`));
         });
     };
+  },
+  logWorkoutEditCancelThunk: () => {
+    return (dispatch, getState) => {
+      return Promise.resolve()
+        .then(() => {
+          dispatch(logWorkoutActions.logWorkout());
+          dispatch(push('/'));
+        });
+    }
   }
 };
 

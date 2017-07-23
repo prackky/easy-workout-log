@@ -41,8 +41,7 @@ const mapDispatchToProps = (dispatch) => {
 class LogWorkoutNew extends Component {
 
   componentDidMount() {
-    if (!this.props.logWorkout.componentMounted) {
-      // TODO: consider maintaining mount status in local state
+    if (!this.props.logWorkout.componentMounted) { // Well we want to keep the form the way it was.
       this
         .props
         .doLogWorkout();

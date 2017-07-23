@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import './log-workout.css';
+import './LogWorkout.css';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
 import LogExercise from './LogExercise';
@@ -62,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     doLogWorkoutExerciseSetData: (index, exercise) => {
       dispatch(logWorkoutActions.logWorkoutExerciseSetData(index, exercise));
+    },
+    doLogWorkoutEditCancelThunk: () => {
+      dispatch(logWorkoutActions.logWorkoutEditCancelThunk());
     }
   };
 };
@@ -148,6 +151,13 @@ class LogWorkout extends Component {
     this
       .props
       .doLogWorkoutSaveThunk();
+  }
+
+  handleCancelEdit = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doLogWorkoutEditCancelThunk();
   }
 
   doCloseTempoHelp = () => {
@@ -275,6 +285,17 @@ class LogWorkout extends Component {
                       className="btn btn-primary btn-lg"
                       onClick={this.handleSave}>
                       Save Workout
+                    </button>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <div className="col-12 text-center">
+                    <button
+                      id="btn-cancel-edit-workout"
+                      className="btn btn-link btn-lg"
+                      onClick={this.handleCancelEdit}>
+                      Cancel edit workout
                     </button>
                   </div>
                 </div>

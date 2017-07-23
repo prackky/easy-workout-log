@@ -2,7 +2,7 @@ import { push } from '../../react-router-redux/index';
 
 import ewoloUtil from '../../common/ewoloUtil';
 // import ewoloConstants from '../../common/ewoloConstants';
-import { handleError } from '../../common/errorHandler';
+// import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
