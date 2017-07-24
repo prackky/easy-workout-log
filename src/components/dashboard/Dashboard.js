@@ -18,7 +18,8 @@ const mapStateToProps = (state/*, ownProps*/) => {
     defaultUnits: state.user.data.units,
     workouts: state.user.workouts.workouts,
     workoutsViewDetails: state.user.workouts.workoutsViewDetails,
-    workoutsAnalysis: state.user.workouts.workoutsAnalysis
+    workoutsAnalysis: state.user.workouts.workoutsAnalysis,
+    lastWorkoutDate: state.user.workouts.lastWorkoutDate
   };
 };
 
@@ -91,6 +92,14 @@ class Dashboard extends Component {
   }
   */
 
+  handleBtnShowOlderWorkoutsClick = (event) => {
+    event.preventDefault();
+    
+    this
+      .props
+      .doFetchUserWorkoutsThunk(this.props.lastWorkoutDate);
+  }
+
   render() {
 
     return (
@@ -115,14 +124,22 @@ class Dashboard extends Component {
               </p>
               <p className="no-text">
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
-                values. Exercise weight units are only displayed when different from <Link to="/account">account settings</Link>.
+                values. Exercise weight units are only displayed when different from
+                <Link to="/account">account settings</Link>.
               </p>
             </div>
             <div className="accordion width-100">
               {this.renderWorkouts()}
             </div>
           </div>
-          <div className="columns">
+          <div className="columns margin-top-1rem">
+            <div className="column col-12 text-center">
+              <button
+                className="btn btn-link btn-lg"
+                onClick={this.handleBtnShowOlderWorkoutsClick}>Show older workouts</button>
+            </div>
+          </div>
+          <div className="columns margin-top-3rem">
             <div className="column col-12 text-center">
               <button
                 className="btn btn-primary btn-lg"
@@ -137,7 +154,7 @@ class Dashboard extends Component {
   renderWorkouts() {
 
     const sortedWorkouts = orderWorkoutsByDate(this.props.workouts);
-  
+
     if (sortedWorkouts.length === 0) {
       return (
         <div className="columns col-12">

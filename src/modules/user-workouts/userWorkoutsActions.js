@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import ewoloUtil from '../../common/ewoloUtil';
 // import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
@@ -60,15 +62,23 @@ const userWorkoutsActions = {
       workouts: workouts
     };
   },
-  fetchUserWorkoutsThunk: () => {
+  fetchUserWorkoutsThunk: (dateBefore) => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;
 
+      // we fetch workouts for one day before the day specified to handle any rollover error
+      let queryDateBefore = null;
+      if (dateBefore) {
+        queryDateBefore = moment(dateBefore).subtract(1, 'days').format('YYYY-MM-DD');
+      }
+
+      const route = `/users/${userId}/workouts` + (queryDateBefore ? '?dateBefore=' + queryDateBefore : '');
+
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest({
-        route: `/users/${userId}/workouts`,
+        route: route,
         method: 'GET',
         authToken: authToken
       });
