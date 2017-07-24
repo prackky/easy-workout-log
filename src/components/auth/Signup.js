@@ -52,7 +52,7 @@ class Signup extends Component {
   render() {
     const forwardingText = (typeof this.props.signup.afterSuccess.action) === 'function'
       ? (
-        <p className="text-left">Your workout will automatically be saved after signing up!</p>
+        <div className="text-left">Your workout will automatically be saved after signing up!</div>
       )
       : null;
 
