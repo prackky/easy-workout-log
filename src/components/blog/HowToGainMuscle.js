@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Blog.css';
 import img from './alexander-redl-185764.jpg';
+import ewoloProgress from './ewolo-progress.png';
 
 const HowToGainMuscle = (props) => {
 
@@ -12,7 +13,7 @@ const HowToGainMuscle = (props) => {
 
           <div className="tile margin-bottom-3rem">
             <div className="tile-icon">
-              <figure className="avatar avatar-xl" data-initial="VP" style={{'background-color': '#5764c6'}}>
+              <figure className="avatar avatar-xl" data-initial="VP" style={{backgroundColor: '#5764c6'}}>
                 
               </figure>
             </div>
@@ -64,7 +65,12 @@ Figuring out what you need to eat to achieve your goals is a very difficult prob
   We all want to see results really quickly. In a way this is a good thing - progress motivates us and makes us want to achieve more. <span className="highlight">Tracking progress also lets us evaluate what is working and what is not</span>. This is why I built <a href="https://ewolo.fitness">Ewolo</a>. I wanted an easy way to track my workouts and see how my shoulders are getting stronger.
 </p>
 
-<p>
+<figure className="figure margin-top-5rem">
+  <img src={ewoloProgress} className="img-responsive" alt="use ewolo to track your progress" />
+  <figcaption className="figure-caption text-center">Use Ewolo to track your progress</figcaption>
+</figure>
+
+<p className="margin-top-5rem">
   If you are just starting out and need motivation, <span className="highlight">start small</span>. Start by calculating the calories in your next meal. Then move on to calculate the nutrition - break down the amount of protein, carbs and minerals. Make small achievable goals, for example &quot;no sugary drinks for the week&quot;. Achieving such small goals will lead to a snowball effect where you will have maximised your potential for progress even before you step into the gym!
 </p>
 

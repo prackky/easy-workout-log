@@ -33,7 +33,7 @@ const Blog = (props) => {
             </div>
           </div>
 
-          <div class="divider"></div>
+          {/*<div className="divider"></div>*/}
 
         </div>
       </div>
