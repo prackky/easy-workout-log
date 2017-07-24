@@ -13,6 +13,7 @@ const ChangeLog = (props) => {
           <h5 className="margin-top-5rem">Version 2.4.0 (2017-07-24)</h5>
           <ul className="change-log">
             <li>Add user avatars (can be changed in settings)</li>
+            <li>Improve dashboard performance</li>
           </ul>
 
           <h5 className="margin-top-5rem">Version 2.3.0 (2017-07-23)</h5>
