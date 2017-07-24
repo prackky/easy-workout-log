@@ -54,9 +54,9 @@ class Modal extends Component {
                 .map((para, index) => {
                   // TODO: Consider a better index here (para length?)
                   return (
-                    <p key={index}>
+                    <div className={index === 0 ? '' : 'margin-top-2rem'} key={index}>
                       {para}
-                    </p>
+                    </div>
                   );
                 })
 }
