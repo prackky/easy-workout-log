@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import ewoloTestUtil from '../common/ewoloTestUtil';
 
-import { segregateWorkoutsByMonth, getChartData, orderWorkoutsByDate } from './workoutsService';
+import { segregateWorkoutsByMonth, getChartData, orderWorkoutsByDate, getLastDate } from './workoutsService';
 
 const sordedWorkouts = [
   {
@@ -195,6 +195,16 @@ describe('workoutsService', () => {
             date: '2008-01-01'
           }
         ]);
+    });
+  });
+
+  describe('getLastDate', () => {
+    it('should get the lastDate', () => {
+      // when
+      const lastDate = getLastDate(workouts);
+
+      // then
+      expect(lastDate).to.equal('2008-01-01');
     });
   });
 

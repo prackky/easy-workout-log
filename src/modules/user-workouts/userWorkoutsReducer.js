@@ -1,11 +1,14 @@
+import moment from 'moment';
 import * as entityService from '../../services/entityService';
+import * as workoutsService from '../../services/workoutsService';
 
 import { c } from './userWorkoutsActions';
 
 export const initialState = {
   workouts: {},
   workoutsViewDetails: {},
-  workoutsAnalysis: []
+  workoutsAnalysis: [],
+  lastWorkoutDate: moment().format('YYYY-MM-DD')
 };
 
 const userWorkoutsReducer = (state = initialState, action) => {
@@ -15,13 +18,16 @@ const userWorkoutsReducer = (state = initialState, action) => {
         const { workouts } = action;
 
         const normalized = entityService.normalize(workouts);
+        const merged = {
+          ...state.workouts,
+          ...normalized
+        };
+        const lastWorkoutDate = workoutsService.getLastDate(merged);
 
         return {
           ...state,
-          workouts: {
-            ...state.workouts,
-            ...normalized
-          }
+          lastWorkoutDate,
+          workouts: merged
         };
       }
     case c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS:

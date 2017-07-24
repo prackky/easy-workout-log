@@ -78,3 +78,16 @@ export const orderWorkoutsByDate = (workouts) => {
 
   return result;
 }
+
+export const getLastDate = (workouts) => {
+  let lastDateUnix = moment().unix();
+
+  for (const workout of Object.values(workouts)) {
+    const unix = moment(workout.date).unix();
+    if (unix <= lastDateUnix) {
+      lastDateUnix = unix;
+    }
+  }
+
+  return moment.unix(lastDateUnix).format('YYYY-MM-DD');
+}

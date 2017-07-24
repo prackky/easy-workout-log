@@ -10,6 +10,11 @@ const ChangeLog = (props) => {
         <div className="column col-12">
           <h3>Change Log</h3>
 
+          <h5 className="margin-top-5rem">Version 2.4.0 (2017-07-24)</h5>
+          <ul className="change-log">
+            <li>Add user avatars (can be changed in settings)</li>
+          </ul>
+
           <h5 className="margin-top-5rem">Version 2.3.0 (2017-07-23)</h5>
           <ul className="change-log">
             <li>Enable zooming and panning for progress charts</li>

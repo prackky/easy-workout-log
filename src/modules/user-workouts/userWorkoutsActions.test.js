@@ -49,6 +49,36 @@ describe('userWorkoutsActions', () => {
           expect(actions).to.deep.equal(expectedActions);
         });
     });
+    
+    it('should successfully fetch user workouts when dateBefore provided', () => {
+      const dateBefore = '2017-01-02';
+      const route = userWorkoutsRoute + '?dateBefore=2017-01-01';
+      
+      nock(ewoloConstants.api.url)
+        .get(route)
+        .reply(200, workouts);
+
+      const expectedActions = [
+        globalActions.taskStart(),
+        userWorkoutsActions.userWorkoutsFetchSuccess(workouts),
+        globalActions.taskEnd()
+      ];
+
+      const store = mockStore({
+        user: {
+          data: {
+            authToken: 'blah',
+            id: userId
+          }
+        }
+      });
+
+      return store.dispatch(userWorkoutsActions.fetchUserWorkoutsThunk(dateBefore))
+        .then(() => { // return of async actions
+          const actions = store.getActions();
+          expect(actions).to.deep.equal(expectedActions);
+        });
+    });
 
   });
 
