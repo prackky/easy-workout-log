@@ -125,7 +125,7 @@ class Dashboard extends Component {
               <p className="no-text">
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
                 values. Exercise weight units are only displayed when different from
-                <Link to="/account">account settings</Link>.
+                &nbsp;<Link to="/account">account settings</Link>.
               </p>
             </div>
             <div className="accordion width-100">

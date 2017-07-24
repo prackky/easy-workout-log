@@ -14,6 +14,7 @@ const ChangeLog = (props) => {
           <ul className="change-log">
             <li>Add user avatars (can be changed in settings)</li>
             <li>Improve dashboard performance</li>
+            <li>Add a clear button for quick exercise name entry</li>
           </ul>
 
           <h5 className="margin-top-5rem">Version 2.3.0 (2017-07-23)</h5>

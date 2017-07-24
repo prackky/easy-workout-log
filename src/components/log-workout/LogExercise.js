@@ -33,6 +33,12 @@ const LogExercise = (props) => {
     props.doLogWorkoutExerciseSetData(props.index, exercise);
   }
 
+  const handleClearName = (event) => {
+    const exercise = props.exercise;
+    exercise.name = '';
+    props.doLogWorkoutExerciseSetData(props.index, exercise);
+  };
+
   const handleShowAdvanced = (event) => {
     event.currentTarget.blur(); // hide the tooltip 
 
@@ -239,7 +245,20 @@ const LogExercise = (props) => {
               Name
             </label>
           </div>
-          <div className="col-9">
+          <div className="col-7">
+            {/*
+            <div className="input-group">
+              <AutoComplete
+                placeholder="e.g. Squats"
+                autoFocus={true}
+                // name="exerciseName"
+                items={props.exerciseNames} 
+                input={props.exercise.name}
+                handleChange={handleNameAutoCompleteChange}/>
+              
+              <button className="btn btn-primary input-group-btn">Clear</button>
+            </div>
+            */}
             <AutoComplete
               placeholder="e.g. Squats"
               autoFocus={true}
@@ -247,6 +266,16 @@ const LogExercise = (props) => {
               items={props.exerciseNames} 
               input={props.exercise.name}
               handleChange={handleNameAutoCompleteChange}/>
+            
+          </div>
+          <div className="col-2 text-center">
+            <button
+              className="btn btn-action tooltip"
+              data-tooltip="Clear"
+              type="button"
+              onClick={handleClearName}>
+              <i className="icon icon-refresh"></i>
+            </button>
           </div>
         </div>
 
