@@ -29,7 +29,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props.sex);
     const avatar = avatarService.getAvatar(this.props.sex);
 
     const userAccountMenu = (

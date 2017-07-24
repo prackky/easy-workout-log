@@ -43,11 +43,16 @@ class LogWorkoutEdit extends Component {
 
   componentWillReceiveProps(nextProps) {
     const workoutId = this.getWorkoutId();
-    const workout = nextProps.workouts[workoutId];
-    if (workout) {
-      this
-        .props
-        .doLogWorkoutEdit(workout);
+    const workout = this.props.workouts[workoutId];
+
+    // only do logWorkoutEdit if you aren't already editing a workout
+    if (!workout) {
+      const loadedWorkout = nextProps.workouts[workoutId];
+      if (loadedWorkout) {
+        this
+          .props
+          .doLogWorkoutEdit(loadedWorkout);
+      }
     }
   }
 
