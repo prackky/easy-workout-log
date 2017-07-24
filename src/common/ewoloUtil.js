@@ -132,6 +132,17 @@ const ewoloUtil = {
     }
 
     return 'kgs';
+  },
+  textToSex: (sex) => {
+    if (sex === 'male') {
+      return 2;
+    }
+
+    if (sex === 'female') {
+      return 3;
+    }
+
+    return 1;
   }
 };
 

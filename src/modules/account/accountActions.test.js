@@ -71,7 +71,7 @@ describe('accountActions', () => {
 
       const expectedActions = [
         globalActions.taskStart(),
-        userDataActions.userDataSet(['squats'], 'xyz', 'a@a.com', 3),
+        userDataActions.userDataSet(['squats'], 'xyz', 'a@a.com', 3, 45),
         userNotificationAction,
         globalActions.taskEnd()
       ];
@@ -79,7 +79,8 @@ describe('accountActions', () => {
       const store = mockStore({
         account: {
           name: 'xyz',
-          units: 3
+          units: 3,
+          sex: 45
         },
         user: {
           logWorkout: {},

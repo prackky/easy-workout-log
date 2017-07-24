@@ -18,11 +18,11 @@ describe('userDataActions', () => {
 
       nock(ewoloConstants.api.url)
         .get('/user-data')
-        .reply(200, { exerciseNames: [], name: 'snoop', email: 'snoop@dawg.yo', units: 7 });
+        .reply(200, { exerciseNames: [], name: 'snoop', email: 'snoop@dawg.yo', units: 7, sex: 15 });
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userDataActions.userDataSet(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo', 7),
+        userDataActions.userDataSet(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo', 7, 15),
         { type: 'TASK-END' }
       ];
 
@@ -43,7 +43,8 @@ describe('userDataActions', () => {
           exerciseNames: ewoloConstants.exerciseNames,
           name: undefined,
           email: undefined,
-          units: undefined
+          units: undefined,
+          sex: undefined
         }
       ];
 

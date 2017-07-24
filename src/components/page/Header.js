@@ -5,10 +5,12 @@ import {connect} from 'react-redux';
 import './Header.css';
 import ewoloLogo from './ewolo-logo.png';
 
+import * as avatarService from '../account/avatarService';
+
 import LinkWithChildren from '../generic/LinkWithChildren';
 
 const mapStateToProps = (state) => {
-  return {authToken: state.user.data.authToken, name: state.user.data.name, email: state.user.data.email};
+  return {authToken: state.user.data.authToken, name: state.user.data.name, email: state.user.data.email, sex: state.user.data.sex};
 };
 
 class Header extends Component {
@@ -27,13 +29,28 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.props.sex);
+    const avatar = avatarService.getAvatar(this.props.sex);
 
     const userAccountMenu = (
       <div className="dropdown dropdown-right">
         <a href="#/account" className="btn btn-link dropdown-toggle" tabIndex="0">
           {/*this.props.name*/}
+          <figure
+            id="account-avatar"
+            className="avatar avatar-lg"
+            data-initial="U"
+            style={{
+            backgroundColor: '#5764c6'
+          }}>
+            <img src={avatar} alt="avatar"/>
+          </figure>
+          <i className="icon icon-caret"></i>
+
+          {/*
           <i className="fa fa-user" aria-hidden="true"></i>
           <i className="icon icon-caret"></i>
+          */}
         </a>
         <ul className="menu">
           <li className="menu-item">
@@ -70,7 +87,9 @@ class Header extends Component {
               <Link to="/" className="navbar-brand mr-10"><img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/></Link>
             </section>
             <section className="navbar-section navbar-content">
-              <NavLink exact to="/" className="btn btn-link">{this.props.authToken ? 'Dashboard' : 'Home'}</NavLink>
+              <NavLink exact to="/" className="btn btn-link">{this.props.authToken
+                  ? 'Dashboard'
+                  : 'Home'}</NavLink>
               <NavLink exact to="/why-ewolo" className="btn btn-link">Why Ewolo?</NavLink>
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
               <NavLink exact to="/blog" className="btn btn-link">Blog</NavLink>
@@ -78,10 +97,14 @@ class Header extends Component {
             <section className="navbar-section navbar-content">
               {this.props.authToken && userAccountMenu}
               {!this.props.authToken && (
-                <NavLink exact to="/signup" className="btn btn-link"><i className="fa fa-fw fa-user-plus" aria-hidden="true"></i> Sign-up</NavLink>
+                <NavLink exact to="/signup" className="btn btn-link">
+                  <i className="fa fa-fw fa-user-plus" aria-hidden="true"></i>
+                  Sign-up</NavLink>
               )}
               {!this.props.authToken && (
-                <NavLink exact to="/login" className="btn btn-link"><i className="fa fa-fw fa-sign-in" aria-hidden="true"></i> Login</NavLink>
+                <NavLink exact to="/login" className="btn btn-link">
+                  <i className="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+                  Login</NavLink>
               )}
             </section>
           </header>
@@ -105,7 +128,9 @@ class Header extends Component {
                   <img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>{this.props.authToken ? 'Dashboard' : 'Home'}</NavLink>
+                  <NavLink exact to="/" onClick={this.handleSidebarCloseClick}>{this.props.authToken
+                      ? 'Dashboard'
+                      : 'Home'}</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink exact to="/why-ewolo" onClick={this.handleSidebarCloseClick}>Why Ewolo?</NavLink>
@@ -119,7 +144,16 @@ class Header extends Component {
                 <li className="divider"></li>
 
                 <li className="nav-item">
-                  {this.props.email}
+
+                  <div className="tile">
+                    <div className="tile-icon">
+                      <img src={avatar} className="avatar" alt="avatar"/>
+                    </div>
+                    <div className="tile-content">
+                      {this.props.email}
+                    </div>
+                  </div>
+
                   <ul className="nav">
                     {this.props.authToken && (
                       <li className="nav-item">

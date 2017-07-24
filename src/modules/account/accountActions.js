@@ -63,11 +63,12 @@ const accountActions = {
         });
     };
   },
-  accountSetData: ({ name, units }) => {
+  accountSetData: ({ name, units, sex }) => {
     return {
       type: c.ACCOUNT_SET_DATA,
       name,
-      units
+      units,
+      sex
     };
   },
   accountDataUpdateThunk: () => {
@@ -81,21 +82,21 @@ const accountActions = {
           });
       }
 
-      const { name, units } = getState().account;
+      const { name, units, sex } = getState().account;
 
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest({
         route: '/users/' + id,
         method: 'PUT',
-        body: { name, units },
+        body: { name, units, sex },
         authToken: authToken
       });
 
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(() => {
-          dispatch(userDataActions.userDataSet(exerciseNames, name, email, units));
+          dispatch(userDataActions.userDataSet(exerciseNames, name, email, units, sex));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
         })
         .catch(error => {

@@ -1,3 +1,7 @@
+#account-avatar {
+  margin-top: -1rem;
+}
+
 .navbar {
   min-height: 10rem;
   font-size: 1.8rem;
@@ -32,6 +36,10 @@
 #sidebar .brand {
   font-size: 2.2rem;
   max-width: 7rem;
+}
+
+#sidebar .tile .tile-icon {
+  margin-top: 0.5rem;
 }
 
 .nav .nav-item a.active {

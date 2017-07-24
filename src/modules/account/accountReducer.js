@@ -8,7 +8,8 @@ export const initialState = {
   password: '',
   passwordFormHint: '',
   name: '',
-  units: 1
+  units: 1,
+  sex: 1
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -37,12 +38,13 @@ const accountReducer = (state = initialState, action) => {
       }
     case c.ACCOUNT_SET_DATA:
       {
-        const {name, units} = action;
+        const {name, units, sex} = action;
 
         return {
           ...state,
           name,
-          units
+          units: parseInt(units, 10),
+          sex: parseInt(sex, 10)
         };
       }
     default:

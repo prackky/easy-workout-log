@@ -59,13 +59,14 @@ describe('accountReducer', () => {
   describe(c.ACCOUNT_SET_DATA, () => {
     it('should set account form data', () => {
       // when
-      const newState = accountReducer(undefined, actions.accountSetData({name: 'vic', units: 34}));
+      const newState = accountReducer(undefined, actions.accountSetData({name: 'vic', units: '34', sex: '78'}));
 
       // then
       const expectedState = {
         ...initialState,
         name: 'vic',
-        units: 34
+        units: 34,
+        sex: 78
       };
 
       expect(newState)

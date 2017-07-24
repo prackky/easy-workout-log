@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import UserNotificationBar from '../notification/UserNotificationBar';
 import EwoloFormHint from '../generic/EwoloFormHint';
 
+import ewoloUtil from '../../common/ewoloUtil';
 import accountActions from '../../modules/account/accountActions';
 
 const mapStateToProps = (state) => {
@@ -18,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     doAccountPasswordUpdateThunk: () => {
       dispatch(accountActions.accountPasswordUpdateThunk());
     },
-    doAccountSetData: ({name, units}) => {
-      dispatch(accountActions.accountSetData({name, units}));
+    doAccountSetData: ({name, units, sex}) => {
+      dispatch(accountActions.accountSetData({name, units, sex}));
     },
     doAccountDataUpdateThunk: () => {
       dispatch(accountActions.accountDataUpdateThunk());
@@ -32,14 +33,16 @@ class Account extends Component {
   componentDidMount() {
     this
       .props
-      .doAccountSetData({name: this.props.userData.name, units: this.props.userData.units});
+      .doAccountSetData({name: this.props.userData.name, units: this.props.userData.units, sex: this.props.userData.sex});
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.userData.name !== nextProps.userData.name || this.props.userData.units !== nextProps.userData.units) {
+    // in the case that the account page is loaded directly we need this check to set the default values ...
+    if (this.props.userData.name !== nextProps.userData.name || this.props.userData.units !== nextProps.userData.units || this.props.userData.sex !== nextProps.userData.sex) {
+      
       this
         .props
-        .doAccountSetData({name: nextProps.userData.name, units: nextProps.userData.units});
+        .doAccountSetData({name: nextProps.userData.name, units: nextProps.userData.units, sex: nextProps.userData.sex});
     }
   }
 
@@ -65,13 +68,21 @@ class Account extends Component {
   handleNameChange = (event) => {
     this
       .props
-      .doAccountSetData({name: event.target.value, units: this.props.account.units});
+      .doAccountSetData({name: event.target.value, units: this.props.account.units, sex: this.props.account.sex});
   }
 
   handleUnitSelectionChange = (event) => {
     this
       .props
-      .doAccountSetData({name: this.props.account.name, units: event.target.value});
+      .doAccountSetData({name: this.props.account.name, units: event.target.value, sex: this.props.account.sex});
+  }
+
+  handleSexChange = (event) => {
+    const sex = ewoloUtil.textToSex(event.target.name);
+    
+    this
+      .props
+      .doAccountSetData({name: this.props.account.name, units: this.props.account.units, sex: sex});
   }
 
   handleBtnUpdateAccountClick = (event) => {
@@ -96,7 +107,7 @@ class Account extends Component {
             </div>
             <div className="column col-12">
               <div>
-                <h4>Settings</h4>
+                <h4>Details</h4>
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -129,6 +140,41 @@ class Account extends Component {
                   </div>
 
                   <div className="form-group">
+                    <div className="col-4">
+                      <label className="form-label">Sex</label>
+                    </div>
+                    <div className="col-8">
+                      <label className="form-radio">
+                        <input
+                          type="radio"
+                          name="male"
+                          checked={this.props.account.sex === 2}
+                          onChange={this.handleSexChange}/>
+                        <i className="form-icon"></i>
+                        Male
+                      </label>
+                      <label className="form-radio">
+                        <input
+                          type="radio"
+                          name="female"
+                          checked={this.props.account.sex === 3}
+                          onChange={this.handleSexChange}/>
+                        <i className="form-icon"></i>
+                        Female
+                      </label>
+                      <label className="form-radio">
+                        <input
+                          type="radio"
+                          name="other"
+                          checked={this.props.account.sex === 1}
+                          onChange={this.handleSexChange}/>
+                        <i className="form-icon"></i>
+                        Other
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
                       <button
                         className="btn btn-primary btn-lg"
@@ -172,7 +218,7 @@ class Account extends Component {
 
                   <EwoloFormHint formHint={this.props.account.passwordFormHint}/>
 
-                  <div className="form-group">
+                  <div className="form-group margin-top-3rem">
                     <div className="col-12 text-center">
                       <button
                         className={"btn btn-primary btn-lg " + ((this.props.account.oldPassordFormHint || this.props.account.passwordFormHint || !this.props.account.oldPassword || !this.props.account.password)

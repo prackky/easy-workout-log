@@ -7,7 +7,8 @@ export const initialState = {
   id: undefined,
   exerciseNames: [],
   name: '',
-  units: 1
+  units: 1,
+  sex: 1
 };
 
 const userDataReducer = (state = initialState, action) => {
@@ -24,7 +25,7 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_SET:
       {
-        const { exerciseNames, name, email, units } = action;
+        const { exerciseNames, name, email, units, sex } = action;
         return {
           ...state,
           exerciseNames: [
@@ -32,7 +33,8 @@ const userDataReducer = (state = initialState, action) => {
           ],
           name,
           email,
-          units: parseInt(units, 10)
+          units: parseInt(units, 10),
+          sex: parseInt(sex, 10)
         };
       }
     case c.USER_DATA_EXERCISE_NAME_ADD:

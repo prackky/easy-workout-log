@@ -77,10 +77,16 @@ class LogWorkout extends Component {
     super(props);
 
     this.state = {
+      quote: ''
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
       quote: quotesService
         .getRandomQuote()
         .quote
-    };
+    });
   }
 
   renderExercises() {
