@@ -19,7 +19,8 @@ const mapStateToProps = (state/*, ownProps*/) => {
     workouts: state.user.workouts.workouts,
     // workoutsViewDetails: state.user.workouts.workoutsViewDetails,
     workoutsAnalysis: state.user.workouts.workoutsAnalysis,
-    lastWorkoutDate: state.user.workouts.lastWorkoutDate
+    lastWorkoutDate: state.user.workouts.lastWorkoutDate,
+    displayMoreWorkouts: state.user.workouts.displayMoreWorkouts
   };
 };
 
@@ -95,7 +96,7 @@ class Dashboard extends Component {
 
   handleBtnShowOlderWorkoutsClick = (event) => {
     event.preventDefault();
-    
+
     this
       .props
       .doFetchUserWorkoutsThunk(this.props.lastWorkoutDate);
@@ -104,7 +105,7 @@ class Dashboard extends Component {
   toggleWorkoutViewDetails = (workoutId, show) => {
     const workoutsViewDetails = this.state.workoutsViewDetails;
     workoutsViewDetails[workoutId] = show;
-    
+
     this.setState({
       ...this.state,
       workoutsViewDetails: {
@@ -137,21 +138,23 @@ class Dashboard extends Component {
               </p>
               <p className="no-text">
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
-                values. Exercise weight units are only displayed when different from
-                &nbsp;<Link to="/account">account settings</Link>.
+                values. Exercise weight units are only displayed when different from <Link to="/account">account settings</Link>.
               </p>
             </div>
             <div className="accordion width-100">
               {this.renderWorkouts()}
             </div>
           </div>
-          <div className="columns margin-top-1rem">
-            <div className="column col-12 text-center">
-              <button
-                className="btn btn-link btn-lg"
-                onClick={this.handleBtnShowOlderWorkoutsClick}>Show older workouts</button>
+          {this.props.displayMoreWorkouts && (
+            <div className="columns margin-top-1rem">
+              <div className="column col-12 text-center">
+                <button
+                  className="btn btn-link btn-lg"
+                  onClick={this.handleBtnShowOlderWorkoutsClick}>Show older workouts</button>
+              </div>
             </div>
-          </div>
+          )
+          }
           <div className="columns margin-top-3rem">
             <div className="column col-12 text-center">
               <button

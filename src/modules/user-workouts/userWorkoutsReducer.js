@@ -8,7 +8,8 @@ export const initialState = {
   workouts: {},
   workoutsViewDetails: {},
   workoutsAnalysis: [],
-  lastWorkoutDate: moment().format('YYYY-MM-DD')
+  lastWorkoutDate: moment().format('YYYY-MM-DD'),
+  displayMoreWorkouts: true
 };
 
 const userWorkoutsReducer = (state = initialState, action) => {
@@ -27,7 +28,8 @@ const userWorkoutsReducer = (state = initialState, action) => {
         return {
           ...state,
           lastWorkoutDate,
-          workouts: merged
+          workouts: merged,
+          displayMoreWorkouts: (workouts.length >= 20)
         };
       }
     case c.USER_WORKOUTS_ANALYSIS_FETCH_SUCCESS:

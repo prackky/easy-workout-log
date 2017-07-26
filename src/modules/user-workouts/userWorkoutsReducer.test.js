@@ -36,7 +36,8 @@ describe('userWorkoutsReducer', () => {
             date: '2017-01-01'
           }
         },
-        lastWorkoutDate: '2017-01-01'
+        lastWorkoutDate: '2017-01-01',
+        displayMoreWorkouts: false
       };
 
       expect(newState)
@@ -79,7 +80,8 @@ describe('userWorkoutsReducer', () => {
             date: '2016-01-01'
           }
         },
-        lastWorkoutDate: '2016-01-01'
+        lastWorkoutDate: '2016-01-01',
+        displayMoreWorkouts: false
       };
 
       expect(newState)
@@ -103,7 +105,8 @@ describe('userWorkoutsReducer', () => {
             date: '2016-01-01'
           }
         },
-        lastWorkoutDate: '2016-01-01'
+        lastWorkoutDate: '2016-01-01',
+        displayMoreWorkouts: false
       };
 
       const newState = userWorkoutsReducer(originalState, actions.userWorkoutsFetchSuccess([{ id: 2, date: '2014-01-01' }, { id: 3, date: '2016-10-01' }]));
@@ -125,7 +128,49 @@ describe('userWorkoutsReducer', () => {
             date: '2016-10-01'
           }
         },
-        lastWorkoutDate: '2014-01-01'
+        lastWorkoutDate: '2014-01-01',
+        displayMoreWorkouts: false
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+
+    it('should set displayMoreWorkouts to true when workouts count >= 20', () => {
+      // when
+      const workouts = [{ id: 1, date: '2017-01-01' }, { id: 2, date: '2016-01-01' }, { id: 3, date: '2017-01-02' }, { id: 4, date: '2017-01-03' }, { id: 5, date: '2017-01-04' }, { id: 6, date: '2017-01-05' }, { id: 7, date: '2017-01-07' }, { id: 8, date: '2017-01-08' }, { id: 9, date: '2017-01-09' }, { id: 10, date: '2017-01-10' }, { id: 11, date: '2017-01-11' }, { id: 12, date: '2017-01-12' }, { id: 13, date: '2017-01-13' }, { id: 14, date: '2017-01-14' }, { id: 15, date: '2017-01-15' }, { id: 16, date: '2017-01-16' }, { id: 17, date: '2017-01-17' }, { id: 18, date: '2017-01-18' }, { id: 19, date: '2017-01-19' }, { id: 20, date: '2017-01-20' }];
+
+      const newState = userWorkoutsReducer(initialState, actions.userWorkoutsFetchSuccess(workouts));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        workouts: {
+          '1': { id: 1, date: '2017-01-01' },
+          '2': { id: 2, date: '2016-01-01' },
+          '3': { id: 3, date: '2017-01-02' },
+          '4': { id: 4, date: '2017-01-03' },
+          '5': { id: 5, date: '2017-01-04' },
+          '6': { id: 6, date: '2017-01-05' },
+          '7': { id: 7, date: '2017-01-07' },
+          '8': { id: 8, date: '2017-01-08' },
+          '9': { id: 9, date: '2017-01-09' },
+          '10': { id: 10, date: '2017-01-10' },
+          '11': { id: 11, date: '2017-01-11' },
+          '12': { id: 12, date: '2017-01-12' },
+          '13': { id: 13, date: '2017-01-13' },
+          '14': { id: 14, date: '2017-01-14' },
+          '15': { id: 15, date: '2017-01-15' },
+          '16': { id: 16, date: '2017-01-16' },
+          '17': { id: 17, date: '2017-01-17' },
+          '18': { id: 18, date: '2017-01-18' },
+          '19': { id: 19, date: '2017-01-19' },
+          '20': { id: 20, date: '2017-01-20' }
+        },
+        lastWorkoutDate: '2016-01-01',
+        displayMoreWorkouts: true
       };
 
       expect(newState)
