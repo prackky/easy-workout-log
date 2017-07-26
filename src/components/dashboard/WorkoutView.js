@@ -153,6 +153,8 @@ class WorkoutView extends React.Component {
   }
 
   render() {
+    const noTransitionCss = ewoloUtil.isMobileDevice() ? ' no-transition ' : '';
+
     return (
       <div className="accordion-item">
         <Modal
@@ -212,8 +214,8 @@ class WorkoutView extends React.Component {
         </label>
         <div
           className={this.props.showWorkoutDetails
-          ? "accordion-body-show"
-          : "accordion-body"}>
+          ? "accordion-body-show" + noTransitionCss
+          : "accordion-body" + noTransitionCss}>
           <div className="columns workout-details">
             {this.renderExercises()}
           </div>

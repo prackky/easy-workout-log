@@ -143,6 +143,9 @@ const ewoloUtil = {
     }
 
     return 1;
+  },
+  isMobileDevice: () => {
+    return window.screen.width < 600;
   }
 };
 
