@@ -116,6 +116,8 @@ class Dashboard extends Component {
 
   render() {
 
+    const sortedWorkouts = orderWorkoutsByDate(this.props.workouts);
+
     return (
       <div>
         <UserNotificationBar/>
@@ -138,11 +140,12 @@ class Dashboard extends Component {
               </p>
               <p className="no-text">
                 Tempo (default 101) and Rest (default 60) are only displayed if not default
-                values. Exercise weight units are only displayed when different from <Link to="/account">account settings</Link>.
+                values. Exercise weight units are only displayed when different from&nbsp;
+                <Link to="/account">account settings</Link>.
               </p>
             </div>
             <div className="accordion width-100">
-              {this.renderWorkouts()}
+              {this.renderWorkouts(sortedWorkouts)}
             </div>
           </div>
           {this.props.displayMoreWorkouts && (
@@ -154,22 +157,23 @@ class Dashboard extends Component {
               </div>
             </div>
           )
-          }
-          <div className="columns margin-top-3rem">
-            <div className="column col-12 text-center">
-              <button
-                className="btn btn-primary btn-lg"
-                onClick={this.handleBtnLogWorkoutClick}>Log a new workout</button>
+}
+          {(sortedWorkouts.length > 0) && (
+            <div className="columns margin-top-3rem">
+              <div className="column col-12 text-center">
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={this.handleBtnLogWorkoutClick}>Log a new workout</button>
+              </div>
             </div>
-          </div>
+          )
+}
         </div>
       </div>
     );
   }
 
-  renderWorkouts() {
-
-    const sortedWorkouts = orderWorkoutsByDate(this.props.workouts);
+  renderWorkouts(sortedWorkouts) {
 
     if (sortedWorkouts.length === 0) {
       return (
