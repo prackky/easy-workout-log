@@ -3,12 +3,15 @@
  * @return provided input with all whitespace removed and converted to lowercase
  */
 const simplify = (str) => {
-  return str.replace(/\s+/g, '').toLowerCase();
+  if (str && str.length) {
+    return str.replace(/\s+/g, '').toLowerCase();
+  }
+  return '';
 }
 
 const autoCompleteSuggestions = (items, input) => {
-  const simplifiedInput = simplify(input);
   const result = [];
+  const simplifiedInput = simplify(input);
 
   if (simplifiedInput) {
     for (const item of items) {
