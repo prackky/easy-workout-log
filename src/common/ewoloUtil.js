@@ -145,7 +145,7 @@ const ewoloUtil = {
     return 1;
   },
   isMobileDevice: () => {
-    return window.screen.width < 600;
+    return window.innerWidth < 600;
   }
 };
 
