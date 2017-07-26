@@ -17,7 +17,7 @@ const mapStateToProps = (state/*, ownProps*/) => {
     dashboard: state.user.dashboard,
     defaultUnits: state.user.data.units,
     workouts: state.user.workouts.workouts,
-    workoutsViewDetails: state.user.workouts.workoutsViewDetails,
+    // workoutsViewDetails: state.user.workouts.workoutsViewDetails,
     workoutsAnalysis: state.user.workouts.workoutsAnalysis,
     lastWorkoutDate: state.user.workouts.lastWorkoutDate
   };
@@ -27,7 +27,7 @@ const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
   doFetchUserWorkoutsAnalysisThunk: userWorkoutsActions.fetchUserWorkoutsAnalysisThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
-  doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails,
+  // doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails,
   doCopyWorkoutThunk: logWorkoutActions.logWorkoutCopyThunk,
   doEditWorkoutThunk: logWorkoutActions.logWorkoutEditThunk
 };
@@ -58,7 +58,8 @@ class Dashboard extends Component {
         }
       ],
       rows: workoutsAnalysisChartData.rows,
-      columns: workoutsAnalysisChartData.columns
+      columns: workoutsAnalysisChartData.columns,
+      workoutsViewDetails: {}
     };
 
     this.state = state;
@@ -98,6 +99,18 @@ class Dashboard extends Component {
     this
       .props
       .doFetchUserWorkoutsThunk(this.props.lastWorkoutDate);
+  }
+
+  toggleWorkoutViewDetails = (workoutId, show) => {
+    const workoutsViewDetails = this.state.workoutsViewDetails;
+    workoutsViewDetails[workoutId] = show;
+    
+    this.setState({
+      ...this.state,
+      workoutsViewDetails: {
+        ...workoutsViewDetails
+      }
+    });
   }
 
   render() {
@@ -189,11 +202,11 @@ class Dashboard extends Component {
                 key={workout.id}
                 workout={workout}
                 defaultUnits={this.props.defaultUnits}
-                showWorkoutDetails={this.props.workoutsViewDetails[workout.id]
+                showWorkoutDetails={this.state.workoutsViewDetails[workout.id]
                 ? true
                 : false}
                 doDeleteUserWorkoutThunk={this.props.doDeleteUserWorkoutThunk}
-                doToggleViewWorkoutDetails={this.props.doToggleViewWorkoutDetails}
+                doToggleViewWorkoutDetails={this.toggleWorkoutViewDetails}
                 doCopyWorkoutThunk={this.props.doCopyWorkoutThunk}
                 doEditWorkoutThunk={this.props.doEditWorkoutThunk}/>);
             })}
