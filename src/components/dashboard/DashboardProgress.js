@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {getChartData} from '../../services/workoutsService';
 
+import Modal from '../generic/Modal';
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
 
@@ -32,7 +33,11 @@ class DashboardProgress extends Component {
         }
       ],
       rows: workoutsAnalysisChartData.rows,
-      columns: workoutsAnalysisChartData.columns
+      columns: workoutsAnalysisChartData.columns,
+      dateBefore: '',
+      dateAfter: '',
+      showStartDateHelp: false,
+      showEndDateHelp: false
     };
 
     this.state = state;
@@ -58,21 +63,139 @@ class DashboardProgress extends Component {
   }
 
   /*
-  componentDidUpdate() {
-    console.log('dashboard update');
+  componentDidUpdate(prevProps, prevState) {
+    console.log('DashboardProgress update');
   }
   */
+
+  handleDateAfterChange = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.dateAfter = event.target.value;
+    this.setState(newState);
+  }
+
+  handleDateBeforeChange = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.dateBefore = event.target.value;
+    this.setState(newState);
+  }
+
+  handleBtnApplyFilterClick = (event) => {
+    event.preventDefault();
+    this
+      .props
+      .doFetchUserWorkoutsAnalysisThunk(this.state.dateBefore, this.state.dateAfter);
+  }
+
+  handleStartDateHelpClick = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.showStartDateHelp = true;
+    this.setState(newState);
+  }
+
+  doCloseStartDateHelp = () => {
+    const newState = this.state;
+    newState.showStartDateHelp = false;
+    this.setState(newState);
+  }
+
+  handleEndDateHelpClick = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.showEndDateHelp = true;
+    this.setState(newState);
+  }
+
+  doCloseEndDateHelp = () => {
+    const newState = this.state;
+    newState.showEndDateHelp = false;
+    this.setState(newState);
+  }
 
   render() {
 
     return (
       <div>
         <h3>Progress</h3>
+
+        <p className="no-text">
+          User the fields below to filter the analysis chart. All filter fields are
+          optional.
+        </p>
+
+        <Modal
+          doModalActionCancel={this.doCloseStartDateHelp}
+          showModal={this.state.showStartDateHelp}
+          size="sm"
+          title="Dashboard date filter"
+          content={['The start date is non-inclusive, i.e. picking the 1st of January means that the workouts will be shown from the 2nd January onwards.']}/>
+
+        <Modal
+          doModalActionCancel={this.doCloseEndDateHelp}
+          showModal={this.state.showEndDateHelp}
+          size="sm"
+          title="Dashboard date filter"
+          content={['The end date is non-inclusive, i.e. picking the 31st of December means that the workouts will be shown from the 30th of December and before.']}/>
+
+        <div className="container grid-480">
+          <div className="columns">
+            <div className="column col-12">
+              <form className="form-horizontal">
+
+                <div className="form-group">
+                  <div className="col-4">
+                    <label className="form-label">
+                      <a onClick={this.handleStartDateHelpClick}>Start Date</a>
+                    </label>
+                  </div>
+                  <div className="col-8">
+                    <input
+                      className="form-input"
+                      type="date"
+                      value={this.state.dateAfter}
+                      onChange={this.handleDateAfterChange}/>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <div className="col-4">
+                    <label className="form-label">
+                      <a onClick={this.handleEndDateHelpClick}>End Date</a>
+                    </label>
+                  </div>
+                  <div className="col-8">
+                    <input
+                      className="form-input"
+                      type="date"
+                      value={this.state.dateBefore}
+                      onChange={this.handleDateBeforeChange}/>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <div className="col-12 text-center">
+                    <button
+                      className={"btn btn-primary btn-lg " + ((this.state.dateBefore || this.state.dateAfter)
+                      ? ''
+                      : 'disabled')}
+                      onClick={this.handleBtnApplyFilterClick}>Apply filter</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
         <DateVsWeightScatterChart
           units={this.props.defaultUnits}
           rows={this.state.rows}
           columns={this.state.columns}
           chartEvents={this.state.chartEvents}/>
+
       </div>
     );
   }
