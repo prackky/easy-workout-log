@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment';
 
 import {getChartData} from '../../services/workoutsService';
 
@@ -37,7 +38,8 @@ class DashboardProgress extends Component {
       dateBefore: '',
       dateAfter: '',
       showStartDateHelp: false,
-      showEndDateHelp: false
+      showEndDateHelp: false,
+      dateRange: 'custom'
     };
 
     this.state = state;
@@ -62,11 +64,10 @@ class DashboardProgress extends Component {
     }
   }
 
-  /*
   componentDidUpdate(prevProps, prevState) {
     console.log('DashboardProgress update');
+    console.log(this.state);
   }
-  */
 
   handleDateAfterChange = (event) => {
     event.preventDefault();
@@ -115,6 +116,47 @@ class DashboardProgress extends Component {
     this.setState(newState);
   }
 
+  handleDateRangeSelectionChange = (event) => {
+    const newState = this.state;
+    newState.dateRange = event.target.value;
+
+    newState.dateBefore = moment()
+      .add(1, 'days')
+      .format('YYYY-MM-DD');
+
+    switch (newState.dateRange) {
+      case 'last-week':
+        {
+          newState.dateAfter = moment()
+            .subtract(8, 'days')
+            .format('YYYY-MM-DD');
+          break;
+        }
+      case 'last-month':
+        {
+          newState.dateAfter = moment()
+            .subtract(1, 'months')
+            .subtract(1, 'days')
+            .format('YYYY-MM-DD');
+          break;
+        }
+      case 'last-year':
+        {
+          newState.dateAfter = moment()
+            .subtract(1, 'years')
+            .subtract(1, 'days')
+            .format('YYYY-MM-DD');
+          break;
+        }
+      default:
+        {
+          // do nothing
+        }
+    }
+
+    this.setState(newState);
+  }
+
   render() {
 
     return (
@@ -122,7 +164,7 @@ class DashboardProgress extends Component {
         <h3>Progress</h3>
 
         <p className="no-text">
-          User the fields below to filter the analysis chart. All filter fields are
+          User the fields below to filter the progress chart. All filter fields are
           optional.
         </p>
 
@@ -147,13 +189,31 @@ class DashboardProgress extends Component {
 
                 <div className="form-group">
                   <div className="col-4">
+                    <label className="form-label">Period</label>
+                  </div>
+                  <div className="col-8">
+                    <select
+                      className="form-select"
+                      value={this.state.dateRange}
+                      onChange={this.handleDateRangeSelectionChange}>
+                      <option value="custom">Custom</option>
+                      <option value="last-week">Last week</option>
+                      <option value="last-month">Last month</option>
+                      <option value="last-year">Last year</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <div className="col-4">
                     <label className="form-label">
                       <a onClick={this.handleStartDateHelpClick}>Start Date</a>
                     </label>
                   </div>
                   <div className="col-8">
                     <input
-                      className="form-input"
+                      className={"form-input"}
+                      disabled={this.state.dateRange !== 'custom'}
                       type="date"
                       value={this.state.dateAfter}
                       onChange={this.handleDateAfterChange}/>
@@ -168,8 +228,9 @@ class DashboardProgress extends Component {
                   </div>
                   <div className="col-8">
                     <input
-                      className="form-input"
+                      className={"form-input"}
                       type="date"
+                      disabled={this.state.dateRange !== 'custom'}
                       value={this.state.dateBefore}
                       onChange={this.handleDateBeforeChange}/>
                   </div>
