@@ -3,11 +3,12 @@ import {Link, withRouter} from 'react-router-dom';
 // import PropTypes from 'prop-types' import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {getChartData, segregateWorkoutsByMonth, orderWorkoutsByDate} from '../../services/workoutsService';
+import {segregateWorkoutsByMonth, orderWorkoutsByDate} from '../../services/workoutsService';
 
-import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import WorkoutView from './WorkoutView';
+import DashboardProgress from './DashboardProgress';
 import UserNotificationBar from '../notification/UserNotificationBar';
+
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions'
 
@@ -17,8 +18,6 @@ const mapStateToProps = (state/*, ownProps*/) => {
     dashboard: state.user.dashboard,
     defaultUnits: state.user.data.units,
     workouts: state.user.workouts.workouts,
-    // workoutsViewDetails: state.user.workouts.workoutsViewDetails,
-    workoutsAnalysis: state.user.workouts.workoutsAnalysis,
     lastWorkoutDate: state.user.workouts.lastWorkoutDate,
     displayMoreWorkouts: state.user.workouts.displayMoreWorkouts
   };
@@ -26,7 +25,6 @@ const mapStateToProps = (state/*, ownProps*/) => {
 
 const mapDispatchToProps = {
   doFetchUserWorkoutsThunk: userWorkoutsActions.fetchUserWorkoutsThunk,
-  doFetchUserWorkoutsAnalysisThunk: userWorkoutsActions.fetchUserWorkoutsAnalysisThunk,
   doDeleteUserWorkoutThunk: userWorkoutsActions.deleteUserWorkoutThunk,
   // doToggleViewWorkoutDetails: userWorkoutsActions.userWorkoutsSetViewDetails,
   doCopyWorkoutThunk: logWorkoutActions.logWorkoutCopyThunk,
@@ -34,32 +32,12 @@ const mapDispatchToProps = {
 };
 
 class Dashboard extends Component {
-  /*
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
-  }
-  */
-
+  
   constructor(props) {
     super(props);
 
-    const workoutsAnalysisChartData = getChartData(props.workoutsAnalysis);
-
     const state = {
       accordionShow: false,
-      chartEvents: [
-        {
-          eventName: 'select',
-          callback(Chart) {
-            // Returns Chart so you can access props and  the ChartWrapper object from
-            // chart.wrapper console.log('Selected ', Chart.chart.getSelection());
-          }
-        }
-      ],
-      rows: workoutsAnalysisChartData.rows,
-      columns: workoutsAnalysisChartData.columns,
       workoutsViewDetails: {}
     };
 
@@ -70,22 +48,8 @@ class Dashboard extends Component {
     this
       .props
       .doFetchUserWorkoutsThunk();
-    this
-      .props
-      .doFetchUserWorkoutsAnalysisThunk();
-
-    // console.log(this.props);
-  }
-
-  componentWillReceiveProps(newProps) {
-    // update chart if something changed most likely this will happen in the case
-    // that we roll back to this page
-    if (this.props.workoutsAnalysis !== newProps.workoutsAnalysis) {
-      const workoutsAnalysisChartData = getChartData(newProps.workoutsAnalysis);
-      const newState = this.state;
-      newState.rows = workoutsAnalysisChartData.rows;
-      this.setState(newState);
-    }
+    
+      // console.log(this.props);
   }
 
   /*
@@ -124,12 +88,7 @@ class Dashboard extends Component {
         <div className="container grid-960 section-content">
           <div className="columns">
             <div className="column col-12">
-              <h3>Progress</h3>
-              <DateVsWeightScatterChart
-                units={this.props.defaultUnits}
-                rows={this.state.rows}
-                columns={this.state.columns}
-                chartEvents={this.state.chartEvents}/>
+              <DashboardProgress/>              
             </div>
           </div>
           <div className="columns">
