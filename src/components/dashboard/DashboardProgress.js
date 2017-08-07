@@ -64,10 +64,12 @@ class DashboardProgress extends Component {
     }
   }
 
+  /*
   componentDidUpdate(prevProps, prevState) {
     console.log('DashboardProgress update');
     console.log(this.state);
   }
+  */
 
   handleDateAfterChange = (event) => {
     event.preventDefault();
