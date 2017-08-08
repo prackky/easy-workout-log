@@ -6,6 +6,7 @@ export const initialState = {
   authToken: undefined,
   id: undefined,
   exerciseNames: [],
+  userExerciseNames: [],
   name: '',
   units: 1,
   sex: 1
@@ -25,11 +26,14 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_SET:
       {
-        const { exerciseNames, name, email, units, sex } = action;
+        const { exerciseNames, userExerciseNames, name, email, units, sex } = action;
         return {
           ...state,
           exerciseNames: [
             ...exerciseNames
+          ],
+          userExerciseNames: [
+            ...userExerciseNames
           ],
           name,
           email,

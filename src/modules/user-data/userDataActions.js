@@ -22,10 +22,11 @@ const userDataActions = {
       id: id
     };
   },
-  userDataSet: (exerciseNames, name, email, units, sex) => {
+  userDataSet: (exerciseNames, userExerciseNames = [], name, email, units, sex) => {
     return {
       type: c.USER_DATA_SET,
       exerciseNames,
+      userExerciseNames,
       name,
       email,
       units,
@@ -55,10 +56,10 @@ const userDataActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
-          dispatch(userDataActions.userDataSet(allExercises, body.name, body.email, body.units, body.sex));
+          dispatch(userDataActions.userDataSet(allExercises, body.exerciseNames, body.name, body.email, body.units, body.sex));
         })
         .catch(error => {
-          handleError({error, dispatch, notificationMessage: 'An error occured when loading user data'});
+          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user data' });
         })
         .then(() => {
           dispatch(globalActions.taskEnd());

@@ -22,7 +22,7 @@ describe('userDataActions', () => {
 
       const expectedActions = [
         { type: 'TASK-START' },
-        userDataActions.userDataSet(ewoloConstants.exerciseNames, 'snoop', 'snoop@dawg.yo', 7, 15),
+        userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'snoop', 'snoop@dawg.yo', 7, 15),
         { type: 'TASK-END' }
       ];
 
@@ -41,6 +41,7 @@ describe('userDataActions', () => {
         {
           type: c.USER_DATA_SET,
           exerciseNames: ewoloConstants.exerciseNames,
+          userExerciseNames: [],
           name: undefined,
           email: undefined,
           units: undefined,
