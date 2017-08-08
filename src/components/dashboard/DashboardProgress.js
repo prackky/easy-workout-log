@@ -9,7 +9,13 @@ import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
 
 const mapStateToProps = (state/*, ownProps*/) => {
-  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis};
+  return {
+    defaultUnits: state.user.data.units,
+    workoutsAnalysis: state.user.workouts.workoutsAnalysis,
+    userExerciseNames: [
+      '', ...state.user.data.userExerciseNames
+    ]
+  };
 };
 
 const mapDispatchToProps = {
@@ -39,7 +45,8 @@ class DashboardProgress extends Component {
       dateAfter: '',
       showStartDateHelp: false,
       showEndDateHelp: false,
-      dateRange: 'custom'
+      dateRange: 'custom',
+      exerciseNameIndex: 0
     };
 
     this.state = state;
@@ -87,9 +94,11 @@ class DashboardProgress extends Component {
 
   handleBtnApplyFilterClick = (event) => {
     event.preventDefault();
+    const exerciseName = this.props.userExerciseNames[this.state.exerciseNameIndex];
+    
     this
       .props
-      .doFetchUserWorkoutsAnalysisThunk(this.state.dateBefore, this.state.dateAfter);
+      .doFetchUserWorkoutsAnalysisThunk(this.state.dateBefore, this.state.dateAfter, exerciseName);
   }
 
   handleStartDateHelpClick = (event) => {
@@ -119,6 +128,8 @@ class DashboardProgress extends Component {
   }
 
   handleDateRangeSelectionChange = (event) => {
+    // event.preventDefault();
+
     const newState = this.state;
     newState.dateRange = event.target.value;
 
@@ -159,7 +170,23 @@ class DashboardProgress extends Component {
     this.setState(newState);
   }
 
+  handleExerciseNameSelectionChange = (event) => {
+    // event.preventDefault();
+    const newState = this.state;
+    newState.exerciseNameIndex = event.target.value;
+    this.setState(newState);
+  }
+
   render() {
+
+    const exerciseNameOptions = this
+      .props
+      .userExerciseNames
+      .map((name, index) => {
+        return (
+          <option value={index} key={index}>{name}</option>
+        );
+      });
 
     return (
       <div>
@@ -188,6 +215,20 @@ class DashboardProgress extends Component {
           <div className="columns">
             <div className="column col-12">
               <form className="form-horizontal">
+
+                <div className="form-group">
+                  <div className="col-4">
+                    <label className="form-label">Exercise</label>
+                  </div>
+                  <div className="col-8">
+                    <select
+                      className="form-select"
+                      value={this.state.exerciseNameIndex}
+                      onChange={this.handleExerciseNameSelectionChange}>
+                      {exerciseNameOptions}
+                    </select>
+                  </div>
+                </div>
 
                 <div className="form-group">
                   <div className="col-4">
@@ -241,9 +282,7 @@ class DashboardProgress extends Component {
                 <div className="form-group">
                   <div className="col-12 text-center">
                     <button
-                      className={"btn btn-primary btn-lg " + ((this.state.dateBefore || this.state.dateAfter)
-                      ? ''
-                      : 'disabled')}
+                      className={"btn btn-primary btn-lg"}
                       onClick={this.handleBtnApplyFilterClick}>Apply filter</button>
                   </div>
                 </div>

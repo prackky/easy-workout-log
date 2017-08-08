@@ -22,7 +22,7 @@ const userWorkoutsActions = {
       workoutsAnalysis: workoutsAnalysis
     };
   },
-  fetchUserWorkoutsAnalysisThunk: (dateBefore, dateAfter) => {
+  fetchUserWorkoutsAnalysisThunk: (dateBefore, dateAfter, exerciseName) => {
     return (dispatch, getState) => {
       const authToken = getState().user.data.authToken;
       const userId = getState().user.data.id;
@@ -38,7 +38,10 @@ const userWorkoutsActions = {
       dispatch(globalActions.taskStart());
 
       const promise = ewoloUtil.getApiRequest({
-        route: `/users/${userId}/analysis/workouts?units=${units}` + (dateBefore ? '&dateBefore=' + dateBefore : '') + (dateAfter ? '&dateAfter=' + dateAfter : ''),
+        route: `/users/${userId}/analysis/workouts?units=${units}` +
+          (dateBefore ? '&dateBefore=' + dateBefore : '') +
+          (dateAfter ? '&dateAfter=' + dateAfter : '') +
+          (exerciseName ? '&exerciseName=' + exerciseName : ''),
         method: 'GET',
         authToken: authToken
       });
