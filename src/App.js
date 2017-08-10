@@ -33,6 +33,7 @@ import Login from './components/auth/Login';
 import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
 import Account from './components/account/Account';
+import WorkoutAnalytics from './components/analytics/WorkoutAnalytics';
 
 import Blog from './components/blog/Blog';
 import HowToGainMuscle from './components/blog/HowToGainMuscle';
@@ -96,6 +97,7 @@ class App extends Component {
             <Route exact path="/logout" component={Logout}/>
             <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
             <Route exact path="/account" component={Account}/>
+            <Route exact path="/analytics" component={WorkoutAnalytics}/>
             <Route exact path="/blog" component={Blog}/>
             <Route
               exact
