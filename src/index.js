@@ -4,6 +4,8 @@ import 'spectre.css/dist/spectre-icons.css';
 
 import 'font-awesome/css/font-awesome.css'
 
+import 'chartist/dist/chartist.css';
+
 import './index.css';
 
 import React from 'react';

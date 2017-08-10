@@ -135,10 +135,6 @@ class AnalyticsFilter extends Component {
 
     return (
       <div>
-        <p className="no-text">
-          Use the fields below to filter the chart. All filter fields are optional.
-        </p>
-
         <Modal
           doModalActionCancel={this.doCloseStartDateHelp}
           showModal={this.state.showStartDateHelp}
@@ -156,6 +152,10 @@ class AnalyticsFilter extends Component {
         <div className="container grid-480">
           <div className="columns">
             <div className="column col-12">
+              <p className="no-text">
+                Use the fields below to filter the chart. All filter fields are optional.
+              </p>
+              
               <form className="form-horizontal">
 
                 <div className="form-group">
