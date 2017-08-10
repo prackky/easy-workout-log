@@ -76,6 +76,6 @@ const quotes = [
 ];
 
 export const getRandomQuote = () => {
-  const index = chance.natural({ min: 0, max: quotes.length });
+  const index = chance.natural({ min: 0, max: quotes.length-1 });
   return quotes[index];
 }

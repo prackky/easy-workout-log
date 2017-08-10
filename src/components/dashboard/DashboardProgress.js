@@ -193,7 +193,7 @@ class DashboardProgress extends Component {
         <h3>Progress</h3>
 
         <p className="no-text">
-          User the fields below to filter the progress chart. All filter fields are
+          Use the fields below to filter the progress chart. All filter fields are
           optional.
         </p>
 
