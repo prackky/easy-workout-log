@@ -1,11 +1,12 @@
 import { push } from '../../react-router-redux/index';
 
-// import ewoloConstants from '../../common/ewoloConstants';
+import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
+import userDataActions from '../user-data/userDataActions';
 
 export const c = {
   LOG_WORKOUT: 'LOG-WORKOUT',
@@ -129,12 +130,32 @@ const logWorkoutActions = {
         .then(body => {
           dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
-          dispatch(push('/'));
         })
         .catch(error => {
           handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please refresh the page and try again.' });
         })
         .then(() => {
+          // dispatch(globalActions.taskEnd());
+          // dispatch(globalActions.taskStart());
+
+          const promise = ewoloUtil.getApiRequest({
+            route: '/user-data',
+            method: 'GET',
+            authToken: authToken
+          });
+
+          return promise;
+        })
+        .then(ewoloUtil.getApiResponse)
+        .then(body => {
+          const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
+          dispatch(userDataActions.userDataSet(allExercises, body.exerciseNames, body.name, body.email, body.units, body.sex));
+        })
+        .catch(error => {
+          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user data' });
+        })
+        .then(() => {
+          dispatch(push('/'));
           dispatch(globalActions.taskEnd());
         });
     };

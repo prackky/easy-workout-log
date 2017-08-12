@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import logWorkoutActions, { c } from './logWorkoutActions';
+import userDataActions, { c as userDataActionConstants } from '../user-data/userDataActions';
 
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloTestUtil, { localStorageMock } from '../../common/ewoloTestUtil';
@@ -21,6 +22,10 @@ describe('logWorkoutActions', () => {
         .post('/workouts')
         .reply(201, { id: 'xxx' });
 
+      nock(ewoloConstants.api.url)
+        .get('/user-data')
+        .reply(200, { exerciseNames: [], name: 'vic', email: 'vic', units: 1, sex: 1 });
+
       const expectedActions = [
         { type: 'TASK-START' },
         {
@@ -33,6 +38,7 @@ describe('logWorkoutActions', () => {
           userNotificationText: 'Saved workout for undefined',
           markPreviousAsRead: false
         },
+        userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
         {
           type: '@@router/CALL_HISTORY_METHOD',
           payload: { method: 'push', args: ['/'] }
@@ -45,6 +51,7 @@ describe('logWorkoutActions', () => {
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
+          // console.log(actions);
           ewoloTestUtil.cleanUpNotification(actions[2]);
 
           expect(store.getActions()).to.deep.equal(expectedActions);
@@ -56,6 +63,10 @@ describe('logWorkoutActions', () => {
       nock(ewoloConstants.api.url)
         .put('/users/snoop/workouts/42')
         .reply(200, { id: 42 });
+
+      nock(ewoloConstants.api.url)
+        .get('/user-data')
+        .reply(200, { exerciseNames: [], name: 'vic', email: 'vic', units: 1, sex: 1 });
 
       const expectedActions = [
         { type: 'TASK-START' },
@@ -69,6 +80,7 @@ describe('logWorkoutActions', () => {
           userNotificationText: 'Saved workout for undefined',
           markPreviousAsRead: false
         },
+        userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
         {
           type: '@@router/CALL_HISTORY_METHOD',
           payload: { method: 'push', args: ['/'] }
@@ -81,6 +93,7 @@ describe('logWorkoutActions', () => {
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
+          // console.log(actions);
           ewoloTestUtil.cleanUpNotification(actions[2]);
           expect(store.getActions()).to.deep.equal(expectedActions);
         });
