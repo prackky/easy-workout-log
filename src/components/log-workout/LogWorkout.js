@@ -90,6 +90,7 @@ class LogWorkout extends Component {
   }
 
   renderExercises() {
+    const lastExerciseIndex = this.props.logWorkout.exercises.length - 1;
     return this
       .props
       .logWorkout
@@ -99,6 +100,7 @@ class LogWorkout extends Component {
         return (<LogExercise
           key={index}
           index={index}
+          isLast={lastExerciseIndex === index ? true : false}
           exercise={exercise}
           exerciseNames={this.props.exerciseNames}
           doLogWorkoutExerciseDelete={this.props.doLogWorkoutExerciseDelete}
@@ -142,7 +144,9 @@ class LogWorkout extends Component {
           units
         });
 
-      ewoloUtil.scrollElementIntoView(this.refs.btnAddExercise);
+      // ewoloUtil.scrollElementIntoView(this.refs.logExerciseLast);
+      // ewoloUtil.scrollElementIntoView(this.refs.btnAddExercise);
+      window.scrollBy(0, 200); // scrolling to btnAddExercise on safari makes the button go all the way to the top :(
 
       return;
     }

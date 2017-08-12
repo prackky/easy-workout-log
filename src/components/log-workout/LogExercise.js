@@ -238,7 +238,9 @@ const LogExercise = (props) => {
     <div className="fade-in">
       <div className="divider"></div>
 
-      <div className="exercise-entry">
+      <div className="exercise-entry" 
+        // ref={props.isLast ? 'lastExercise' : 'exercise' + props.index}
+        >
         <div className="form-group">
           <div className="col-3">
             <label className="form-label">
@@ -290,6 +292,7 @@ const LogExercise = (props) => {
 LogExercise.propTypes = {
   exerciseNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
+  isLast: PropTypes.bool.isRequired,
   exercise: PropTypes.object.isRequired,
   doLogWorkoutExerciseDelete: PropTypes.func.isRequired,
   doLogWorkoutExerciseSetData: PropTypes.func.isRequired,
