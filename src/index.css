@@ -103,3 +103,16 @@ h6 {
 .tile .tile-subtitle {
   line-height: 3rem;
 }
+
+.dropdown .menu.active {
+  display: block !important;
+}
+
+.dropdown .menu {
+  display: none !important;
+}
+
+.dropdown.active .menu, .dropdown .dropdown-toggle:focus + .menu, .dropdown .menu:hover {
+  display: initial;
+}
+

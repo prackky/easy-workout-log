@@ -17,7 +17,8 @@ class Header extends Component {
 
   state = {
     docsSidebarClass: '',
-    sidebarCloseClass: ''
+    sidebarCloseClass: '',
+    isMenuActive: false
   };
 
   handleSidebarShowClick = () => {
@@ -28,12 +29,22 @@ class Header extends Component {
     this.setState({docsSidebarClass: '', sidebarCloseClass: ''});
   }
 
+  handleAccountMenuClick = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.isMenuActive = !newState.isMenuActive;
+    this.setState(newState);
+  }
+
   render() {
     const avatar = avatarService.getAvatar(this.props.sex);
 
     const userAccountMenu = (
       <div className="dropdown dropdown-right">
-        <a href="#/account" className="btn btn-link dropdown-toggle" tabIndex="0">
+        <a
+          className="btn btn-link dropdown-toggle"
+          tabIndex="0"
+          onClick={this.handleAccountMenuClick}>
           {/*this.props.name*/}
           <figure
             id="account-avatar"
@@ -51,7 +62,10 @@ class Header extends Component {
           <i className="icon icon-caret"></i>
           */}
         </a>
-        <ul className="menu">
+        <ul
+          className={"menu" + (this.state.isMenuActive
+          ? ' active'
+          : '')}>
           <li className="menu-item">
             <div className="tile tile-centered">{this.props.email}</div>
           </li>

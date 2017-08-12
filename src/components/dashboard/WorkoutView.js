@@ -42,7 +42,8 @@ class WorkoutView extends React.Component {
     super(props);
 
     this.state = {
-      showDeleteConfirmModal: false
+      showDeleteConfirmModal: false,
+      isMenuActive: false
     };
   }
 
@@ -99,6 +100,10 @@ class WorkoutView extends React.Component {
   handleWorkoutMenuClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
+
+    const newState = this.state;
+    newState.isMenuActive = !newState.isMenuActive;
+    this.setState(newState);
   }
 
   renderExercises = () => {
@@ -135,7 +140,9 @@ class WorkoutView extends React.Component {
         <div className="column col-12 row" key={exercise.id}>
           <div className="columns">
             <div className="column col-6 text-right row">{exercise.reps} {exercise.weight > 0
-                ? 'x ' + exercise.weight + (exercise.units !== this.props.defaultUnits ? ' ' + ewoloUtil.unitsToText(exercise.units) : '') 
+                ? 'x ' + exercise.weight + (exercise.units !== this.props.defaultUnits
+                  ? ' ' + ewoloUtil.unitsToText(exercise.units)
+                  : '')
                 : ''}</div>
             <div className="column col-6 row">{showTempo
                 ? exercise.tempo
@@ -153,7 +160,9 @@ class WorkoutView extends React.Component {
   }
 
   render() {
-    const noTransitionCss = ewoloUtil.isMobileDevice() ? ' no-transition ' : '';
+    const noTransitionCss = ewoloUtil.isMobileDevice()
+      ? ' no-transition '
+      : '';
 
     return (
       <div className="accordion-item">
@@ -185,7 +194,7 @@ class WorkoutView extends React.Component {
             </button>
             */}
 
-              <div className="dropdown dropdown-right">
+              <div className={"dropdown dropdown-right"}>
                 <button
                   className="btn btn-action btn-lg circle btn-exercise-action dropdown-toggle"
                   type="button"
@@ -193,7 +202,10 @@ class WorkoutView extends React.Component {
                   <i className="icon icon-menu"></i>
                 </button>
 
-                <ul className="menu">
+                <ul
+                  className={"menu" + (this.state.isMenuActive
+                  ? ' active'
+                  : '')}>
                   <li className="menu-item">
                     <a href="#/workout-copy" onClick={this.handleWorkoutEdit}>
                       <i className="fa fa-pencil" aria-hidden="true"></i>Edit workout {this.props.workout.date}</a>
