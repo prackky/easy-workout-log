@@ -73,7 +73,7 @@ const accountActions = {
   },
   accountDataUpdateThunk: () => {
     return (dispatch, getState) => {
-      const { authToken, exerciseNames, email, id } = getState().user.data;
+      const { authToken, exerciseNames, userExerciseNames, email, id } = getState().user.data;
 
       if (!authToken) {
         return Promise.resolve()
@@ -96,7 +96,7 @@ const accountActions = {
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(() => {
-          dispatch(userDataActions.userDataSet(exerciseNames, name, email, units, sex));
+          dispatch(userDataActions.userDataSet(exerciseNames, userExerciseNames, name, email, units, sex));
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
         })
         .catch(error => {
