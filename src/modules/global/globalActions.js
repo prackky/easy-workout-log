@@ -34,12 +34,12 @@ const globalActions = {
       isRead
     };
   },
-  appNotificationSet: (id, text, showAll = true) => {
+  appNotificationSet: (id, text, show = 'all') => {
     return {
       type: c.APP_NOTIFICATION_SET,
       id,
       text,
-      showAll
+      show
     };
   }
 };

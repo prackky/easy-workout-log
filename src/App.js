@@ -70,7 +70,7 @@ class App extends Component {
       const appNotificationSeen = ewoloUtil.getObject(appNotification.id);
 
       if (appNotificationSeen === null) { // undefined means localStorage is disabled
-        store.dispatch(globalActions.appNotificationSet(appNotification.id, appNotification.text, appNotification.showAll));
+        store.dispatch(globalActions.appNotificationSet(appNotification.id, appNotification.text, appNotification.show));
       }
     }
 
