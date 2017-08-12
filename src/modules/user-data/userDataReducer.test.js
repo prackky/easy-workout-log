@@ -54,6 +54,26 @@ describe('userDataReducer', () => {
         .equal(expectedState);
     });
 
+    it('should keep the userExerciseNames in sorted order', () => {
+      // when
+      const newState = userDataReducer({ units: 1, sex: 23 }, actions.userDataSet([], ['squats', 'dawg', 'jmoney'], 'a', 'a@a.com', '42', '23'));
+
+      // then
+      const expectedState = {
+        exerciseNames: [],
+        userExerciseNames: ['dawg', 'jmoney', 'squats'],
+        name: 'a',
+        email: 'a@a.com',
+        units: 42,
+        sex: 23
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
+
   });
 
 });

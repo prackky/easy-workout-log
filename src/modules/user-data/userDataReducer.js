@@ -36,14 +36,16 @@ const userDataReducer = (state = initialState, action) => {
           sex = 1;
         }
 
+        const sortedUserExerciseNames = [
+          ...userExerciseNames
+        ].sort(caseInsensitiveSort);
+
         return {
           ...state,
           exerciseNames: [
             ...exerciseNames
           ],
-          userExerciseNames: [
-            ...userExerciseNames
-          ],
+          userExerciseNames: sortedUserExerciseNames,
           name,
           email,
           units: parseInt(units, 10),
@@ -67,6 +69,12 @@ const userDataReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const caseInsensitiveSort = (a, b) => {
+  const aLower = a.toLowerCase();
+  const bLower = b.toLowerCase();
+  return aLower.localeCompare(bLower);
 };
 
 export default userDataReducer;
