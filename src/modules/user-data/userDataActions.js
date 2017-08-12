@@ -45,22 +45,8 @@ const userDataActions = {
       }
 
       dispatch(globalActions.taskStart());
-
-      const promise = ewoloUtil.getApiRequest({
-        route: '/user-data',
-        method: 'GET',
-        authToken: authToken
-      });
-
-      return promise
-        .then(ewoloUtil.getApiResponse)
-        .then(body => {
-          const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
-          dispatch(userDataActions.userDataSet(allExercises, body.exerciseNames, body.name, body.email, body.units, body.sex));
-        })
-        .catch(error => {
-          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user data' });
-        })
+      
+      return fetchUserDataThunkPromise(ewoloUtil, ewoloConstants, dispatch, userDataActions, handleError, authToken)
         .then(() => {
           dispatch(globalActions.taskEnd());
         });
@@ -82,5 +68,24 @@ const userDataActions = {
     };
   }
 };
+
+export const fetchUserDataThunkPromise = (ewoloUtil, ewoloConstants, dispatch, userDataActions, handleError, authToken) => {
+
+  const promise = ewoloUtil.getApiRequest({
+    route: '/user-data',
+    method: 'GET',
+    authToken: authToken
+  });
+
+  return promise
+    .then(ewoloUtil.getApiResponse)
+    .then(body => {
+      const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
+      dispatch(userDataActions.userDataSet(allExercises, body.exerciseNames, body.name, body.email, body.units, body.sex));
+    })
+    .catch(error => {
+      handleError({ error, dispatch, notificationMessage: 'An error occured when loading user data' });
+    });
+}
 
 export default userDataActions;

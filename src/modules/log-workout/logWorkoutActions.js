@@ -6,7 +6,7 @@ import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
-import userDataActions from '../user-data/userDataActions';
+import userDataActions, { fetchUserDataThunkPromise } from '../user-data/userDataActions';
 
 export const c = {
   LOG_WORKOUT: 'LOG-WORKOUT',
@@ -135,24 +135,7 @@ const logWorkoutActions = {
           handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please refresh the page and try again.' });
         })
         .then(() => {
-          // dispatch(globalActions.taskEnd());
-          // dispatch(globalActions.taskStart());
-
-          const promise = ewoloUtil.getApiRequest({
-            route: '/user-data',
-            method: 'GET',
-            authToken: authToken
-          });
-
-          return promise;
-        })
-        .then(ewoloUtil.getApiResponse)
-        .then(body => {
-          const allExercises = body.exerciseNames.concat(ewoloConstants.exerciseNames);
-          dispatch(userDataActions.userDataSet(allExercises, body.exerciseNames, body.name, body.email, body.units, body.sex));
-        })
-        .catch(error => {
-          handleError({ error, dispatch, notificationMessage: 'An error occured when loading user data' });
+          return fetchUserDataThunkPromise(ewoloUtil, ewoloConstants, dispatch, userDataActions, handleError, authToken);
         })
         .then(() => {
           dispatch(push('/'));
