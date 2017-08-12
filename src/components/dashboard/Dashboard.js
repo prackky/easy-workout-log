@@ -88,7 +88,11 @@ class Dashboard extends Component {
         <div className="container grid-960 section-content">
           <div className="columns">
             <div className="column col-12">
-              <DashboardProgress/>              
+              <DashboardProgress/>
+              <p className="no-text">
+                Also check the <Link to="/account">analytics</Link> page for an in-depth exercise analysis.  
+              </p>
+              
             </div>
           </div>
           <div className="columns">

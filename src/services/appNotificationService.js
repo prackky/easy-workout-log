@@ -8,10 +8,15 @@ const appNotifications = [
     id: 'standardized-menus',
     text: 'Ewolo 2.6.3: Dashboard progress filters + standardized menus, click to open and click to close.',
     showAll: true // TODO: add ability to show notifications per user
+  },
+  {
+    id: 'analytics',
+    text: 'Ewolo 2.7.0: Check the analytics page for an in-depth exercise analysis!',
+    showAll: true // TODO: add ability to show notifications per user
   }
 ];
 
 export const getAppNotification = () => {
-  return appNotifications[1];
+  return appNotifications[2];
   // return null;
 }
