@@ -26,7 +26,16 @@ const userDataReducer = (state = initialState, action) => {
       }
     case c.USER_DATA_SET:
       {
-        const { exerciseNames, userExerciseNames, name, email, units, sex } = action;
+        let { exerciseNames, userExerciseNames, name, email, units, sex } = action;
+
+        if (!units) {
+          units = 1;
+        }
+
+        if (!sex) {
+          sex = 1;
+        }
+
         return {
           ...state,
           exerciseNames: [
