@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {segregateWorkoutsByMonth, orderWorkoutsByDate} from '../../services/workoutsService';
 
+import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import WorkoutView from './WorkoutView';
 import DashboardProgress from './DashboardProgress';
 import UserNotificationBar from '../notification/UserNotificationBar';
@@ -32,7 +33,7 @@ const mapDispatchToProps = {
 };
 
 class Dashboard extends Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -48,8 +49,8 @@ class Dashboard extends Component {
     this
       .props
       .doFetchUserWorkoutsThunk();
-    
-      // console.log(this.props);
+
+    // console.log(this.props);
   }
 
   /*
@@ -90,9 +91,11 @@ class Dashboard extends Component {
             <div className="column col-12">
               <DashboardProgress/>
               <p className="no-text">
-                Also check the <Link to="/account">analytics</Link> page for an in-depth exercise analysis.  
+                Also check the&nbsp;
+                <Link to="/account">analytics</Link>
+                &nbsp;page for an in-depth exercise analysis.
               </p>
-              
+
             </div>
           </div>
           <div className="columns">
@@ -139,20 +142,7 @@ class Dashboard extends Component {
   renderWorkouts(sortedWorkouts) {
 
     if (sortedWorkouts.length === 0) {
-      return (
-        <div className="columns col-12">
-          <div className="empty width-100">
-            <div className="empty-icon">
-              <i className="icon icon-flag"></i>
-            </div>
-            <h4 className="empty-title">You have no workouts logged</h4>
-            <div className="empty-subtitle">Click the button to log a new workout</div>
-            <div className="empty-action">
-              <button className="btn btn-primary" onClick={this.handleBtnLogWorkoutClick}>Log Workout</button>
-            </div>
-          </div>
-        </div>
-      );
+      return (<NoWorkoutsPanel history={this.props.history}/>);
     }
 
     const monthlyWorkouts = segregateWorkoutsByMonth(sortedWorkouts);

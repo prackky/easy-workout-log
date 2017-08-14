@@ -6,8 +6,9 @@ import Chartist from 'chartist';
 
 import ChartistGraph from 'react-chartist';
 
-import {ctAxisTitle, legend} from '../generic/ChartistPlugins'
+import {ctAxisTitle, legend} from '../generic/ChartistPlugins';
 
+import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
 import UserNotificationBar from '../notification/UserNotificationBar';
 
@@ -74,7 +75,8 @@ class WorkoutAnalytics extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // this function is pretty much only in existence to set the correct exercise name in the case that the page is loaded directly.
+    // this function is pretty much only in existence to set the correct exercise
+    // name in the case that the page is loaded directly.
     if (this.props.userExerciseNames !== newProps.userExerciseNames) {
       if (newProps.userExerciseNames.length) {
         const newState = this.state;
@@ -216,7 +218,8 @@ class WorkoutAnalytics extends Component {
           <div className="columns">
             <div className="column col-12">
               <div>
-                Showing progress data for <strong>{this.state.exerciseName}</strong>
+                Showing progress data for
+                <strong>{this.state.exerciseName}</strong>
               </div>
               <ChartistGraph
                 data={chartData}
@@ -227,16 +230,26 @@ class WorkoutAnalytics extends Component {
           </div>
         </div>
 
-        <div className="container grid-960 section-content">
-          <div className="columns margin-top-3rem">
-            <div className="column col-12 text-center">
-              <button
-                className="btn btn-primary btn-lg"
-                onClick={this.handleBtnLogWorkoutClick}>Log a new workout</button>
-            </div>
+        {this.renderCallToAction()}
+
+      </div>
+    );
+  }
+
+  renderCallToAction() {
+    if (this.props.workoutsAnalysis.length === 0) {
+      return (<NoWorkoutsPanel history={this.props.history}/>);
+    }
+
+    return (
+      <div className="container grid-960 section-content">
+        <div className="columns margin-top-3rem">
+          <div className="column col-12 text-center">
+            <button
+              className="btn btn-primary btn-lg"
+              onClick={this.handleBtnLogWorkoutClick}>Log a new workout</button>
           </div>
         </div>
-
       </div>
     );
   }
