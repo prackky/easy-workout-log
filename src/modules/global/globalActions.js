@@ -3,7 +3,8 @@
 import ewoloUtil from '../../common/ewoloUtil';
 
 export const c = Object.freeze({
-  APP_NOTIFICATION_SET: 'APP-NOTIFICATION-SET'
+  APP_NOTIFICATION_SET: 'APP-NOTIFICATION-SET',
+  USER_NOTIFICATION_ADD: 'USER-NOTIFICATION-ADD'
 });
 
 const globalActions = {
@@ -19,7 +20,7 @@ const globalActions = {
   },
   userNotificationAdd: (type, text, markPreviousAsRead = false) => {
     return {
-      type: 'USER-NOTIFICATION-ADD',
+      type: c.USER_NOTIFICATION_ADD,
       userNotificationType: type,
       userNotificationText: text,
       at: new Date(),
