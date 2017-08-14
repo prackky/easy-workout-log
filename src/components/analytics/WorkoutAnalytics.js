@@ -12,13 +12,14 @@ import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
 import UserNotificationBar from '../notification/UserNotificationBar';
 
+import analyticsActions from '../../modules/analytics/analyticsActions';
+
 const mapStateToProps = (state/*, ownProps*/) => {
   return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames};
 };
 
 const mapDispatchToProps = {
-  // doFetchUserWorkoutsAnalysisThunk:
-  // userWorkoutsActions.fetchUserWorkoutsAnalysisThunk
+  doAnalyticsExerciseFetchDataThunk: analyticsActions.analyticsExerciseFetchDataThunk
 };
 
 const getWindowWidth = () => {
@@ -82,6 +83,10 @@ class WorkoutAnalytics extends Component {
         const newState = this.state;
         newState.exerciseName = newProps.userExerciseNames[0];
         this.setState(newState);
+
+        this
+          .props
+          .doAnalyticsExerciseFetchDataThunk(newState.exerciseName);
       }
     }
   }
@@ -94,11 +99,9 @@ class WorkoutAnalytics extends Component {
 
     console.log([exerciseNameIndex, dateBefore, dateAfter, exerciseName]);
 
-    /*
     this
       .props
-      .doFetchUserWorkoutsAnalysisThunk(dateBefore, dateAfter, exerciseName);
-    */
+      .doAnalyticsExerciseFetchDataThunk(exerciseName, dateBefore, dateAfter);
   }
 
   render() {
@@ -218,8 +221,8 @@ class WorkoutAnalytics extends Component {
           <div className="columns">
             <div className="column col-12">
               <div>
-                Showing progress data for
-                <strong>{this.state.exerciseName}</strong>
+                Showing progress data for&nbsp;
+               <strong>{this.state.exerciseName}</strong>
               </div>
               <ChartistGraph
                 data={chartData}
