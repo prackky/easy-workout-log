@@ -4,7 +4,8 @@ const authenticatedRoutesCheck = ({ dispatch, getState }) => next => action => {
 
   if ('@@router/LOCATION_CHANGE' === action.type) {
     if (action.payload.pathname === '/dashboard' ||
-      action.payload.pathname === '/account') {
+      action.payload.pathname === '/account' ||
+      action.payload.pathname === '/analytics') {
       if (!getState().user.data.authToken) {
         // console.log('Attempting to access authenticated resource');
         dispatch(push('/'));
