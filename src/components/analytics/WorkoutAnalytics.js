@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {/*Link, */
+  withRouter
+} from 'react-router-dom';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import Chartist from 'chartist';
 
 import ChartistGraph from 'react-chartist';
 
-import {ctAxisTitle, legend} from '../generic/ChartistPlugins';
+import ewoloUtil from '../../common/ewoloUtil';
+import {ctAxisTitle, ctPointLabels, ChartistLegend} from '../generic/ChartistPlugins';
+import * as workoutAnalyticsService from '../../services/workoutAnalyticsService';
 
 import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
@@ -15,7 +19,7 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import analyticsActions from '../../modules/analytics/analyticsActions';
 
 const mapStateToProps = (state/*, ownProps*/) => {
-  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames};
+  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames, analyticsExercise: state.user.analytics.exercise};
 };
 
 const mapDispatchToProps = {
@@ -99,12 +103,60 @@ class WorkoutAnalytics extends Component {
 
     console.log([exerciseNameIndex, dateBefore, dateAfter, exerciseName]);
 
+    const newState = this.state;
+    newState.exerciseName = exerciseName;
+    this.setState(newState);
+
     this
       .props
       .doAnalyticsExerciseFetchDataThunk(exerciseName, dateBefore, dateAfter);
   }
 
   render() {
+
+    return (
+      <div>
+        <UserNotificationBar/> {this.renderAnalyticsContent()}
+      </div>
+    );
+  }
+
+  renderAnalyticsContent() {
+    if (this.props.userExerciseNames.length === 0) {
+      return (
+        <div className="container grid-960 section-content">
+          <div className="columns">
+            <div className="column col-12">
+              <h3>Analytics</h3>
+              <NoWorkoutsPanel history={this.props.history}/>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <div className="container grid-960 section-content">
+          <div className="columns">
+            <div className="column col-12">
+              <h3>Analytics</h3>
+
+              <AnalyticsFilter
+                exerciseNames={this.props.userExerciseNames}
+                doApplyFilter={this.doApplyFilter}/>
+            </div>
+          </div>
+        </div>
+
+        {this.renderChart()}
+
+        {this.renderCallToAction()}
+      </div>
+    )
+  }
+
+  renderChart() {
 
     const chartData = {
       series: [
@@ -161,19 +213,48 @@ class WorkoutAnalytics extends Component {
       ]
     };
 
+    const analyticsExerciseData = this.props.analyticsExercise[this.state.exerciseName] || [];
+
+    if (analyticsExerciseData.length === 0) {
+      return (
+        <div className="container grid-960 section-content">
+          <div className="columns">
+            <div className="empty width-100">
+              <div className="empty-icon">
+                <i className="icon icon-flag"></i>
+              </div>
+              <h4 className="empty-title">No data found</h4>
+              <div className="empty-subtitle">Try expanding the date range</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const analyticsExerciseChartData = {
+      series: workoutAnalyticsService.getAnalyticsExerciseChartistSeriesData(analyticsExerciseData)
+    };
+
+    // console.log(chartData); console.log(analyticsExerciseChartData);
+
+    // TODO: consider adding a tooltip https://github.com/gsklee/react-chartist-tooltip/blob/master/react-chartist-tooltip.babel.js
     const chartOptions = {
       chartPadding: {
-        top: 40,
+        top: 10,
         right: 0,
         bottom: 30,
         left: 20
       },
+      lineSmooth: Chartist
+        .Interpolation
+        .cardinal({fillHoles: true}),
+      low: 0,
       axisX: {
         // type: Chartist.Chartist, divisor: 5,
         type: Chartist.AutoScaleAxis,
         scaleMinSpace: 50,
         labelInterpolationFnc: function (value) {
-          return moment(value).format('MMM D');
+          return moment(value).format('D, MMM YY');
         }
       },
       plugins: [
@@ -188,7 +269,7 @@ class WorkoutAnalytics extends Component {
             textAnchor: 'middle'
           },
           axisY: {
-            axisTitle: 'Weight',
+            axisTitle: 'Weight (' + ewoloUtil.unitsToText(this.props.defaultUnits) + ')',
             axisClass: 'ct-axis-title',
             offset: {
               x: -50,
@@ -197,53 +278,31 @@ class WorkoutAnalytics extends Component {
             flipTitle: true
           }
         }),
-        legend()
+        ctPointLabels({textAnchor: 'middle'})
       ]
     };
 
     return (
-      <div>
-        <UserNotificationBar/>
-
-        <div className="container grid-960 section-content">
-          <div className="columns">
-            <div className="column col-12">
-              <h3>Analytics</h3>
-
-              <AnalyticsFilter
-                exerciseNames={this.props.userExerciseNames}
-                doApplyFilter={this.doApplyFilter}/>
+      <div className="container grid-1280 section-content">
+        <div className="columns">
+          <div className="column col-12">
+            <div>
+              Showing progress data for&nbsp;
+              <strong>{this.state.exerciseName}</strong>
             </div>
+            <ChartistLegend series={analyticsExerciseChartData.series}></ChartistLegend>
+            <ChartistGraph
+              data={analyticsExerciseChartData}
+              options={chartOptions}
+              type={'Line'}
+              className={this.getCtClassName()}/>
           </div>
         </div>
-
-        <div className="container grid-1280 section-content">
-          <div className="columns">
-            <div className="column col-12">
-              <div>
-                Showing progress data for&nbsp;
-               <strong>{this.state.exerciseName}</strong>
-              </div>
-              <ChartistGraph
-                data={chartData}
-                options={chartOptions}
-                type={'Line'}
-                className={this.getCtClassName()}/>
-            </div>
-          </div>
-        </div>
-
-        {this.renderCallToAction()}
-
       </div>
     );
   }
 
   renderCallToAction() {
-    if (this.props.workoutsAnalysis.length === 0) {
-      return (<NoWorkoutsPanel history={this.props.history}/>);
-    }
-
     return (
       <div className="container grid-960 section-content">
         <div className="columns margin-top-3rem">

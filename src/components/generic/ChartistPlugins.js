@@ -1,3 +1,6 @@
+import React from 'react';
+
+import moment from 'moment';
 import Chartist from 'chartist';
 import './ChartistPlugins.css';
 
@@ -115,7 +118,9 @@ export function ctAxisTitle(options) {
   };
 };
 
-
+// This plugin unfortunately tries to manage it's own elements and does integrate as smoothly as expected
+// TODO: consider writing a pure react version rather than the watered down component
+/*
 export function legend(options) {
 
   var defaultOptions = {
@@ -304,3 +309,93 @@ export function legend(options) {
   };
 
 };
+*/
+
+export function ctPointLabels(options) {
+
+  var defaultOptions = {
+    labelClass: 'ct-label',
+    labelOffset: {
+      x: 0,
+      y: -10
+    },
+    textAnchor: 'middle',
+    align: 'center',
+    labelInterpolationFnc: Chartist.noop,
+    xAxisIsDate: true,
+    xAxisShow: false
+  };
+
+  var labelPositionCalculation = {
+    point: function(data) {
+      return {
+        x: data.x,
+        y: data.y
+      };
+    },
+    bar: {
+      left: function(data) {
+        return {
+          x: data.x1,
+          y: data.y1
+        };
+      },
+      center: function(data) {
+        return {
+          x: data.x1 + (data.x2 - data.x1) / 2,
+          y: data.y1
+        };
+      },
+      right: function(data) {
+        return {
+          x: data.x2,
+          y: data.y1
+        };
+      }
+    }
+  };
+
+
+  options = Chartist.extend({}, defaultOptions, options);
+
+  function addLabel(position, data) {
+    var xValue = options.xAxisIsDate ? moment(data.value.x).format('YYYY-MM-DD') : data.value.x;
+
+    xValue = options.xAxisShow ? xValue : undefined;
+    
+    // if x and y exist concat them otherwise output only the existing value
+    var value = xValue !== undefined && data.value.y ?
+      (xValue + ', ' + data.value.y) :
+      data.value.y || xValue;
+
+    data.group.elem('text', {
+      x: position.x + options.labelOffset.x,
+      y: position.y + options.labelOffset.y,
+      style: 'text-anchor: ' + options.textAnchor
+    }, options.labelClass).text(options.labelInterpolationFnc(value));
+  }
+
+  return function ctPointLabels(chart) {
+    switch (chart.constructor.name) {
+      case 'Line':
+      case 'Bar':
+        chart.on('draw', function(data) {
+          var positonCalculator = labelPositionCalculation[data.type] && labelPositionCalculation[data.type][options.align] || labelPositionCalculation[data.type];
+          if (positonCalculator) {
+            addLabel(positonCalculator(data), data);
+          }
+        });
+        break;
+      default:
+        // do nothing
+    }
+  };
+};
+
+export const ChartistLegend = (props) => {
+  return (<ul className="ct-legend">
+    {props.series.map((series, i) => {
+      return (<li key={i} className={'ct-series-' + i} data-legend={i}>{series.name}</li>);
+    })}
+  </ul>);
+}
