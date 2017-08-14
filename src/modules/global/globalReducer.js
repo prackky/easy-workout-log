@@ -6,7 +6,7 @@ export const initialState = {
   appNotification: {
     id: '',
     text: '',
-    showAll: true
+    show: 'all'
   }
 };
 
@@ -89,14 +89,14 @@ const globalReducer = (state = initialState, action) => {
       }
     case c.APP_NOTIFICATION_SET:
       {
-        const { id, text, showAll } = action;
+        const { id, text, show } = action;
 
         return {
           ...state,
           appNotification: {
             id,
             text,
-            showAll
+            show
           }
         };
       }

@@ -291,7 +291,7 @@ describe('globalReducer', () => {
           appNotification: {
             id: 'a',
             text: 'xxx',
-            showAll: true
+            show: 'all'
           }
         });
     });

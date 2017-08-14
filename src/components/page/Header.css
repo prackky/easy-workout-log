@@ -64,6 +64,18 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .navbar .navbar-content .xtra {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .navbar .navbar-content .xtra {
+    display: block;
+  }
+}
+
 .docs-sidebar {
   background: #fff;
   height: 100%;

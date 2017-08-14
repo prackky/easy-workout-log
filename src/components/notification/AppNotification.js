@@ -5,7 +5,7 @@ import ewoloUtil from '../../common/ewoloUtil';
 import globalActions from '../../modules/global/globalActions';
 
 const mapStateToProps = (state) => {
-  return {appNotification: state.global.appNotification};
+  return {appNotification: state.global.appNotification, authToken: state.user.data.authToken};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,6 +31,10 @@ class AppNotification extends Component {
       return null;
     }
 
+    if (this.props.appNotification.show && this.props.appNotification.show === 'logged-in' && !this.props.authToken) {
+      return null;
+    }
+    
     return (
       <div className="toast global-notification">
         <button

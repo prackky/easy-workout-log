@@ -116,3 +116,10 @@ h6 {
   display: initial;
 }
 
+/**
+ * Chartist overrides
+ */
+
+.ct-label {
+  font-size: 1rem;
+}

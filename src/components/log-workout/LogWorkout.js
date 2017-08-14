@@ -13,7 +13,7 @@ import {EwoloFormHintSplit} from '../generic/EwoloFormHint';
 import logWorkoutActions from '../../modules/log-workout/logWorkoutActions';
 import userDataActions from '../../modules/user-data/userDataActions';
 
-import ewoloUtil from '../../common/ewoloUtil';
+// import ewoloUtil from '../../common/ewoloUtil';
 import ewoloContent from '../../common/ewoloContent';
 
 const mapStateToProps = (state) => {
