@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import {getChartData} from '../../services/workoutsService';
 
-import Modal from '../generic/Modal';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
 import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';

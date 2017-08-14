@@ -380,7 +380,7 @@ export function ctPointLabels(options) {
       case 'Line':
       case 'Bar':
         chart.on('draw', function(data) {
-          var positonCalculator = labelPositionCalculation[data.type] && labelPositionCalculation[data.type][options.align] || labelPositionCalculation[data.type];
+          var positonCalculator = (labelPositionCalculation[data.type] && labelPositionCalculation[data.type][options.align]) || labelPositionCalculation[data.type];
           if (positonCalculator) {
             addLabel(positonCalculator(data), data);
           }

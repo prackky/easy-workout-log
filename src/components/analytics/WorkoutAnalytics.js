@@ -158,6 +158,7 @@ class WorkoutAnalytics extends Component {
 
   renderChart() {
 
+    /*
     const chartData = {
       series: [
         {
@@ -212,6 +213,7 @@ class WorkoutAnalytics extends Component {
         }
       ]
     };
+    */
 
     const analyticsExerciseData = this.props.analyticsExercise[this.state.exerciseName] || [];
 
@@ -238,6 +240,7 @@ class WorkoutAnalytics extends Component {
     // console.log(chartData); console.log(analyticsExerciseChartData);
 
     // TODO: consider adding a tooltip https://github.com/gsklee/react-chartist-tooltip/blob/master/react-chartist-tooltip.babel.js
+    // TODO: enable legend click functionality
     const chartOptions = {
       chartPadding: {
         top: 10,
@@ -254,7 +257,7 @@ class WorkoutAnalytics extends Component {
         type: Chartist.AutoScaleAxis,
         scaleMinSpace: 50,
         labelInterpolationFnc: function (value) {
-          return moment(value).format('D, MMM YY');
+          return moment(value).format('D MMM YY');
         }
       },
       plugins: [
