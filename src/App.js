@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {/*BrowserRouter,*/
-  Route
+  Route, Switch
 } from 'react-router-dom';
 
 import {Provider} from 'react-redux';
@@ -85,24 +85,27 @@ class App extends Component {
             <Loader/>
             <AppNotification/>
             <Header/>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/why-ewolo" component={WhyEwolo}/>
-            <Route exact path="/privacy" component={Privacy}/>
-            <Route exact path="/terms" component={Terms}/>
-            <Route exact path="/change-log" component={ChangeLog}/>
-            <Route exact path="/log-workout" component={LogWorkoutNew}/>
-            <Route path="/edit-workout/:workoutId" component={LogWorkoutEdit}/>
-            <Route exact path="/signup" component={Signup}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/logout" component={Logout}/>
-            <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
-            <Route exact path="/account" component={Account}/>
-            <Route exact path="/analytics" component={WorkoutAnalytics}/>
-            <Route exact path="/blog" component={Blog}/>
-            <Route
-              exact
-              path="/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks"
-              component={HowToGainMuscle}/>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/why-ewolo" component={WhyEwolo}/>
+              <Route exact path="/privacy" component={Privacy}/>
+              <Route exact path="/terms" component={Terms}/>
+              <Route exact path="/change-log" component={ChangeLog}/>
+              <Route exact path="/log-workout" component={LogWorkoutNew}/>
+              <Route path="/edit-workout/:workoutId" component={LogWorkoutEdit}/>
+              <Route exact path="/signup" component={Signup}/>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/logout" component={Logout}/>
+              <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
+              <Route exact path="/account" component={Account}/>
+              <Route exact path="/analytics" component={WorkoutAnalytics}/>
+              <Route exact path="/blog" component={Blog}/>
+              <Route
+                exact
+                path="/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks"
+                component={HowToGainMuscle}/>
+              <Route component={Home}/>
+            </Switch>
             <Footer
               clientVersion={packageJson.version}
               apiVersion={ewoloConstants.api.version}/>
