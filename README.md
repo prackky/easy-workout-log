@@ -22,7 +22,7 @@ https://github.com/facebookincubator/create-react-app/issues/1341
 
 ## Releases
 
-Dry run: `release-it -n -d`
+Dry run: `release-it -n -d`  
 Release: `release-it`
 
 # License
