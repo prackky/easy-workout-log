@@ -25,30 +25,26 @@ export function ctAxisTitle(options) {
 
     options = Chartist.extend({}, defaultOptions, options);
 
-    var getTitle = function(title) {
+    var getTitle = function (title) {
       if (title instanceof Function) {
         return title();
       }
       return title;
     };
 
-    var getClasses = function(classes) {
+    var getClasses = function (classes) {
       if (classes instanceof Function) {
         return classes();
       }
       return classes;
     };
 
-    chart.on('created', function(data) {
+    chart.on('created', function (data) {
 
       if (!options.axisX.axisTitle && !options.axisY.axisTitle) {
-        throw new Error(
-          'ctAxisTitle plugin - You must provide at least one axis title'
-        );
+        throw new Error('ctAxisTitle plugin - You must provide at least one axis title');
       } else if (!data.axisX && !data.axisY) {
-        throw new Error(
-          'ctAxisTitle plugin can only be used on charts that have at least one axis'
-        );
+        throw new Error('ctAxisTitle plugin can only be used on charts that have at least one axis');
       }
 
       var xPos;
@@ -58,8 +54,7 @@ export function ctAxisTitle(options) {
       //position axis X title
       if (options.axisX.axisTitle && data.axisX) {
 
-        xPos = (data.axisX.axisLength / 2) + data.options.axisY.offset +
-          data.options.chartPadding.left;
+        xPos = (data.axisX.axisLength / 2) + data.options.axisY.offset + data.options.chartPadding.left;
 
         yPos = data.options.chartPadding.top;
 
@@ -80,7 +75,9 @@ export function ctAxisTitle(options) {
           "text-anchor": options.axisX.textAnchor
         });
 
-        data.svg.append(title, true);
+        data
+          .svg
+          .append(title, true);
 
       }
 
@@ -88,9 +85,7 @@ export function ctAxisTitle(options) {
       if (options.axisY.axisTitle && data.axisY) {
         xPos = 0;
 
-
-        yPos = (data.axisY.axisLength / 2) + data.options.chartPadding
-          .top;
+        yPos = (data.axisY.axisLength / 2) + data.options.chartPadding.top;
 
         if (data.options.axisX.position === 'start') {
           yPos += data.options.axisX.offset;
@@ -100,8 +95,9 @@ export function ctAxisTitle(options) {
           xPos = data.axisX.axisLength;
         }
 
-        var transform = 'rotate(' + (options.axisY.flipTitle ? -
-          90 : 90) + ', ' + xPos + ', ' + yPos + ')';
+        var transform = 'rotate(' + (options.axisY.flipTitle
+          ? - 90
+          : 90) + ', ' + xPos + ', ' + yPos + ')';
 
         title = new Chartist.Svg("text");
         title.addClass(getClasses(options.axisY.axisClass));
@@ -112,14 +108,18 @@ export function ctAxisTitle(options) {
           transform: transform,
           "text-anchor": options.axisY.textAnchor
         });
-        data.svg.append(title, true);
+        data
+          .svg
+          .append(title, true);
       }
     });
   };
 };
 
-// This plugin unfortunately tries to manage it's own elements and does integrate as smoothly as expected
-// TODO: consider writing a pure react version rather than the watered down component
+// This plugin unfortunately tries to manage it's own elements and does
+// integrate as smoothly as expected
+// TODO: consider writing a pure react version rather than the watered down
+// component
 /*
 export function legend(options) {
 
@@ -311,6 +311,7 @@ export function legend(options) {
 };
 */
 
+/*
 export function ctPointLabels(options) {
 
   var defaultOptions = {
@@ -362,7 +363,7 @@ export function ctPointLabels(options) {
     var xValue = options.xAxisIsDate ? moment(data.value.x).format('YYYY-MM-DD') : data.value.x;
 
     xValue = options.xAxisShow ? xValue : undefined;
-    
+
     // if x and y exist concat them otherwise output only the existing value
     var value = xValue !== undefined && data.value.y ?
       (xValue + ', ' + data.value.y) :
@@ -391,11 +392,51 @@ export function ctPointLabels(options) {
     }
   };
 };
+*/
+
+export function ctPointLabels(options) {
+  return function ctPointLabels(chart) {
+
+    var defaultOptions = {
+      labelClass: 'ct-label',
+      labelOffset: {
+        x: 0,
+        y: -10
+      },
+      textAnchor: 'middle'
+    };
+
+    options = Chartist.extend({}, defaultOptions, options);
+
+    if (chart instanceof Chartist.Line) {
+      chart
+        .on('draw', function (data) {
+          console.log(data);
+          if (data.type === 'point') {
+            data
+              .group
+              .elem('text', {
+                x: data.x + options.labelOffset.x,
+                y: data.y + options.labelOffset.y,
+                style: 'text-anchor: ' + options.textAnchor
+              }, options.labelClass)
+              .text(data.value.y);
+          }
+        });
+    }
+  }
+}
 
 export const ChartistLegend = (props) => {
-  return (<ul className="ct-legend">
-    {props.series.map((series, i) => {
-      return (<li key={i} className={'ct-series-' + i} data-legend={i}>{series.name}</li>);
-    })}
-  </ul>);
+  return (
+    <ul className="ct-legend">
+      {props
+        .series
+        .map((series, i) => {
+          return (
+            <li key={i} className={'ct-series-' + i} data-legend={i}>{series.name}</li>
+          );
+        })}
+    </ul>
+  );
 }
