@@ -103,7 +103,7 @@ class Header extends Component {
               <NavLink exact to="/" className="btn btn-link">{this.props.authToken
                   ? 'Dashboard'
                   : 'Home'}</NavLink>
-              <NavLink exact to="/analytics" className="btn btn-link">Analytics</NavLink>
+              {this.props.authToken && <NavLink exact to="/analytics" className="btn btn-link">Analytics</NavLink>}
               <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
               <NavLink exact to="/blog" className="btn btn-link">Blog</NavLink>
               <NavLink exact to="/why-ewolo" className="btn btn-link xtra">Why Ewolo?</NavLink>
@@ -146,9 +146,9 @@ class Header extends Component {
                       ? 'Dashboard'
                       : 'Home'}</NavLink>
                 </li>
-                <li className="nav-item">
+                {this.props.authToken && <li className="nav-item">
                   <NavLink exact to="/analytics" onClick={this.handleSidebarCloseClick}>Analytics</NavLink>
-                </li>
+                </li>}
                 <li className="nav-item">
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
