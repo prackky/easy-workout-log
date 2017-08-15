@@ -8,11 +8,18 @@ import globalActions from '../global/globalActions';
 // import userDataActions from '../user-data/userDataActions';
 
 export const c = Object.freeze({
-  ANALYTICS_EXERCISE_SET_DATA: 'ANALYTICS-EXERCISE-SET-DATA'
+  ANALYTICS_EXERCISE_SET_DATA: 'ANALYTICS-EXERCISE-SET-DATA',
+  ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME: 'ANALYTICS-EXERCISE-SET-SELECTED-EXERCISE-NAME'
 });
 
 
 const analyticsActions = {
+  analyticsExerciseSetSelectedExerciseName: (exerciseName) => {
+    return {
+      type: c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME,
+      exerciseName
+    };
+  },
   analyticsExerciseSetData: (exerciseName, data) => {
     return {
       type: c.ANALYTICS_EXERCISE_SET_DATA,

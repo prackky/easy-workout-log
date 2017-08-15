@@ -90,7 +90,27 @@ describe('analyticsReducer', () => {
         .equal(expectedState);
     });
 
+  });
 
+  describe(c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME, () => {
+    it('should set selectedExerciseName', () => {
+      // given
+      const exerciseName = 'the!@@$äé#$%%$^&%*^&(&*(&(❤';
+      
+      // when
+      const newState = analyticsReducer(undefined, actions.analyticsExerciseSetSelectedExerciseName(exerciseName));
+
+      // then
+      const expectedState = {
+        ...initialState,
+        selectedExerciseName: exerciseName
+      };
+
+      expect(newState)
+        .to
+        .deep
+        .equal(expectedState);
+    });
 
   });
 

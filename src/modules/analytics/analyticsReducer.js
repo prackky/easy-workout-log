@@ -5,7 +5,8 @@
 import { c } from './analyticsActions';
 
 export const initialState = {
-  exercise: {}
+  exercise: {},
+  selectedExerciseName: ''
 };
 
 const analyticsReducer = (state = initialState, action) => {
@@ -26,6 +27,15 @@ const analyticsReducer = (state = initialState, action) => {
           ...state,
           exercise: newExercise
         };
+      }
+    case c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME:
+      {
+        const { exerciseName } = action;
+
+        return {
+          ...state,
+          selectedExerciseName: exerciseName
+        }
       }
     default:
       return state;
