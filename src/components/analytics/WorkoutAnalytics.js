@@ -99,9 +99,13 @@ class WorkoutAnalytics extends Component {
 
     const analyticsExerciseData = this.props.analytics.exercise[exerciseName] || [];
 
-    const chartContent = (analyticsExerciseData.length)
-      ? this.renderChart(exerciseName, analyticsExerciseData)
-      : this.renderNoChartData();
+    const chartContent = (this.props.userExerciseNames.length)
+      ? (analyticsExerciseData.length
+        ? this.renderChart(exerciseName, analyticsExerciseData)
+        : this.renderNoChartData())
+      : '';
+
+    const callToAction = (this.props.userExerciseNames.length) ? this.renderCallToAction() : '';
 
     return (
       <div>
@@ -116,7 +120,7 @@ class WorkoutAnalytics extends Component {
 
         {chartContent}
 
-        {this.renderCallToAction()}
+        {callToAction}
       </div>
     )
   }
