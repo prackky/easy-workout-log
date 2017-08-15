@@ -65,6 +65,12 @@ class DashboardProgress extends Component {
       newState.rows = workoutsAnalysisChartData.rows;
       this.setState(newState);
     }
+
+    if (this.props.defaultUnits !== newProps.defaultUnits) {
+      this
+        .props
+        .doFetchUserWorkoutsAnalysisThunk();
+    }
   }
 
   /*
