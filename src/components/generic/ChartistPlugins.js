@@ -411,8 +411,15 @@ export function ctPointLabels(options) {
     if (chart instanceof Chartist.Line) {
       chart
         .on('draw', function (data) {
-          console.log(data);
+          // console.log(data);
           if (data.type === 'point') {
+            const value = Number.isInteger(data.value.y)
+              ? data.value.y
+              : data
+                .value
+                .y
+                .toFixed(0);
+
             data
               .group
               .elem('text', {
@@ -420,7 +427,7 @@ export function ctPointLabels(options) {
                 y: data.y + options.labelOffset.y,
                 style: 'text-anchor: ' + options.textAnchor
               }, options.labelClass)
-              .text(data.value.y);
+              .text(value);
           }
         });
     }
