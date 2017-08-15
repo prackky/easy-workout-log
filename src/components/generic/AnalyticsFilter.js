@@ -153,7 +153,7 @@ class AnalyticsFilter extends Component {
           <div className="columns">
             <div className="column col-12">
               <p className="no-text">
-                Use the fields below to filter the chart. All filter fields are optional.
+                Use the fields below to filter the chart. All filter fields are optional. Click the apply filter button to reload chart data.
               </p>
               
               <form className="form-horizontal">

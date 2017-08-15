@@ -73,6 +73,12 @@ class WorkoutAnalytics extends Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions);
+
+    if (this.state.exerciseName) {
+      this
+        .props
+        .doAnalyticsExerciseFetchDataThunk(this.state.exerciseName);
+    }
   }
 
   componentWillUnmount() {
@@ -122,29 +128,19 @@ class WorkoutAnalytics extends Component {
   }
 
   renderAnalyticsContent() {
-    if (this.props.userExerciseNames.length === 0) {
-      return (
-        <div className="container grid-960 section-content">
-          <div className="columns">
-            <div className="column col-12">
-              <h3>Analytics</h3>
-              <NoWorkoutsPanel history={this.props.history}/>
-            </div>
-          </div>
-        </div>
-      );
-    }
+    const analyticscontent = (this.props.userExerciseNames.length === 0)
+      ? (<NoWorkoutsPanel history={this.props.history}/>)
+      : (<AnalyticsFilter
+        exerciseNames={this.props.userExerciseNames}
+        doApplyFilter={this.doApplyFilter}/>);
 
     return (
       <div>
         <div className="container grid-960 section-content">
           <div className="columns">
             <div className="column col-12">
-              <h3>Analytics</h3>
-
-              <AnalyticsFilter
-                exerciseNames={this.props.userExerciseNames}
-                doApplyFilter={this.doApplyFilter}/>
+              <h3>Exercise Analytics</h3>
+              {analyticscontent}
             </div>
           </div>
         </div>
@@ -226,7 +222,7 @@ class WorkoutAnalytics extends Component {
                 <i className="icon icon-flag"></i>
               </div>
               <h4 className="empty-title">No data found</h4>
-              <div className="empty-subtitle">Try expanding the date range</div>
+              <div className="empty-subtitle">Try expanding the date range and click the apply filter button</div>
             </div>
           </div>
         </div>
@@ -239,7 +235,9 @@ class WorkoutAnalytics extends Component {
 
     // console.log(chartData); console.log(analyticsExerciseChartData);
 
-    // TODO: consider adding a tooltip https://github.com/gsklee/react-chartist-tooltip/blob/master/react-chartist-tooltip.babel.js
+    // TODO: consider adding a tooltip
+    // https://github.com/gsklee/react-chartist-tooltip/blob/master/react-chartist-t
+    // o oltip.babel.js
     // TODO: enable legend click functionality
     const chartOptions = {
       chartPadding: {
