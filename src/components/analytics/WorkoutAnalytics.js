@@ -1,17 +1,9 @@
 import React, {Component} from 'react';
-import {/*Link, */
-  withRouter
-} from 'react-router-dom';
 import {connect} from 'react-redux';
-import moment from 'moment';
-import Chartist from 'chartist';
 
-import ChartistGraph from 'react-chartist';
+// import ewoloUtil from '../../common/ewoloUtil';
 
-import ewoloUtil from '../../common/ewoloUtil';
-import {ctAxisTitle, ctPointLabels, ChartistLegend} from '../generic/ChartistPlugins';
-import * as workoutAnalyticsService from '../../services/workoutAnalyticsService';
-
+import AnalyticsExerciseChart from './AnalyticsExerciseChart';
 import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
 import UserNotificationBar from '../notification/UserNotificationBar';
@@ -19,22 +11,12 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import analyticsActions from '../../modules/analytics/analyticsActions';
 
 const mapStateToProps = (state/*, ownProps*/) => {
-  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames, analyticsExercise: state.user.analytics.exercise};
+  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames, analytics: state.user.analytics};
 };
 
 const mapDispatchToProps = {
   doAnalyticsExerciseFetchDataThunk: analyticsActions.analyticsExerciseFetchDataThunk
 };
-
-const getWindowWidth = () => {
-  var w = window,
-    d = document,
-    documentElement = d.documentElement,
-    body = d.getElementsByTagName('body')[0],
-    width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
-
-  return width;
-}
 
 class WorkoutAnalytics extends Component {
 
@@ -42,47 +24,28 @@ class WorkoutAnalytics extends Component {
     super(props);
 
     this.state = {
-      width: getWindowWidth(),
       exerciseName: (props.userExerciseNames.length
         ? props.userExerciseNames[0]
         : '')
     };
   }
 
-  getCtClassName() {
-    if (this.state.width < 400) {
-      return 'ct-square';
-    }
+  getExerciseName() {
+    const result = this.props.analytics.selectedExerciseName
+      ? this.props.analytics.selectedExerciseName
+      : (this.props.userExerciseNames.length)
+        ? this.props.userExerciseNames[0]
+        : '';
 
-    if (this.state.width < 600) {
-      return 'ct-perfect-fourth';
-    }
-
-    return 'ct-major-tenth';
-  }
-
-  updateDimensions = () => {
-    const newState = this.state;
-    newState.width = getWindowWidth();
-    this.setState(newState);
-  }
-
-  componentWillMount() {
-    this.updateDimensions();
+    return result;
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions);
-
     if (this.state.exerciseName) {
       this
         .props
         .doAnalyticsExerciseFetchDataThunk(this.state.exerciseName);
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
   }
 
   componentWillReceiveProps(newProps) {
@@ -134,6 +97,12 @@ class WorkoutAnalytics extends Component {
         exerciseNames={this.props.userExerciseNames}
         doApplyFilter={this.doApplyFilter}/>);
 
+    const analyticsExerciseData = this.props.analytics.exercise[this.state.exerciseName] || [];
+
+    const chartContent = (analyticsExerciseData.length)
+      ? this.renderChart(analyticsExerciseData)
+      : this.renderNoChartData();
+
     return (
       <div>
         <div className="container grid-960 section-content">
@@ -145,158 +114,38 @@ class WorkoutAnalytics extends Component {
           </div>
         </div>
 
-        {this.renderChart()}
+        {chartContent}
 
         {this.renderCallToAction()}
       </div>
     )
   }
 
-  renderChart() {
-
-    /*
-    const chartData = {
-      series: [
-        {
-          name: 'series-1',
-          data: [
-            {
-              x: new Date(143134652600),
-              y: 53
-            }, {
-              x: new Date(143234652600),
-              y: 40
-            }, {
-              x: new Date(143340052600),
-              y: 45
-            }, {
-              x: new Date(143366652600),
-              y: 40
-            }, {
-              x: new Date(143410652600),
-              y: 20
-            }, {
-              x: new Date(143508652600),
-              y: 32
-            }, {
-              x: new Date(143569652600),
-              y: 18
-            }, {
-              x: new Date(143579652600),
-              y: 11
-            }
-          ]
-        }, {
-          name: 'series-2',
-          data: [
-            {
-              x: new Date(143134652600),
-              y: 53
-            }, {
-              x: new Date(143234652600),
-              y: 35
-            }, {
-              x: new Date(143334652600),
-              y: 30
-            }, {
-              x: new Date(143384652600),
-              y: 30
-            }, {
-              x: new Date(143568652600),
-              y: 10
-            }
-          ]
-        }
-      ]
-    };
-    */
-
-    const analyticsExerciseData = this.props.analyticsExercise[this.state.exerciseName] || [];
-
-    if (analyticsExerciseData.length === 0) {
-      return (
-        <div className="container grid-960 section-content">
-          <div className="columns">
-            <div className="empty width-100">
-              <div className="empty-icon">
-                <i className="icon icon-flag"></i>
-              </div>
-              <h4 className="empty-title">No data found</h4>
-              <div className="empty-subtitle">Try expanding the date range and click the apply filter button</div>
+  renderNoChartData() {
+    return (
+      <div className="container grid-960 section-content">
+        <div className="columns">
+          <div className="empty width-100">
+            <div className="empty-icon">
+              <i className="icon icon-flag"></i>
             </div>
+            <h4 className="empty-title">No data found</h4>
+            <div className="empty-subtitle">Try expanding the date range and click the apply filter button</div>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    const analyticsExerciseChartData = {
-      series: workoutAnalyticsService.getAnalyticsExerciseChartistSeriesData(analyticsExerciseData)
-    };
-
-    // console.log(chartData); console.log(analyticsExerciseChartData);
-
-    // TODO: consider adding a tooltip
-    // https://github.com/gsklee/react-chartist-tooltip/blob/master/react-chartist-t
-    // o oltip.babel.js
-    // TODO: enable legend click functionality
-    const chartOptions = {
-      chartPadding: {
-        top: 10,
-        right: 0,
-        bottom: 30,
-        left: 20
-      },
-      lineSmooth: Chartist
-        .Interpolation
-        .cardinal({fillHoles: true}),
-      low: 0,
-      axisX: {
-        // type: Chartist.Chartist, divisor: 5,
-        type: Chartist.AutoScaleAxis,
-        scaleMinSpace: 50,
-        labelInterpolationFnc: function (value) {
-          return moment(value).format('D MMM YY');
-        }
-      },
-      plugins: [
-        ctAxisTitle({
-          axisX: {
-            axisTitle: 'Days',
-            axisClass: 'ct-axis-title',
-            offset: {
-              x: 0,
-              y: 50
-            },
-            textAnchor: 'middle'
-          },
-          axisY: {
-            axisTitle: 'Weight (' + ewoloUtil.unitsToText(this.props.defaultUnits) + ')',
-            axisClass: 'ct-axis-title',
-            offset: {
-              x: -50,
-              y: 20
-            },
-            flipTitle: true
-          }
-        }),
-        ctPointLabels({textAnchor: 'middle'})
-      ]
-    };
+  renderChart(analyticsExerciseData) {
 
     return (
       <div className="container grid-1280 section-content">
         <div className="columns">
           <div className="column col-12">
-            <div>
-              Showing progress data for&nbsp;
-              <strong>{this.state.exerciseName}</strong>
-            </div>
-            <ChartistLegend series={analyticsExerciseChartData.series}></ChartistLegend>
-            <ChartistGraph
-              data={analyticsExerciseChartData}
-              options={chartOptions}
-              type={'Line'}
-              className={this.getCtClassName()}/>
+            <AnalyticsExerciseChart
+              exerciseName={this.state.exerciseName}
+              analyticsExerciseData={analyticsExerciseData}/>
           </div>
         </div>
       </div>
@@ -326,4 +175,6 @@ class WorkoutAnalytics extends Component {
   }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WorkoutAnalytics)); // need to wrap this to allow history push
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WorkoutAnalytics)); // need to wrap this to allow history push
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutAnalytics);

@@ -20,7 +20,7 @@ const wrapLocalStorageAccess = (fn) => {
   }
 }
 
-const ewoloUtil = { 
+const ewoloUtil = {
   getApiRequest: ({ route, method, body, authToken }) => {
     const url = ewoloConstants.api.url + route;
     const headers = {
@@ -146,6 +146,15 @@ const ewoloUtil = {
   },
   isMobileDevice: () => {
     return window.innerWidth < 600;
+  },
+  getWindowWidth: () => {
+    const w = window,
+      d = document,
+      documentElement = d.documentElement,
+      body = d.getElementsByTagName('body')[0],
+      width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
+
+    return width;
   }
 };
 

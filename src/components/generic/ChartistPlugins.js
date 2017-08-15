@@ -1,6 +1,6 @@
 import React from 'react';
 
-import moment from 'moment';
+// import moment from 'moment';
 import Chartist from 'chartist';
 import './ChartistPlugins.css';
 
