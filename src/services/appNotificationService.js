@@ -11,7 +11,7 @@ const appNotifications = [
   },
   {
     id: 'analytics',
-    text: 'Ewolo 2.7.0: Check the analytics page for an in-depth exercise analysis!',
+    text: 'Ewolo 3.0.0: Check the analytics page for an in-depth exercise analysis!',
     show: 'logged-in'
   }
 ];
