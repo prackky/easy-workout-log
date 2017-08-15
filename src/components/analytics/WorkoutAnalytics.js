@@ -11,56 +11,47 @@ import UserNotificationBar from '../notification/UserNotificationBar';
 import analyticsActions from '../../modules/analytics/analyticsActions';
 
 const mapStateToProps = (state/*, ownProps*/) => {
-  return {defaultUnits: state.user.data.units, workoutsAnalysis: state.user.workouts.workoutsAnalysis, userExerciseNames: state.user.data.userExerciseNames, analytics: state.user.analytics};
+  return {defaultUnits: state.user.data.units, userExerciseNames: state.user.data.userExerciseNames, analytics: state.user.analytics};
 };
 
 const mapDispatchToProps = {
-  doAnalyticsExerciseFetchDataThunk: analyticsActions.analyticsExerciseFetchDataThunk
+  doAnalyticsExerciseFetchDataThunk: analyticsActions.analyticsExerciseFetchDataThunk,
+  doAnalyticsExerciseSetFilterData: analyticsActions.analyticsExerciseSetFilterData
 };
 
 class WorkoutAnalytics extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      exerciseName: (props.userExerciseNames.length
+  getExerciseName(props) {
+    const result = props.analytics.exerciseFilterData.exerciseName
+      ? props.analytics.exerciseFilterData.exerciseName
+      : (props.userExerciseNames.length)
         ? props.userExerciseNames[0]
-        : '')
-    };
-  }
-
-  getExerciseName() {
-    const result = this.props.analytics.selectedExerciseName
-      ? this.props.analytics.selectedExerciseName
-      : (this.props.userExerciseNames.length)
-        ? this.props.userExerciseNames[0]
         : '';
 
     return result;
   }
 
   componentDidMount() {
-    if (this.state.exerciseName) {
+    const exerciseName = this.getExerciseName(this.props);
+
+    if (exerciseName) {
       this
         .props
-        .doAnalyticsExerciseFetchDataThunk(this.state.exerciseName);
+        .doAnalyticsExerciseFetchDataThunk(exerciseName, this.props.analytics.exerciseFilterData.dateBefore, this.props.analytics.exerciseFilterData.dateAfter);
     }
   }
 
   componentWillReceiveProps(newProps) {
-    // this function is pretty much only in existence to set the correct exercise
-    // name in the case that the page is loaded directly.
-    if (this.props.userExerciseNames !== newProps.userExerciseNames) {
-      if (newProps.userExerciseNames.length) {
-        const newState = this.state;
-        newState.exerciseName = newProps.userExerciseNames[0];
-        this.setState(newState);
+    // reload data in case filter changed or if the userExerciseNames changed
+    // (happens in case of a direct page load)
 
-        this
-          .props
-          .doAnalyticsExerciseFetchDataThunk(newState.exerciseName);
-      }
+    if (newProps.analytics.exerciseFilterData !== this.props.analytics.exerciseFilterData || newProps.userExerciseNames !== this.props.userExerciseNames) {
+
+      const exerciseName = this.getExerciseName(newProps);
+
+      this
+        .props
+        .doAnalyticsExerciseFetchDataThunk(exerciseName, newProps.analytics.exerciseFilterData.dateBefore, newProps.analytics.exerciseFilterData.dateAfter);
     }
   }
 
@@ -70,15 +61,11 @@ class WorkoutAnalytics extends Component {
       exerciseName = this.props.userExerciseNames[exerciseNameIndex];
     }
 
-    console.log([exerciseNameIndex, dateBefore, dateAfter, exerciseName]);
-
-    const newState = this.state;
-    newState.exerciseName = exerciseName;
-    this.setState(newState);
+    // console.log([exerciseNameIndex, dateBefore, dateAfter, exerciseName]);
 
     this
       .props
-      .doAnalyticsExerciseFetchDataThunk(exerciseName, dateBefore, dateAfter);
+      .doAnalyticsExerciseSetFilterData({exerciseName, dateBefore, dateAfter});
   }
 
   render() {
@@ -91,16 +78,20 @@ class WorkoutAnalytics extends Component {
   }
 
   renderAnalyticsContent() {
+    const exerciseName = this.getExerciseName(this.props);
     const analyticscontent = (this.props.userExerciseNames.length === 0)
       ? (<NoWorkoutsPanel history={this.props.history}/>)
       : (<AnalyticsFilter
         exerciseNames={this.props.userExerciseNames}
-        doApplyFilter={this.doApplyFilter}/>);
+        doApplyFilter={this.doApplyFilter}
+        selectedExerciseName={exerciseName}
+        selectedDateBefore={this.props.analytics.exerciseFilterData.dateBefore}
+        selectedDateAfter={this.props.analytics.exerciseFilterData.dateAfter}/>);
 
-    const analyticsExerciseData = this.props.analytics.exercise[this.state.exerciseName] || [];
+    const analyticsExerciseData = this.props.analytics.exercise[exerciseName] || [];
 
     const chartContent = (analyticsExerciseData.length)
-      ? this.renderChart(analyticsExerciseData)
+      ? this.renderChart(exerciseName, analyticsExerciseData)
       : this.renderNoChartData();
 
     return (
@@ -137,14 +128,14 @@ class WorkoutAnalytics extends Component {
     );
   }
 
-  renderChart(analyticsExerciseData) {
+  renderChart(exerciseName, analyticsExerciseData) {
 
     return (
       <div className="container grid-1280 section-content">
         <div className="columns">
           <div className="column col-12">
             <AnalyticsExerciseChart
-              exerciseName={this.state.exerciseName}
+              exerciseName={exerciseName}
               analyticsExerciseData={analyticsExerciseData}/>
           </div>
         </div>
@@ -174,7 +165,5 @@ class WorkoutAnalytics extends Component {
       .push('/log-workout');
   }
 };
-
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WorkoutAnalytics)); // need to wrap this to allow history push
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkoutAnalytics);

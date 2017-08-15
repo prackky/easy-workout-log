@@ -4,26 +4,52 @@ import moment from 'moment';
 
 import Modal from './Modal';
 
+const getExerciseNameIndex = (exerciseNames, exerciseName) => {
+  for (let i = 0; i < exerciseNames.length; ++i) {
+    if (exerciseNames[i] === exerciseName) {
+      return i;
+    }
+  }
+}
+
 class AnalyticsFilter extends Component {
 
   static propTypes = {
     exerciseNames: PropTypes
       .arrayOf(PropTypes.string)
       .isRequired,
-    doApplyFilter: PropTypes.func.isRequired
+    doApplyFilter: PropTypes.func.isRequired,
+    selectedExerciseName: PropTypes.string.isRequired,
+    selectedDateBefore: PropTypes.string.isRequired,
+    selectedDateAfter: PropTypes.string.isRequired
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      dateBefore: '',
-      dateAfter: '',
       showStartDateHelp: false,
       showEndDateHelp: false,
       dateRange: 'custom',
-      exerciseNameIndex: 0
+      ...this.getComputedStateProperties(props)
     };
+  }
+
+  getComputedStateProperties(props) {
+    return {
+      dateBefore: props.selectedDateBefore ? props.selectedDateBefore : '',
+      dateAfter: props.selectedDateAfter ? props.selectedDateAfter : '',
+      exerciseNameIndex: props.selectedExerciseName ? getExerciseNameIndex(props.exerciseNames, props.selectedExerciseName) : 0
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    const newState = {
+      ...this.state,
+      ...this.getComputedStateProperties(newProps)
+    };
+
+    this.setState(newState);
   }
 
   handleDateAfterChange = (event) => {

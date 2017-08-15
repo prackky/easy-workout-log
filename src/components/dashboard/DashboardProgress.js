@@ -39,7 +39,10 @@ class DashboardProgress extends Component {
         }
       ],
       rows: workoutsAnalysisChartData.rows,
-      columns: workoutsAnalysisChartData.columns
+      columns: workoutsAnalysisChartData.columns,
+      filterExerciseName: 0,
+      filterDateBefore: '',
+      filterDateAfter: ''
     };
 
     this.state = state;
@@ -73,7 +76,14 @@ class DashboardProgress extends Component {
 
   doApplyFilter = ({exerciseNameIndex, dateBefore, dateAfter}) => {
     const exerciseName = this.props.userExerciseNames[exerciseNameIndex];
-    
+
+    const newState = this.state;
+    newState.filterExerciseName = exerciseName;
+    newState.filterDateBefore = dateBefore;
+    newState.filterDateAfter = dateAfter;
+
+    this.setState(newState);
+
     this
       .props
       .doFetchUserWorkoutsAnalysisThunk(dateBefore, dateAfter, exerciseName);
@@ -85,7 +95,12 @@ class DashboardProgress extends Component {
       <div>
         <h3>Progress</h3>
 
-        <AnalyticsFilter exerciseNames={this.props.userExerciseNames} doApplyFilter={this.doApplyFilter}/>
+        <AnalyticsFilter
+          exerciseNames={this.props.userExerciseNames}
+          doApplyFilter={this.doApplyFilter}
+          selectedExerciseName={this.state.filterExerciseName}
+          selectedDateBefore={this.state.filterDateBefore}
+          selectedDateAfter={this.state.filterDateAfter}/>
 
         <DateVsWeightScatterChart
           units={this.props.defaultUnits}

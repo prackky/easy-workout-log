@@ -9,15 +9,17 @@ import globalActions from '../global/globalActions';
 
 export const c = Object.freeze({
   ANALYTICS_EXERCISE_SET_DATA: 'ANALYTICS-EXERCISE-SET-DATA',
-  ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME: 'ANALYTICS-EXERCISE-SET-SELECTED-EXERCISE-NAME'
+  ANALYTICS_EXERCISE_SET_FILTER_DATA: 'ANALYTICS-EXERCISE-SET-FILTER-DATA'
 });
 
 
 const analyticsActions = {
-  analyticsExerciseSetSelectedExerciseName: (exerciseName) => {
+  analyticsExerciseSetFilterData: ({exerciseName, dateBefore, dateAfter}) => {
     return {
-      type: c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME,
-      exerciseName
+      type: c.ANALYTICS_EXERCISE_SET_FILTER_DATA,
+      exerciseName,
+      dateBefore,
+      dateAfter
     };
   },
   analyticsExerciseSetData: (exerciseName, data) => {

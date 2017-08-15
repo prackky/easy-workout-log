@@ -6,7 +6,11 @@ import { c } from './analyticsActions';
 
 export const initialState = {
   exercise: {},
-  selectedExerciseName: ''
+  exerciseFilterData: {
+    exerciseName: '',
+    dateBefore: '',
+    dateAfter: ''
+  }
 };
 
 const analyticsReducer = (state = initialState, action) => {
@@ -28,13 +32,17 @@ const analyticsReducer = (state = initialState, action) => {
           exercise: newExercise
         };
       }
-    case c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME:
+    case c.ANALYTICS_EXERCISE_SET_FILTER_DATA:
       {
-        const { exerciseName } = action;
+        const { exerciseName, dateBefore, dateAfter } = action;
 
         return {
           ...state,
-          selectedExerciseName: exerciseName
+          exerciseFilterData: {
+            exerciseName,
+            dateBefore,
+            dateAfter
+          }
         }
       }
     default:

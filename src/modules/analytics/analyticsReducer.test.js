@@ -92,18 +92,24 @@ describe('analyticsReducer', () => {
 
   });
 
-  describe(c.ANALYTICS_EXERCISE_SET_SELECTED_EXERCISE_NAME, () => {
-    it('should set selectedExerciseName', () => {
+  describe(c.ANALYTICS_EXERCISE_SET_FILTER_DATA, () => {
+    it('should set filter data', () => {
       // given
       const exerciseName = 'the!@@$äé#$%%$^&%*^&(&*(&(❤';
-      
+      const dateBefore = '2017-01-01';
+      const dateAfter = '2016-01-01';
+
       // when
-      const newState = analyticsReducer(undefined, actions.analyticsExerciseSetSelectedExerciseName(exerciseName));
+      const newState = analyticsReducer(undefined, actions.analyticsExerciseSetFilterData({ exerciseName, dateBefore, dateAfter }));
 
       // then
       const expectedState = {
         ...initialState,
-        selectedExerciseName: exerciseName
+        exerciseFilterData: {
+          exerciseName,
+          dateBefore,
+          dateAfter
+        }
       };
 
       expect(newState)
