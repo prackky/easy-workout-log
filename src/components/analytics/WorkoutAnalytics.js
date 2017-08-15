@@ -22,13 +22,22 @@ const mapDispatchToProps = {
 class WorkoutAnalytics extends Component {
 
   getExerciseName(props) {
-    const result = props.analytics.exerciseFilterData.exerciseName
-      ? props.analytics.exerciseFilterData.exerciseName
-      : (props.userExerciseNames.length)
-        ? props.userExerciseNames[0]
-        : '';
+    if (props.analytics.exerciseFilterData.exerciseName) {
+      return props.analytics.exerciseFilterData.exerciseName;
+    }
 
-    return result;
+    if (props.userExerciseNames.length) {
+      // try to pick squats
+      for (let i = 0; i < props.userExerciseNames.length; ++i) {
+        if ('squats' === props.userExerciseNames[i].trim().toLowerCase()) {
+          return props.userExerciseNames[i];
+        }
+      }
+
+      return props.userExerciseNames[0];
+    }
+
+    return '';
   }
 
   componentDidMount() {
