@@ -40,12 +40,22 @@
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build && npm run delete-maps",
+    "build": "react-scripts build && npm run delete-maps && react-snapshot",
     "delete-maps": "npm run delete-map-files && npm run delete-references-to-map-files",
     "delete-map-files": "find ./build -name '*.map' -delete",
     "delete-references-to-map-files": "find ./build -regex '.*\\.\\(js\\|css\\)' -exec sed -i -E '\\/[\\*\\/]#\\ssourceMappingURL=main(\\.[0-9a-f]+)?\\.(css|js)\\.map(\\*\\/)?/g' {} +",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "reactSnapshot": {
+    "include": [],
+    "exclude": [
+      "/log-workout",
+      "/login",
+      "/signup",
+      "/change-log"
+    ],
+    "snapshotDelay": 100
   },
   "jest": {}
 }
