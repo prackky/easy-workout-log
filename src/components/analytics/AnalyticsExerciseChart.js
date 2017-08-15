@@ -121,7 +121,7 @@ class AnalyticsExerciseChart extends React.Component {
     // TODO: enable legend click functionality
     const chartOptions = {
       chartPadding: {
-        top: 10,
+        top: 20, // padding for top label
         right: 0,
         bottom: 30,
         left: 20
@@ -129,7 +129,7 @@ class AnalyticsExerciseChart extends React.Component {
       lineSmooth: Chartist
         .Interpolation
         .cardinal({fillHoles: true}),
-      low: 0,
+      // low: 0,
       axisX: {
         // type: Chartist.Chartist, divisor: 5,
         type: Chartist.AutoScaleAxis,

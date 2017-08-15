@@ -105,7 +105,9 @@ class WorkoutAnalytics extends Component {
         : this.renderNoChartData())
       : '';
 
-    const callToAction = (this.props.userExerciseNames.length) ? this.renderCallToAction() : '';
+    const callToAction = (this.props.userExerciseNames.length)
+      ? this.renderCallToAction()
+      : '';
 
     return (
       <div>
@@ -149,7 +151,8 @@ class WorkoutAnalytics extends Component {
           <div className="column col-12">
             <AnalyticsExerciseChart
               exerciseName={exerciseName}
-              analyticsExerciseData={analyticsExerciseData}/>
+              analyticsExerciseData={analyticsExerciseData}
+              defaultUnits={this.props.defaultUnits}/>
           </div>
         </div>
       </div>
