@@ -128,7 +128,7 @@ class AnalyticsExerciseChart extends React.Component {
       },
       lineSmooth: Chartist
         .Interpolation
-        .cardinal({fillHoles: true}),
+        .simple({fillHoles: true}),
       // low: 0,
       axisX: {
         // type: Chartist.Chartist, divisor: 5,
