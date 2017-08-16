@@ -53,7 +53,7 @@ class DateVsWeightScatterChart extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.units != this.props.units) {
+    if (nextProps.units !== this.props.units) {
       const newState = this.state;
       newState.options.vAxis.title = `Weight (${ewoloUtil.unitsToText(nextProps.units)})`;
       this.setState(newState);
