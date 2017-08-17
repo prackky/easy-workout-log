@@ -19,18 +19,17 @@ const WhyEwolo = (props) => {
           </p>
 
           <p>
-            <strong>
-             If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution:            </strong>
-            <ul className="why-ewolo">
-              <li><strong>It comes with a list of over 100 exercises but you can add any exercise you want.</strong></li>
-              <li><strong>Most fields are optional and you can log workouts in the past, present and future (to set up future routines).</strong></li>
-              <li><strong>Log multiple workouts for a single day.</strong></li>
-              <li><strong>Log supersets, circuits (2 or more exercises without rest) and optionally specify tempo for high intensity workouts.</strong></li>
-              <li><strong>Copy, edit and delete workouts.</strong></li> 
-              <li><strong>All of the above plus a simple interface that is navigable on the smallest mobile device!</strong></li>
-            </ul>
+            <strong>If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution:</strong>
           </p>
           
+          <ul className="text why-ewolo">
+            <li><strong>It comes with a list of over 100 exercises but you can add any exercise you want.</strong></li>
+            <li><strong>Most fields are optional and you can log workouts in the past, present and future (to set up future routines).</strong></li>
+            <li><strong>Log multiple workouts for a single day.</strong></li>
+            <li><strong>Log supersets, circuits (2 or more exercises without rest) and optionally specify tempo for high intensity workouts.</strong></li>
+            <li><strong>Copy, edit and delete workouts.</strong></li> 
+            <li><strong>All of the above plus a simple interface that is navigable on the smallest mobile device!</strong></li>
+          </ul>
           
           <p>
             Any feedback is very much welcome and we hope that you like it as much as we enjoyed making it. Oh and in case you were wondering, Ewolo is simply short for &quot;easy workout log&quot; :)

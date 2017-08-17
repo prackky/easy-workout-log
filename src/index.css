@@ -41,7 +41,7 @@ body {
   font-size: 1.8rem;
 }
 
-p {
+p, ul.text {
   line-height: 2.6rem;
   margin: 0 0 3rem;
   font-weight: 300;
