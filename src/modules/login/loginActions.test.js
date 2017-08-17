@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import loginActions from './loginActions';
+import userDataActions from '../user-data/userDataActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
@@ -20,6 +21,10 @@ describe('loginActions', () => {
       .post('/authenticate')
       .reply(200, { token: ewoloTestUtil.authToken });
 
+    nock(ewoloConstants.api.url)
+      .get('/user-data')
+      .reply(200, { exerciseNames: [], name: 'snoop', email: 'snoop@dawg.yo', units: 7, sex: 15 });
+
     const expectedActions = [
       { type: 'TASK-START' },
       {
@@ -27,6 +32,7 @@ describe('loginActions', () => {
         authToken: ewoloTestUtil.authToken,
         id: ewoloTestUtil.authTokenUserId
       },
+      userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'snoop', 'snoop@dawg.yo', 7, 15),
       {
         type: '@@router/CALL_HISTORY_METHOD',
         payload: { method: 'push', args: ['/xxx'] }
@@ -58,6 +64,10 @@ describe('loginActions', () => {
       .post('/authenticate')
       .reply(200, { token: ewoloTestUtil.authToken });
 
+    nock(ewoloConstants.api.url)
+      .get('/user-data')
+      .reply(200, { exerciseNames: [], name: 'snoop', email: 'snoop@dawg.yo', units: 7, sex: 15 });
+
     const expectedActions = [
       { type: 'TASK-START' },
       {
@@ -65,6 +75,7 @@ describe('loginActions', () => {
         authToken: ewoloTestUtil.authToken,
         id: ewoloTestUtil.authTokenUserId
       },
+      userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'snoop', 'snoop@dawg.yo', 7, 15),
       {
         type: 'DO-SOMETHING-AFTER'
       },

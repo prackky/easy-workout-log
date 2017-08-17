@@ -1,11 +1,11 @@
 import { push } from '../../react-router-redux/index';
 
 import ewoloUtil from '../../common/ewoloUtil';
-// import ewoloConstants from '../../common/ewoloConstants';
-// import { handleError } from '../../common/errorHandler';
+import ewoloConstants from '../../common/ewoloConstants';
+import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
-import userDataActions from '../user-data/userDataActions';
+import userDataActions, { fetchUserDataThunkPromise } from '../user-data/userDataActions';
 
 export const c = Object.freeze({
   LOGIN_SET_DATA: 'LOGIN-SET-DATA',
@@ -50,6 +50,10 @@ const loginActions = {
         .then(body => {
 
           dispatch(userDataActions.processUserAuthSuccess(body.token));
+
+          return fetchUserDataThunkPromise(ewoloUtil, ewoloConstants, dispatch, userDataActions, handleError, body.token);
+        })
+        .then(() => {
 
           if (afterSuccess.action) {
             dispatch(afterSuccess.action);
