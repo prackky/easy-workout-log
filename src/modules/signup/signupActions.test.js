@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import signupActions from './signupActions';
+import userDataActions from '../user-data/userDataActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
 
@@ -27,6 +28,7 @@ describe('signupActions', () => {
         authToken: ewoloTestUtil.authToken,
         id: ewoloTestUtil.authTokenUserId
       },
+      userDataActions.userDataSet(ewoloConstants.exerciseNames, 'vic', 'vic@smalldata.tech', 1, 1),
       {
         type: 'USER-NOTIFICATION-ADD',
         userNotificationType: 'SUCCESS',
@@ -43,6 +45,7 @@ describe('signupActions', () => {
     const store = mockStore({
       signup: {
         email: 'vic@smalldata.tech',
+        name: 'vic',
         afterSuccess: {
           redirect: '/xxx'
         }
@@ -52,7 +55,7 @@ describe('signupActions', () => {
     return store.dispatch(signupActions.signupThunk())
       .then(() => { // return of async actions
         const actions = store.getActions();
-        ewoloTestUtil.cleanUpNotification(actions[2]);
+        ewoloTestUtil.cleanUpNotification(actions[3]);
         const authToken = ewoloUtil.getObject(ewoloConstants.storage.authTokenKey);
         expect(authToken).to.equal(ewoloTestUtil.authToken);
         expect(store.getActions()).to.deep.equal(expectedActions);
