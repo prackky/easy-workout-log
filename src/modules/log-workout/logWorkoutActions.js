@@ -177,8 +177,10 @@ const logWorkoutActions = {
     return (dispatch, getState) => {
       return Promise.resolve()
         .then(() => {
+          // dispatch(globalActions.taskStart());
+          dispatch(push('/')); // let the current components unmount before cleaning up the state
           dispatch(logWorkoutActions.logWorkout());
-          dispatch(push('/'));
+          // dispatch(globalActions.taskEnd());
         });
     }
   }
