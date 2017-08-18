@@ -42,7 +42,7 @@ const highlights = [
 ];
 
 const mapStateToProps = (state) => {
-  return {user: state.user};
+  return {authToken: state.user.data.authToken};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -64,6 +64,10 @@ class Welcome extends Component {
   };
 
   render() {
+    if (this.props.authToken) {
+      return null;
+    }
+
     if (this.state.redirect) {
       return (<Redirect push to={this.state.redirect}/>);
     }
