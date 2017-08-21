@@ -111,26 +111,28 @@ const LogExercise = (props) => {
 
     return (
       <div className="exercise-entry">
-        <div className="columns">
-          {renderedSetIndicator}
-          <div className="column col-11">
-            <div className="columns">
-              <div className="column col-12">
-                {name}
+        <div className="fade-in exercise-entry-details">
+          <div className="columns">
+            {renderedSetIndicator}
+            <div className="column col-11">
+              <div className="columns">
+                <div className="column col-12">
+                  {name}
+                </div>
+                <div className="column col-12">
+                  {reps}
+                  &nbsp;reps {weight
+                    ? ' @ ' + weight + ' ' + ewoloUtil.unitsToText(units)
+                    : ''}
+                  {tempo && tempo !== '101'
+                    ? ' / ' + tempo
+                    : ''}
+                  {rest && rest !== '60'
+                    ? ' / ' + rest + ' secs'
+                    : ''}
+                </div>
+                {renderedExerciseOperations}
               </div>
-              <div className="column col-12">
-                {reps}
-                &nbsp;reps {weight
-                  ? ' @ ' + weight + ' ' + ewoloUtil.unitsToText(units)
-                  : ''}
-                {tempo && tempo !== '101'
-                  ? ' / ' + tempo
-                  : ''}
-                {rest && rest !== '60'
-                  ? ' / ' + rest + ' secs'
-                  : ''}
-              </div>
-              {renderedExerciseOperations}
             </div>
           </div>
         </div>
