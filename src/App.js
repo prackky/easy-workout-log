@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {/*BrowserRouter,*/
-  Route, Switch
+  Route,
+  Switch
 } from 'react-router-dom';
 
 import {Provider} from 'react-redux';
@@ -36,7 +37,8 @@ import Account from './components/account/Account';
 import WorkoutAnalytics from './components/analytics/WorkoutAnalytics';
 
 import Blog from './components/blog/Blog';
-import HowToGainMuscle from './components/blog/HowToGainMuscle';
+import HowToGainMuscle, {entry as entryHowToGainMuscle} from './components/blog/HowToGainMuscle';
+import Version3, {entry as entryVersion3} from './components/blog/Version3';
 
 import appReducer from './modules/appReducer';
 import createEwoloStore from './redux/createEwoloStore';
@@ -99,11 +101,12 @@ class App extends Component {
               <Route exact path="/dashboard" component={Dashboard}/> {/* legacy support, should be dropped in 3.0 */}
               <Route exact path="/account" component={Account}/>
               <Route exact path="/analytics" component={WorkoutAnalytics}/>
+
               <Route exact path="/blog" component={Blog}/>
-              <Route
-                exact
-                path="/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks"
-                component={HowToGainMuscle}/>
+              <Route exact path={entryHowToGainMuscle.url} component={HowToGainMuscle}/>
+              <Route exact path={entryVersion3.url} component={Version3}/>
+
+              {/* default */}
               <Route component={Home}/>
             </Switch>
             <Footer

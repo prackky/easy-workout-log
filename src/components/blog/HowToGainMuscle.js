@@ -1,29 +1,20 @@
 import React from 'react';
 
-import './Blog.css';
+import BlogTemplate from './BlogTemplate';
 import img from './alexander-redl-185764.jpg';
 import ewoloProgress from './ewolo-progress.png';
+
+export const entry = {
+  title: 'How to gain 20 pounds of muscle in 4 weeks',
+  url: '/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks',
+  author: 'Victor Parmar',
+  dateStr: 'July 23, 2017'
+};
 
 const HowToGainMuscle = (props) => {
 
   return (
-    <div className="container grid-640 section-content">
-      <div className="columns">
-        <div className="column col-12">
-
-          <div className="tile margin-bottom-3rem">
-            <div className="tile-icon">
-              <figure className="avatar avatar-xl" data-initial="VP" style={{backgroundColor: '#5764c6'}}>
-                
-              </figure>
-            </div>
-            <div className="tile-content">
-              <div className="tile-title">Victor Parmar</div>
-              <div className="tile-subtitle">July 23, 2017</div>
-            </div>
-          </div>
-              
-          <h3>How to gain 20 pounds of muscle in 4 weeks</h3>
+    <BlogTemplate entry={entry}>          
 
 <p>
 I will save you some time right away by letting you know that the next time you see a title that tells you how to lose or gain x amount of weight in very little time you can move on. Such articles are written by people who have achieved incredible results but the same approach will not work for the majority of the people due to the fact that everyone has a <span className="highlight">different body type, diet and physical development</span>.
@@ -107,10 +98,7 @@ Please note I am not a professional trainer nor a nutritionist. You should ideal
 <p>
 I wish you all the very best.
 </p>
-        </div>
-      </div>
-
-    </div>
+    </BlogTemplate>
   );
 
 }

@@ -1,6 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import {entry as entryHowToGainMuscle} from './HowToGainMuscle';
+import {entry as entryVersion3} from './Version3';
+
+const BlogEntry = (props) => {
+  const entry = props.entry;
+
+  return (
+    <div className="entry">
+      <div className="link">
+        <Link to={entry.url}>{entry.title}</Link>
+      </div>
+      <div className="author">
+        - {entry.author},
+        &nbsp;<span className="date">{entry.dateStr}</span>
+      </div>
+    </div>
+  )
+};
+
 const Blog = (props) => {
 
   return (
@@ -9,31 +28,9 @@ const Blog = (props) => {
         <div className="column col-12">
           <h3>Blog</h3>
 
-          {/*
-          <div className="tile margin-bottom-3rem">
-            <div className="tile-icon">
-              <figure className="avatar avatar-xl" data-initial="VP" style={{'background-color': '#5764c6'}}>
-                
-              </figure>
-            </div>
-            <div className="tile-content">
-              <div className="tile-title">Victor Parmar</div>
-              <div className="tile-title"><Link to="/how-to-gain-20-lbs-of-muscle-in-4-weeks">How to gain 20 pounds of muscle in 4 weeks</Link></div>
-              <div className="tile-subtitle">July 23, 2017</div>
-            </div>
-          </div>
-          */}
-
-          <div className="entry">
-            <div className="link">
-              <Link to="/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks">How to gain 20 pounds of muscle in 4 weeks</Link>
-            </div>
-            <div className="author">
-              - Victor Parmar, <span className="date">July 23, 2017</span>
-            </div>
-          </div>
-
-          {/*<div className="divider"></div>*/}
+          <BlogEntry entry={entryVersion3}></BlogEntry>
+          <div className="divider"></div>
+          <BlogEntry entry={entryHowToGainMuscle}></BlogEntry>
 
         </div>
       </div>
