@@ -9,7 +9,7 @@ const BlogTemplate = (props) => {
       <div className="columns">
         <div className="column col-12">
 
-          <div className="tile margin-bottom-3rem">
+          <div className="tile margin-top-3rem margin-bottom-5rem">
             <div className="tile-icon">
               <figure className="avatar avatar-xl" data-initial="VP" style={{backgroundColor: '#5764c6'}}>
                 

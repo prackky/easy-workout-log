@@ -19,3 +19,7 @@ p .highlight {
   font-style: italic;
   text-decoration: underline;
 }
+
+img.bordered {
+  border: 1px solid #727e96;
+}

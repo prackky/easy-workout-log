@@ -57,7 +57,7 @@ Figuring out what you need to eat to achieve your goals is a very difficult prob
 </p>
 
 <figure className="figure margin-top-5rem">
-  <img src={ewoloProgress} className="img-responsive" alt="use ewolo to track your progress" />
+  <a href={ewoloProgress}><img src={ewoloProgress} className="img-responsive bordered" alt="use ewolo to track your progress" /></a>
   <figcaption className="figure-caption text-center">Use Ewolo to track your progress</figcaption>
 </figure>
 
