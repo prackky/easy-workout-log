@@ -10,9 +10,10 @@ const ChangeLog = (props) => {
         <div className="column col-12">
           <h3>Change Log</h3>
 
-          <h5 className="margin-top-5rem">Version 3.0.0 (2017-08-15)</h5>
+          <h5 className="margin-top-5rem">Version 3.1.0 (2017-08-21)</h5>
           <ul className="change-log">
             <li>Brand new analytics section!</li>
+            <li>Ability to mark exercises as done</li>
           </ul>
 
           <h5 className="margin-top-5rem">Version 2.6.5 (2017-08-12)</h5>

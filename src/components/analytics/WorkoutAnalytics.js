@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 // import ewoloUtil from '../../common/ewoloUtil';
 
+import * as workoutAnalyticsService from '../../services/workoutAnalyticsService';
+
 import AnalyticsExerciseChart from './AnalyticsExerciseChart';
 import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
@@ -21,27 +23,8 @@ const mapDispatchToProps = {
 
 class WorkoutAnalytics extends Component {
 
-  getExerciseName(props) {
-    if (props.analytics.exerciseFilterData.exerciseName) {
-      return props.analytics.exerciseFilterData.exerciseName;
-    }
-
-    if (props.userExerciseNames.length) {
-      // try to pick squats
-      for (let i = 0; i < props.userExerciseNames.length; ++i) {
-        if ('squats' === props.userExerciseNames[i].trim().toLowerCase()) {
-          return props.userExerciseNames[i];
-        }
-      }
-
-      return props.userExerciseNames[0];
-    }
-
-    return '';
-  }
-
   componentDidMount() {
-    const exerciseName = this.getExerciseName(this.props);
+    const exerciseName = workoutAnalyticsService.getExerciseName(this.props.analytics.exerciseFilterData, this.props.userExerciseNames);
 
     if (exerciseName) {
       this
@@ -56,7 +39,7 @@ class WorkoutAnalytics extends Component {
 
     if (newProps.analytics.exerciseFilterData !== this.props.analytics.exerciseFilterData || newProps.userExerciseNames !== this.props.userExerciseNames) {
 
-      const exerciseName = this.getExerciseName(newProps);
+      const exerciseName = workoutAnalyticsService.getExerciseName(newProps.analytics.exerciseFilterData, newProps.userExerciseNames);
 
       this
         .props
@@ -87,7 +70,7 @@ class WorkoutAnalytics extends Component {
   }
 
   renderAnalyticsContent() {
-    const exerciseName = this.getExerciseName(this.props);
+    const exerciseName = workoutAnalyticsService.getExerciseName(this.props.analytics.exerciseFilterData, this.props.userExerciseNames);
     const analyticscontent = (this.props.userExerciseNames.length === 0)
       ? (<NoWorkoutsPanel history={this.props.history}/>)
       : (<AnalyticsFilter

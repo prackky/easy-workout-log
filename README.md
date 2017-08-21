@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/victorparmar/easy-workout-log.svg?branch=master)](https://travis-ci.org/victorparmar/easy-workout-log)
+
 # Easy Workout Log
 
 [https://ewolo.fitness](https://ewolo.fitness) frontend.

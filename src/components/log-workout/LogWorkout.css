@@ -14,6 +14,10 @@
   margin-left: 1rem;
 }
 
+.exercise-entry .exercise-operations {
+  margin-top: 1rem;
+}
+
 .secondary-operation {
   margin-top: 2rem;
 }

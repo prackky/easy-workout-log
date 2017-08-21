@@ -10,7 +10,7 @@ describe('logWorkoutReducer', () => {
       // when
       const newState = logWorkoutReducer({
         exercises: [{ name: 'a' }, { name: 'b', reps: '1' }, { name: 'c' }]
-      }, actions.logWorkoutExerciseSetData(1, { name: 'changed', snoop: 'dawg', reps: '1' }));
+      }, actions.logWorkoutExerciseSetData(1, { name: 'changed', snoop: 'dawg', reps: '1', isDone: true }));
 
       // then
       expect(newState)
@@ -19,7 +19,7 @@ describe('logWorkoutReducer', () => {
         .equal({
           exercises: [
             { name: 'a', setIndex: 1, superSetIndex: 0 },
-            { name: 'changed', snoop: 'dawg', reps: '1', nameFormHint: '', repsFormHint: '', setIndex: 1, superSetIndex: 0 },
+            { name: 'changed', snoop: 'dawg', reps: '1', nameFormHint: '', repsFormHint: '', setIndex: 1, superSetIndex: 0, isDone: true },
             { name: 'c', setIndex: 1, superSetIndex: 0 }
           ]
         });
