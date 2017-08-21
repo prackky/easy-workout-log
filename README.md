@@ -27,6 +27,10 @@ https://github.com/facebookincubator/create-react-app/issues/1341
 Dry run: `release-it -n -d`  
 Release: `release-it`
 
+## React performance
+
+https://marmelab.com/blog/2017/02/06/react-is-slow-react-is-fast.html
+
 # License
 
 See [LICENSE](LICENSE)
