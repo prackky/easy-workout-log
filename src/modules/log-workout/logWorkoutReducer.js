@@ -118,7 +118,8 @@ const logWorkoutReducer = (state = initialState, action) => {
           showProperties: true,
           setIndex: 1,
           superSetIndex: 0,
-          units
+          units,
+          isDone: false
         });
 
         calculateSetIndexes(exercises);

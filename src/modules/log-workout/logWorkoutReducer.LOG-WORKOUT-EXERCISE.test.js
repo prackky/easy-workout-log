@@ -31,7 +31,8 @@ describe('logWorkoutReducer', () => {
               showProperties: true,
               setIndex: 1,
               superSetIndex: 0,
-              units: 1
+              units: 1,
+              isDone: false
             }
           ]
         });
@@ -73,7 +74,8 @@ describe('logWorkoutReducer', () => {
               showProperties: true,
               setIndex: 1,
               superSetIndex: 0,
-              units: 43
+              units: 43,
+              isDone: false
             }
           ]
         });
@@ -102,7 +104,8 @@ describe('logWorkoutReducer', () => {
               showProperties: true,
               setIndex: 2,
               superSetIndex: 0,
-              units: 1
+              units: 1,
+              isDone: false
           }]
           });
       });
@@ -132,7 +135,8 @@ describe('logWorkoutReducer', () => {
                 showProperties: true,
                 setIndex: 3,
                 superSetIndex: 0,
-                units: 1
+                units: 1,
+                isDone: false
               }
             ]
           });
@@ -166,7 +170,8 @@ describe('logWorkoutReducer', () => {
                 showProperties: true,
                 setIndex: 1,
                 superSetIndex: 0,
-                units: 1
+                units: 1,
+                isDone: false
               }
             ]
           });
@@ -207,7 +212,8 @@ describe('logWorkoutReducer', () => {
               showProperties: true,
               setIndex: 1,
               superSetIndex: 1,
-              units: 1
+              units: 1,
+              isDone: false
             }]
           });
       });
@@ -240,8 +246,9 @@ describe('logWorkoutReducer', () => {
                 showProperties: true,
                 setIndex: 1,
                 superSetIndex: 3,
-                units: 1
-              },
+                units: 1,
+                isDone: false
+              }
             ]
           });
       });
@@ -274,7 +281,8 @@ describe('logWorkoutReducer', () => {
                 showProperties: true,
                 setIndex: 1,
                 superSetIndex: 0,
-                units: 1
+                units: 1,
+                isDone: false
               },
             ]
           });
