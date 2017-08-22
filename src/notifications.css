@@ -1,10 +1,10 @@
 .global-notification {
-  font-size: 1.4rem;
   animation: slide-down .5s ease 1;
 }
 
 .user-notification {
-  padding: 2rem 1rem;
+  padding: 0.8rem 0.8rem;
+  margin-top: 1rem;
 }
 
 .notification-timestamp {

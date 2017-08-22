@@ -3,15 +3,15 @@ import React from 'react';
 const Terms = (props) => {
 
   return (
-    <div className="container grid-640 section-content">
+    <div className="container grid-sm section-content">
       <div className="columns">
         <div className="column col-12">
           <h3>Terms of Service</h3>
 
-          <h6>
-            <u>Last updated</u>: June 22<sup>nd</sup>, 2017. Inspired by <a href="https://monicahq.com/terms" target="_blank" rel="noopener noreferrer">Monica</a></h6>
+          <p>
+            <u>Last updated</u>: June 22<sup>nd</sup>, 2017. Inspired by <a href="https://monicahq.com/terms" target="_blank" rel="noopener noreferrer">Monica</a></p>
 
-          <h4 className="margin-top-5rem">Scope of service</h4>
+          <h4 className="margin-top-2rem">Scope of service</h4>
           <p>
             Ewolo supports the following browsers:
             <ul>
@@ -24,7 +24,7 @@ const Terms = (props) => {
             Usage on any other browsers is likely but not guaranteed.
           </p>
 
-          <h4 className="margin-top-5rem">Rights</h4>
+          <h4 className="margin-top-2rem">Rights</h4>
           <p>
             You don’t have to provide your real name when you register to an account. You do
             however need a valid email address if you want to opt into our email
@@ -42,7 +42,7 @@ const Terms = (props) => {
           </p>
           <p>Any new features that affect privacy will be strictly opt-in.</p>
 
-          <h4 className="margin-top-5rem">Responsibilities</h4>
+          <h4 className="margin-top-2rem">Responsibilities</h4>
 
           <p>You will not use the site to store illegal information or data under the
             Canadian law.</p>
@@ -56,7 +56,7 @@ const Terms = (props) => {
           <p>The site operators reserve the right to close accounts that abuse the system
             or use it in an unreasonable manner.</p>
 
-          <h4 className="margin-top-5rem">Legal</h4>
+          <h4 className="margin-top-2rem">Legal</h4>
 
           <p>Although we want to provide a great service, there are certain things about
             the service that cannot be promised. For example, the services and software are

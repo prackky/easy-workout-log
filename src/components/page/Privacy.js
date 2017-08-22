@@ -3,7 +3,7 @@ import React from 'react';
 const Privacy = (props) => {
 
   return (
-    <div className="container grid-640 section-content">
+    <div className="container grid-sm section-content">
       <div className="columns">
         <div className="column col-12">
           <h3>Privacy policy</h3>

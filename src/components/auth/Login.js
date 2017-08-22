@@ -42,7 +42,7 @@ class Login extends Component {
     return (
       <div>
         <UserNotificationBar/>
-        <div className="container grid-480 section-content">
+        <div className="container grid-xs section-content">
           <div className="columns">
             <div className="column col-12">
               <div className="text-center">
@@ -77,7 +77,7 @@ class Login extends Component {
 
                   <EwoloFormHint formHint={this.props.login.passwordFormHint} />
 
-                  <div className="form-group">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <button
                         className={"btn btn-primary btn-lg " + ((this.props.login.emailFormHint || this.props.login.passwordFormHint || !this.props.login.email || !this.props.login)
@@ -87,7 +87,7 @@ class Login extends Component {
                     </div>
                   </div>
 
-                  <div className="form-group margin-top-3rem">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <Link to="/signup">Don't have an account?</Link>
                     </div>

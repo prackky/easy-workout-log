@@ -1,11 +1,9 @@
 import React from 'react';
 
-import './WhyEwolo.css';
-
 const WhyEwolo = (props) => {
 
   return (
-    <div className="container grid-640 section-content">
+    <div className="container grid-sm section-content">
       <div className="columns">
         <div className="column col-12">
           <h3>Why Ewolo?</h3>
@@ -22,7 +20,7 @@ const WhyEwolo = (props) => {
             <strong>If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution:</strong>
           </p>
           
-          <ul className="text why-ewolo">
+          <ul className="text">
             <li><strong>It comes with a list of over 100 exercises but you can add any exercise you want.</strong></li>
             <li><strong>Most fields are optional and you can log workouts in the past, present and future (to set up future routines).</strong></li>
             <li><strong>Log multiple workouts for a single day.</strong></li>

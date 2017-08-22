@@ -175,7 +175,7 @@ class AnalyticsFilter extends Component {
           title="Dashboard date filter"
           content={['The end date is non-inclusive, i.e. picking the 31st of December means that the workouts will be shown from the 30th of December and before.']}/>
 
-        <div className="container grid-480">
+        <div className="container grid-xs">
           <div className="columns">
             <div className="column col-12">
               <p className="no-text">
@@ -247,10 +247,10 @@ class AnalyticsFilter extends Component {
                   </div>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group margin-top-1rem">
                   <div className="col-12 text-center">
                     <button
-                      className={"btn btn-primary btn-lg"}
+                      className="btn btn-primary btn-lg"
                       onClick={this.handleBtnApplyFilterClick}>Apply filter</button>
                   </div>
                 </div>

@@ -1,23 +1,22 @@
 #account-avatar {
-  margin-top: -1rem;
+  margin-top: -0.8rem;
 }
 
 .navbar {
-  min-height: 10rem;
-  font-size: 1.8rem;
+  min-height: 4rem;
+  font-size: 0.8rem;
   /*border-bottom: 1px solid #50596c;*/
 }
 
 .navbar .navbar-brand {
-  font-size: 2.5rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   color: #50596c;
-  max-width: 10rem;
+  max-width: 5rem;
 }
 
 .navbar .btn {
-  font-size: 1.8rem;
+  font-size: 0.8rem;
 }
 
 .navbar .btn-link {
@@ -30,16 +29,16 @@
 
 .navbar .dropdown-toggle .icon {
   vertical-align: inherit;
-  top: -10%;
+  top: -40%;
 }
 
 #sidebar .brand {
-  font-size: 2.2rem;
-  max-width: 7rem;
+  max-width: 4rem;
+  margin-bottom: 1rem;
 }
 
-#sidebar .tile .tile-icon {
-  margin-top: 0.5rem;
+.nav .nav-item {
+  font-size: 0.8rem;
 }
 
 .nav .nav-item a.active {
@@ -81,10 +80,10 @@
   height: 100%;
   left: 0;
   overflow-y: auto;
-  padding: 3rem 3rem;
+  padding: 2rem 1.6rem;
   position: fixed;
   top: 0;
-  width: 24rem;
+  width: 18rem;
   z-index: 400;
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);

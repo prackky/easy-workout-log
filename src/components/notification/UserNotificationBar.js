@@ -33,7 +33,7 @@ const UserNotificationBar = (props) => {
 
   return (
     <div>
-      <div className="container grid-480">
+      <div className="container grid-xs">
         {renderUserNotifications()}
       </div>
 
