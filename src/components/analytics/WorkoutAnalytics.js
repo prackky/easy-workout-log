@@ -94,7 +94,7 @@ class WorkoutAnalytics extends Component {
 
     return (
       <div>
-        <div className="container grid-960 section-content">
+        <div className="container grid-md section-content">
           <div className="columns">
             <div className="column col-12">
               <h3>Exercise Analytics</h3>
@@ -112,7 +112,7 @@ class WorkoutAnalytics extends Component {
 
   renderNoChartData() {
     return (
-      <div className="container grid-960 section-content">
+      <div className="container grid-md section-content">
         <div className="columns">
           <div className="empty width-100">
             <div className="empty-icon">
@@ -129,7 +129,7 @@ class WorkoutAnalytics extends Component {
   renderChart(exerciseName, analyticsExerciseData) {
 
     return (
-      <div className="container grid-1280 section-content">
+      <div className="container grid-xl section-content">
         <div className="columns">
           <div className="column col-12">
             <AnalyticsExerciseChart
@@ -144,8 +144,8 @@ class WorkoutAnalytics extends Component {
 
   renderCallToAction() {
     return (
-      <div className="container grid-960 section-content">
-        <div className="columns margin-top-3rem">
+      <div className="container grid-md section-content">
+        <div className="columns margin-top-2rem">
           <div className="column col-12 text-center">
             <button
               className="btn btn-primary btn-lg"

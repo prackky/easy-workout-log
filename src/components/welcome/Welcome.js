@@ -95,7 +95,7 @@ class Welcome extends Component {
           </div>
         </section>
         <section className="highlights">
-          <div className="container grid-1280">
+          <div className="container grid-xl">
             <div className="columns">
               {highlights.map((highlight, index) => {
                 return this.renderHighlightItem(highlight, index);
@@ -104,12 +104,15 @@ class Welcome extends Component {
           </div>
         </section>
         <section className="features">
-          <div className="container grid-1280">
+          <div className="container grid-lg">
             <div className="columns">
-              <div className="column col-1 col-md-12"></div>
-              <div className="column col-4 col-md-12">
+              <div className="column col-12">
+                <h3 className="text-center">Features</h3>  
+              </div>
+            </div>
+            <div className="columns">
+              <div className="column col-6 col-md-12">
                 <div className="feature-list">
-                  <h3 className="text-center">Features</h3>
                   <ul className="fa-ul">
                     {features.map((feature, index) => {
                       return this.renderFeatureListItem(feature, index);
@@ -124,22 +127,21 @@ class Welcome extends Component {
               <div className="column col-3 col-md-12">
                 <img src={iPhone6EwoloProgress} className="img-responsive centered" alt="iphone6 application ui progress example"/>
               </div>
-              <div className="column col-1 col-md-12"></div>
             </div>
           </div>
         </section>
         <section className="last-call">
-          <div className="container grid-1280">
+          <div className="container grid-xl">
             <div className="content text-center">
               <h3>Simple setup</h3>
               <p className="no-text">
                 Logging a workout shouldn't take more than a few minutes. Try Ewolo for free.
               </p>
               <button
-                className="btn btn-welcome-log-workout"
+                className="btn btn-welcome-log-workout margin-top-1rem"
                 onClick={this.handleBtnLogWorkoutClick}>Log a workout</button>
               <p className="no-text">
-                Account only required if you wish to save your workouts.
+                (Account only required if you wish to save your workouts.)
               </p>
             </div>
           </div>
@@ -150,7 +152,7 @@ class Welcome extends Component {
 
   renderHighlightItem(highlight, index) {
     return (
-      <div className="column col-sm-12 col-4 highlight" key={index}>
+      <div className="column col-md-12 col-4 highlight" key={index}>
         <i className={"fa fa-4x " + highlight.icon}></i>
         <h4>{highlight.title}</h4>
         <p className="no-text">{highlight.text}</p>

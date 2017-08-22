@@ -246,7 +246,7 @@ class LogWorkout extends Component {
           title="Weight"
           content={ewoloContent.weightHelpModalContent}/>
 
-        <div className="container grid-480 section-content">
+        <div className="container grid-xs section-content">
           <div className="columns">
             <div className="column col-12">
               {pageTitle}
@@ -304,7 +304,7 @@ class LogWorkout extends Component {
                   <div className="col-2 text-center">
                     <button
                       ref="btnAddExercise"
-                      className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+                      className="btn btn-action circle btn-exercise-action tooltip"
                       data-tooltip="Add exercise"
                       type="button"
                       onClick={this.handleBtnAddExerciseClick}>

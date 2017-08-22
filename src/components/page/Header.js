@@ -87,7 +87,7 @@ class Header extends Component {
 
     return (
       <div className="bg-gray">
-        <div className="container grid-1280 ">
+        <div className="container grid-xl ">
           <header className="navbar">
             <section className="navbar-section">
               <button
@@ -123,7 +123,7 @@ class Header extends Component {
             </section>
           </header>
         </div>
-        <div id="sidebar" className="container grid-960">
+        <div id="sidebar" className="container grid-md">
           <div className="columns">
             <div
               className={"docs-sidebar column col-3 col-sm-12 " + this.state.docsSidebarClass}>

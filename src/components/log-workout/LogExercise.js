@@ -114,12 +114,12 @@ const LogExercise = (props) => {
         <div className="fade-in exercise-entry-details">
           <div className="columns">
             {renderedSetIndicator}
-            <div className="column col-11">
+            <div className="column col-10">
               <div className="columns">
                 <div className="column col-12">
                   {name}
                 </div>
-                <div className="column col-12">
+                <div className="column col-12 exercise-readonly-row">
                   {reps}
                   &nbsp;reps {weight
                     ? ' @ ' + weight + ' ' + ewoloUtil.unitsToText(units)
@@ -200,7 +200,7 @@ const LogExercise = (props) => {
         <div className="col-12 exercise-operations">
           {renderAdvancedPropertiesButton()}
           <button
-            className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+            className="btn btn-action circle btn-exercise-action tooltip"
             data-tooltip="Delete exercise"
             type="button"
             onClick={handleExerciseDelete}>
@@ -216,7 +216,7 @@ const LogExercise = (props) => {
     if (props.exercise.isDone) {
       return (
         <button
-          className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+          className="btn btn-action circle btn-exercise-action tooltip"
           data-tooltip="Edit exercise"
           type="button"
           onClick={handleExerciseMarkActive}>
@@ -227,7 +227,7 @@ const LogExercise = (props) => {
 
     return (
       <button
-        className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+        className="btn btn-action circle btn-exercise-action tooltip"
         data-tooltip="Mark exercise done"
         type="button"
         onClick={handleExerciseMarkDone}>
@@ -244,7 +244,7 @@ const LogExercise = (props) => {
     if (props.exercise.showAdvanced) {
       return (
         <button
-          className="btn btn-action btn-lg circle tooltip"
+          className="btn btn-action circle tooltip"
           data-tooltip="Hide advanced"
           type="button"
           onClick={handleHideAdvanced}>
@@ -255,7 +255,7 @@ const LogExercise = (props) => {
 
     return (
       <button
-        className="btn btn-action btn-lg circle tooltip"
+        className="btn btn-action circle tooltip"
         data-tooltip="Show advanced"
         type="button"
         onClick={handleShowAdvanced}>
@@ -278,7 +278,7 @@ const LogExercise = (props) => {
       <div className="fade-in exercise-entry-details">
         <div className="columns">
           {renderedDivider}
-          <div className="column col-11">
+          <div className="column col-10">
 
             <div className="form-group">
               <div className="col-4">
@@ -286,7 +286,7 @@ const LogExercise = (props) => {
               </div>
               <div className="col-4">
                 <input
-                  className="form-input input-lg"
+                  className="form-input"
                   type="number"
                   min="0"
                   max="1000"
@@ -308,7 +308,7 @@ const LogExercise = (props) => {
               <div className="col-8">
                 <div className="input-group">
                   <input
-                    className="form-input input-lg"
+                    className="form-input"
                     type="number"
                     property="weight"
                     min="0"
@@ -373,7 +373,7 @@ const LogExercise = (props) => {
           </div>
           <div className="col-4">
             <input
-              className="form-input input-lg"
+              className="form-input"
               type="number"
               property="tempo"
               min="0"
@@ -394,7 +394,7 @@ const LogExercise = (props) => {
           </div>
           <div className="col-4">
             <input
-              className="form-input input-lg"
+              className="form-input"
               type="number"
               min="0"
               max="99999"

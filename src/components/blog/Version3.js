@@ -21,7 +21,7 @@ const Version3 = (props) => {
 I am super proud to present Ewolo version 3 which comes with a brand new <Link to="/analytics">analytics</Link> section! This section displays an exercise specific progress chart broken down by &quot;rep maximums&quot;. Simply pick an exercise, an optional date range and hit the apply button to update the chart.
 </p>
 
-<figure className="figure margin-top-5rem margin-bottom-5rem">
+<figure className="figure blog">
   <a href={ewoloSquatAnalytics}><img src={ewoloSquatAnalytics} className="img-responsive bordered" alt="Vic's squat history for 2017" /></a>
   <figcaption className="figure-caption text-center">My squat history for 2017</figcaption>
 </figure>
@@ -30,7 +30,7 @@ I am super proud to present Ewolo version 3 which comes with a brand new <Link t
 Apart from the analytics, there have been quite a few UX improvements with a major one being a new &quot;mark exercise as done&quot; button which marks the exercise as read-only. This saves space and allows you to clearly keep track of which set you are currently on. You can always edit the exercise again using the edit button.
 </p>
 
-<figure className="figure margin-top-5rem margin-bottom-5rem">
+<figure className="figure blog">
   <a href={ewoloMarkExerciseDone}><img src={ewoloMarkExerciseDone} className="img-responsive centered bordered" alt="Ewolo mark exercise as done" /></a>
   <figcaption className="figure-caption text-center">Ewolo mark exercise as done.</figcaption>
 </figure>

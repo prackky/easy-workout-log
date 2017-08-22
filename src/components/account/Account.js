@@ -97,17 +97,11 @@ class Account extends Component {
     return (
       <div>
         <UserNotificationBar/>
-        <div className="container grid-480 section-content">
+        <div className="container grid-xs section-content">
           <div className="columns">
             <div className="column col-12">
-              <h3>Account</h3>
-              <p className="no-text">
-                Use the following sections to modify your account.
-              </p>
-            </div>
-            <div className="column col-12">
               <div>
-                <h4>Details</h4>
+                <h3>Account Details</h3>
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -174,7 +168,7 @@ class Account extends Component {
                     </div>
                   </div>
 
-                  <div className="form-group margin-top-3rem">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <button
                         className="btn btn-primary btn-lg"
@@ -186,9 +180,9 @@ class Account extends Component {
 
               </div>
             </div>
-            <div className="column col-12">
+            <div className="column col-12 margin-top-1rem">
               <div>
-                <h4>Password</h4>
+                <h3>Password</h3>
                 <form className="form-horizontal">
 
                   <div className="form-group">
@@ -218,7 +212,7 @@ class Account extends Component {
 
                   <EwoloFormHint formHint={this.props.account.passwordFormHint}/>
 
-                  <div className="form-group margin-top-3rem">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <button
                         className={"btn btn-primary btn-lg " + ((this.props.account.oldPassordFormHint || this.props.account.passwordFormHint || !this.props.account.oldPassword || !this.props.account.password)

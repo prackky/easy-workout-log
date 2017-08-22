@@ -23,13 +23,13 @@ const BlogEntry = (props) => {
 const Blog = (props) => {
 
   return (
-    <div className="container grid-640 section-content">
+    <div className="container grid-sm section-content">
       <div className="columns">
         <div className="column col-12">
           <h3>Blog</h3>
 
           <BlogEntry entry={entryVersion3}></BlogEntry>
-          <div className="divider"></div>
+          <div className="divider entry-divider"></div>
           <BlogEntry entry={entryHowToGainMuscle}></BlogEntry>
 
         </div>

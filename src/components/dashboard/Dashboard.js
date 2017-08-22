@@ -86,7 +86,7 @@ class Dashboard extends Component {
     return (
       <div>
         <UserNotificationBar/>
-        <div className="container grid-960 section-content">
+        <div className="container grid-md section-content">
           <div className="columns">
             <div className="column col-12">
               <DashboardProgress/>
@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
             </div>
           </div>
-          <div className="columns">
+          <div className="columns margin-top-1rem">
             <div className="column col-12">
               <h3>Workouts</h3>
               <p className="no-text">
@@ -125,7 +125,7 @@ class Dashboard extends Component {
           )
 }
           {(sortedWorkouts.length > 0) && (
-            <div className="columns margin-top-3rem">
+            <div className="columns margin-top-2rem">
               <div className="column col-12 text-center">
                 <button
                   className="btn btn-primary btn-lg"
@@ -150,7 +150,7 @@ class Dashboard extends Component {
     return monthlyWorkouts.map(monthlyWorkoutList => {
       return (
         <div key={monthlyWorkoutList.key}>
-          <div className="columns">
+          <div className="columns workout-month-row">
             <div className="column col-12">
               <h5 className="text-center">{monthlyWorkoutList.key}</h5>
             </div>

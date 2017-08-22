@@ -186,7 +186,7 @@ class WorkoutView extends React.Component {
             <div className="columns col-xs-2 col-1 centered text-right">
               {/*
             <button
-              className="btn btn-action btn-lg circle btn-exercise-action tooltip"
+              className="btn btn-action circle btn-exercise-action tooltip"
               data-tooltip="Delete workout"
               type="button"
               onClick={handleWorkoutDelete}>
@@ -196,7 +196,7 @@ class WorkoutView extends React.Component {
 
               <div className={"dropdown dropdown-right"}>
                 <button
-                  className="btn btn-action btn-lg circle btn-exercise-action dropdown-toggle"
+                  className="btn btn-action circle dropdown-toggle"
                   type="button"
                   onClick={this.handleWorkoutMenuClick}>
                   <i className="icon icon-menu"></i>

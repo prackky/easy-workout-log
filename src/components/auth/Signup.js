@@ -59,7 +59,7 @@ class Signup extends Component {
     return (
       <div>
         <UserNotificationBar/>
-        <div className="container grid-480 section-content">
+        <div className="container grid-xs section-content">
           <div className="columns">
             <div className="column col-12">
               <div className="text-center">
@@ -118,7 +118,7 @@ class Signup extends Component {
                   </div>
                   */}
 
-                  <div className="form-group">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <button
                         className={"btn btn-primary btn-lg " + ((this.props.signup.emailFormHint || this.props.signup.passwordFormHint || !this.props.signup.email || !this.props.signup)
@@ -128,13 +128,13 @@ class Signup extends Component {
                     </div>
                   </div>
 
-                  <div className="form-group margin-top-3rem">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <Link to="/login">Already have an account?</Link>
                     </div>
                   </div>
 
-                  <div className="form-group margin-top-3rem">
+                  <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       By signing up you agree to our&nbsp;
                       <Link to="/terms">Terms of Service</Link>.

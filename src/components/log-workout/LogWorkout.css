@@ -10,20 +10,20 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.exercise-entry .exercise-entry-details {
-  margin-left: 1rem;
-}
 
 .exercise-entry .exercise-operations {
-  margin-top: 1rem;
+  margin-top: 0.4rem;
+}
+
+.exercise-entry .exercise-readonly-row {
+  margin-top: 0.4rem;
 }
 
 .secondary-operation {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .secondary-operation .quote {
   margin-top: 2rem;
-  font-size: 1.6rem;
   font-style: italic;
 }

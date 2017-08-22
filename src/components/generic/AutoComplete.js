@@ -190,7 +190,7 @@ class AutoComplete extends Component {
       <div className="form-autocomplete">
         <div className="form-autocomplete-input form-input">
           <input
-            className="form-input input-lg"
+            className="form-input"
             type="text"
             autoFocus={this.props.autoFocus}
             placeholder={this.props.placeholder}
