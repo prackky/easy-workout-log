@@ -303,6 +303,7 @@ class LogWorkout extends Component {
                   <div className="col-10"></div>
                   <div className="col-2 text-center">
                     <button
+                      id="btn-add-exercise"
                       ref="btnAddExercise"
                       className="btn btn-action circle btn-exercise-action tooltip"
                       data-tooltip="Add exercise"

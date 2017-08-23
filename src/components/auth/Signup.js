@@ -72,6 +72,7 @@ class Signup extends Component {
                   <div className="form-group">
                     <div className="col-12">
                       <input
+                        id="input-name"
                         className="form-input"
                         type="text"
                         placeholder="Full Name"
@@ -83,6 +84,7 @@ class Signup extends Component {
                   <div className="form-group">
                     <div className="col-12">
                       <input
+                        id="input-email"
                         className="form-input"
                         type="email"
                         placeholder="Email"
@@ -97,6 +99,7 @@ class Signup extends Component {
                   <div className="form-group">
                     <div className="col-12">
                       <input
+                        id="input-password"
                         className="form-input"
                         type="password"
                         placeholder="Password"
@@ -121,6 +124,7 @@ class Signup extends Component {
                   <div className="form-group margin-top-1rem">
                     <div className="col-12 text-center">
                       <button
+                        id="btn-signup"
                         className={"btn btn-primary btn-lg " + ((this.props.signup.emailFormHint || this.props.signup.passwordFormHint || !this.props.signup.email || !this.props.signup)
                         ? 'disabled'
                         : '')}
