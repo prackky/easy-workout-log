@@ -1,7 +1,7 @@
 {
   "verbose": true,
   "src": {
-    "beforeStartCommand": "cd ~/npq/ewolo-e2e; mocha; cd ~/npq/easy-workout-log; CI=true npm test; json -I -f package-lock.json -e 'this.version=\"${version}\"'; git add package-lock.json",
+    "beforeStartCommand": "./e2e.sh && CI=true npm test; json -I -f package-lock.json -e 'this.version=\"${version}\"'; git add package-lock.json",
     "afterReleaseCommand": "echo Successfully released ${version}"
   }
 }
