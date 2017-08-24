@@ -51,7 +51,7 @@ const signupActions = {
         .then(body => {
 
           dispatch(userDataActions.processUserAuthSuccess(body.token));
-          dispatch(userDataActions.userDataSet(ewoloConstants.exerciseNames, signup.name, signup.email, 1, 1));
+          dispatch(userDataActions.userDataSet(ewoloConstants.exerciseNames, [],signup.name, signup.email, 1, 1));
 
           dispatch(globalActions.userNotificationAdd('SUCCESS', 'Created account for ' + signup.email));
 

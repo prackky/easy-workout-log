@@ -28,7 +28,7 @@ describe('signupActions', () => {
         authToken: ewoloTestUtil.authToken,
         id: ewoloTestUtil.authTokenUserId
       },
-      userDataActions.userDataSet(ewoloConstants.exerciseNames, 'vic', 'vic@smalldata.tech', 1, 1),
+      userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic@smalldata.tech', 1, 1),
       {
         type: 'USER-NOTIFICATION-ADD',
         userNotificationType: 'SUCCESS',

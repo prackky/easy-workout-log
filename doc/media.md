@@ -8,4 +8,7 @@ Check out https://ewolo.fitness if you're looking for a simple, flexible cross-p
 
 If you are looking for a simple workout log that you can use on any platform via a web browser, Ewolo is your solution. It comes with a list of over 100 exercises but you can add any exercise you want. Most fields are optional and you can log workouts in the past, present and future (to set up future routines). You can log multiple workouts for a single day. You can also log supersets, circuits (2 or more exercises without rest) and optionally specify tempo for high intensity workouts. You can copy, edit and delete workouts. All of the above plus a simple interface that is navigable on the smallest mobile device.
 
+# Posts
+
+LinkedIn: Ewolo version 3: https://ewolo.fitness/blog/ewolo-version-3 ( https://ewolo.fitness/media/ewolo-squats-analytics.png )
 
