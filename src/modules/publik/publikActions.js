@@ -1,11 +1,10 @@
-import { push } from '../../react-router-redux/index';
+// import { push } from '../../react-router-redux/index';
 
 import ewoloUtil from '../../common/ewoloUtil';
-import ewoloConstants from '../../common/ewoloConstants';
+// import ewoloConstants from '../../common/ewoloConstants';
 import { handleError } from '../../common/errorHandler';
 
 import globalActions from '../global/globalActions';
-import userDataActions from '../user-data/userDataActions';
 
 export const c = Object.freeze({
   PUBLIK_LINK_SET_DATA: 'PUBLIK-LINK-SET-DATA'

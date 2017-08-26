@@ -1,6 +1,6 @@
-import ewoloUtil from '../../common/ewoloUtil';
+// import ewoloUtil from '../../common/ewoloUtil';
 
-import {c} from './publikActions';
+import { c } from './publikActions';
 
 export const initialState = {
   links: {}
@@ -10,16 +10,18 @@ const publikReducer = (state = initialState, action) => {
   switch (action.type) {
     case c.PUBLIK_LINK_SET_DATA:
       {
-        const {linkId, data} = action;
-        
+        const { linkId, data } = action;
+
+        const links = {
+          ...state.links
+        }
+        links[linkId] = data;
+
         return {
           ...state,
-          links: {
-            ...state.links,
-            linkId: data
-          }
+          links
         };
-        
+
       }
     default:
       return state;

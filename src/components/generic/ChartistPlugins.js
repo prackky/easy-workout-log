@@ -447,3 +447,15 @@ export const ChartistLegend = (props) => {
     </ul>
   );
 }
+
+export const getCtClassName = (width) => {
+  if (width < 400) {
+    return 'ct-square';
+  }
+
+  if (width < 600) {
+    return 'ct-perfect-fourth';
+  }
+
+  return 'ct-major-tenth';
+}

@@ -28,7 +28,7 @@ describe('publikReducer', () => {
       const expectedState = {
         ...initialState,
         links: {
-          linkId: data
+          'abc': data
         }
       };
 
