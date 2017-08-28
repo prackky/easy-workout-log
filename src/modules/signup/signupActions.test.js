@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import signupActions from './signupActions';
+import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
@@ -29,12 +30,7 @@ describe('signupActions', () => {
         id: ewoloTestUtil.authTokenUserId
       },
       userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic@smalldata.tech', 1, 1),
-      {
-        type: 'USER-NOTIFICATION-ADD',
-        userNotificationType: 'SUCCESS',
-        userNotificationText: 'Created account for vic@smalldata.tech',
-        markPreviousAsRead: false
-      },
+      ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Created account for vic@smalldata.tech' })),
       {
         type: '@@router/CALL_HISTORY_METHOD',
         payload: { method: 'push', args: ['/xxx'] }

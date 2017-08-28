@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import logWorkoutActions, { c } from './logWorkoutActions';
+import globalActions from '../global/globalActions';
 import userDataActions, { c as userDataActionConstants } from '../user-data/userDataActions';
 
 import ewoloConstants from '../../common/ewoloConstants';
@@ -11,9 +12,12 @@ window.localStorage = localStorageMock;
 const mockStore = ewoloTestUtil.getMockStore();
 
 describe('logWorkoutActions', () => {
+
   afterEach(() => {
     nock.cleanAll();
   });
+
+  const successUserNotification = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for undefined', publicLinkId: 'publicLinkId', publicLinkText: 'Tweet workout!' }));
 
   describe('logWorkoutSaveThunk', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when creating a new workout for a logged in user', () => {
@@ -21,6 +25,10 @@ describe('logWorkoutActions', () => {
       nock(ewoloConstants.api.url)
         .post('/workouts')
         .reply(201, { id: 'xxx' });
+
+      nock(ewoloConstants.api.url)
+        .post('/links/workout-details')
+        .reply(201, { id: 'publicLinkId' });
 
       nock(ewoloConstants.api.url)
         .get('/user-data')
@@ -32,12 +40,7 @@ describe('logWorkoutActions', () => {
           type: c.LOG_WORKOUT_SAVE_SUCCESS,
           id: 'xxx'
         },
-        {
-          type: 'USER-NOTIFICATION-ADD',
-          userNotificationType: 'SUCCESS',
-          userNotificationText: 'Saved workout for undefined',
-          markPreviousAsRead: false
-        },
+        successUserNotification,
         userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
         {
           type: '@@router/CALL_HISTORY_METHOD',
@@ -51,7 +54,6 @@ describe('logWorkoutActions', () => {
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
           const actions = store.getActions();
-          // console.log(actions);
           ewoloTestUtil.cleanUpNotification(actions[2]);
 
           expect(store.getActions()).to.deep.equal(expectedActions);
@@ -65,6 +67,10 @@ describe('logWorkoutActions', () => {
         .reply(200, { id: 42 });
 
       nock(ewoloConstants.api.url)
+        .post('/links/workout-details')
+        .reply(201, { id: 'publicLinkId' });
+
+      nock(ewoloConstants.api.url)
         .get('/user-data')
         .reply(200, { exerciseNames: [], name: 'vic', email: 'vic', units: 1, sex: 1 });
 
@@ -74,12 +80,7 @@ describe('logWorkoutActions', () => {
           type: c.LOG_WORKOUT_SAVE_SUCCESS,
           id: 42
         },
-        {
-          type: 'USER-NOTIFICATION-ADD',
-          userNotificationType: 'SUCCESS',
-          userNotificationText: 'Saved workout for undefined',
-          markPreviousAsRead: false
-        },
+        successUserNotification,
         userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
         {
           type: '@@router/CALL_HISTORY_METHOD',

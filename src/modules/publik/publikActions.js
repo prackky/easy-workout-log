@@ -19,9 +19,9 @@ const publikActions = {
       data
     };
   },
-  linkCreateAsync: ({ authToken, userId, workoutId }) => {
+  linkCreateAsync: ({linkType, authToken, userId, workoutId }) => {
     const promise = ewoloUtil.getApiRequest({
-      route: '/links',
+      route: `/links/${linkType}`,
       method: 'POST',
       body: { userId, workoutId },
       authToken: authToken

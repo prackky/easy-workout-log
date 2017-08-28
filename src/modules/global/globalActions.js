@@ -18,14 +18,16 @@ const globalActions = {
       type: 'TASK-END'
     };
   },
-  userNotificationAdd: ({type, text, markPreviousAsRead = false}) => {
+  userNotificationAdd: ({ type, text, markPreviousAsRead = false, publicLinkId, publicLinkText }) => {
     return {
       type: c.USER_NOTIFICATION_ADD,
       userNotificationType: type,
       userNotificationText: text,
       at: new Date(),
       markPreviousAsRead: markPreviousAsRead,
-      id: ewoloUtil.chance.guid()
+      id: ewoloUtil.chance.guid(),
+      publicLinkId,
+      publicLinkText
     };
   },
   userNotificationUpdate: (id, isRead) => {
