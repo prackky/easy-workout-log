@@ -140,9 +140,7 @@ class Welcome extends Component {
               <button
                 className="btn btn-welcome-log-workout margin-top-1rem"
                 onClick={this.handleBtnLogWorkoutClick}>Log a workout</button>
-              <p className="no-text">
-                (Account only required if you wish to save your workouts.)
-              </p>
+              
             </div>
           </div>
         </section>
