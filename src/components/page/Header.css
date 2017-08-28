@@ -29,6 +29,11 @@
 
 .navbar .dropdown-toggle .icon {
   vertical-align: inherit;
+  top: -10%;
+}
+
+.navbar .account-section .dropdown-toggle .icon {
+  vertical-align: inherit;
   top: -40%;
 }
 
@@ -80,7 +85,7 @@
   height: 100%;
   left: 0;
   overflow-y: auto;
-  padding: 2rem 1.6rem;
+  padding: 1rem 1.6rem;
   position: fixed;
   top: 0;
   width: 18rem;

@@ -18,7 +18,8 @@ class Header extends Component {
   state = {
     docsSidebarClass: '',
     sidebarCloseClass: '',
-    isMenuActive: false
+    isMenuActive: false,
+    isMiscMenuActive: false
   };
 
   handleSidebarShowClick = () => {
@@ -33,6 +34,25 @@ class Header extends Component {
     event.preventDefault();
     const newState = this.state;
     newState.isMenuActive = !newState.isMenuActive;
+    this.setState(newState);
+  }
+
+  handleAccountMenuItemlick = (event) => {
+    const newState = this.state;
+    newState.isMenuActive = false;
+    this.setState(newState);
+  }
+
+  handleMiscMenuClick = (event) => {
+    event.preventDefault();
+    const newState = this.state;
+    newState.isMiscMenuActive = !newState.isMiscMenuActive;
+    this.setState(newState);
+  }
+
+  handleMiscMenuItemClick = (event) => {
+    const newState = this.state;
+    newState.isMiscMenuActive = false;
     this.setState(newState);
   }
 
@@ -63,6 +83,7 @@ class Header extends Component {
           */}
         </a>
         <ul
+          onClick={this.handleAccountMenuItemlick}
           className={"menu" + (this.state.isMenuActive
           ? ' active'
           : '')}>
@@ -85,6 +106,64 @@ class Header extends Component {
       </div>
     );
 
+    const loginMenu = (
+      <div>
+        <NavLink exact to="/signup" className="btn btn-link">
+          <i className="fa fa-fw fa-user-plus" aria-hidden="true"></i>
+          Sign-up</NavLink>
+        <NavLink exact to="/login" className="btn btn-link">
+          <i className="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+          Login</NavLink>
+      </div>
+    );
+
+    const thirdSection = this.props.authToken
+      ? userAccountMenu
+      : loginMenu;
+
+    const miscDropdown = (
+      <div className="dropdown">
+        <a className="btn btn-link dropdown-toggle" onClick={this.handleMiscMenuClick}>
+          Misc
+          <i className="icon icon-caret"></i>
+        </a>
+        <ul
+          onClick={this.handleMiscMenuItemClick}
+          className={"menu" + (this.state.isMiscMenuActive
+          ? ' active'
+          : '')}>
+          <li className="menu-item">
+            <NavLink exact to="/blog" className="">Blog</NavLink>
+          </li>
+          <li className="menu-item">
+            <NavLink exact to="/why-ewolo" className="">Why Ewolo?</NavLink>
+          </li>
+        </ul>
+      </div>
+    );
+
+    const defaultLinks = (
+      <section className="navbar-section navbar-content">
+        <NavLink exact to="/" className="btn btn-link">Home</NavLink>
+        <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
+        <NavLink exact to="/blog" className="btn btn-link">Blog</NavLink>
+        <NavLink exact to="/why-ewolo" className="btn btn-link xtra">Why Ewolo?</NavLink>
+      </section>
+    );
+
+    const loggedInLinks = (
+      <section className="navbar-section navbar-content">
+        <NavLink exact to="/" className="btn btn-link">Dashboard</NavLink>
+        <NavLink exact to="/analytics" className="btn btn-link">Analytics</NavLink>
+        <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
+        {miscDropdown}
+      </section>
+    );
+
+    const secondSection = this.props.authToken
+      ? loggedInLinks
+      : defaultLinks;
+
     return (
       <div className="bg-gray">
         <div className="container grid-xl ">
@@ -99,27 +178,9 @@ class Header extends Component {
 
               <Link to="/" className="navbar-brand mr-10"><img src={ewoloLogo} className="img-responsive" alt="ewolo logo"/></Link>
             </section>
-            <section className="navbar-section navbar-content">
-              <NavLink exact to="/" className="btn btn-link">{this.props.authToken
-                  ? 'Dashboard'
-                  : 'Home'}</NavLink>
-              {this.props.authToken && <NavLink exact to="/analytics" className="btn btn-link">Analytics</NavLink>}
-              <NavLink exact to="/log-workout" className="btn btn-link">Log workout</NavLink>
-              <NavLink exact to="/blog" className="btn btn-link">Blog</NavLink>
-              <NavLink exact to="/why-ewolo" className="btn btn-link xtra">Why Ewolo?</NavLink>
-            </section>
-            <section className="navbar-section navbar-content">
-              {this.props.authToken && userAccountMenu}
-              {!this.props.authToken && (
-                <NavLink exact to="/signup" className="btn btn-link">
-                  <i className="fa fa-fw fa-user-plus" aria-hidden="true"></i>
-                  Sign-up</NavLink>
-              )}
-              {!this.props.authToken && (
-                <NavLink exact to="/login" className="btn btn-link">
-                  <i className="fa fa-fw fa-sign-in" aria-hidden="true"></i>
-                  Login</NavLink>
-              )}
+            {secondSection}
+            <section className="navbar-section navbar-content account-section">
+              {thirdSection}
             </section>
           </header>
         </div>
@@ -153,11 +214,17 @@ class Header extends Component {
                   <NavLink exact to="/log-workout" onClick={this.handleSidebarCloseClick}>Log workout</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/blog" onClick={this.handleSidebarCloseClick}>Blog</NavLink>
+                  <span>Misc</span>
+                  <ul className="nav">
+                    <li className="nav-item">
+                      <NavLink exact to="/blog" onClick={this.handleSidebarCloseClick}>Blog</NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink exact to="/why-ewolo" onClick={this.handleSidebarCloseClick}>Why Ewolo?</NavLink>
+                    </li>
+                  </ul>
                 </li>
-                <li className="nav-item">
-                  <NavLink exact to="/why-ewolo" onClick={this.handleSidebarCloseClick}>Why Ewolo?</NavLink>
-                </li>
+
                 <li className="divider"></li>
 
                 <li className="nav-item">
