@@ -6,7 +6,7 @@ import ChartistGraph from 'react-chartist';
 
 import ewoloUtil from '../../common/ewoloUtil';
 
-import {getCtClassName} from '../generic/ChartistPlugins';
+import {getCtClassName} from './ChartistPlugins';
 
 class WorkoutPieChart extends React.Component {
 

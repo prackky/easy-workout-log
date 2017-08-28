@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import * as workoutAnalyticsService from '../../services/workoutAnalyticsService';
 
-import AnalyticsExerciseChart from './AnalyticsExerciseChart';
+import AnalyticsExerciseChart from '../charts/AnalyticsExerciseChart';
 import NoWorkoutsPanel from '../generic/NoWorkoutsPanel';
 import AnalyticsFilter from '../generic/AnalyticsFilter';
 import UserNotificationBar from '../notification/UserNotificationBar';

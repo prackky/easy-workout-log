@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import './Publik.css';
 
 import UserNotificationBar from '../notification/UserNotificationBar';
-import WorkoutPieChart from './WorkoutPieChart';
+import WorkoutPieChart from '../charts/WorkoutPieChart';
 
 import publikActions from '../../modules/publik/publikActions';
 
