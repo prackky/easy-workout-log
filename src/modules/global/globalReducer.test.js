@@ -81,7 +81,7 @@ describe('globalReducer', () => {
     it('should add a user notification', () => {
       // when
       const now = new Date();
-      const action = actions.userNotificationAdd({ type: 'SUCCESS', text: 'yay!', publicLinkId: 'blah', publicLinkText: 'yo' });
+      const action = actions.userNotificationAdd({ type: 'SUCCESS', text: 'yay!', publicLink: { id: 'blah', text: 'yo' } });
       action.at = now;
       action.id = 'xxx';
 
@@ -101,8 +101,7 @@ describe('globalReducer', () => {
               isRead: false,
               at: now,
               id: 'xxx',
-              publicLinkId: 'blah',
-              publicLinkText: 'yo'
+              publicLink: { id: 'blah', text: 'yo' }
             }
           ]
         });
@@ -131,8 +130,7 @@ describe('globalReducer', () => {
               isRead: false,
               at: now,
               id: 'xxx',
-              publicLinkId: undefined,
-              publicLinkText: undefined
+              publicLink: null
             },
             {
               text: '0',
@@ -165,8 +163,7 @@ describe('globalReducer', () => {
               isRead: false,
               at: now,
               id: 'xxx',
-              publicLinkId: undefined,
-              publicLinkText: undefined
+              publicLink: null
             },
             {
               text: '0',

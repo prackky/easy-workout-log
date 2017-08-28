@@ -50,8 +50,7 @@ const globalReducer = (state = initialState, action) => {
               isRead: false,
               at: action.at,
               id: action.id,
-              publicLinkId: action.publicLinkId,
-              publicLinkText: action.publicLinkText
+              publicLink: action.publicLink
             },
             ...userNotifications
           ]

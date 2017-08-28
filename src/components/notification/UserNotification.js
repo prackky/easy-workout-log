@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import ewoloUtil from '../../common/ewoloUtil';
 
+import SharePublicLink from './SharePublicLink';
+
 const getNotificationClassName = (type) => {
   if (type === 'SUCCESS') {
     return 'toast-success';
@@ -53,6 +55,7 @@ class UserNotification extends Component {
             <div>
               {this.props.userNotification.text}
             </div>
+            {this.renderPublicLink()}
             <div className="notification-timestamp">
               {moment(this.props.userNotification.at).fromNow()}
             </div>
@@ -60,6 +63,16 @@ class UserNotification extends Component {
         </div>
       </div>
     );
+  }
+
+  renderPublicLink() {
+    const publicLink = this.props.userNotification.publicLink;
+
+    if (!publicLink) {
+      return null;
+    }
+
+    return <SharePublicLink type='twitter' publicLink={publicLink}/>;
   }
 };
 

@@ -17,7 +17,9 @@ describe('logWorkoutActions', () => {
     nock.cleanAll();
   });
 
-  const successUserNotification = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for undefined', publicLinkId: 'publicLinkId', publicLinkText: 'Tweet workout!' }));
+  const logWorkoutDate = '2017-01-03';
+
+  const successUserNotification = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: `Saved workout for ${logWorkoutDate}`, publicLink: { id: 'publicLinkId', type: 'workout-details', workoutDate: logWorkoutDate } }));
 
   describe('logWorkoutSaveThunk', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when creating a new workout for a logged in user', () => {
@@ -49,7 +51,7 @@ describe('logWorkoutActions', () => {
         { type: 'TASK-END' }
       ];
 
-      const store = mockStore({ user: { logWorkout: {}, data: { authToken: 'blah' } } })
+      const store = mockStore({ user: { logWorkout: { date: logWorkoutDate }, data: { authToken: 'blah' } } })
 
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
@@ -89,7 +91,7 @@ describe('logWorkoutActions', () => {
         { type: 'TASK-END' }
       ];
 
-      const store = mockStore({ user: { logWorkout: { id: 42 }, data: { id: 'snoop', authToken: 'blah' } } })
+      const store = mockStore({ user: { logWorkout: { id: 42, date: logWorkoutDate }, data: { id: 'snoop', authToken: 'blah' } } })
 
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions
