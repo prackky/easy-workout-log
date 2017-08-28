@@ -81,7 +81,7 @@ describe('globalReducer', () => {
     it('should add a user notification', () => {
       // when
       const now = new Date();
-      const action = actions.userNotificationAdd('SUCCESS', 'yay!');
+      const action = actions.userNotificationAdd({ type: 'SUCCESS', text: 'yay!', publicLink: { id: 'blah', text: 'yo' } });
       action.at = now;
       action.id = 'xxx';
 
@@ -100,7 +100,8 @@ describe('globalReducer', () => {
               text: 'yay!',
               isRead: false,
               at: now,
-              id: 'xxx'
+              id: 'xxx',
+              publicLink: { id: 'blah', text: 'yo' }
             }
           ]
         });
@@ -109,7 +110,7 @@ describe('globalReducer', () => {
     it('should add a user notification at the front of the queue', () => {
       // when
       const now = new Date();
-      const action = actions.userNotificationAdd('SUCCESS', 'yay!');
+      const action = actions.userNotificationAdd({ type: 'SUCCESS', text: 'yay!' });
       action.at = now;
       action.id = 'xxx';
 
@@ -128,7 +129,8 @@ describe('globalReducer', () => {
               text: 'yay!',
               isRead: false,
               at: now,
-              id: 'xxx'
+              id: 'xxx',
+              publicLink: null
             },
             {
               text: '0',
@@ -141,7 +143,7 @@ describe('globalReducer', () => {
     it('should mark the other user notifications as seen', () => {
       // when
       const now = new Date();
-      const action = actions.userNotificationAdd('SUCCESS', 'yay!', true);
+      const action = actions.userNotificationAdd({ type: 'SUCCESS', text: 'yay!', markPreviousAsRead: true });
       action.at = now;
       action.id = 'xxx';
 
@@ -160,7 +162,8 @@ describe('globalReducer', () => {
               text: 'yay!',
               isRead: false,
               at: now,
-              id: 'xxx'
+              id: 'xxx',
+              publicLink: null
             },
             {
               text: '0',

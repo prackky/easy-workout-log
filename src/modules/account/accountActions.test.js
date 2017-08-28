@@ -22,8 +22,8 @@ describe('accountActions', () => {
         .post('/credentials')
         .reply(200, { id: 'xxx' });
 
-      const userNotificationAction = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
-      
+      const userNotificationAction = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Updated password', markPreviousAsRead: true }));
+
 
       const expectedActions = [
         globalActions.taskStart(),
@@ -65,7 +65,7 @@ describe('accountActions', () => {
         .put('/users/' + userId)
         .reply(204);
 
-      const userNotificationAction = globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true);
+      const userNotificationAction = globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Updated account settings', markPreviousAsRead: true });
       delete userNotificationAction.id;
       delete userNotificationAction.at;
 

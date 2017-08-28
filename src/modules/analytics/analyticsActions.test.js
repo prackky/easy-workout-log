@@ -46,7 +46,7 @@ describe('analyticsActions', () => {
     it('creates ' + globalActionConstants.USER_NOTIFICATION_ADD + ' with an error message when fetching data for a non-logged in user', () => {
 
       const expectedActions = [
-        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Cannot fetch analytics data because user is not logged in.')),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Cannot fetch analytics data because user is not logged in.' })),
       ];
 
       const store = mockStore({ user: { data: { authToken: null } } })

@@ -35,6 +35,7 @@ import Logout from './components/auth/Logout';
 import Dashboard from './components/dashboard/Dashboard';
 import Account from './components/account/Account';
 import WorkoutAnalytics from './components/analytics/WorkoutAnalytics';
+import Publik from './components/publik/Publik';
 
 import Blog from './components/blog/Blog';
 import HowToGainMuscle, {entry as entryHowToGainMuscle} from './components/blog/HowToGainMuscle';
@@ -102,11 +103,11 @@ class App extends Component {
               <Route exact path="/account" component={Account}/>
               <Route exact path="/analytics" component={WorkoutAnalytics}/>
 
+              <Route path="/public/:linkId" component={Publik}/>
+
               <Route exact path="/blog" component={Blog}/>
               <Route exact path={entryHowToGainMuscle.url} component={HowToGainMuscle}/>
-              <Route exact path={entryVersion3.url} component={Version3}/>
-
-              {/* default */}
+              <Route exact path={entryVersion3.url} component={Version3}/> {/* default */}
               <Route component={Home}/>
             </Switch>
             <Footer

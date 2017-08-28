@@ -7,6 +7,7 @@ import { handleError } from '../../common/errorHandler';
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
 import userDataActions, { fetchUserDataThunkPromise } from '../user-data/userDataActions';
+import publikActions from '../publik/publikActions';
 
 export const c = {
   LOG_WORKOUT: 'LOG-WORKOUT',
@@ -128,11 +129,15 @@ const logWorkoutActions = {
       return promise
         .then(ewoloUtil.getApiResponse)
         .then(body => {
-          dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
+          const workoutId = body.id;
+          dispatch(logWorkoutActions.logWorkoutSaveSuccess(workoutId));
+          return publikActions.linkCreateAsync({ linkType: 'workout-details', authToken, userId, workoutId });
+        })
+        .then(linkBody => {
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for ' + logWorkoutDate, publicLink: { id: linkBody.id, type: 'workout-details', workoutDate: logWorkoutDate } }));
         })
         .catch(error => {
-          handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please refresh the page and try again.' });
+          handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please click the back button and try again.' });
         })
         .then(() => {
           return fetchUserDataThunkPromise(ewoloUtil, ewoloConstants, dispatch, userDataActions, handleError, authToken);

@@ -2,6 +2,7 @@ import nock from 'nock';
 import { expect } from 'chai';
 
 import loginActions from './loginActions';
+import globalActions from '../global/globalActions';
 import userDataActions from '../user-data/userDataActions';
 import ewoloConstants from '../../common/ewoloConstants';
 import ewoloUtil from '../../common/ewoloUtil';
@@ -108,12 +109,7 @@ describe('loginActions', () => {
 
     const expectedActions = [
       { type: 'TASK-START' },
-      {
-        type: 'USER-NOTIFICATION-ADD',
-        userNotificationType: 'ERROR',
-        userNotificationText: 'Invalid username / password',
-        markPreviousAsRead: false
-      },
+      ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Invalid username / password' })),
       { type: 'TASK-END' }
     ];
 

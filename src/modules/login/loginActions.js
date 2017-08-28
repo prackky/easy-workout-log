@@ -65,7 +65,7 @@ const loginActions = {
         })
         .catch(error => {
           // handleError({error, dispatch, notificationMessage: 'Invalid username / password'});
-          dispatch(globalActions.userNotificationAdd('ERROR', 'Invalid username / password')); // TODO: consider other errors here
+          dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Invalid username / password' })); // TODO: consider other errors here
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());

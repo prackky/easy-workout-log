@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getChartData} from '../../services/workoutsService';
 
 import AnalyticsFilter from '../generic/AnalyticsFilter';
-import DateVsWeightScatterChart from '../generic/DateVsWeightScatterChart';
+import DateVsWeightScatterChart from '../charts/DateVsWeightScatterChart';
 import userWorkoutsActions from '../../modules/user-workouts/userWorkoutsActions';
 
 const mapStateToProps = (state/*, ownProps*/) => {

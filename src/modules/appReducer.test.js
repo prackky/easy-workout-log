@@ -9,6 +9,7 @@ import { initialState as userWorkoutsInitialState } from './user-workouts/userWo
 import { initialState as accountInitialState } from './account/accountReducer';
 import { initialState as logWorkoutInitialState } from './log-workout/logWorkoutReducer';
 import { initialState as analyticsInitialState } from './analytics/analyticsReducer';
+import { initialState as publikInitialState } from './publik/publikReducer';
 
 describe('appReducer', () => {
   it('should reduce undefined state to initial state', () => {
@@ -26,7 +27,8 @@ describe('appReducer', () => {
       signup: signupInitialState,
       login: loginInitialState,
       global: globalInitialState,
-      account: accountInitialState
+      account: accountInitialState,
+      publik: publikInitialState
     });
   })
 });

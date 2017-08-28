@@ -6,7 +6,7 @@ import ChartistGraph from 'react-chartist';
 
 import ewoloUtil from '../../common/ewoloUtil';
 
-import {ctAxisTitle, ctPointLabels, ChartistLegend} from '../generic/ChartistPlugins';
+import {ctAxisTitle, ctPointLabels, ChartistLegend} from './ChartistPlugins';
 import * as workoutAnalyticsService from '../../services/workoutAnalyticsService';
 
 class AnalyticsExerciseChart extends React.Component {
