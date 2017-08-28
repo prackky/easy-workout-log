@@ -17,16 +17,17 @@ describe('logWorkoutActions', () => {
     nock.cleanAll();
   });
 
+  const workoutId = 'xxx';
   const logWorkoutDate = '2017-01-03';
 
-  const successUserNotification = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: `Saved workout for ${logWorkoutDate}`, publicLink: { id: 'publicLinkId', type: 'workout-details', workoutDate: logWorkoutDate } }));
+  const successUserNotification = ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: `Saved workout for ${logWorkoutDate}`, publicLink: { type: 'workout-details', workoutDate: logWorkoutDate, workoutId: 'xxx' } }));
 
   describe('logWorkoutSaveThunk', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when creating a new workout for a logged in user', () => {
 
       nock(ewoloConstants.api.url)
         .post('/workouts')
-        .reply(201, { id: 'xxx' });
+        .reply(201, { id: workoutId });
 
       nock(ewoloConstants.api.url)
         .post('/links/workout-details')
@@ -40,7 +41,7 @@ describe('logWorkoutActions', () => {
         { type: 'TASK-START' },
         {
           type: c.LOG_WORKOUT_SAVE_SUCCESS,
-          id: 'xxx'
+          id: workoutId
         },
         successUserNotification,
         userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
@@ -65,8 +66,8 @@ describe('logWorkoutActions', () => {
     it('creates ' + c.LOG_WORKOUT_SAVE_SUCCESS + ' when editing a workout for a logged in user', () => {
 
       nock(ewoloConstants.api.url)
-        .put('/users/snoop/workouts/42')
-        .reply(200, { id: 42 });
+        .put('/users/snoop/workouts/' + workoutId)
+        .reply(200, { id: workoutId });
 
       nock(ewoloConstants.api.url)
         .post('/links/workout-details')
@@ -80,7 +81,7 @@ describe('logWorkoutActions', () => {
         { type: 'TASK-START' },
         {
           type: c.LOG_WORKOUT_SAVE_SUCCESS,
-          id: 42
+          id: workoutId
         },
         successUserNotification,
         userDataActions.userDataSet(ewoloConstants.exerciseNames, [], 'vic', 'vic', 1, 1),
@@ -91,7 +92,7 @@ describe('logWorkoutActions', () => {
         { type: 'TASK-END' }
       ];
 
-      const store = mockStore({ user: { logWorkout: { id: 42, date: logWorkoutDate }, data: { id: 'snoop', authToken: 'blah' } } })
+      const store = mockStore({ user: { logWorkout: { id: workoutId, date: logWorkoutDate }, data: { id: 'snoop', authToken: 'blah' } } })
 
       return store.dispatch(logWorkoutActions.logWorkoutSaveThunk())
         .then(() => { // return of async actions

@@ -131,10 +131,8 @@ const logWorkoutActions = {
         .then(body => {
           const workoutId = body.id;
           dispatch(logWorkoutActions.logWorkoutSaveSuccess(workoutId));
-          return publikActions.linkCreateAsync({ linkType: 'workout-details', authToken, userId, workoutId });
-        })
-        .then(linkBody => {
-          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for ' + logWorkoutDate, publicLink: { id: linkBody.id, type: 'workout-details', workoutDate: logWorkoutDate } }));
+          // return publikActions.linkCreateAsync({ linkType: 'workout-details', authToken, userId, workoutId });
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for ' + logWorkoutDate, publicLink: { type: 'workout-details', workoutDate: logWorkoutDate, workoutId } }));
         })
         .catch(error => {
           handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please click the back button and try again.' });
