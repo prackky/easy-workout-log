@@ -49,11 +49,11 @@ describe('userWorkoutsActions', () => {
           expect(actions).to.deep.equal(expectedActions);
         });
     });
-    
+
     it('should successfully fetch user workouts when dateBefore provided', () => {
       const dateBefore = '2017-01-02';
       const route = userWorkoutsRoute + '?dateBefore=2017-01-01';
-      
+
       nock(ewoloConstants.api.url)
         .get(route)
         .reply(200, workouts);
@@ -123,7 +123,7 @@ describe('userWorkoutsActions', () => {
 
       const expectedActions = [
         globalActions.taskStart(),
-        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Unauthorized to perform this action. Please try logging in again.')),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Unauthorized to perform this action. Please try logging in again.' })),
         {
           type: '@@router/CALL_HISTORY_METHOD',
           payload: { method: 'push', args: ['/login'] }
@@ -157,7 +157,7 @@ describe('userWorkoutsActions', () => {
 
       const expectedActions = [
         globalActions.taskStart(),
-        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Operation not permitted.')),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Operation not permitted.' })),
         globalActions.taskEnd()
       ];
 
@@ -192,7 +192,7 @@ describe('userWorkoutsActions', () => {
       const expectedActions = [
         globalActions.taskStart(),
         userWorkoutsActions.userWorkoutsDeleteSuccess(workoutId),
-        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`)),
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'SUCCESS', text: `Deleted workout for ${workoutDate}` })),
         globalActions.taskEnd()
       ];
 
@@ -248,7 +248,7 @@ describe('userWorkoutsActions', () => {
     it('should error when fetch user workouts analysis for non-logged in user', () => {
 
       const expectedActions = [
-        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.'))
+        ewoloTestUtil.cleanUpNotification(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Cannot fetch workout progress data because user is not logged in.' }))
       ];
 
       const store = mockStore({

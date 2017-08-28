@@ -14,7 +14,7 @@ export const c = Object.freeze({
 
 
 const analyticsActions = {
-  analyticsExerciseSetFilterData: ({exerciseName, dateBefore, dateAfter}) => {
+  analyticsExerciseSetFilterData: ({ exerciseName, dateBefore, dateAfter }) => {
     return {
       type: c.ANALYTICS_EXERCISE_SET_FILTER_DATA,
       exerciseName,
@@ -38,7 +38,7 @@ const analyticsActions = {
       if (!authToken) {
         return Promise.resolve()
           .then(() => {
-            dispatch(globalActions.userNotificationAdd('ERROR', 'Cannot fetch analytics data because user is not logged in.'));
+            dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Cannot fetch analytics data because user is not logged in.' }));
           });
       }
 

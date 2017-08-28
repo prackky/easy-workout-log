@@ -31,7 +31,7 @@ const userWorkoutsActions = {
       if (!authToken) {
         return Promise.resolve()
           .then(() => {
-            dispatch(globalActions.userNotificationAdd('ERROR', 'Cannot fetch workout progress data because user is not logged in.'));
+            dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Cannot fetch workout progress data because user is not logged in.' }));
           });
       }
 
@@ -152,7 +152,7 @@ const userWorkoutsActions = {
           handleError({ error, dispatch, notificationMessage: 'An error occured when deleting a workout' });
         })
         .then(() => {
-          dispatch(globalActions.userNotificationAdd('SUCCESS', `Deleted workout for ${workoutDate}`));
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: `Deleted workout for ${workoutDate}` }));
           dispatch(globalActions.taskEnd());
         });
     }

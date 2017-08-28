@@ -18,7 +18,7 @@ const globalActions = {
       type: 'TASK-END'
     };
   },
-  userNotificationAdd: (type, text, markPreviousAsRead = false) => {
+  userNotificationAdd: ({type, text, markPreviousAsRead = false}) => {
     return {
       type: c.USER_NOTIFICATION_ADD,
       userNotificationType: type,

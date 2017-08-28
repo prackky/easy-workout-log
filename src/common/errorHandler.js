@@ -21,21 +21,21 @@ export const handleError = ({ error, dispatch, notificationMessage, codeMessages
   const errorCode = getErrorCode(error);
 
   if (codeMessages && codeMessages[errorCode]) {
-    dispatch(globalActions.userNotificationAdd('ERROR', codeMessages[errorCode]));
+    dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: codeMessages[errorCode] }));
     return;
   }
 
   if (errorCode === 403) {
-    dispatch(globalActions.userNotificationAdd('ERROR', 'Operation not permitted.'));
+    dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Operation not permitted.' }));
     return;
   }
 
   if (errorCode === 401) {
-    dispatch(globalActions.userNotificationAdd('ERROR', 'Unauthorized to perform this action. Please try logging in again.'));
+    dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: 'Unauthorized to perform this action. Please try logging in again.' }));
     dispatch(push('/login'));
     return;
   }
 
-  dispatch(globalActions.userNotificationAdd('ERROR', notificationMessage));
+  dispatch(globalActions.userNotificationAdd({ type: 'ERROR', text: notificationMessage }));
   console.error(error);
 };

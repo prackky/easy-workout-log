@@ -53,10 +53,10 @@ const accountActions = {
         .then(ewoloUtil.getApiResponse)
         .then(() => {
           dispatch(accountActions.accountPasswordUpdateSuccess());
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated password', true));
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Updated password', markPreviousAsRead: true }));
         })
         .catch(error => {
-          handleError({error, dispatch, notificationMessage: `An error occured when updating password`});
+          handleError({ error, dispatch, notificationMessage: `An error occured when updating password` });
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
@@ -97,10 +97,10 @@ const accountActions = {
         .then(ewoloUtil.getApiResponse)
         .then(() => {
           dispatch(userDataActions.userDataSet(exerciseNames, userExerciseNames, name, email, units, sex));
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Updated account settings', true));
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Updated account settings', markPreviousAsRead: true }));
         })
         .catch(error => {
-          handleError({error, dispatch, notificationMessage: `An error occured when updating account`});
+          handleError({ error, dispatch, notificationMessage: `An error occured when updating account` });
         })
         .then(() => { // poor man's substitute for finally
           dispatch(globalActions.taskEnd());
@@ -134,7 +134,7 @@ const accountActions = {
         .then(body => {
           dispatch(accountActions.accountSetData({name: body.name, units: body.units}));
           if (displaySuccessNotification) {
-            dispatch(globalActions.userNotificationAdd('SUCCESS', 'Successfully got account data', true));
+            dispatch(globalActions.('SUCCESS', 'Successfully got account data', true));
           }
         })
         .catch(error => {

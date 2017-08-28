@@ -129,7 +129,7 @@ const logWorkoutActions = {
         .then(ewoloUtil.getApiResponse)
         .then(body => {
           dispatch(logWorkoutActions.logWorkoutSaveSuccess(body.id));
-          dispatch(globalActions.userNotificationAdd('SUCCESS', 'Saved workout for ' + logWorkoutDate));
+          dispatch(globalActions.userNotificationAdd({ type: 'SUCCESS', text: 'Saved workout for ' + logWorkoutDate }));
         })
         .catch(error => {
           handleError({ error, dispatch, notificationMessage: 'An error occured when saving workout for ' + logWorkoutDate + '. Please refresh the page and try again.' });
