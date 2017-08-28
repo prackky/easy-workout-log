@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ewoloUtil from '../../common/ewoloUtil';
+// import ewoloUtil from '../../common/ewoloUtil';
 
 import globalActions from '../../modules/global/globalActions';
 import publikActions from '../../modules/publik/publikActions';

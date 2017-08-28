@@ -7,7 +7,6 @@ import { handleError } from '../../common/errorHandler';
 import globalActions from '../global/globalActions';
 import signupActions from '../signup/signupActions';
 import userDataActions, { fetchUserDataThunkPromise } from '../user-data/userDataActions';
-import publikActions from '../publik/publikActions';
 
 export const c = {
   LOG_WORKOUT: 'LOG-WORKOUT',
