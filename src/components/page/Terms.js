@@ -14,13 +14,15 @@ const Terms = (props) => {
           <h4 className="margin-top-2rem">Scope of service</h4>
           <p>
             Ewolo supports the following browsers:
-            <ul>
-              <li>Internet Explorer (9+)</li>
-              <li>Firefox (50+)</li>
-              <li>Chrome (latest)</li>
-              <li>Safari (latest)</li>
-            </ul>
+          </p>
+          <ul className="text">
+            <li>Internet Explorer (9+)</li>
+            <li>Firefox (50+)</li>
+            <li>Chrome (latest)</li>
+            <li>Safari (latest)</li>
+          </ul>
 
+          <p>
             Usage on any other browsers is likely but not guaranteed.
           </p>
 
