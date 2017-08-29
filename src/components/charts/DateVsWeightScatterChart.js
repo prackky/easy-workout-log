@@ -46,8 +46,8 @@ class DateVsWeightScatterChart extends React.Component {
             showR2: false,
             visibleInLegend: false
           }
-        },
-        explorer: {}
+        }
+        // ,explorer: {} // enable panning and zooming
       }
     };
   }
