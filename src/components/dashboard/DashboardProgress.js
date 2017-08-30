@@ -40,7 +40,7 @@ class DashboardProgress extends Component {
       ],
       rows: workoutsAnalysisChartData.rows,
       columns: workoutsAnalysisChartData.columns,
-      filterExerciseName: 0,
+      filterExerciseName: '',
       filterDateBefore: '',
       filterDateAfter: ''
     };
