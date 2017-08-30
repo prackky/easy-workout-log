@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import SimpleModal from '../generic/SimpleModal';
+import SimpleModal from '../generic/SimpleModal'; // TODO: use basic modal here instead
 import SharePublicLink from './SharePublicLink';
 
 class WorkoutShareModal extends Component {
