@@ -17,10 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 const SharePublicLink = (props) => {
 
   const publicLink = props.publicLink;
-  const linkText = (props.type === 'twitter' && publicLink.type === 'workout-details')
-    ? 'Tweet workout!'
-    : 'Share link';
-
+  
   const handleShareLinkClick = (event) => {
     event.preventDefault();
 
@@ -48,9 +45,19 @@ const SharePublicLink = (props) => {
       });
   }
 
+  const renderIcon = () => {
+    if ('twitter' === props.type) {
+      return (
+        <i className="fa fa-twitter" aria-hidden="true"></i>
+      );
+    }
+
+    return null;
+  }
+
   return (
     <div>
-      <a href="" onClick={handleShareLinkClick}>{linkText}</a>
+      {renderIcon()}&nbsp;<a href="" onClick={handleShareLinkClick}>{props.children}</a>
     </div>
   );
 }

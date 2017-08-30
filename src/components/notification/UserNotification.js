@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import ewoloUtil from '../../common/ewoloUtil';
 
-import SharePublicLink from './SharePublicLink';
+import SharePublicLink from '../publik/SharePublicLink';
 
 const getNotificationClassName = (type) => {
   if (type === 'SUCCESS') {
@@ -72,7 +72,7 @@ class UserNotification extends Component {
       return null;
     }
 
-    return <SharePublicLink type='twitter' publicLink={publicLink}/>;
+    return <SharePublicLink type='twitter' publicLink={publicLink}>Tweet workout!</SharePublicLink>;
   }
 };
 

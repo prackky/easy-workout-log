@@ -3,6 +3,7 @@ import React from 'react';
 import './WorkoutView.css';
 
 import Modal from '../generic/Modal';
+import WorkoutShareModal from '../publik/WorkoutShareModal';
 import calculateSuperSetIndexes from '../../services/superSetService';
 
 import ewoloUtil from '../../common/ewoloUtil';
@@ -43,6 +44,7 @@ class WorkoutView extends React.Component {
 
     this.state = {
       showDeleteConfirmModal: false,
+      showShareModal: false,
       isMenuActive: false
     };
   }
@@ -76,6 +78,26 @@ class WorkoutView extends React.Component {
     this.setState({
       ...state,
       showDeleteConfirmModal: true
+    });
+  }
+
+  handleWorkoutShare = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const state = this.state;
+    this.setState({
+      ...state,
+      showShareModal: true
+    });
+  }
+
+  handleModalWorkoutShareClose = () => {
+    const state = this.state;
+    this.setState({
+      ...state,
+      showShareModal: false,
+      isMenuActive: !state.isMenuActive
     });
   }
 
@@ -175,6 +197,12 @@ class WorkoutView extends React.Component {
           title="Delete workout"
           content={['Are you sure you want to delete this workout?']}/>
 
+        <WorkoutShareModal
+          doModalActionClose={this.handleModalWorkoutShareClose}
+          showModal={this.state.showShareModal}
+          workoutId={this.props.workout.id}
+          workoutDate={this.props.workout.date}/>
+
         <label
           className="accordion-header hand workout-panel"
           onClick={this.toggleViewWorkoutDetails}>
@@ -217,6 +245,10 @@ class WorkoutView extends React.Component {
                   <li className="menu-item">
                     <a href="#/workout-delete" onClick={this.handleWorkoutDelete}>
                       <i className="fa fa-trash" aria-hidden="true"></i>Delete workout {this.props.workout.date}</a>
+                  </li>
+                  <li className="menu-item">
+                    <a onClick={this.handleWorkoutShare}>
+                      <i className="fa fa-share" aria-hidden="true"></i>Share workout {this.props.workout.date}</a>
                   </li>
                 </ul>
               </div>
