@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/victorparmar/easy-workout-log.svg?branch=master)](https://travis-ci.org/victorparmar/easy-workout-log)
+[![Build Status](https://travis-ci.org/victorparmar/easy-workout-log.svg?branch=master)](https://travis-ci.org/victorparmar/easy-workout-log) [![Known Vulnerabilities](https://snyk.io/test/github/victorparmar/easy-workout-log/badge.svg)](https://snyk.io/test/github/victorparmar/easy-workout-log)
 
 # Easy Workout Log
 
