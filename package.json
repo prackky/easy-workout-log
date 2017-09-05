@@ -51,8 +51,7 @@
     "exclude": [
       "/log-workout",
       "/login",
-      "/signup",
-      "/change-log"
+      "/signup"
     ],
     "snapshotDelay": 100
   },

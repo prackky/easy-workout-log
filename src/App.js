@@ -25,7 +25,6 @@ import Footer from './components/page/Footer';
 import Privacy from './components/page/Privacy';
 import Terms from './components/page/Terms';
 import WhyEwolo from './components/page/WhyEwolo';
-import ChangeLog from './components/page/ChangeLog';
 import LogWorkoutNew from './components/log-workout/LogWorkoutNew';
 import LogWorkoutEdit from './components/log-workout/LogWorkoutEdit';
 import Loader from './components/page/Loader';
@@ -93,7 +92,6 @@ class App extends Component {
               <Route exact path="/why-ewolo" component={WhyEwolo}/>
               <Route exact path="/privacy" component={Privacy}/>
               <Route exact path="/terms" component={Terms}/>
-              <Route exact path="/change-log" component={ChangeLog}/>
               <Route exact path="/log-workout" component={LogWorkoutNew}/>
               <Route path="/edit-workout/:workoutId" component={LogWorkoutEdit}/>
               <Route exact path="/signup" component={Signup}/>

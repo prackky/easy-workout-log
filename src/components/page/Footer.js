@@ -12,7 +12,6 @@ const Footer = (props) => {
           <div className="column col-md-12 col-8">
             <div className="r">
               <a href="mailto:feedback@ewolo.fitness">Contact</a>
-              &nbsp;&#8226;&nbsp;<Link to="/change-log">Change log</Link>
               &nbsp;&#8226;&nbsp;<a href="https://github.com/victorparmar/easy-workout-log">Github</a>
             </div>
             <div className="r">
