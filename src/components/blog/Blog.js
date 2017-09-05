@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {entry as entryHowToGainMuscle} from './HowToGainMuscle';
 import {entry as entryVersion3} from './Version3';
+import {entry as entryPrintableWorkoutLog} from './PrintableWorkoutLog';
 
 const BlogEntry = (props) => {
   const entry = props.entry;
@@ -28,9 +29,11 @@ const Blog = (props) => {
         <div className="column col-12">
           <h3>Blog</h3>
 
-          <BlogEntry entry={entryVersion3}></BlogEntry>
-          <div className="divider entry-divider"></div>
-          <BlogEntry entry={entryHowToGainMuscle}></BlogEntry>
+          <BlogEntry entry={entryPrintableWorkoutLog}/>
+          <div className="divider entry-divider"/>
+          <BlogEntry entry={entryVersion3}/>
+          <div className="divider entry-divider"/>
+          <BlogEntry entry={entryHowToGainMuscle}/>
 
         </div>
       </div>

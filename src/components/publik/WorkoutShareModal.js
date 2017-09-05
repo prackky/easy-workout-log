@@ -5,10 +5,6 @@ import SharePublicLink from './SharePublicLink';
 
 class WorkoutShareModal extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const publicLink = {
       type: 'workout-details',
