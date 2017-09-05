@@ -10,6 +10,7 @@ Created using React with Redux for state management.
 
 - Start local server with live-reload: `npm start`
 - Start tests and watch for changes: `npm test`
+- Build and deployment: `cd scripts && ./deploy-frontend.sh`
 - Count lines of js code: `find . -name '*.js' | xargs wc -l`
 
 ### API 
