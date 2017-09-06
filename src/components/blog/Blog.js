@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import {entry as entryHowToGainMuscle} from './HowToGainMuscle';
-import {entry as entryVersion3} from './Version3';
-import {entry as entryPrintableWorkoutLog} from './PrintableWorkoutLog';
+import HowToGainMuscleEntry from './HowToGainMuscle';
+import Version3Entry from './Version3';
+import PrintableWorkoutLogEntry from './PrintableWorkoutLog';
+
+export const blogEntries = [PrintableWorkoutLogEntry, Version3Entry, HowToGainMuscleEntry];
 
 const BlogEntry = (props) => {
   const entry = props.entry;
@@ -14,8 +16,7 @@ const BlogEntry = (props) => {
         <Link to={entry.url}>{entry.title}</Link>
       </div>
       <div className="author">
-        - {entry.author},
-        &nbsp;<span className="date">{entry.dateStr}</span>
+        - {entry.author}, &nbsp;<span className="date">{entry.dateStr}</span>
       </div>
     </div>
   )
@@ -28,13 +29,15 @@ const Blog = (props) => {
       <div className="columns">
         <div className="column col-12">
           <h3>Blog</h3>
-
-          <BlogEntry entry={entryPrintableWorkoutLog}/>
-          <div className="divider entry-divider"/>
-          <BlogEntry entry={entryVersion3}/>
-          <div className="divider entry-divider"/>
-          <BlogEntry entry={entryHowToGainMuscle}/>
-
+          {blogEntries.map((entry, index) => {
+            return (
+              <div>
+                <BlogEntry entry={entry}/>
+                <div className="divider entry-divider"/>
+              </div>
+            );
+          })
+}
         </div>
       </div>
 

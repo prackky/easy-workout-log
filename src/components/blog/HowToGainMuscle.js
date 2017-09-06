@@ -1,10 +1,10 @@
 import React from 'react';
 
 import BlogTemplate from './BlogTemplate';
-import img from './alexander-redl-185764.jpg';
-import ewoloProgress from './ewolo-progress.png';
+import img from './media/alexander-redl-185764.jpg';
+import ewoloProgress from './media/ewolo-progress.png';
 
-export const entry = {
+const entry = {
   title: 'How to gain 20 pounds of muscle in 4 weeks',
   url: '/blog/how-to-gain-20-lbs-of-muscle-in-4-weeks',
   author: 'Victor Parmar',
@@ -103,4 +103,9 @@ I wish you all the very best.
 
 }
 
-export default HowToGainMuscle;
+const HowToGainMuscleEntry = {
+  ...entry,
+  component: HowToGainMuscle
+};
+
+export default HowToGainMuscleEntry;

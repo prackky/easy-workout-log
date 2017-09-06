@@ -36,10 +36,7 @@ import Account from './components/account/Account';
 import WorkoutAnalytics from './components/analytics/WorkoutAnalytics';
 import Publik from './components/publik/Publik';
 
-import Blog from './components/blog/Blog';
-import HowToGainMuscle, {entry as entryHowToGainMuscle} from './components/blog/HowToGainMuscle';
-import Version3, {entry as entryVersion3} from './components/blog/Version3';
-import PrintableWorkoutLog, {entry as entryPrintableWorkoutLog} from './components/blog/PrintableWorkoutLog';
+import Blog, {blogEntries} from './components/blog/Blog';
 
 import appReducer from './modules/appReducer';
 import createEwoloStore from './redux/createEwoloStore';
@@ -104,10 +101,12 @@ class App extends Component {
 
               <Route path="/public/:linkId" component={Publik}/>
 
-              <Route exact path="/blog" component={Blog}/>
-              <Route exact path={entryHowToGainMuscle.url} component={HowToGainMuscle}/>
-              <Route exact path={entryPrintableWorkoutLog.url} component={PrintableWorkoutLog}/>
-              <Route exact path={entryVersion3.url} component={Version3}/> {/* default */}
+              <Route exact path="/blog" component={Blog}/> {blogEntries.map((blogEntry, index) => {
+                return (<Route exact path={blogEntry.url} component={blogEntry.component}/>);
+              })
+}
+
+              {/* default */}
               <Route component={Home}/>
             </Switch>
             <Footer

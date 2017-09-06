@@ -4,7 +4,7 @@ import React from 'react';
 import BlogTemplate from './BlogTemplate';
 import ewoloPrintableWorkoutLog from './media/ewolo-printable-workout-log.pdf';
 
-export const entry = {
+const entry = {
   title: 'Free printable workout log!',
   url: '/blog/printable-workout-log',
   author: 'Victor Parmar',
@@ -29,4 +29,9 @@ While I highly recommend using Ewolo to log your workouts, there are still quite
 
 }
 
-export default PrintableWorkoutLog;
+const PrintableWorkoutLogEntry = {
+  ...entry,
+  component: PrintableWorkoutLog
+}
+
+export default PrintableWorkoutLogEntry;

@@ -5,7 +5,7 @@ import BlogTemplate from './BlogTemplate';
 import ewoloSquatAnalytics from './media/ewolo-squats-analytics.png';
 import ewoloMarkExerciseDone from './media/ewolo-mark-exercise-done.png';
 
-export const entry = {
+const entry = {
   title: 'Ewolo version 3',
   url: '/blog/ewolo-version-3',
   author: 'Victor Parmar',
@@ -44,4 +44,9 @@ Apart from the analytics, there have been quite a few UX improvements with a maj
 
 }
 
-export default Version3;
+const Version3Entry = {
+  ...entry,
+  component: Version3
+}
+
+export default Version3Entry;
